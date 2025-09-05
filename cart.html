@@ -3,24 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Cart - BBETA</title>
+  <title>BBETA - Your Cart</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f4f4f9;
       margin: 0;
       padding: 0;
+      background: #f4f4f9;
       text-align: center;
     }
     header {
-      background: #222;
+      background: #333;
       color: white;
-      padding: 20px;
-      font-size: 24px;
-      font-weight: bold;
+      padding: 15px;
     }
-    header span {
-      color: red;
+    header h1 {
+      margin: 0;
     }
     .cart-container {
       padding: 20px;
@@ -31,26 +29,22 @@
       padding: 15px;
       border-radius: 8px;
       width: 90%;
-      max-width: 400px;
+      max-width: 500px;
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-    .cart-item span {
-      font-size: 16px;
-    }
     .total {
       font-size: 20px;
-      margin-top: 20px;
       font-weight: bold;
+      margin: 20px 0;
     }
-    .form-input {
-      margin: 10px auto;
-      display: block;
-      padding: 10px;
+    input {
       width: 90%;
       max-width: 400px;
+      padding: 10px;
+      margin: 8px 0;
       border: 1px solid #ccc;
       border-radius: 5px;
     }
@@ -61,14 +55,14 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      margin-top: 15px;
+      margin-top: 10px;
     }
     button:hover {
       background: #218838;
     }
     .back-btn {
-      display: inline-block;
       margin-top: 20px;
+      display: inline-block;
       padding: 10px 15px;
       background: #007bff;
       color: white;
@@ -82,21 +76,18 @@
 </head>
 <body>
   <header>
-    BB<span>BETA</span> 🛒 Your Cart
+    <h1>🛒 Your Cart</h1>
   </header>
 
-  <div class="cart-container" id="cartItems">
-    <!-- Cart items will appear here -->
-  </div>
+  <div class="cart-container" id="cartItems"></div>
+  <div class="total" id="totalAmount">Total: ₹0</div>
 
-  <div class="total" id="totalAmount"></div>
+  <h3>Customer Details</h3>
+  <input type="text" id="customerName" placeholder="Enter your name" required><br>
+  <input type="text" id="customerPhone" placeholder="Enter your phone number" required><br>
+  <input type="text" id="customerAddress" placeholder="Enter your address" required><br>
 
-  <!-- Customer Info Form -->
-  <input type="text" id="customerName" class="form-input" placeholder="Enter your Name">
-  <input type="text" id="customerNumber" class="form-input" placeholder="Enter Contact Number">
-  <textarea id="customerAddress" class="form-input" placeholder="Enter Delivery Address"></textarea>
-
-  <button onclick="confirmOrder()">✅ Confirm Order on WhatsApp</button>
+  <button onclick="placeOrder()">✅ Confirm Order on WhatsApp</button>
 
   <br>
   <a href="index.html" class="back-btn">⬅ Back to Shop</a>
@@ -104,7 +95,7 @@
   <script>
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     const cartContainer = document.getElementById("cartItems");
-    const totalAmount = document.getElementById("totalAmount");
+    const totalAmountEl = document.getElementById("totalAmount");
 
     function displayCart() {
       cartContainer.innerHTML = "";
@@ -112,22 +103,22 @@
 
       if (cart.length === 0) {
         cartContainer.innerHTML = "<p>Your cart is empty 🛍️</p>";
-        totalAmount.innerText = "";
+        totalAmountEl.textContent = "Total: ₹0";
         return;
       }
 
       cart.forEach((item, index) => {
-        total += item.price;
         let div = document.createElement("div");
         div.classList.add("cart-item");
         div.innerHTML = `
-          <span>${item.name} - ₹${item.price}</span>
-          <button onclick="removeItem(${index})">Remove</button>
+          <span>${item.product} - ₹${item.price}</span>
+          <button onclick="removeItem(${index})">❌</button>
         `;
         cartContainer.appendChild(div);
+        total += item.price;
       });
 
-      totalAmount.innerText = "Total: ₹" + total;
+      totalAmountEl.textContent = "Total: ₹" + total;
     }
 
     function removeItem(index) {
@@ -136,34 +127,33 @@
       displayCart();
     }
 
-    function confirmOrder() {
-      const name = document.getElementById("customerName").value.trim();
-      const number = document.getElementById("customerNumber").value.trim();
-      const address = document.getElementById("customerAddress").value.trim();
+    function placeOrder() {
+      let name = document.getElementById("customerName").value;
+      let phone = document.getElementById("customerPhone").value;
+      let address = document.getElementById("customerAddress").value;
 
-      if (!name || !number || !address) {
-        alert("⚠️ Please enter Name, Contact Number, and Delivery Address.");
+      if (!name || !phone || !address) {
+        alert("⚠️ Please fill all details before confirming order.");
         return;
       }
 
-      let total = cart.reduce((sum, item) => sum + item.price, 0);
+      let orderText = "Hello BBETA,%0AHere is my order:%0A";
+      let total = 0;
 
-      let message = `Hello BBETA,%0AHere is my order:%0A`;
       cart.forEach(item => {
-        message += `• ${item.name} (₹${item.price})%0A`;
+        orderText += "• " + item.product + " (₹" + item.price + ")%0A";
+        total += item.price;
       });
-      message += `%0ATotal: ₹${total}%0A%0A👤 Name: ${name}%0A📞 Contact: ${number}%0A🏠 Address: ${address}`;
 
-      const phoneNumber = "7093242271"; 
-      const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
+      orderText += "%0ATotal: ₹" + total;
+      orderText += "%0A%0A👤 Name: " + name;
+      orderText += "%0A📞 Contact: " + phone;
+      orderText += "%0A🏠 Address: " + address;
+
+      let whatsappNumber = "7093242271"; // Tumhara number
+      let whatsappURL = "https://wa.me/" + whatsappNumber + "?text=" + orderText;
+
       window.open(whatsappURL, "_blank");
-
-      localStorage.setItem("customerName", name);
-      localStorage.removeItem("cart");
-
-      setTimeout(() => {
-        window.location.href = "thankyou.html";
-      }, 1500);
     }
 
     displayCart();
