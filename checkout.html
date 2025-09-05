@@ -3,89 +3,166 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BBETA - Checkout</title>
+  <title>Checkout - BBETA Store</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
       background: #f4f4f9;
-      text-align: center;
     }
     header {
-      background: #111;
+      background: #222;
       color: white;
       padding: 15px;
       text-align: center;
     }
-    .checkout-container {
-      padding: 20px;
-      max-width: 500px;
-      margin: 20px auto;
+    header img {
+      max-height: 60px;
+      display: block;
+      margin: auto;
+    }
+    h1 {
+      margin: 10px 0;
+      font-size: 26px;
+      color: #00cc44;
+    }
+    .container {
+      max-width: 600px;
+      margin: 30px auto;
       background: white;
+      padding: 20px;
       border-radius: 8px;
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
-    .checkout-container h2 {
+    .container h2 {
       margin-bottom: 20px;
+      text-align: center;
     }
-    input, textarea {
-      width: 90%;
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+    input, select, textarea {
+      width: 100%;
       padding: 10px;
-      margin: 10px 0;
+      margin-bottom: 15px;
       border: 1px solid #ccc;
       border-radius: 5px;
+      font-size: 14px;
     }
-    button {
-      padding: 10px 20px;
+    textarea {
+      resize: none;
+      height: 80px;
+    }
+    .btn {
+      width: 100%;
       background: #28a745;
       color: white;
+      padding: 12px;
       border: none;
       border-radius: 5px;
+      font-size: 16px;
       cursor: pointer;
-      margin-top: 10px;
     }
-    button:hover {
+    .btn:hover {
       background: #218838;
     }
-    .back-btn {
-      display: inline-block;
-      margin-top: 15px;
-      padding: 10px 15px;
-      background: #007bff;
-      color: white;
-      text-decoration: none;
+    .order-summary {
+      margin-top: 20px;
+      background: #f9f9f9;
+      padding: 15px;
       border-radius: 5px;
+      border: 1px solid #ddd;
     }
-    .back-btn:hover {
-      background: #0056b3;
+    .order-summary h3 {
+      margin-top: 0;
+    }
+    .order-summary ul {
+      list-style: none;
+      padding: 0;
+    }
+    .order-summary li {
+      padding: 5px 0;
+      border-bottom: 1px solid #eee;
+    }
+    footer {
+      margin-top: 30px;
+      background: #222;
+      color: white;
+      text-align: center;
+      padding: 15px;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>✅ Checkout</h1>
+    <img src="assets/logo.png" alt="BBETA Logo">
+    <h1>Checkout</h1>
   </header>
 
-  <div class="checkout-container">
-    <h2>Enter Your Details</h2>
+  <div class="container">
+    <h2>Delivery Details</h2>
     <form id="checkoutForm">
-      <input type="text" id="name" placeholder="Full Name" required><br>
-      <input type="text" id="address" placeholder="Address" required><br>
-      <input type="text" id="phone" placeholder="Phone Number" required><br>
-      <textarea id="notes" placeholder="Any Notes (optional)"></textarea><br>
-      <button type="submit">Confirm Order</button>
+      <label for="name">Full Name</label>
+      <input type="text" id="name" required>
+
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" required>
+
+      <label for="address">Delivery Address</label>
+      <textarea id="address" required></textarea>
+
+      <label for="payment">Payment Method</label>
+      <select id="payment" required>
+        <option value="">-- Select Payment --</option>
+        <option value="COD">Cash on Delivery</option>
+        <option value="UPI">UPI</option>
+        <option value="Card">Credit/Debit Card</option>
+      </select>
+
+      <button type="submit" class="btn">Place Order ✅</button>
     </form>
-    <a href="cart.html" class="back-btn">⬅ Back to Cart</a>
+
+    <div class="order-summary">
+      <h3>Your Order</h3>
+      <ul id="orderItems"></ul>
+    </div>
   </div>
 
+  <footer>
+    📍 Nalgonda, Telangana, India - 508001 <br>
+    WhatsApp: <a href="https://wa.me/7093242271" style="color:#00ff88;">7093242271</a>
+  </footer>
+
   <script>
-    document.getElementById("checkoutForm").addEventListener("submit", function(e) {
+    // Show cart items on checkout page
+    function loadOrderSummary() {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      let orderItems = document.getElementById("orderItems");
+      orderItems.innerHTML = "";
+
+      if(cart.length === 0) {
+        orderItems.innerHTML = "<li>No items in cart</li>";
+      } else {
+        cart.forEach(item => {
+          let li = document.createElement("li");
+          li.textContent = item;
+          orderItems.appendChild(li);
+        });
+      }
+    }
+
+    // Handle form submit
+    document.getElementById("checkoutForm").addEventListener("submit", function(e){
       e.preventDefault();
-      alert("🎉 Order Confirmed! Thank you for shopping with BBETA.");
-      localStorage.removeItem("cart"); // clear cart
+      alert("✅ Order Placed Successfully! Thank you for shopping with BBETA ❤️");
+      localStorage.removeItem("cart");
       window.location.href = "index.html"; // back to home
     });
+
+    loadOrderSummary();
   </script>
 </body>
   </html>
