@@ -3,136 +3,115 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BBETA Grocery</title>
+  <title>BBETA Store</title>
   <style>
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
-      background: #f9f9f9;
-      color: #333;
-    }
-    header {
-      background: #28a745;
-      color: white;
-      padding: 15px;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f9;
       text-align: center;
     }
+    header {
+      background: #333;
+      color: white;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
     header img {
-      height: 60px;
+      height: 50px;
     }
-    h1 {
-      margin: 10px 0 0;
-    }
-    .quote {
-      font-style: italic;
-      font-size: 14px;
-      margin-top: 5px;
+    .cart-link {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
     }
     .container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 20px;
       padding: 20px;
     }
-    .card {
+    .item {
       background: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      overflow: hidden;
-      text-align: center;
-      transition: transform 0.3s;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
-    .card:hover {
-      transform: scale(1.05);
-    }
-    .card img {
+    .item img {
       width: 100%;
-      height: 160px;
+      height: 150px;
       object-fit: cover;
+      border-radius: 8px;
     }
-    .card h3 {
-      margin: 10px 0;
-    }
-    .btn {
-      display: inline-block;
-      margin: 10px;
-      padding: 10px 15px;
+    button {
+      margin-top: 10px;
+      padding: 10px;
       background: #28a745;
       color: white;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: background 0.3s;
-    }
-    .btn:hover {
-      background: #218838;
-    }
-    footer {
-      background: #333;
-      color: white;
-      text-align: center;
-      padding: 20px;
-      margin-top: 20px;
-    }
-    iframe {
-      width: 100%;
       border: none;
-      border-radius: 8px;
-      margin-top: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #218838;
     }
   </style>
 </head>
 <body>
   <header>
     <img src="assets/logo.png" alt="BBETA Logo">
-    <h1>BBETA Grocery Store</h1>
-    <p class="quote">“Freshness you can trust, quality you deserve.”</p>
+    <a href="cart.html" class="cart-link">🛒 Cart: <span id="cartCount">0</span></a>
   </header>
 
+  <h2>Welcome to BBETA Store</h2>
+  <p><i>"B for Bada Beta, Apka Apna Beta!"</i></p>
+
   <div class="container">
-    <div class="card">
+    <div class="item">
       <img src="assets/vegetables.jpg" alt="Vegetables">
       <h3>Fresh Vegetables</h3>
-      <a href="#" class="btn">Add to Cart</a>
+      <button onclick="addToCart('Vegetables')">Add to Cart</button>
     </div>
-    <div class="card">
+    <div class="item">
       <img src="assets/fruits.jpg" alt="Fruits">
       <h3>Fresh Fruits</h3>
-      <a href="#" class="btn">Add to Cart</a>
+      <button onclick="addToCart('Fruits')">Add to Cart</button>
     </div>
-    <div class="card">
+    <div class="item">
       <img src="assets/groceries.jpg" alt="Groceries">
       <h3>Kirana Items</h3>
-      <a href="#" class="btn">Add to Cart</a>
+      <button onclick="addToCart('Groceries')">Add to Cart</button>
     </div>
-    <div class="card">
+    <div class="item">
       <img src="assets/medicines.jpg" alt="Medicines">
       <h3>Medicines</h3>
-      <a href="#" class="btn">Add to Cart</a>
+      <button onclick="addToCart('Medicines')">Add to Cart</button>
     </div>
-    <div class="card">
+    <div class="item">
       <img src="assets/bakery.jpg" alt="Bakery">
-      <h3>Bakery</h3>
-      <a href="#" class="btn">Add to Cart</a>
+      <h3>Bakery Items</h3>
+      <button onclick="addToCart('Bakery')">Add to Cart</button>
     </div>
-    <div class="card">
+    <div class="item">
       <img src="assets/dairy.jpg" alt="Dairy">
       <h3>Dairy Products</h3>
-      <a href="#" class="btn">Add to Cart</a>
+      <button onclick="addToCart('Dairy')">Add to Cart</button>
     </div>
   </div>
 
-  <footer>
-    <p>📞 Contact us on WhatsApp: 
-      <a href="https://wa.me/919876543210" target="_blank" class="btn">Chat Now</a>
-    </p>
-    <p>📍 Our Location:</p>
-    <iframe 
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.01944688764!2d144.95592831531665!3d-37.8172099797515!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf5774caa2c7a8d2!2sGrocery%20Store!5e0!3m2!1sen!2sin!4v1678888888888"
-      height="250"
-      allowfullscreen=""
-      loading="lazy">
-    </iframe>
-    <p>&copy; 2025 BBETA Grocery Store</p>
-  </footer>
+  <script>
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    document.getElementById("cartCount").innerText = cart.length;
+
+    function addToCart(item) {
+      cart.push(item);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      document.getElementById("cartCount").innerText = cart.length;
+      alert(item + " added to cart ✅");
+    }
+  </script>
 </body>
 </html>
