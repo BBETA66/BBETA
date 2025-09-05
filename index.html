@@ -10,101 +10,40 @@
   <header>
     <h1>BBETA</h1>
     <p>Apka Apna Bada Beta 🛒</p>
-    <a href="cart.html" class="cart-link">Go to Cart</a>
+    <a href="cart.html" class="cart-btn">🛒 Cart</a>
   </header>
 
   <main>
-    <div class="products">
+    <section class="product-list">
       <!-- Product 1 -->
       <div class="product">
-        <img src="assets/fruits.jpg" alt="Apples">
+        <img src="assets/apple.jpg" alt="Fresh Apples">
         <h2>Fresh Apples</h2>
         <p>₹50 / kg</p>
-        <input type="number" value="1" min="1" class="qty">
-        <button onclick="addToCart('Fresh Apples', 50, this)">Add to Cart</button>
+        <input type="number" min="1" value="1" class="qty">
+        <button class="add-to-cart">Add to Cart</button>
       </div>
 
       <!-- Product 2 -->
       <div class="product">
-        <img src="assets/vegetables.jpg" alt="Tomatoes">
-        <h2>Tomatoes</h2>
-        <p>₹30 / kg</p>
-        <input type="number" value="1" min="1" class="qty">
-        <button onclick="addToCart('Tomatoes', 30, this)">Add to Cart</button>
+        <img src="assets/vegetables.jpg" alt="Fresh Vegetables">
+        <h2>Fresh Vegetables</h2>
+        <p>₹40 / kg</p>
+        <input type="number" min="1" value="1" class="qty">
+        <button class="add-to-cart">Add to Cart</button>
       </div>
 
       <!-- Product 3 -->
       <div class="product">
-        <img src="assets/rice.jpg" alt="Rice">
-        <h2>Rice</h2>
-        <p>₹60 / kg</p>
-        <input type="number" value="1" min="1" class="qty">
-        <button onclick="addToCart('Rice', 60, this)">Add to Cart</button>
+        <img src="assets/mango.jpg" alt="Mangoes">
+        <h2>Mangoes</h2>
+        <p>₹80 / kg</p>
+        <input type="number" min="1" value="1" class="qty">
+        <button class="add-to-cart">Add to Cart</button>
       </div>
 
-      <!-- Product 4 -->
-      <div class="product">
-        <img src="assets/sugar.jpg" alt="Sugar">
-        <h2>Sugar</h2>
-        <p>₹40 / kg</p>
-        <input type="number" value="1" min="1" class="qty">
-        <button onclick="addToCart('Sugar', 40, this)">Add to Cart</button>
-      </div>
-
-      <!-- Product 5 -->
-      <div class="product">
-        <img src="assets/oil.jpg" alt="Cooking Oil">
-        <h2>Cooking Oil</h2>
-        <p>₹150 / litre</p>
-        <input type="number" value="1" min="1" class="qty">
-        <button onclick="addToCart('Cooking Oil', 150, this)">Add to Cart</button>
-      </div>
-
-      <!-- Product 6 -->
-      <div class="product">
-        <img src="assets/milk.jpg" alt="Milk">
-        <h2>Milk</h2>
-        <p>₹25 / litre</p>
-        <input type="number" value="1" min="1" class="qty">
-        <button onclick="addToCart('Milk', 25, this)">Add to Cart</button>
-      </div>
-
-      <!-- Product 7 -->
-      <div class="product">
-        <img src="assets/bread.jpg" alt="Bread">
-        <h2>Bread</h2>
-        <p>₹30 / pack</p>
-        <input type="number" value="1" min="1" class="qty">
-        <button onclick="addToCart('Bread', 30, this)">Add to Cart</button>
-      </div>
-
-      <!-- Product 8 -->
-      <div class="product">
-        <img src="assets/tea.jpg" alt="Tea">
-        <h2>Tea</h2>
-        <p>₹120 / 250g</p>
-        <input type="number" value="1" min="1" class="qty">
-        <button onclick="addToCart('Tea', 120, this)">Add to Cart</button>
-      </div>
-
-      <!-- Product 9 -->
-      <div class="product">
-        <img src="assets/snacks.jpg" alt="Snacks">
-        <h2>Snacks</h2>
-        <p>₹20 / pack</p>
-        <input type="number" value="1" min="1" class="qty">
-        <button onclick="addToCart('Snacks', 20, this)">Add to Cart</button>
-      </div>
-
-      <!-- Product 10 -->
-      <div class="product">
-        <img src="assets/cold_drink.jpg" alt="Cold Drink">
-        <h2>Cold Drink</h2>
-        <p>₹35 / bottle</p>
-        <input type="number" value="1" min="1" class="qty">
-        <button onclick="addToCart('Cold Drink', 35, this)">Add to Cart</button>
-      </div>
-    </div>
+      <!-- Aur bhi products yaha add kar lena same format se -->
+    </section>
   </main>
 
   <script src="cart.js"></script>
