@@ -3,72 +3,80 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Cart</title>
+  <title>Your Cart - BBETA</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
   <style>
     body { background: #f8f9fa; }
-    .header { background: #343a40; color: #fff; padding: 12px; text-align: center; font-weight: bold; }
+    .navbar { background: #343a40; }
+    .navbar-brand, .navbar-text { color: white !important; }
+    .card { border-radius: 12px; }
+    .btn-whatsapp { background: #25D366; color: white; border: none; }
+    .btn-back { background: #007bff; color: white; border: none; }
   </style>
 </head>
 <body>
-  <div class="header">🛒 Your Cart</div>
+
+  <!-- Navbar -->
+  <nav class="navbar px-3">
+    <span class="navbar-brand">🛒 Your Cart</span>
+  </nav>
 
   <div class="container my-4">
-    <table class="table table-bordered text-center">
-      <thead class="table-dark">
-        <tr>
-          <th>Item</th>
-          <th>Price</th>
-          <th>Qty</th>
-          <th>Total</th>
-        </tr>
-      </thead>
-      <tbody id="cart-items"></tbody>
-    </table>
+    <div id="cart-items" class="mb-3"></div>
+    <h5 id="total"></h5>
 
-    <h4 class="text-end">Grand Total: ₹<span id="grand-total">0</span></h4>
-
-    <div class="text-center my-3">
-      <button class="btn btn-success" onclick="checkout()">✅ Checkout via WhatsApp</button>
-      <a href="index.html" class="btn btn-primary">⬅️ Back to Shop</a>
+    <div class="d-flex gap-2 mt-3">
+      <button id="checkout" class="btn btn-whatsapp">✔ Checkout via WhatsApp</button>
+      <a href="index.html" class="btn btn-back">⬅ Back to Shop</a>
     </div>
   </div>
 
   <script>
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    let cartItems = document.getElementById("cart-items");
-    let grandTotal = 0;
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const cartItemsDiv = document.getElementById("cart-items");
+    const totalDiv = document.getElementById("total");
+    let total = 0;
 
-    if(cart.length === 0){
-      cartItems.innerHTML = `<tr><td colspan="4">Your cart is empty</td></tr>`;
+    if (cart.length === 0) {
+      cartItemsDiv.innerHTML = "<p>Your cart is empty.</p>";
     } else {
-      cart.forEach(item => {
-        let total = item.price * item.qty;
-        grandTotal += total;
-        cartItems.innerHTML += `
-          <tr>
-            <td>${item.name}</td>
-            <td>₹${item.price}</td>
-            <td>${item.qty}</td>
-            <td>₹${total}</td>
-          </tr>`;
+      cart.forEach((item, index) => {
+        total += item.price;
+        const div = document.createElement("div");
+        div.classList.add("card", "p-2", "mb-2");
+        div.innerHTML = `
+          <div class="d-flex justify-content-between align-items-center">
+            <span>${item.name} - ₹${item.price}</span>
+            <button class="btn btn-sm btn-danger" onclick="removeItem(${index})">Remove</button>
+          </div>
+        `;
+        cartItemsDiv.appendChild(div);
       });
     }
-    document.getElementById("grand-total").innerText = grandTotal;
+    totalDiv.textContent = "Total: ₹" + total;
 
-    function checkout(){
-      if(cart.length === 0){
-        alert("Cart is empty!");
+    // Remove item function
+    function removeItem(index) {
+      cart.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      location.reload();
+    }
+
+    // Checkout via WhatsApp
+    document.getElementById("checkout").addEventListener("click", () => {
+      if (cart.length === 0) {
+        alert("Your cart is empty!");
         return;
       }
-      let message = "🛒 BBETA Order:%0A";
+      let orderText = "🛒 *BBETA Order*%0A%0A";
       cart.forEach(item => {
-        message += `${item.name} - ${item.qty} x ₹${item.price} = ₹${item.price*item.qty}%0A`;
+        orderText += `- ${item.name}: ₹${item.price}%0A`;
       });
-      message += `-----------------%0ATotal = ₹${grandTotal}`;
-      let phone = "7093242271"; // <-- apna number yaha
-      window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
-    }
+      orderText += `%0ATotal: ₹${total}%0A%0AConfirm my order ✅`;
+
+      const phone = "917093242271"; // apna WhatsApp number (91 + number)
+      window.open(`https://wa.me/${phone}?text=${orderText}`, "_blank");
+    });
   </script>
 </body>
 </html>
