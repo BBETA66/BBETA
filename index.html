@@ -3,23 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BBETA - Apna Apna Beta!</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <title>BBETA - Online Store</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background:#f8f9fa; }
+    .navbar { background:#28a745 !important; }
+    .navbar-brand { font-weight:bold; color:white !important; }
+    .card img { height:180px; object-fit:cover; }
+    footer { background:#f1f1f1; border-top:1px solid #ddd; }
+  </style>
 </head>
-<body style="background:#f8f9fa;">
+<body>
 
-  <!-- Header -->
-  <div class="bg-success text-white text-center p-2">
-    📦 BBETA - B for Bada, BBETA aapka apna beta!
-  </div>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="#">🛒 BBETA</a>
+      <span class="text-white">B for Bada, BBETA aapka apna beta!</span>
+    </div>
+  </nav>
 
   <!-- Products -->
   <div class="container mt-4">
     <div class="row g-4">
 
-      <!-- Vegetables -->
       <div class="col-md-4">
-        <div class="card shadow-sm">
+        <div class="card">
           <img src="assets/vegetables.jpg" class="card-img-top" alt="Vegetables">
           <div class="card-body text-center">
             <h5 class="card-title">Fresh Vegetables</h5>
@@ -29,9 +38,8 @@
         </div>
       </div>
 
-      <!-- Fruits -->
       <div class="col-md-4">
-        <div class="card shadow-sm">
+        <div class="card">
           <img src="assets/fruits.jpg" class="card-img-top" alt="Fruits">
           <div class="card-body text-center">
             <h5 class="card-title">Fresh Fruits</h5>
@@ -41,9 +49,8 @@
         </div>
       </div>
 
-      <!-- Groceries -->
       <div class="col-md-4">
-        <div class="card shadow-sm">
+        <div class="card">
           <img src="assets/groceries.jpg" class="card-img-top" alt="Groceries">
           <div class="card-body text-center">
             <h5 class="card-title">Groceries</h5>
@@ -53,9 +60,8 @@
         </div>
       </div>
 
-      <!-- Medicines -->
       <div class="col-md-4">
-        <div class="card shadow-sm">
+        <div class="card">
           <img src="assets/medicines.jpg" class="card-img-top" alt="Medicines">
           <div class="card-body text-center">
             <h5 class="card-title">Medicines</h5>
@@ -65,9 +71,8 @@
         </div>
       </div>
 
-      <!-- Bakery -->
       <div class="col-md-4">
-        <div class="card shadow-sm">
+        <div class="card">
           <img src="assets/bakery.jpg" class="card-img-top" alt="Bakery">
           <div class="card-body text-center">
             <h5 class="card-title">Bakery Items</h5>
@@ -77,9 +82,8 @@
         </div>
       </div>
 
-      <!-- Dairy -->
       <div class="col-md-4">
-        <div class="card shadow-sm">
+        <div class="card">
           <img src="assets/dairy.jpg" class="card-img-top" alt="Dairy">
           <div class="card-body text-center">
             <h5 class="card-title">Dairy Products</h5>
@@ -90,18 +94,18 @@
       </div>
 
     </div>
-  </div>
 
-  <!-- Go to Cart Button -->
-  <div class="text-center my-4">
-    <a href="cart.html" class="btn btn-warning">🛒 Go to Cart</a>
+    <!-- Go to Cart Button -->
+    <div class="text-center mt-4">
+      <a href="cart.html" class="btn btn-warning">🛍 Go to Cart</a>
+    </div>
   </div>
 
   <!-- Footer -->
-  <footer class="text-center mt-4 p-3" style="background:#f1f1f1; border-top:1px solid #ddd;">
+  <footer class="text-center mt-4 p-3">
     <p><strong>📍 Our Location:</strong></p>
     <iframe 
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241317.11609994634!2d72.74109895!3d19.0821978!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b63d5945a5f9%3A0xbedc9f50d0c759ce!2sMumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1693927856985!5m2!1sen!2sin" 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.514260417919!2d79.2620290746652!3d17.05738591351356!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a3342ff50f4e5c7%3A0x6e9a9e0c2e4a0f6d!2sNalgonda%2C%20Telangana%20508001!5e0!3m2!1sen!2sin!4v1693929000000!5m2!1sen!2sin" 
       width="100%" height="200" style="border:0; border-radius:8px;" allowfullscreen="" loading="lazy">
     </iframe>
 
@@ -115,11 +119,11 @@
   </footer>
 
   <script>
-    function addToCart(item, price) {
-      let cart = JSON.parse(localStorage.getItem('cart')) || [];
-      cart.push({ item, price });
-      localStorage.setItem('cart', JSON.stringify(cart));
-      alert(item + " added to cart!");
+    function addToCart(product, price) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.push({ product, price });
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert(product + " added to cart!");
     }
   </script>
 
