@@ -4,137 +4,130 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BBETA - Online Store</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    body { background:#f8f9fa; }
-    .navbar { background:#28a745 !important; }
-    .card img { height:180px; object-fit:cover; }
-    footer { background:#f1f1f1; border-top:1px solid #ddd; }
-    .logo-section { text-align:center; margin:20px 0; }
-    .logo-section img { width:120px; }
-    .logo-section h1 { font-weight:bold; margin-top:10px; color:#28a745; }
-    .logo-section p { font-size:18px; color:#555; }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f9;
+      text-align: center;
+    }
+    header {
+      background: #222;
+      color: white;
+      padding: 20px;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    header span {
+      color: red;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .card h3 {
+      margin: 10px 0;
+    }
+    .btn {
+      padding: 10px 15px;
+      background: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+    .btn:hover {
+      background: #218838;
+    }
+    .cart-link {
+      display: inline-block;
+      margin: 20px;
+      padding: 12px 20px;
+      background: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+    .cart-link:hover {
+      background: #0056b3;
+    }
   </style>
 </head>
 <body>
+  <header>
+    BB<span>BETA</span>
+  </header>
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg">
-    <div class="container">
-      <span class="navbar-brand text-white">🛒 BBETA</span>
-    </div>
-  </nav>
-
-  <!-- Logo Center -->
-  <div class="logo-section">
-    <img src="assets/logo.png" alt="BBETA Logo">
-    <h1>BBETA</h1>
-    <p>B for Bada, BBETA aapka apna beta!</p>
-  </div>
-
-  <!-- Products -->
-  <div class="container mt-4">
-    <div class="row g-4">
-
-      <div class="col-md-4">
-        <div class="card">
-          <img src="assets/vegetables.jpg" class="card-img-top" alt="Vegetables">
-          <div class="card-body text-center">
-            <h5 class="card-title">Fresh Vegetables</h5>
-            <p>₹50 / kg</p>
-            <button class="btn btn-primary" onclick="addToCart('Fresh Vegetables', 50)">Add to Cart</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <div class="card">
-          <img src="assets/fruits.jpg" class="card-img-top" alt="Fruits">
-          <div class="card-body text-center">
-            <h5 class="card-title">Fresh Fruits</h5>
-            <p>₹80 / kg</p>
-            <button class="btn btn-primary" onclick="addToCart('Fresh Fruits', 80)">Add to Cart</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <div class="card">
-          <img src="assets/groceries.jpg" class="card-img-top" alt="Groceries">
-          <div class="card-body text-center">
-            <h5 class="card-title">Groceries</h5>
-            <p>₹200 / pack</p>
-            <button class="btn btn-primary" onclick="addToCart('Groceries', 200)">Add to Cart</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <div class="card">
-          <img src="assets/medicines.jpg" class="card-img-top" alt="Medicines">
-          <div class="card-body text-center">
-            <h5 class="card-title">Medicines</h5>
-            <p>₹100 / item</p>
-            <button class="btn btn-primary" onclick="addToCart('Medicines', 100)">Add to Cart</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <div class="card">
-          <img src="assets/bakery.jpg" class="card-img-top" alt="Bakery">
-          <div class="card-body text-center">
-            <h5 class="card-title">Bakery Items</h5>
-            <p>₹120 / pack</p>
-            <button class="btn btn-primary" onclick="addToCart('Bakery Items', 120)">Add to Cart</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <div class="card">
-          <img src="assets/dairy.jpg" class="card-img-top" alt="Dairy">
-          <div class="card-body text-center">
-            <h5 class="card-title">Dairy Products</h5>
-            <p>₹60 / litre</p>
-            <button class="btn btn-primary" onclick="addToCart('Dairy Products', 60)">Add to Cart</button>
-          </div>
-        </div>
-      </div>
-
+  <div class="container">
+    <div class="card">
+      <img src="assets/vegetables.jpg" alt="Fresh Vegetables">
+      <h3>Fresh Vegetables</h3>
+      <p>₹50</p>
+      <button class="btn" onclick="addToCart('Fresh Vegetables', 50)">Add to Cart</button>
     </div>
 
-    <!-- Go to Cart Button -->
-    <div class="text-center mt-4">
-      <a href="cart.html" class="btn btn-warning">🛍 Go to Cart</a>
+    <div class="card">
+      <img src="assets/fruits.jpg" alt="Fresh Fruits">
+      <h3>Fresh Fruits</h3>
+      <p>₹80</p>
+      <button class="btn" onclick="addToCart('Fresh Fruits', 80)">Add to Cart</button>
+    </div>
+
+    <div class="card">
+      <img src="assets/groceries.jpg" alt="Groceries">
+      <h3>Groceries</h3>
+      <p>₹200</p>
+      <button class="btn" onclick="addToCart('Groceries', 200)">Add to Cart</button>
+    </div>
+
+    <div class="card">
+      <img src="assets/medicines.jpg" alt="Medicines">
+      <h3>Medicines</h3>
+      <p>₹100</p>
+      <button class="btn" onclick="addToCart('Medicines', 100)">Add to Cart</button>
+    </div>
+
+    <div class="card">
+      <img src="assets/bakery.jpg" alt="Bakery Items">
+      <h3>Bakery Items</h3>
+      <p>₹120</p>
+      <button class="btn" onclick="addToCart('Bakery Items', 120)">Add to Cart</button>
+    </div>
+
+    <div class="card">
+      <img src="assets/dairy.jpg" alt="Dairy Products">
+      <h3>Dairy Products</h3>
+      <p>₹60</p>
+      <button class="btn" onclick="addToCart('Dairy Products', 60)">Add to Cart</button>
     </div>
   </div>
 
-  <!-- Footer -->
-  <footer class="text-center mt-4 p-3">
-    <p><strong>📍 Our Location:</strong></p>
-    <iframe 
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.514260417919!2d79.2620290746652!3d17.05738591351356!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a3342ff50f4e5c7%3A0x6e9a9e0c2e4a0f6d!2sNalgonda%2C%20Telangana%20508001!5e0!3m2!1sen!2sin!4v1693929000000!5m2!1sen!2sin" 
-      width="100%" height="200" style="border:0; border-radius:8px;" allowfullscreen="" loading="lazy">
-    </iframe>
-
-    <p class="mt-3">
-      📞 Order Now on WhatsApp:  
-      <a href="https://wa.me/917093242271" target="_blank" style="color:#25D366; font-weight:bold;">
-        +91 70932 42271
-      </a>
-    </p>
-    <small>© 2025 BBETA - All rights reserved.</small>
-  </footer>
+  <a href="cart.html" class="cart-link">🛒 View Cart</a>
 
   <script>
-    function addToCart(product, price) {
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      cart.push({ product, price });
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    function addToCart(name, price) {
+      cart.push({ name: name, price: price });
       localStorage.setItem("cart", JSON.stringify(cart));
-      alert(product + " added to cart!");
+      alert(`${name} added to cart!`);
     }
   </script>
-
 </body>
-  </html>
+</html>
