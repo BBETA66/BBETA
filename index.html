@@ -9,215 +9,120 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background: #f4f4f9;
+      background: #f8f9fa;
     }
-
-    :root {
-      --logo-size: clamp(42px, 7.5vw, 72px);
-      --glow1: rgba(0,255,140,0.6);
-      --glow2: rgba(0,200,120,0.45);
-      --glow3: rgba(0,180,110,0.25);
-      --brand-green-1:#00ff88;
-      --brand-green-2:#00cc66;
-      --brand-green-3:#00aa66;
+    header {
+      background: #222;
+      padding: 15px;
+      text-align: center;
+      color: white;
     }
-
-    /* Header wrapper */
-    .site-header {
-      background:#111;
-      color:#fff;
-      text-align:center;
-      padding:22px 12px 18px;
+    header img {
+      max-height: 60px;
+      display: block;
+      margin: auto;
     }
-
-    /* Wordmark row */
-    .logo-wordmark {
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:12px;
-      margin-bottom:10px;
+    h1 {
+      margin: 10px 0;
+      font-size: 28px;
+      color: #ff3333;
     }
-
-    /* Cart icon (left of text) */
-    .logo-cart {
-      width: clamp(28px, 4.5vw, 38px);
-      height: auto;
-      fill: #aaffdd;
-      filter: drop-shadow(0 0 6px var(--glow2));
-    }
-
-    /* Text wordmark */
-    .logo-text {
-      font-weight: 900;
-      letter-spacing: 0.5px;
-      line-height: 1;
-      font-size: var(--logo-size);
-      display:inline-block;
-      position:relative;
-      background: linear-gradient(90deg, var(--brand-green-1), var(--brand-green-2) 60%, var(--brand-green-3));
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow:
-        0 0 10px var(--glow1),
-        0 0 18px var(--glow2),
-        0 0 28px var(--glow3);
-    }
-
-    .logo-b {
-      filter: brightness(1.15);
-    }
-    .logo-beta {
-      background: linear-gradient(90deg, #00e67a, #00b865);
-      -webkit-background-clip:text;
-      background-clip:text;
-      -webkit-text-fill-color: transparent;
-    }
-    .logo-store {
-      margin-left: 8px;
-      font-weight: 800;
-      font-size: calc(var(--logo-size) * 0.55);
-      color:#c7ffe8;
-      text-shadow:
-        0 0 6px var(--glow2),
-        0 0 14px var(--glow3);
-    }
-
-    /* Cart button */
     .cart-btn {
-      display:inline-block;
-      margin-top:10px;
-      padding:10px 18px;
-      background:#28a745;
-      color:#fff;
-      text-decoration:none;
-      border-radius:10px;
-      font-weight:700;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.35);
-      transition: transform .15s ease, background .15s ease;
+      background: #28a745;
+      padding: 10px 20px;
+      border-radius: 5px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
     }
-    .cart-btn:hover {
-      background:#219a3c;
-      transform: translateY(-1px);
-    }
-
-    /* Product grid */
-    .products {
+    .container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 20px;
       padding: 20px;
     }
-    .product {
+    .card {
       background: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border: 1px solid #ddd;
+      border-radius: 8px;
       padding: 15px;
       text-align: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
-    .product img {
-      width: 100%;
-      max-height: 160px;
-      object-fit: cover;
-      border-radius: 8px;
-      margin-bottom: 10px;
+    .card img {
+      max-width: 100%;
+      height: 120px;
+      object-fit: contain;
     }
-    .product h3 {
-      margin: 10px 0;
-      font-size: 18px;
-    }
-    .product button {
-      padding: 8px 12px;
-      background: #007bff;
+    .btn {
+      margin-top: 10px;
+      background: #28a745;
       color: white;
+      padding: 10px;
       border: none;
       border-radius: 5px;
       cursor: pointer;
     }
-    .product button:hover {
-      background: #0056b3;
-    }
-
-    footer {
-      background: #333;
-      color: white;
-      padding: 15px;
-      text-align: center;
-      margin-top: 30px;
+    .btn:hover {
+      background: #218838;
     }
   </style>
 </head>
 <body>
-  <!-- Header -->
-  <header class="site-header">
-    <div class="logo-wordmark">
-      <!-- cart icon -->
-      <svg class="logo-cart" viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M7 4h-2l-1 2h2l3.6 7.59-1.35 2.44A2 2 0 0 0 10 19h9v-2h-8.42a.25.25 0 0 1-.22-.37L11.1 14h6.55a2 2 0 0 0 1.8-1.1l3.2-6.4A1 1 0 0 0 21.8 5H7.42L7 4zM7 20.5A1.5 1.5 0 1 0 7 17.5 1.5 1.5 0 0 0 7 20.5zm10 0A1.5 1.5 0 1 0 17 17.5 1.5 1.5 0 0 0 17 20.5z"></path>
-      </svg>
-      <span class="logo-text">
-        <span class="logo-b">B</span><span class="logo-beta">BETA</span>
-        <span class="logo-store">Store</span>
-      </span>
-    </div>
-    <a href="cart.html" class="cart-btn">🛒 Cart: <span id="cartCount">0</span></a>
+  <header>
+    <img src="assets/logo.png" alt="BBETA Logo">
+    <h1>BBETA Store</h1>
+    <a href="cart.html" class="cart-btn">🛒 Cart (<span id="cartCount">0</span>)</a>
   </header>
 
-  <!-- Products -->
-  <div class="products">
-    <div class="product">
-      <img src="assets/vegetables.jpg" alt="Fresh Vegetables">
+  <div class="container">
+    <div class="card">
+      <img src="assets/vegetables.jpg" alt="Vegetables">
       <h3>Fresh Vegetables</h3>
-      <button onclick="addToCart('Fresh Vegetables')">Add to Cart</button>
+      <button class="btn" onclick="addToCart('Fresh Vegetables')">Add to Cart</button>
     </div>
-    <div class="product">
-      <img src="assets/fruits.jpg" alt="Fresh Fruits">
+    <div class="card">
+      <img src="assets/fruits.jpg" alt="Fruits">
       <h3>Fresh Fruits</h3>
-      <button onclick="addToCart('Fresh Fruits')">Add to Cart</button>
+      <button class="btn" onclick="addToCart('Fresh Fruits')">Add to Cart</button>
     </div>
-    <div class="product">
-      <img src="assets/groceries.jpg" alt="Kirana Items">
+    <div class="card">
+      <img src="assets/groceries.jpg" alt="Groceries">
       <h3>Kirana Items</h3>
-      <button onclick="addToCart('Kirana Items')">Add to Cart</button>
+      <button class="btn" onclick="addToCart('Kirana Items')">Add to Cart</button>
     </div>
-    <div class="product">
+    <div class="card">
       <img src="assets/medicines.jpg" alt="Medicines">
       <h3>Medicines</h3>
-      <button onclick="addToCart('Medicines')">Add to Cart</button>
+      <button class="btn" onclick="addToCart('Medicines')">Add to Cart</button>
     </div>
-    <div class="product">
-      <img src="assets/bakery.jpg" alt="Bakery Items">
+    <div class="card">
+      <img src="assets/bakery.jpg" alt="Bakery">
       <h3>Bakery Items</h3>
-      <button onclick="addToCart('Bakery Items')">Add to Cart</button>
+      <button class="btn" onclick="addToCart('Bakery Items')">Add to Cart</button>
     </div>
-    <div class="product">
-      <img src="assets/dairy.jpg" alt="Dairy Products">
+    <div class="card">
+      <img src="assets/dairy.jpg" alt="Dairy">
       <h3>Dairy Products</h3>
-      <button onclick="addToCart('Dairy Products')">Add to Cart</button>
+      <button class="btn" onclick="addToCart('Dairy Products')">Add to Cart</button>
     </div>
   </div>
 
-  <!-- Footer -->
-  <footer>
-    <p>📍 Nalgonda, Telangana, India - 508001</p>
-    <p>📞 WhatsApp: 7093242271</p>
-    <p>B for Bada, Beta aapka apna – <b>BBETA Store</b></p>
-  </footer>
-
   <script>
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const cartCount = document.getElementById("cartCount");
-
-    function addToCart(item) {
-      cart.push(item);
-      localStorage.setItem("cart", JSON.stringify(cart));
-      cartCount.textContent = cart.length;
-      alert(item + " added to cart!");
+    function updateCartCount() {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      document.getElementById("cartCount").textContent = cart.length;
     }
 
-    // Initialize cart count
-    cartCount.textContent = cart.length;
+    function addToCart(item) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.push(item);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      updateCartCount();
+      alert(item + " added to cart ✅");
+    }
+
+    updateCartCount();
   </script>
 </body>
-</html>
+      </html>
