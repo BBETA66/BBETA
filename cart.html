@@ -13,10 +13,16 @@
       text-align: center;
     }
     header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       background: #333;
+      padding: 10px 20px;
       color: white;
-      padding: 15px;
-      text-align: center;
+    }
+    header img {
+      height: 60px; /* 👈 logo yaha bhi bada */
+      width: auto;
     }
     .cart-container {
       padding: 20px;
@@ -60,6 +66,7 @@
 </head>
 <body>
   <header>
+    <img src="assets/logo.png" alt="BBETA Logo">
     <h1>🛒 Your Cart</h1>
   </header>
 
