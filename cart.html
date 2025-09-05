@@ -5,68 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Your Cart - BBETA</title>
   <link rel="stylesheet" href="style.css">
-  <style>
-    .cart-container {
-      max-width: 400px;
-      margin: 20px auto;
-      background: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-
-    .cart-container h2 {
-      text-align: center;
-      color: red;
-      margin-bottom: 15px;
-    }
-
-    .cart-container p {
-      text-align: center;
-      margin-bottom: 20px;
-      font-size: 16px;
-    }
-
-    .cart-container input {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 12px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-size: 15px;
-    }
-
-    .cart-container button {
-      width: 100%;
-      padding: 12px;
-      background: green;
-      color: white;
-      font-size: 16px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .cart-container button:hover {
-      background: darkgreen;
-    }
-  </style>
 </head>
 <body>
   <header>
     <h1>BBETA</h1>
     <p>Apka Apna Bada Beta 🛒</p>
+    <a href="index.html" class="cart-link">⬅ Back to Shop</a>
   </header>
 
-  <main>
-    <div class="cart-container">
-      <h2>Your Cart</h2>
-      <p id="cart-items">Your cart is empty.</p>
+  <main class="cart-container">
+    <h2>Your Cart</h2>
+    <div id="cart-items"></div>
+    <h3>Total: ₹<span id="cart-total">0</span></h3>
 
-      <input type="text" placeholder="Full Name" id="name" required>
-      <input type="text" placeholder="Contact Number" id="contact" required>
-      <input type="text" placeholder="Delivery Address" id="address" required>
-
+    <div class="checkout-form">
+      <h2>Customer Details</h2>
+      <input type="text" id="customerName" placeholder="Enter your name" required>
+      <input type="text" id="customerPhone" placeholder="Enter your phone number" required>
+      <textarea id="customerAddress" placeholder="Enter your address" required></textarea>
       <button onclick="placeOrder()">Place Order</button>
     </div>
   </main>
