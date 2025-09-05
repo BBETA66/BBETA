@@ -9,35 +9,39 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background: #f4f4f9;
-      text-align: center;
+      background: #f8f9fa;
     }
     header {
-      background: #333;
-      color: white;
-      padding: 15px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      background: #333;
+      padding: 10px 20px;
+      color: white;
     }
     header img {
-      height: 70px;   /* 🔥 Logo size yaha adjust hoga */
+      height: 60px;   /* 👈 logo ko bada kiya */
       width: auto;
     }
-    header .cart-link {
+    header h1 {
+      margin: 0;
+      font-size: 20px;
+    }
+    .cart-link {
       color: white;
       text-decoration: none;
-      font-size: 18px;
+      font-size: 16px;
     }
-    .welcome {
-      margin: 20px 0;
+    .container {
+      text-align: center;
+      padding: 20px;
     }
-    .welcome h1 {
+    h2 {
       margin: 10px 0;
     }
     .products {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 20px;
       padding: 20px;
     }
@@ -73,54 +77,53 @@
     <a href="cart.html" class="cart-link">🛒 Cart: <span id="cartCount">0</span></a>
   </header>
 
-  <div class="welcome">
-    <h1>Welcome to BBETA Store</h1>
-    <p><em>"B for Bada Beta, Apka Apna Beta!"</em></p>
-  </div>
-
-  <div class="products">
-    <div class="product">
-      <img src="assets/vegetables.jpg" alt="Fresh Vegetables">
-      <h3>Fresh Vegetables</h3>
-      <button onclick="addToCart('Fresh Vegetables')">Add to Cart</button>
-    </div>
-    <div class="product">
-      <img src="assets/fruits.jpg" alt="Fresh Fruits">
-      <h3>Fresh Fruits</h3>
-      <button onclick="addToCart('Fresh Fruits')">Add to Cart</button>
-    </div>
-    <div class="product">
-      <img src="assets/groceries.jpg" alt="Kirana Items">
-      <h3>Kirana Items</h3>
-      <button onclick="addToCart('Kirana Items')">Add to Cart</button>
-    </div>
-    <div class="product">
-      <img src="assets/medicines.jpg" alt="Medicines">
-      <h3>Medicines</h3>
-      <button onclick="addToCart('Medicines')">Add to Cart</button>
-    </div>
-    <div class="product">
-      <img src="assets/bakery.jpg" alt="Bakery Items">
-      <h3>Bakery Items</h3>
-      <button onclick="addToCart('Bakery Items')">Add to Cart</button>
-    </div>
-    <div class="product">
-      <img src="assets/dairy.jpg" alt="Dairy Products">
-      <h3>Dairy Products</h3>
-      <button onclick="addToCart('Dairy Products')">Add to Cart</button>
+  <div class="container">
+    <h2>Welcome to BBETA Store</h2>
+    <p>"B for Bada Beta, Apka Apna Beta!"</p>
+    <div class="products">
+      <div class="product">
+        <img src="assets/vegetables.jpg" alt="Vegetables">
+        <h3>Fresh Vegetables</h3>
+        <button onclick="addToCart('Fresh Vegetables')">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="assets/fruits.jpg" alt="Fruits">
+        <h3>Fresh Fruits</h3>
+        <button onclick="addToCart('Fresh Fruits')">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="assets/groceries.jpg" alt="Groceries">
+        <h3>Kirana Items</h3>
+        <button onclick="addToCart('Kirana Items')">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="assets/medicines.jpg" alt="Medicines">
+        <h3>Medicines</h3>
+        <button onclick="addToCart('Medicines')">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="assets/bakery.jpg" alt="Bakery">
+        <h3>Bakery Items</h3>
+        <button onclick="addToCart('Bakery Items')">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="assets/dairy.jpg" alt="Dairy">
+        <h3>Dairy Products</h3>
+        <button onclick="addToCart('Dairy Products')">Add to Cart</button>
+      </div>
     </div>
   </div>
 
   <script>
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    document.getElementById("cartCount").innerText = cart.length;
+    document.getElementById("cartCount").textContent = cart.length;
 
     function addToCart(item) {
       cart.push(item);
       localStorage.setItem("cart", JSON.stringify(cart));
-      document.getElementById("cartCount").innerText = cart.length;
-      alert(item + " added to cart 🛒");
+      document.getElementById("cartCount").textContent = cart.length;
+      alert(item + " added to cart!");
     }
   </script>
 </body>
-    </html>
+</html>
