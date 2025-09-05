@@ -9,120 +9,129 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background: #f8f9fa;
+      background: #f4f4f9;
+      text-align: center;
     }
     header {
       background: #222;
-      padding: 15px;
-      text-align: center;
       color: white;
+      padding: 15px;
     }
-    header img {
-      max-height: 60px;
-      display: block;
-      margin: auto;
-    }
-    h1 {
-      margin: 10px 0;
+    .logo {
       font-size: 28px;
-      color: #ff3333;
+      font-weight: bold;
+      color: red;
     }
     .cart-btn {
-      background: #28a745;
-      padding: 10px 20px;
-      border-radius: 5px;
+      background: green;
       color: white;
+      padding: 8px 12px;
+      border-radius: 5px;
       text-decoration: none;
-      font-weight: bold;
     }
-    .container {
+    .products {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
+      gap: 15px;
       padding: 20px;
     }
-    .card {
+    .product {
       background: white;
-      border: 1px solid #ddd;
       border-radius: 8px;
-      padding: 15px;
-      text-align: center;
+      padding: 10px;
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
-    .card img {
-      max-width: 100%;
-      height: 120px;
-      object-fit: contain;
+    .product img {
+      width: 100%;
+      border-radius: 8px;
+      height: 150px;
+      object-fit: cover;
     }
-    .btn {
-      margin-top: 10px;
+    .product h3 {
+      margin: 10px 0 5px;
+    }
+    .product p {
+      font-weight: bold;
+      margin: 5px 0;
+    }
+    .add-btn {
+      padding: 8px 12px;
       background: #28a745;
       color: white;
-      padding: 10px;
       border: none;
       border-radius: 5px;
       cursor: pointer;
     }
-    .btn:hover {
+    .add-btn:hover {
       background: #218838;
     }
   </style>
 </head>
 <body>
+
   <header>
-    <img src="assets/logo.png" alt="BBETA Logo">
-    <h1>BBETA Store</h1>
-    <a href="cart.html" class="cart-btn">🛒 Cart (<span id="cartCount">0</span>)</a>
+    <div class="logo">🛒 BBETA Store</div>
+    <a href="cart.html" class="cart-btn">Cart: <span id="cartCount">0</span></a>
   </header>
 
-  <div class="container">
-    <div class="card">
-      <img src="assets/vegetables.jpg" alt="Vegetables">
+  <h2>Welcome to BBETA Store</h2>
+  <p>"B for Bada Beta, Apka Apna Beta!"</p>
+
+  <div class="products">
+    <div class="product">
+      <img src="assets/vegetables.jpg" alt="Fresh Vegetables">
       <h3>Fresh Vegetables</h3>
-      <button class="btn" onclick="addToCart('Fresh Vegetables')">Add to Cart</button>
+      <p>₹50 / kg</p>
+      <button class="add-btn" onclick="addToCart('Fresh Vegetables', 50)">Add to Cart</button>
     </div>
-    <div class="card">
-      <img src="assets/fruits.jpg" alt="Fruits">
+    <div class="product">
+      <img src="assets/fruits.jpg" alt="Fresh Fruits">
       <h3>Fresh Fruits</h3>
-      <button class="btn" onclick="addToCart('Fresh Fruits')">Add to Cart</button>
+      <p>₹80 / kg</p>
+      <button class="add-btn" onclick="addToCart('Fresh Fruits', 80)">Add to Cart</button>
     </div>
-    <div class="card">
-      <img src="assets/groceries.jpg" alt="Groceries">
+    <div class="product">
+      <img src="assets/groceries.jpg" alt="Kirana Items">
       <h3>Kirana Items</h3>
-      <button class="btn" onclick="addToCart('Kirana Items')">Add to Cart</button>
+      <p>₹200 / pack</p>
+      <button class="add-btn" onclick="addToCart('Kirana Items', 200)">Add to Cart</button>
     </div>
-    <div class="card">
+    <div class="product">
       <img src="assets/medicines.jpg" alt="Medicines">
       <h3>Medicines</h3>
-      <button class="btn" onclick="addToCart('Medicines')">Add to Cart</button>
+      <p>₹100 / item</p>
+      <button class="add-btn" onclick="addToCart('Medicines', 100)">Add to Cart</button>
     </div>
-    <div class="card">
-      <img src="assets/bakery.jpg" alt="Bakery">
+    <div class="product">
+      <img src="assets/bakery.jpg" alt="Bakery Items">
       <h3>Bakery Items</h3>
-      <button class="btn" onclick="addToCart('Bakery Items')">Add to Cart</button>
+      <p>₹150 / pack</p>
+      <button class="add-btn" onclick="addToCart('Bakery Items', 150)">Add to Cart</button>
     </div>
-    <div class="card">
-      <img src="assets/dairy.jpg" alt="Dairy">
+    <div class="product">
+      <img src="assets/dairy.jpg" alt="Dairy Products">
       <h3>Dairy Products</h3>
-      <button class="btn" onclick="addToCart('Dairy Products')">Add to Cart</button>
+      <p>₹120 / pack</p>
+      <button class="add-btn" onclick="addToCart('Dairy Products', 120)">Add to Cart</button>
     </div>
   </div>
 
   <script>
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const cartCount = document.getElementById("cartCount");
+
     function updateCartCount() {
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      document.getElementById("cartCount").textContent = cart.length;
+      cartCount.innerText = cart.length;
     }
 
-    function addToCart(item) {
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      cart.push(item);
+    function addToCart(name, price) {
+      cart.push({ name, price });
       localStorage.setItem("cart", JSON.stringify(cart));
       updateCartCount();
-      alert(item + " added to cart ✅");
     }
 
     updateCartCount();
   </script>
+
 </body>
-      </html>
+        </html>
