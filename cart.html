@@ -3,76 +3,85 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BBETA - Cart</title>
+  <title>BBETA Cart</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    body { background: #f8f9fa; }
-    .container { margin-top: 50px; }
-    .btn-whatsapp {
-      background-color: #25D366;
-      color: white;
-      font-weight: bold;
-    }
-    .btn-whatsapp:hover {
-      background-color: #1ebe57;
-      color: white;
-    }
+    body { background-color: #f8f9fa; }
+    .cart-header { text-align: center; padding: 20px; background-color: #28a745; color: white; }
+    .cart-header h1 { font-weight: bold; }
+    .footer { background-color: #333; color: white; padding: 10px; text-align: center; margin-top: 20px; }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h2 class="mb-4 text-center">🛒 Your Cart</h2>
-    <div id="cart-items"></div>
-    <h4 class="mt-4">Total: ₹<span id="cart-total">0</span></h4>
-    
-    <button class="btn btn-success mt-3" onclick="checkout()">Proceed to Checkout</button>
-    <button class="btn btn-whatsapp mt-3" onclick="sendToWhatsApp()">📩 Place Order on WhatsApp</button>
-    <a href="index.html" class="btn btn-secondary mt-3">Continue Shopping</a>
+
+  <!-- Cart Header -->
+  <div class="cart-header">
+    <h1>🛒 Your Cart</h1>
+    <a href="index.html" class="btn btn-light">⬅ Back to Store</a>
+  </div>
+
+  <!-- Cart Items -->
+  <div class="container my-4">
+    <div id="cart-items" class="list-group mb-3"></div>
+    <h4>Total: ₹<span id="total">0</span></h4>
+    <button class="btn btn-success" onclick="checkout()">✅ Place Order (WhatsApp)</button>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    📍 Nalgonda, Telangana, India - 508001 | 📞 WhatsApp: 7093242271
   </div>
 
   <script>
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    let cartItemsDiv = document.getElementById("cart-items");
-    let cartTotalSpan = document.getElementById("cart-total");
-
-    function renderCart() {
-      cartItemsDiv.innerHTML = "";
+    function loadCart() {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      let cartItemsDiv = document.getElementById('cart-items');
       let total = 0;
+      cartItemsDiv.innerHTML = '';
+
       cart.forEach((item, index) => {
+        total += item.price;
         cartItemsDiv.innerHTML += `
-          <div class="d-flex justify-content-between align-items-center border-bottom py-2">
-            <span>${item.name} - ₹${item.price} x ${item.quantity}</span>
-            <span>₹${item.price * item.quantity}</span>
-          </div>
-        `;
-        total += item.price * item.quantity;
+          <div class="list-group-item d-flex justify-content-between align-items-center">
+            ${item.product} - ₹${item.price}
+            <button class="btn btn-danger btn-sm" onclick="removeFromCart(${index})">❌</button>
+          </div>`;
       });
-      cartTotalSpan.textContent = total;
+
+      document.getElementById('total').innerText = total;
+    }
+
+    function removeFromCart(index) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      loadCart();
     }
 
     function checkout() {
-      window.location.href = "checkout.html";
-    }
-
-    function sendToWhatsApp() {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
       if (cart.length === 0) {
         alert("Your cart is empty!");
         return;
       }
-      let message = "🛒 BBETA Order:%0A";
+
+      let message = "🛒 *New Order from BBETA Store* %0A%0A";
       let total = 0;
       cart.forEach(item => {
-        message += `${item.name} - ₹${item.price} x ${item.quantity} = ₹${item.price * item.quantity}%0A`;
-        total += item.price * item.quantity;
+        message += `• ${item.product} - ₹${item.price}%0A`;
+        total += item.price;
       });
-      message += `%0ATotal: ₹${total}`;
-      
-      let phone = "917093242271"; // Tumhara WhatsApp number
+      message += `%0A💰 *Total:* ₹${total}`;
+
+      let phone = "917093242271"; // WhatsApp number with country code
       let url = `https://wa.me/${phone}?text=${message}`;
       window.open(url, "_blank");
+
+      localStorage.removeItem('cart');
     }
 
-    renderCart();
+    loadCart();
   </script>
+
 </body>
 </html>
