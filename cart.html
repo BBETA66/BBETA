@@ -3,92 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BBETA - Your Cart</title>
+  <title>Your Cart - BBETA</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f4f4f9;
-      text-align: center;
-    }
-    header {
-      background: #333;
-      color: white;
-      padding: 15px;
-      text-align: center;
-    }
-    .cart-container {
-      padding: 20px;
-    }
-    .cart-item {
-      background: white;
-      margin: 10px auto;
-      padding: 15px;
-      border-radius: 8px;
-      width: 90%;
-      max-width: 400px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .total {
-      margin-top: 20px;
-      font-size: 18px;
-      font-weight: bold;
-    }
-    button {
-      padding: 8px 12px;
-      background: #dc3545;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #c82333;
-    }
-    .checkout-btn {
-      margin-top: 20px;
-      display: inline-block;
-      padding: 10px 15px;
-      background: #28a745;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-    }
-    .checkout-btn:hover {
-      background: #218838;
-    }
-    .back-btn {
-      margin-top: 20px;
-      display: inline-block;
-      padding: 10px 15px;
-      background: #007bff;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-    }
-    .back-btn:hover {
-      background: #0056b3;
-    }
+    body { background: #f8f9fa; }
+    .cart-header { background: #343a40; color: white; padding: 15px; text-align: center; }
+    .cart-container { margin: 20px auto; max-width: 700px; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.2); }
+    .cart-item { border-bottom: 1px solid #ddd; padding: 10px 0; }
+    .footer { background: #343a40; color: white; padding: 15px; text-align: center; margin-top: 30px; }
   </style>
 </head>
 <body>
-  <header>
-    <h1>🛒 Your Cart</h1>
-  </header>
 
-  <div class="cart-container" id="cartItems">
-    <!-- Cart items will appear here -->
+  <!-- Header -->
+  <div class="cart-header">
+    🛒 <b>Your Cart</b>
   </div>
 
-  <div class="total" id="totalAmount">Total: ₹0</div>
+  <!-- Cart Container -->
+  <div class="cart-container">
+    <div id="cart-items"></div>
+    <h5 id="cart-total">Total: ₹0</h5>
+    <button class="btn btn-success w-100 my-2" onclick="checkout()">✅ Checkout via WhatsApp</button>
+    <a href="index.html" class="btn btn-primary w-100">⬅ Back to Shop</a>
+  </div>
 
-  <a href="#" class="checkout-btn" onclick="checkout()">✅ Checkout via WhatsApp</a>
-  <br>
-  <a href="index.html" class="back-btn">⬅ Back to Shop</a>
+  <!-- Footer -->
+  <div class="footer">
+    📍 Nalgonda, Telangana | 📞 WhatsApp: 7093242271
+  </div>
 
   <script src="cart.js"></script>
 </body>
