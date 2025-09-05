@@ -13,18 +13,17 @@
       text-align: center;
     }
     header {
-      background: linear-gradient(90deg, #0f9d58, #34a853);
+      background: #28a745;
       color: white;
-      padding: 20px;
+      padding: 15px;
     }
     header h1 {
-      font-size: 40px;
-      font-weight: bold;
-      text-shadow: 0 0 10px rgba(0,255,0,0.7);
+      margin: 0;
+      font-size: 30px;
     }
     .products {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 15px;
       padding: 20px;
     }
@@ -35,9 +34,8 @@
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
     .product img {
-      width: 100%;
+      max-width: 100%;
       height: 150px;
-      object-fit: cover;
       border-radius: 8px;
     }
     .product h3 {
@@ -49,95 +47,73 @@
     }
     button {
       padding: 8px 12px;
-      background: #28a745;
+      background: #007bff;
       color: white;
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      margin-top: 5px;
     }
     button:hover {
-      background: #218838;
+      background: #0056b3;
+    }
+    footer {
+      margin-top: 30px;
+      padding: 20px;
+      background: #333;
+      color: white;
+    }
+    iframe {
+      width: 100%;
+      height: 250px;
+      border: none;
+      margin-top: 15px;
     }
     .cart-btn {
       display: inline-block;
       margin: 20px auto;
-      padding: 12px 20px;
-      background: #007bff;
-      color: white;
-      border-radius: 5px;
+      padding: 10px 15px;
+      background: #ffc107;
+      color: black;
       text-decoration: none;
-    }
-    .cart-btn:hover {
-      background: #0056b3;
+      border-radius: 5px;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
   <header>
     <h1>🛍️ BBETA STORE</h1>
-    <p>Groceries • Fruits • Vegetables • Daily Essentials</p>
   </header>
 
+  <h2>Available Products</h2>
   <div class="products">
     <div class="product">
-      <img src="https://source.unsplash.com/400x300/?rice" alt="Rice">
-      <h3>Rice</h3>
-      <p>₹50 / kg</p>
-      <button onclick="addToCart('Rice', 50)">Add to Cart</button>
+      <img src="assets/vegetables.jpg" alt="Vegetables">
+      <h3>Fresh Vegetables</h3>
+      <p>₹50</p>
+      <button onclick="addToCart('Fresh Vegetables', 50)">Add to Cart</button>
     </div>
-
     <div class="product">
-      <img src="https://source.unsplash.com/400x300/?oil" alt="Oil">
-      <h3>Sunflower Oil</h3>
-      <p>₹120 / L</p>
-      <button onclick="addToCart('Sunflower Oil', 120)">Add to Cart</button>
+      <img src="assets/groceries.jpg" alt="Groceries">
+      <h3>Groceries</h3>
+      <p>₹80</p>
+      <button onclick="addToCart('Groceries', 80)">Add to Cart</button>
     </div>
-
     <div class="product">
-      <img src="https://source.unsplash.com/400x300/?sugar" alt="Sugar">
-      <h3>Sugar</h3>
-      <p>₹45 / kg</p>
-      <button onclick="addToCart('Sugar', 45)">Add to Cart</button>
-    </div>
-
-    <div class="product">
-      <img src="https://source.unsplash.com/400x300/?tea" alt="Tea">
-      <h3>Tea Powder</h3>
-      <p>₹80 / 250g</p>
-      <button onclick="addToCart('Tea Powder', 80)">Add to Cart</button>
-    </div>
-
-    <div class="product">
-      <img src="https://source.unsplash.com/400x300/?biscuits" alt="Biscuits">
-      <h3>Biscuits</h3>
-      <p>₹30 / pack</p>
-      <button onclick="addToCart('Biscuits', 30)">Add to Cart</button>
-    </div>
-
-    <div class="product">
-      <img src="https://source.unsplash.com/400x300/?milk" alt="Milk">
-      <h3>Fresh Milk</h3>
-      <p>₹25 / L</p>
-      <button onclick="addToCart('Fresh Milk', 25)">Add to Cart</button>
-    </div>
-
-    <div class="product">
-      <img src="https://source.unsplash.com/400x300/?vegetables" alt="Vegetables">
-      <h3>Mixed Vegetables</h3>
-      <p>₹60 / kg</p>
-      <button onclick="addToCart('Mixed Vegetables', 60)">Add to Cart</button>
-    </div>
-
-    <div class="product">
-      <img src="https://source.unsplash.com/400x300/?fruits" alt="Fruits">
-      <h3>Fresh Fruits</h3>
-      <p>₹100 / kg</p>
-      <button onclick="addToCart('Fresh Fruits', 100)">Add to Cart</button>
+      <img src="assets/medicines.jpg" alt="Medicines">
+      <h3>Medicines</h3>
+      <p>₹100</p>
+      <button onclick="addToCart('Medicines', 100)">Add to Cart</button>
     </div>
   </div>
 
   <a href="cart.html" class="cart-btn">🛒 Go to Cart</a>
+
+  <footer>
+    <p>📍 Location: Nalgonda, Telangana, India - 508001</p>
+    <p>📞 WhatsApp: <a href="https://wa.me/7093242271" style="color:#25D366;">7093242271</a></p>
+    <iframe src="https://www.google.com/maps?q=Nalgonda,+Telangana,+India+508001&output=embed"></iframe>
+  </footer>
 
   <script>
     function addToCart(product, price) {
