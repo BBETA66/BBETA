@@ -76,9 +76,17 @@
       });
       message += `%0ATotal: ₹${total}%0A%0A👤 Name: ${name}%0A📞 Contact: ${number}%0A🏠 Address: ${address}`;
 
-      const phoneNumber = "7093242271"; // tumhara WhatsApp number
+      const phoneNumber = "7093242271"; // Tumhara WhatsApp number
       const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
+      
+      // Open WhatsApp
       window.open(whatsappURL, "_blank");
+
+      // Clear cart and redirect to thank you
+      localStorage.removeItem("cart");
+      setTimeout(() => {
+        window.location.href = "thankyou.html";
+      }, 1500);
     }
 
     renderCart();
