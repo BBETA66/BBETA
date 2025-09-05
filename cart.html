@@ -3,31 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Cart - BBETA</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <title>Your Cart</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
   <style>
-    body { background: #f8f9fa; }
-    .cart-header { background: #343a40; color: white; padding: 15px; text-align: center; }
-    .cart-container { margin: 20px auto; max-width: 700px; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.2); }
-    .cart-item { border-bottom: 1px solid #ddd; padding: 10px 0; }
-    .footer { background: #343a40; color: white; padding: 15px; text-align: center; margin-top: 30px; }
+    body { background-color: #f8f9fa; }
+    .header { background: #343a40; color: white; padding: 15px; text-align: center; }
+    .cart-card { border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
   </style>
 </head>
 <body>
-
-  <div class="cart-header">
-    🛒 <b>Your Cart</b>
+  <div class="header">
+    <h3>🛒 Your Cart</h3>
   </div>
 
-  <div class="cart-container">
+  <div class="container my-4">
     <div id="cart-items"></div>
-    <h5 id="cart-total">Total: ₹0</h5>
-    <button class="btn btn-success w-100 my-2" onclick="checkout()">✅ Checkout via WhatsApp</button>
-    <a href="index.html" class="btn btn-primary w-100">⬅ Back to Shop</a>
-  </div>
+    <h4 class="mt-4">Total: ₹<span id="total">0</span></h4>
 
-  <div class="footer">
-    📍 Nalgonda, Telangana | 📞 WhatsApp: 7093242271
+    <button class="btn btn-success mt-3" onclick="checkout()">✅ Checkout via WhatsApp</button>
+    <a href="index.html" class="btn btn-primary mt-3">⬅ Back to Shop</a>
   </div>
 
   <script src="cart.js"></script>
