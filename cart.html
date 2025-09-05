@@ -3,80 +3,105 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Cart - BBETA</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <title>BBETA - Your Cart</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    body { background: #f8f9fa; }
-    .navbar { background: #343a40; }
-    .navbar-brand, .navbar-text { color: white !important; }
-    .card { border-radius: 12px; }
-    .btn-whatsapp { background: #25D366; color: white; border: none; }
-    .btn-back { background: #007bff; color: white; border: none; }
+    body { background:#f8f9fa; }
+    .navbar { background:#28a745 !important; }
+    .cart-item {
+      background: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .cart-total {
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
 
   <!-- Navbar -->
-  <nav class="navbar px-3">
-    <span class="navbar-brand">🛒 Your Cart</span>
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <span class="navbar-brand text-white">🛒 Your Cart - BBETA</span>
+    </div>
   </nav>
 
-  <div class="container my-4">
-    <div id="cart-items" class="mb-3"></div>
-    <h5 id="total"></h5>
+  <!-- Cart Items -->
+  <div class="container mt-4">
+    <div id="cartItems"></div>
+    <p class="cart-total" id="cartTotal">Total: ₹0</p>
 
-    <div class="d-flex gap-2 mt-3">
-      <button id="checkout" class="btn btn-whatsapp">✔ Checkout via WhatsApp</button>
-      <a href="index.html" class="btn btn-back">⬅ Back to Shop</a>
+    <div class="mt-4 text-center">
+      <button class="btn btn-success" onclick="checkout()">✅ Confirm Order (WhatsApp)</button>
+      <a href="index.html" class="btn btn-secondary">⬅ Back to Shop</a>
     </div>
   </div>
 
   <script>
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const cartItemsDiv = document.getElementById("cart-items");
-    const totalDiv = document.getElementById("total");
-    let total = 0;
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const cartItemsDiv = document.getElementById("cartItems");
+    const cartTotalEl = document.getElementById("cartTotal");
 
-    if (cart.length === 0) {
-      cartItemsDiv.innerHTML = "<p>Your cart is empty.</p>";
-    } else {
+    function displayCart() {
+      cartItemsDiv.innerHTML = "";
+      let total = 0;
+
+      if (cart.length === 0) {
+        cartItemsDiv.innerHTML = "<p>Your cart is empty 🛍️</p>";
+        cartTotalEl.innerText = "Total: ₹0";
+        return;
+      }
+
       cart.forEach((item, index) => {
         total += item.price;
-        const div = document.createElement("div");
-        div.classList.add("card", "p-2", "mb-2");
+        let div = document.createElement("div");
+        div.classList.add("cart-item");
         div.innerHTML = `
-          <div class="d-flex justify-content-between align-items-center">
-            <span>${item.name} - ₹${item.price}</span>
-            <button class="btn btn-sm btn-danger" onclick="removeItem(${index})">Remove</button>
-          </div>
+          <span>${item.product} - ₹${item.price}</span>
+          <button class="btn btn-sm btn-danger" onclick="removeItem(${index})">Remove</button>
         `;
         cartItemsDiv.appendChild(div);
       });
-    }
-    totalDiv.textContent = "Total: ₹" + total;
 
-    // Remove item function
+      cartTotalEl.innerText = "Total: ₹" + total;
+    }
+
     function removeItem(index) {
       cart.splice(index, 1);
       localStorage.setItem("cart", JSON.stringify(cart));
-      location.reload();
+      displayCart();
     }
 
-    // Checkout via WhatsApp
-    document.getElementById("checkout").addEventListener("click", () => {
+    function checkout() {
       if (cart.length === 0) {
         alert("Your cart is empty!");
         return;
       }
-      let orderText = "🛒 *BBETA Order*%0A%0A";
-      cart.forEach(item => {
-        orderText += `- ${item.name}: ₹${item.price}%0A`;
-      });
-      orderText += `%0ATotal: ₹${total}%0A%0AConfirm my order ✅`;
+      let message = "Hello BBETA,%0AHere is my order:%0A";
+      let total = 0;
 
-      const phone = "917093242271"; // apna WhatsApp number (91 + number)
-      window.open(`https://wa.me/${phone}?text=${orderText}`, "_blank");
-    });
+      cart.forEach(item => {
+        message += "- " + item.product + " (₹" + item.price + ")%0A";
+        total += item.price;
+      });
+
+      message += "%0ATotal: ₹" + total;
+
+      // WhatsApp number
+      let phone = "917093242271";
+      window.open("https://wa.me/" + phone + "?text=" + message, "_blank");
+    }
+
+    displayCart();
   </script>
+
 </body>
 </html>
