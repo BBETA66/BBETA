@@ -12,15 +12,16 @@
   </header>
 
   <main>
-    <div id="cart-items"></div>
-    <h3 id="cart-total"></h3>
+    <div id="cart-items" class="cart-items">
+      <p class="empty-cart">🛒 Your cart is empty.</p>
+    </div>
 
-    <form onsubmit="placeOrder(event)">
-      <input type="text" id="name" placeholder="Full Name" required>
-      <input type="tel" id="phone" placeholder="Contact Number" required>
-      <textarea id="address" placeholder="Delivery Address" required></textarea>
-      <button type="submit">Place Order</button>
-    </form>
+    <div class="checkout-form">
+      <input type="text" placeholder="Full Name">
+      <input type="text" placeholder="Contact Number">
+      <textarea placeholder="Delivery Address"></textarea>
+      <button class="order-btn">Place Order</button>
+    </div>
   </main>
 
   <script src="cart.js"></script>
