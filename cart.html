@@ -5,99 +5,150 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Your Cart - BBETA</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f9; text-align: center; }
-    header { background: #fff; padding: 20px; }
-    header h1 {
-      font-size: 2.2rem; font-weight: bold;
-      background: linear-gradient(90deg, #28a745, #ff0000);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 2px 2px 5px rgba(0,0,0,0.4);
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 0;
+      text-align: center;
     }
-    .cart-container { padding: 20px; }
-    .cart-item { background: white; margin: 10px auto; padding: 15px; border-radius: 8px;
-                 width: 90%; max-width: 500px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-                 display: flex; justify-content: space-between; align-items: center; }
-    .cart-summary { margin-top: 20px; font-size: 1.2rem; font-weight: bold; }
-    button { padding: 8px 12px; background: #dc3545; color: white; border: none; border-radius: 5px; cursor: pointer; }
-    button:hover { background: #c82333; }
-    .back-btn, .order-btn { margin: 10px; display: inline-block; padding: 10px 15px; border-radius: 5px; color: white; text-decoration: none; }
-    .back-btn { background: #28a745; }
-    .order-btn { background: #007bff; }
-    input { padding: 8px; margin: 5px; width: 80%; max-width: 300px; }
+    header {
+      background: #4CAF50;
+      color: white;
+      padding: 15px;
+      font-size: 22px;
+      font-weight: bold;
+    }
+    table {
+      width: 90%;
+      margin: 20px auto;
+      border-collapse: collapse;
+      background: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    th, td {
+      padding: 12px;
+      border: 1px solid #ddd;
+    }
+    th {
+      background: #f2f2f2;
+    }
+    .total {
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .form-container {
+      width: 90%;
+      margin: 20px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: left;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 8px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background: #0056b3;
+    }
   </style>
 </head>
 <body>
-  <header>
-    <h1>🛒 Apka Apna Bada BBETA</h1>
-  </header>
 
-  <div class="cart-container" id="cartItems"></div>
-  <div class="cart-summary" id="cartTotal"></div>
+<header>
+  🛒 Your Cart - BBETA
+</header>
 
+<h2>Cart Items</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody id="cartTable"></tbody>
+</table>
+
+<h3 class="total">Grand Total: ₹<span id="grandTotal">0</span></h3>
+
+<div class="form-container">
   <h3>Enter Your Details</h3>
-  <input type="text" id="custName" placeholder="Your Name"><br>
-  <input type="text" id="custNumber" placeholder="Contact Number"><br>
-  <input type="text" id="custAddress" placeholder="Full Address"><br>
+  <input type="text" id="name" placeholder="Your Name" required>
+  <input type="text" id="phone" placeholder="Mobile Number" required>
+  <textarea id="address" placeholder="Delivery Address" rows="3" required></textarea>
+  <button onclick="placeOrder()">Confirm Order ✅</button>
+</div>
 
-  <a href="index.html" class="back-btn">⬅ Back to Shop</a>
-  <a href="#" class="order-btn" onclick="placeOrder()">✅ Confirm Order on WhatsApp</a>
+<script>
+  function loadCart() {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let cartTable = document.getElementById("cartTable");
+    let grandTotal = 0;
 
-  <script>
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const cartContainer = document.getElementById("cartItems");
-    const cartTotal = document.getElementById("cartTotal");
+    cartTable.innerHTML = "";
 
-    function displayCart() {
-      cartContainer.innerHTML = "";
-      let total = 0;
-      if (cart.length === 0) {
-        cartContainer.innerHTML = "<p>Your cart is empty 🛍️</p>";
-        cartTotal.innerHTML = "";
-        return;
-      }
-      cart.forEach((item, index) => {
-        let div = document.createElement("div");
-        div.classList.add("cart-item");
-        let itemTotal = item.price * item.qty;
-        total += itemTotal;
-        div.innerHTML = `
-          <span>${item.name} (${item.qty} × ₹${item.price}) = ₹${itemTotal}</span>
-          <button onclick="removeItem(${index})">Remove</button>
-        `;
-        cartContainer.appendChild(div);
-      });
-      cartTotal.innerHTML = "Total: ₹" + total;
+    cart.forEach((item, index) => {
+      let total = item.price * item.qty;
+      grandTotal += total;
+
+      cartTable.innerHTML += `
+        <tr>
+          <td>${item.product}</td>
+          <td>₹${item.price}</td>
+          <td>${item.qty}</td>
+          <td>₹${total}</td>
+        </tr>
+      `;
+    });
+
+    document.getElementById("grandTotal").innerText = grandTotal;
+  }
+
+  function placeOrder() {
+    let name = document.getElementById("name").value;
+    let phone = document.getElementById("phone").value;
+    let address = document.getElementById("address").value;
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let grandTotal = document.getElementById("grandTotal").innerText;
+
+    if (!name || !phone || !address) {
+      alert("⚠️ Please fill all details");
+      return;
     }
 
-    function removeItem(index) {
-      cart.splice(index, 1);
-      localStorage.setItem("cart", JSON.stringify(cart));
-      displayCart();
-    }
+    let orderDetails = "Hello BBETA,\nHere is my order:\n\n";
+    cart.forEach(item => {
+      orderDetails += `• ${item.product} x ${item.qty} (₹${item.price}) = ₹${item.price * item.qty}\n`;
+    });
+    orderDetails += `\nTotal: ₹${grandTotal}\n\n👤 Name: ${name}\n📞 Contact: ${phone}\n🏠 Address: ${address}`;
 
-    function placeOrder() {
-      let name = document.getElementById("custName").value;
-      let number = document.getElementById("custNumber").value;
-      let address = document.getElementById("custAddress").value;
+    // WhatsApp number (update here)
+    let whatsappNumber = "919490648430"; 
+    let whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(orderDetails)}`;
 
-      if (!name || !number || !address) {
-        alert("⚠️ Please fill all details before confirming order");
-        return;
-      }
+    window.open(whatsappLink, "_blank");
+    localStorage.removeItem('cart');
+  }
 
-      let orderText = "Hello BBETA,%0AHere is my order:%0A";
-      let total = 0;
-      cart.forEach(item => {
-        orderText += `• ${item.name} (${item.qty} × ₹${item.price}) = ₹${item.qty * item.price}%0A`;
-        total += item.qty * item.price;
-      });
-      orderText += `%0A*Total: ₹${total}*%0A%0A👤 Name: ${name}%0A📞 Contact: ${number}%0A🏠 Address: ${address}`;
+  loadCart();
+</script>
 
-      window.open(`https://wa.me/917093242271?text=${orderText}`, "_blank");
-    }
-
-    displayCart();
-  </script>
 </body>
 </html>
