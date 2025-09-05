@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BBETA - Your Cart</title>
+  <title>BBETA - Cart</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -12,149 +12,120 @@
       background: #f4f4f9;
       text-align: center;
     }
-
-    :root {
-      --logo-size: clamp(38px, 7vw, 66px);
-      --glow1: rgba(0,255,140,0.6);
-      --glow2: rgba(0,200,120,0.45);
-      --glow3: rgba(0,180,110,0.25);
-      --brand-green-1:#00ff88;
-      --brand-green-2:#00cc66;
-      --brand-green-3:#00aa66;
-    }
-
     header {
-      background:#111;
-      color:white;
-      padding:20px;
-    }
-
-    /* Logo Row */
-    .logo-wordmark {
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      margin-bottom:8px;
-    }
-    .logo-cart {
-      width: clamp(28px, 4.5vw, 38px);
-      fill: #aaffdd;
-      filter: drop-shadow(0 0 6px var(--glow2));
-    }
-    .logo-text {
-      font-weight:900;
-      font-size: var(--logo-size);
-      background: linear-gradient(90deg, var(--brand-green-1), var(--brand-green-2), var(--brand-green-3));
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow:0 0 10px var(--glow1),0 0 18px var(--glow2),0 0 28px var(--glow3);
-    }
-    .logo-store {
-      margin-left: 8px;
-      font-size: calc(var(--logo-size) * 0.5);
-      color:#c7ffe8;
-    }
-
-    .cart-container {
-      padding: 20px;
-    }
-    .cart-item {
-      background: white;
-      margin: 10px auto;
+      background: #111;
+      color: white;
       padding: 15px;
-      border-radius: 8px;
-      width: 90%;
-      max-width: 400px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      text-align: center;
     }
-    button {
-      padding: 8px 12px;
-      background: #dc3545;
+    .cart-container {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+    th, td {
+      padding: 10px;
+      text-align: center;
+    }
+    .checkout-btn {
+      padding: 10px 20px;
+      background: #28a745;
       color: white;
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      text-decoration: none;
     }
-    button:hover {
-      background: #c82333;
+    .checkout-btn:hover {
+      background: #218838;
+    }
+    .empty {
+      font-size: 18px;
+      margin: 20px 0;
     }
     .back-btn {
-      margin-top: 20px;
       display: inline-block;
+      margin-top: 15px;
       padding: 10px 15px;
-      background: #28a745;
+      background: #007bff;
       color: white;
       text-decoration: none;
       border-radius: 5px;
     }
     .back-btn:hover {
-      background: #218838;
-    }
-
-    footer {
-      background:#333;
-      color:white;
-      padding:15px;
-      margin-top:20px;
+      background: #0056b3;
     }
   </style>
 </head>
 <body>
   <header>
-    <div class="logo-wordmark">
-      <svg class="logo-cart" viewBox="0 0 24 24">
-        <path d="M7 4h-2l-1 2h2l3.6 7.59-1.35 2.44A2 2 0 0 0 10 19h9v-2h-8.42a.25.25 0 0 1-.22-.37L11.1 14h6.55a2 2 0 0 0 1.8-1.1l3.2-6.4A1 1 0 0 0 21.8 5H7.42L7 4zM7 20.5A1.5 1.5 0 1 0 7 17.5 1.5 1.5 0 0 0 7 20.5zm10 0A1.5 1.5 0 1 0 17 17.5 1.5 1.5 0 0 0 17 20.5z"/>
-      </svg>
-      <span class="logo-text">BBETA <span class="logo-store">Store</span></span>
-    </div>
-    <h2>Your Cart</h2>
+    <h1>🛒 Your Cart</h1>
   </header>
 
-  <div class="cart-container" id="cartItems">
-    <!-- Cart items will appear here -->
+  <div class="cart-container">
+    <table id="cartTable">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Quantity</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+    <p class="empty" id="emptyMsg">Your cart is empty</p>
+    <a href="checkout.html" class="checkout-btn" id="checkoutBtn" style="display:none;">Proceed to Checkout</a>
+    <br>
+    <a href="index.html" class="back-btn">⬅ Continue Shopping</a>
   </div>
 
-  <a href="index.html" class="back-btn">⬅ Back to Shop</a>
-
-  <footer>
-    <p>📍 Nalgonda, Telangana, India - 508001</p>
-    <p>📞 WhatsApp: 7093242271</p>
-    <p>B for Bada, Beta aapka apna – <b>BBETA Store</b></p>
-  </footer>
-
   <script>
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const cartContainer = document.getElementById("cartItems");
+    function loadCart() {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      let tbody = document.querySelector("#cartTable tbody");
+      let emptyMsg = document.getElementById("emptyMsg");
+      let checkoutBtn = document.getElementById("checkoutBtn");
+      tbody.innerHTML = "";
 
-    function displayCart() {
-      cartContainer.innerHTML = "";
-      if (cart.length === 0) {
-        cartContainer.innerHTML = "<p>Your cart is empty 🛍️</p>";
-        return;
+      if(cart.length === 0) {
+        emptyMsg.style.display = "block";
+        checkoutBtn.style.display = "none";
+      } else {
+        emptyMsg.style.display = "none";
+        checkoutBtn.style.display = "inline-block";
+
+        cart.forEach((item, index) => {
+          let row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${item}</td>
+            <td>1</td>
+            <td><button onclick="removeItem(${index})">❌</button></td>
+          `;
+          tbody.appendChild(row);
+        });
       }
-      cart.forEach((item, index) => {
-        let div = document.createElement("div");
-        div.classList.add("cart-item");
-        div.innerHTML = `
-          <span>${item}</span>
-          <button onclick="removeItem(${index})">Remove</button>
-        `;
-        cartContainer.appendChild(div);
-      });
     }
 
     function removeItem(index) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
       cart.splice(index, 1);
       localStorage.setItem("cart", JSON.stringify(cart));
-      displayCart();
+      loadCart();
     }
 
-    displayCart();
+    loadCart();
   </script>
 </body>
 </html>
