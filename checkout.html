@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BBETA - Checkout</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f9;
+      text-align: center;
+    }
+    header {
+      background: #111;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+    .checkout-container {
+      padding: 20px;
+      max-width: 500px;
+      margin: 20px auto;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .checkout-container h2 {
+      margin-bottom: 20px;
+    }
+    input, textarea {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      padding: 10px 20px;
+      background: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover {
+      background: #218838;
+    }
+    .back-btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 15px;
+      background: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+    .back-btn:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>✅ Checkout</h1>
+  </header>
+
+  <div class="checkout-container">
+    <h2>Enter Your Details</h2>
+    <form id="checkoutForm">
+      <input type="text" id="name" placeholder="Full Name" required><br>
+      <input type="text" id="address" placeholder="Address" required><br>
+      <input type="text" id="phone" placeholder="Phone Number" required><br>
+      <textarea id="notes" placeholder="Any Notes (optional)"></textarea><br>
+      <button type="submit">Confirm Order</button>
+    </form>
+    <a href="cart.html" class="back-btn">⬅ Back to Cart</a>
+  </div>
+
+  <script>
+    document.getElementById("checkoutForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      alert("🎉 Order Confirmed! Thank you for shopping with BBETA.");
+      localStorage.removeItem("cart"); // clear cart
+      window.location.href = "index.html"; // back to home
+    });
+  </script>
+</body>
+  </html>
