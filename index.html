@@ -6,138 +6,164 @@
   <title>BBETA Store</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
-      padding: 0;
-      background-color: #f8f9fa;
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
       text-align: center;
     }
+
+    /* Header */
     header {
-      background: #333;
+      background-color: #333;
+      padding: 15px;
       color: white;
-      padding: 20px 10px;
     }
-    /* Logo text styling */
-    .logo-text {
-      display: inline-block;
-      font-size: 48px;
+
+    .logo {
+      width: 160px;
+      display: block;
+      margin: 0 auto 10px auto;
+    }
+
+    .store-name {
+      font-size: 32px;
       font-weight: bold;
     }
-    .logo-b {
+
+    .store-name .orange {
       color: orange;
     }
-    .logo-beta {
+
+    .store-name .red {
       color: red;
     }
-    .logo-store {
-      color: limegreen;
-    }
+
     .cart {
-      margin-top: 10px;
-      padding: 8px 16px;
-      background: #28a745;
+      margin-top: 8px;
+      background: green;
       color: white;
+      padding: 5px 12px;
       border-radius: 5px;
       display: inline-block;
-      font-weight: bold;
-    }
-    h2 {
-      margin-top: 20px;
-      font-size: 26px;
-    }
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 20px;
-      padding: 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-    .product {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      padding: 15px;
-    }
-    .product img {
-      width: 100%;
-      height: 150px;
-      object-fit: cover;
-      border-radius: 10px;
-    }
-    .product h3 {
-      font-size: 18px;
-      margin: 10px 0;
-    }
-    .product button {
-      background: #28a745;
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .footer {
-      background: #333;
-      color: white;
-      padding: 12px;
-      margin-top: 20px;
       font-size: 14px;
     }
-    .footer a {
-      color: #28a745;
+
+    /* Main Section */
+    main {
+      padding: 20px;
+    }
+
+    h2 {
+      margin-bottom: 5px;
+    }
+
+    .subtitle {
+      font-style: italic;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .product {
+      background: white;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .product img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    .product h3 {
+      font-size: 16px;
+      margin: 10px 0;
+    }
+
+    .product button {
+      background: green;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 30px;
+      background: #333;
+      color: white;
+      padding: 15px;
+      font-size: 14px;
+    }
+
+    footer a {
+      color: #25D366;
       text-decoration: none;
     }
   </style>
 </head>
 <body>
   <header>
-    <!-- Logo Text -->
-    <div class="logo-text">
-      <span class="logo-b">B</span><span class="logo-beta">BETA</span> <span class="logo-store">Store</span>
+    <img src="assets/logo.png" alt="BBETA Logo" class="logo">
+    <div class="store-name">
+      <span class="orange">B</span><span class="red">BETA</span> Store
     </div>
     <div class="cart">🛒 Cart: 0</div>
   </header>
 
-  <h2>Welcome to BBETA Store</h2>
-  <p><i>"B for Bada Beta, Apka Apna Beta!"</i></p>
+  <main>
+    <h2>Welcome to BBETA Store</h2>
+    <p class="subtitle">"B for Bada Beta, Apka Apna Beta!"</p>
 
-  <div class="product-grid">
-    <div class="product">
-      <img src="vegetables.jpg" alt="Fresh Vegetables" onerror="this.src='https://via.placeholder.com/300x200?text=Vegetables'">
-      <h3>Fresh Vegetables</h3>
-      <button>Add to Cart</button>
+    <div class="products">
+      <div class="product">
+        <img src="assets/vegetables.jpg" alt="Fresh Vegetables">
+        <h3>Fresh Vegetables</h3>
+        <button>Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="assets/fruits.jpg" alt="Fresh Fruits">
+        <h3>Fresh Fruits</h3>
+        <button>Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="assets/groceries.jpg" alt="Kirana Items">
+        <h3>Kirana Items</h3>
+        <button>Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="assets/medicines.jpg" alt="Medicines">
+        <h3>Medicines</h3>
+        <button>Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="assets/bakery.jpg" alt="Bakery Items">
+        <h3>Bakery Items</h3>
+        <button>Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="assets/dairy.jpg" alt="Dairy Products">
+        <h3>Dairy Products</h3>
+        <button>Add to Cart</button>
+      </div>
     </div>
-    <div class="product">
-      <img src="fruits.jpg" alt="Fresh Fruits" onerror="this.src='https://via.placeholder.com/300x200?text=Fruits'">
-      <h3>Fresh Fruits</h3>
-      <button>Add to Cart</button>
-    </div>
-    <div class="product">
-      <img src="kirana.jpg" alt="Kirana Items" onerror="this.src='https://via.placeholder.com/300x200?text=Kirana+Items'">
-      <h3>Kirana Items</h3>
-      <button>Add to Cart</button>
-    </div>
-    <div class="product">
-      <img src="medicines.jpg" alt="Medicines" onerror="this.src='https://via.placeholder.com/300x200?text=Medicines'">
-      <h3>Medicines</h3>
-      <button>Add to Cart</button>
-    </div>
-    <div class="product">
-      <img src="bakery.jpg" alt="Bakery Items" onerror="this.src='https://via.placeholder.com/300x200?text=Bakery'">
-      <h3>Bakery Items</h3>
-      <button>Add to Cart</button>
-    </div>
-    <div class="product">
-      <img src="dairy.jpg" alt="Dairy Products" onerror="this.src='https://via.placeholder.com/300x200?text=Dairy'">
-      <h3>Dairy Products</h3>
-      <button>Add to Cart</button>
-    </div>
-  </div>
+  </main>
 
-  <div class="footer">
+  <footer>
     📍 Nalgonda, Telangana, India - 508001 <br>
     📞 WhatsApp: <a href="https://wa.me/917093242271">7093242271</a>
-  </div>
+  </footer>
 </body>
 </html>
