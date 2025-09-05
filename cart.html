@@ -3,27 +3,84 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Cart</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <title>Your Cart - BBETA</title>
   <style>
-    body { background-color: #f8f9fa; }
-    .header { background: #343a40; color: white; padding: 15px; text-align: center; }
-    .cart-card { border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+    body { font-family: Arial, sans-serif; background: #f4f4f9; margin: 0; padding: 0; }
+    header { background: #333; color: white; padding: 15px; text-align: center; }
+    header h1 { margin: 0; font-size: 22px; }
+    .cart-container { max-width: 600px; margin: 20px auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #ddd; }
+    .cart-item:last-child { border-bottom: none; }
+    .cart-item span { font-size: 16px; }
+    .total { text-align: right; font-weight: bold; margin: 15px 0; font-size: 18px; }
+    .btn { display: inline-block; padding: 10px 15px; border-radius: 5px; text-decoration: none; color: white; font-weight: bold; }
+    .btn-wa { background: #25d366; margin-right: 10px; }
+    .btn-back { background: #007bff; }
   </style>
 </head>
 <body>
-  <div class="header">
-    <h3>🛒 Your Cart</h3>
+  <header>
+    <h1>🛒 Your Cart</h1>
+  </header>
+
+  <div class="cart-container" id="cartItems">
+    <!-- Cart items will appear here -->
   </div>
 
-  <div class="container my-4">
-    <div id="cart-items"></div>
-    <h4 class="mt-4">Total: ₹<span id="total">0</span></h4>
-
-    <button class="btn btn-success mt-3" onclick="checkout()">✅ Checkout via WhatsApp</button>
-    <a href="index.html" class="btn btn-primary mt-3">⬅ Back to Shop</a>
+  <div class="cart-container">
+    <div class="total" id="cartTotal">Total: ₹0</div>
+    <a href="#" id="checkoutBtn" class="btn btn-wa">✔ Checkout via WhatsApp</a>
+    <a href="index.html" class="btn btn-back">← Back to Shop</a>
   </div>
 
-  <script src="cart.js"></script>
+  <script>
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const cartContainer = document.getElementById("cartItems");
+    const cartTotal = document.getElementById("cartTotal");
+    const checkoutBtn = document.getElementById("checkoutBtn");
+
+    function renderCart() {
+      cartContainer.innerHTML = "";
+      let total = 0;
+
+      if (cart.length === 0) {
+        cartContainer.innerHTML = "<p>Your cart is empty.</p>";
+        cartTotal.textContent = "Total: ₹0";
+        return;
+      }
+
+      cart.forEach(item => {
+        const div = document.createElement("div");
+        div.classList.add("cart-item");
+        div.innerHTML = `
+          <span>${item.name} (x${item.qty})</span>
+          <span>₹${item.price * item.qty}</span>
+        `;
+        cartContainer.appendChild(div);
+        total += item.price * item.qty;
+      });
+
+      cartTotal.textContent = "Total: ₹" + total;
+    }
+
+    checkoutBtn.addEventListener("click", () => {
+      if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+      }
+
+      let message = "🛒 BBETA Order:\n\n";
+      cart.forEach(item => {
+        message += `${item.name} (x${item.qty}) = ₹${item.price * item.qty}\n`;
+      });
+      message += `\nTotal = ₹${cart.reduce((sum, item) => sum + (item.price * item.qty), 0)}`;
+
+      const phone = "917093242271"; // 👈 yaha apna WhatsApp number daal diya
+      const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+      window.open(url, "_blank");
+    });
+
+    renderCart();
+  </script>
 </body>
 </html>
