@@ -3,131 +3,72 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Apka Apna Bada Beta</title>
+  <title>BBETA - Apka Apna Bada Beta</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; background: #f9f9f9; }
-    header {
-      background: linear-gradient(90deg, #2E7D32, #43A047);
-      color: white;
-      padding: 20px;
-      text-align: center;
-      font-size: 28px;
-      font-weight: bold;
-      text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
-    }
-    .cart-link {
-      display: inline-block;
-      margin-top: 10px;
-      background: #e53935;
-      padding: 8px 12px;
-      border-radius: 5px;
-      color: white;
-      text-decoration: none;
-    }
-    .container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-      padding: 20px;
-    }
-    .product {
-      background: white;
-      padding: 15px;
-      border-radius: 8px;
-      text-align: center;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-    .product img {
-      width: 100%;
-      height: 150px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-    .product h3 { margin: 10px 0 5px; }
-    .product p { font-weight: bold; color: #333; }
-    input[type=number] {
-      width: 60px;
-      padding: 5px;
-      margin: 5px 0;
-      text-align: center;
-    }
-    button {
-      background: #4CAF50;
-      color: white;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    button:hover { background: #388E3C; }
-    footer {
-      background: #333;
-      color: white;
-      text-align: center;
-      padding: 15px;
-      margin-top: 20px;
-    }
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f9; }
+    header { background: #222; color: white; padding: 20px; text-align: center; }
+    header h1 { margin: 0; font-size: 32px; color: #ff4444; }
+    header p { margin: 5px 0 0; font-size: 16px; color: #eee; }
+    .products { display: flex; flex-wrap: wrap; justify-content: center; padding: 20px; }
+    .product { background: white; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin: 10px; padding: 15px; width: 200px; text-align: center; }
+    .product img { width: 100%; height: 150px; object-fit: cover; border-radius: 8px; }
+    .product h3 { margin: 10px 0 5px; font-size: 18px; }
+    .product p { margin: 5px 0; font-size: 16px; }
+    .product input { width: 50px; padding: 5px; margin-top: 5px; text-align: center; }
+    .product button { margin-top: 10px; padding: 8px 12px; border: none; border-radius: 5px; background: #28a745; color: white; cursor: pointer; }
+    .product button:hover { background: #218838; }
+    footer { background: #333; color: white; text-align: center; padding: 15px; margin-top: 20px; }
+    .map { margin: 20px 0; }
+    .whatsapp { display: inline-block; margin-top: 10px; padding: 10px 15px; background: #25d366; color: white; text-decoration: none; border-radius: 5px; }
   </style>
 </head>
 <body>
   <header>
-    🌟 Apka Apna Bada BBETA 🌟
-    <br>
-    <a href="cart.html" class="cart-link">🛒 Go to Cart</a>
+    <h1>BBETA</h1>
+    <p>Apka Apna Bada Beta 🛒</p>
   </header>
 
-  <div class="container">
+  <div class="products">
+    <div class="product">
+      <img src="assets/apple.jpg" alt="Apple">
+      <h3>Fresh Apples</h3>
+      <p>₹50 / kg</p>
+      <input type="number" min="1" value="1" id="qty-apple">
+      <button onclick="addToCart('Fresh Apples', 50, document.getElementById('qty-apple').value)">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="assets/tomato.jpg" alt="Tomato">
+      <h3>Tomatoes</h3>
+      <p>₹30 / kg</p>
+      <input type="number" min="1" value="1" id="qty-tomato">
+      <button onclick="addToCart('Tomatoes', 30, document.getElementById('qty-tomato').value)">Add to Cart</button>
+    </div>
+
     <div class="product">
       <img src="assets/rice.jpg" alt="Rice">
       <h3>Rice</h3>
-      <p>₹50/kg</p>
-      <input type="number" id="riceQty" value="1" min="1">
-      <button onclick="addToCart('Rice', 50, document.getElementById('riceQty').value)">Add to Cart</button>
-    </div>
-    <div class="product">
-      <img src="assets/wheat.jpg" alt="Wheat">
-      <h3>Wheat</h3>
-      <p>₹40/kg</p>
-      <input type="number" id="wheatQty" value="1" min="1">
-      <button onclick="addToCart('Wheat', 40, document.getElementById('wheatQty').value)">Add to Cart</button>
-    </div>
-    <div class="product">
-      <img src="assets/oil.jpg" alt="Oil">
-      <h3>Cooking Oil</h3>
-      <p>₹120/L</p>
-      <input type="number" id="oilQty" value="1" min="1">
-      <button onclick="addToCart('Cooking Oil', 120, document.getElementById('oilQty').value)">Add to Cart</button>
-    </div>
-    <div class="product">
-      <img src="assets/sugar.jpg" alt="Sugar">
-      <h3>Sugar</h3>
-      <p>₹45/kg</p>
-      <input type="number" id="sugarQty" value="1" min="1">
-      <button onclick="addToCart('Sugar', 45, document.getElementById('sugarQty').value)">Add to Cart</button>
+      <p>₹80 / 5kg</p>
+      <input type="number" min="1" value="1" id="qty-rice">
+      <button onclick="addToCart('Rice', 80, document.getElementById('qty-rice').value)">Add to Cart</button>
     </div>
   </div>
 
   <footer>
-    📍 Nalgonda, Telangana - 508001 <br>
-    📞 7093242271 | WhatsApp Order Available
+    <p>📍 Location: Nalgonda, Telangana, India - 508001</p>
+    <div class="map">
+      <iframe src="https://www.google.com/maps?q=Nalgonda,Telangana,India,508001&output=embed" width="300" height="200" style="border:0;" allowfullscreen></iframe>
+    </div>
+    <a href="cart.html" class="whatsapp">View Cart 🛒</a>
+    <p>Contact us on WhatsApp: <b>7093242271</b></p>
   </footer>
 
   <script>
     function addToCart(name, price, qty) {
-      qty = parseInt(qty);
-      if (qty < 1) { alert("Quantity must be at least 1"); return; }
-
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      let existing = cart.find(item => item.name === name);
-
-      if (existing) {
-        existing.quantity += qty;
-      } else {
-        cart.push({ name, price, quantity: qty });
-      }
-
+      cart.push({ name, price, qty: parseInt(qty) });
       localStorage.setItem("cart", JSON.stringify(cart));
-      alert(name + " added to cart!");
+      alert(qty + " x " + name + " added to cart!");
     }
   </script>
 </body>
