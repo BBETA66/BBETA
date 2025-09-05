@@ -9,56 +9,67 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background: #f8f9fa;
+      background: #f4f4f9;
+      text-align: center;
     }
     header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
       background: #333;
-      padding: 10px 20px;
       color: white;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
     header img {
-      height: 60px;   /* 👈 logo ko bada kiya */
-      width: auto;
+      height: 80px;   /* 🔥 logo height bada kar diya */
+      width: auto;    /* width auto rakha taki stretch na ho */
+      margin-left: 10px;
     }
     header h1 {
+      flex-grow: 1;
+      text-align: center;
+      font-size: 28px;
       margin: 0;
-      font-size: 20px;
     }
     .cart-link {
       color: white;
       text-decoration: none;
-      font-size: 16px;
+      font-size: 18px;
+      margin-right: 15px;
     }
-    .container {
-      text-align: center;
+    main {
       padding: 20px;
     }
     h2 {
       margin: 10px 0;
     }
-    .products {
+    .quote {
+      font-style: italic;
+      color: #555;
+      margin-bottom: 20px;
+    }
+    .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 20px;
-      padding: 20px;
+      padding: 10px;
     }
-    .product {
+    .card {
       background: white;
-      padding: 15px;
       border-radius: 8px;
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      padding: 15px;
     }
-    .product img {
-      width: 100%;
+    .card img {
+      max-width: 100%;
+      border-radius: 8px;
       height: 150px;
       object-fit: cover;
-      border-radius: 8px;
     }
-    .product button {
-      margin-top: 10px;
+    .card h3 {
+      margin: 10px 0;
+    }
+    .card button {
       padding: 8px 12px;
       background: #28a745;
       color: white;
@@ -66,62 +77,75 @@
       border-radius: 5px;
       cursor: pointer;
     }
-    .product button:hover {
+    .card button:hover {
       background: #218838;
+    }
+    footer {
+      margin-top: 20px;
+      padding: 10px;
+      background: #333;
+      color: white;
     }
   </style>
 </head>
 <body>
   <header>
     <img src="assets/logo.png" alt="BBETA Logo">
+    <h1>BBETA Store</h1>
     <a href="cart.html" class="cart-link">🛒 Cart: <span id="cartCount">0</span></a>
   </header>
 
-  <div class="container">
+  <main>
     <h2>Welcome to BBETA Store</h2>
-    <p>"B for Bada Beta, Apka Apna Beta!"</p>
-    <div class="products">
-      <div class="product">
-        <img src="assets/vegetables.jpg" alt="Vegetables">
+    <p class="quote">"B for Bada Beta, Apka Apna Beta!"</p>
+    
+    <div class="grid">
+      <div class="card">
+        <img src="assets/vegetables.jpg" alt="Fresh Vegetables">
         <h3>Fresh Vegetables</h3>
         <button onclick="addToCart('Fresh Vegetables')">Add to Cart</button>
       </div>
-      <div class="product">
-        <img src="assets/fruits.jpg" alt="Fruits">
+      <div class="card">
+        <img src="assets/fruits.jpg" alt="Fresh Fruits">
         <h3>Fresh Fruits</h3>
         <button onclick="addToCart('Fresh Fruits')">Add to Cart</button>
       </div>
-      <div class="product">
-        <img src="assets/groceries.jpg" alt="Groceries">
+      <div class="card">
+        <img src="assets/groceries.jpg" alt="Kirana Items">
         <h3>Kirana Items</h3>
         <button onclick="addToCart('Kirana Items')">Add to Cart</button>
       </div>
-      <div class="product">
+      <div class="card">
         <img src="assets/medicines.jpg" alt="Medicines">
         <h3>Medicines</h3>
         <button onclick="addToCart('Medicines')">Add to Cart</button>
       </div>
-      <div class="product">
-        <img src="assets/bakery.jpg" alt="Bakery">
+      <div class="card">
+        <img src="assets/bakery.jpg" alt="Bakery Items">
         <h3>Bakery Items</h3>
         <button onclick="addToCart('Bakery Items')">Add to Cart</button>
       </div>
-      <div class="product">
-        <img src="assets/dairy.jpg" alt="Dairy">
+      <div class="card">
+        <img src="assets/dairy.jpg" alt="Dairy Products">
         <h3>Dairy Products</h3>
         <button onclick="addToCart('Dairy Products')">Add to Cart</button>
       </div>
     </div>
-  </div>
+  </main>
+
+  <footer>
+    <p>📍 Nalgonda, Telangana, India - 508001</p>
+    <p>📞 WhatsApp: <a href="https://wa.me/917093242271" style="color:#0f0;">7093242271</a></p>
+  </footer>
 
   <script>
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    document.getElementById("cartCount").textContent = cart.length;
+    document.getElementById("cartCount").innerText = cart.length;
 
     function addToCart(item) {
       cart.push(item);
       localStorage.setItem("cart", JSON.stringify(cart));
-      document.getElementById("cartCount").textContent = cart.length;
+      document.getElementById("cartCount").innerText = cart.length;
       alert(item + " added to cart!");
     }
   </script>
