@@ -5,53 +5,64 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Your Cart - BBETA</title>
   <style>
-    body { font-family: Arial, sans-serif; background: #f8f9fa; padding: 20px; }
-    h2 { text-align: center; color: #28a745; }
-    ul { list-style: none; padding: 0; }
-    li { background: white; padding: 10px; margin: 5px 0; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-    .total { font-weight: bold; margin-top: 15px; }
-    .input-box { margin: 10px 0; }
-    .btn { background: #28a745; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; }
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f9f9f9; }
+    .container { width: 90%; max-width: 800px; margin: 20px auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+    h2 { text-align: center; color: #333; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    table, th, td { border: 1px solid #ddd; }
+    th, td { padding: 12px; text-align: center; }
+    th { background: #f4f4f4; }
+    .total { text-align: right; margin-top: 20px; font-size: 18px; font-weight: bold; }
+    .form-section { margin-top: 20px; }
+    input { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 5px; }
+    button { background: #28a745; color: white; padding: 12px; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; width: 100%; }
+    button:hover { background: #218838; }
   </style>
 </head>
 <body>
-  <h2>Your Cart</h2>
-  <ul id="cart-list"></ul>
-  <p class="total" id="total"></p>
+  <div class="container">
+    <h2>Your Cart</h2>
+    <table id="cart-table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <div class="total" id="total">Total: ₹0</div>
 
-  <div class="input-box">
-    <input type="text" id="custName" placeholder="Your Name" required>
-  </div>
-  <div class="input-box">
-    <input type="text" id="custNumber" placeholder="Your Contact Number" required>
-  </div>
-  <div class="input-box">
-    <input type="text" id="custAddress" placeholder="Your Address" required>
-  </div>
+    <div class="form-section">
+      <input type="text" id="customerName" placeholder="Enter Your Name" required>
+      <input type="text" id="customerContact" placeholder="Enter Contact Number" required>
+      <input type="text" id="customerAddress" placeholder="Enter Delivery Address" required>
+    </div>
 
-  <button class="btn" onclick="placeOrder()">✅ Place Order on WhatsApp</button>
+    <button onclick="placeOrder()">Place Order on WhatsApp</button>
+  </div>
 
   <script>
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    let cartList = document.getElementById("cart-list");
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const tableBody = document.querySelector("#cart-table tbody");
     let total = 0;
 
     cart.forEach(item => {
-      let li = document.createElement("li");
-      li.innerText = `${item.name} - ₹${item.price}`;
-      cartList.appendChild(li);
+      const row = document.createElement("tr");
+      row.innerHTML = `<td>${item.name}</td><td>₹${item.price}</td>`;
+      tableBody.appendChild(row);
       total += item.price;
     });
 
-    document.getElementById("total").innerText = "Total: ₹" + total;
+    document.getElementById("total").innerText = `Total: ₹${total}`;
 
     function placeOrder() {
-      let name = document.getElementById("custName").value;
-      let number = document.getElementById("custNumber").value;
-      let address = document.getElementById("custAddress").value;
+      const name = document.getElementById("customerName").value;
+      const contact = document.getElementById("customerContact").value;
+      const address = document.getElementById("customerAddress").value;
 
-      if (!name || !number || !address) {
-        alert("Please fill all details!");
+      if (!name || !contact || !address) {
+        alert("⚠ Please fill all details before placing order.");
         return;
       }
 
@@ -59,9 +70,16 @@
       cart.forEach(item => {
         message += `• ${item.name} (₹${item.price})%0A`;
       });
-      message += `%0ATotal: ₹${total}%0A%0A👤 Name: ${name}%0A📞 Contact: ${number}%0A🏠 Address: ${address}`;
+      message += `%0ATotal: ₹${total}%0A%0A👤 Name: ${name}%0A📞 Contact: ${contact}%0A🏠 Address: ${address}`;
 
+      // WhatsApp open
       window.open(`https://wa.me/7093242271?text=${message}`, "_blank");
+
+      // Redirect to Thank You page
+      window.location.href = "thankyou.html";
+
+      // Clear cart
+      localStorage.removeItem("cart");
     }
   </script>
 </body>
