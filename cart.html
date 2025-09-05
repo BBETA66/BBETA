@@ -5,150 +5,110 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Your Cart - BBETA</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f9f9f9;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-    }
-    header {
-      background: #4CAF50;
-      color: white;
+    body { font-family: Arial, sans-serif; background: #f4f4f9; margin: 0; padding: 0; text-align: center; }
+    header { background: #2E7D32; color: white; padding: 20px; font-size: 24px; font-weight: bold; }
+    .cart-container { padding: 20px; }
+    .cart-item {
+      background: white;
+      margin: 10px auto;
       padding: 15px;
-      font-size: 22px;
-      font-weight: bold;
-    }
-    table {
+      border-radius: 8px;
       width: 90%;
-      margin: 20px auto;
-      border-collapse: collapse;
-      background: white;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      max-width: 400px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    th, td {
-      padding: 12px;
-      border: 1px solid #ddd;
-    }
-    th {
-      background: #f2f2f2;
-    }
-    .total {
-      font-weight: bold;
-      font-size: 18px;
-    }
-    .form-container {
-      width: 90%;
-      margin: 20px auto;
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      text-align: left;
-    }
+    .total { font-size: 20px; margin: 20px 0; font-weight: bold; }
     input, textarea {
-      width: 100%;
-      padding: 8px;
-      margin: 8px 0;
-      border: 1px solid #ccc;
-      border-radius: 5px;
+      width: 90%; max-width: 400px;
+      padding: 10px; margin: 8px 0;
+      border: 1px solid #ccc; border-radius: 5px;
     }
     button {
-      background: #007bff;
+      padding: 10px 15px;
+      background: #28a745;
       color: white;
       border: none;
-      padding: 10px 15px;
       border-radius: 5px;
       cursor: pointer;
-      font-size: 16px;
+      margin-top: 10px;
     }
-    button:hover {
-      background: #0056b3;
-    }
+    button:hover { background: #218838; }
   </style>
 </head>
 <body>
+  <header>🛒 Apka Apna Bada BBETA</header>
 
-<header>
-  🛒 Your Cart - BBETA
-</header>
+  <div class="cart-container" id="cartItems"></div>
+  <div class="total" id="totalAmount">Total: ₹0</div>
 
-<h2>Cart Items</h2>
-<table>
-  <thead>
-    <tr>
-      <th>Product</th>
-      <th>Price</th>
-      <th>Quantity</th>
-      <th>Total</th>
-    </tr>
-  </thead>
-  <tbody id="cartTable"></tbody>
-</table>
-
-<h3 class="total">Grand Total: ₹<span id="grandTotal">0</span></h3>
-
-<div class="form-container">
   <h3>Enter Your Details</h3>
-  <input type="text" id="name" placeholder="Your Name" required>
-  <input type="text" id="phone" placeholder="Mobile Number" required>
-  <textarea id="address" placeholder="Delivery Address" rows="3" required></textarea>
-  <button onclick="placeOrder()">Confirm Order ✅</button>
-</div>
+  <input type="text" id="customerName" placeholder="Your Name" required>
+  <input type="text" id="customerPhone" placeholder="Contact Number" required>
+  <textarea id="customerAddress" placeholder="Delivery Address" rows="3" required></textarea>
 
-<script>
-  function loadCart() {
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    let cartTable = document.getElementById("cartTable");
-    let grandTotal = 0;
+  <button onclick="placeOrder()">✅ Place Order</button>
 
-    cartTable.innerHTML = "";
+  <script>
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const cartContainer = document.getElementById("cartItems");
+    const totalAmount = document.getElementById("totalAmount");
 
-    cart.forEach((item, index) => {
-      let total = item.price * item.qty;
-      grandTotal += total;
-
-      cartTable.innerHTML += `
-        <tr>
-          <td>${item.product}</td>
-          <td>₹${item.price}</td>
-          <td>${item.qty}</td>
-          <td>₹${total}</td>
-        </tr>
-      `;
-    });
-
-    document.getElementById("grandTotal").innerText = grandTotal;
-  }
-
-  function placeOrder() {
-    let name = document.getElementById("name").value;
-    let phone = document.getElementById("phone").value;
-    let address = document.getElementById("address").value;
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    let grandTotal = document.getElementById("grandTotal").innerText;
-
-    if (!name || !phone || !address) {
-      alert("⚠️ Please fill all details");
-      return;
+    function displayCart() {
+      cartContainer.innerHTML = "";
+      let total = 0;
+      if (cart.length === 0) {
+        cartContainer.innerHTML = "<p>Your cart is empty 🛍️</p>";
+        totalAmount.innerText = "Total: ₹0";
+        return;
+      }
+      cart.forEach((item, index) => {
+        let div = document.createElement("div");
+        div.classList.add("cart-item");
+        div.innerHTML = `
+          <span>${item.name} (${item.quantity} × ₹${item.price})</span>
+          <button onclick="removeItem(${index})">❌</button>
+        `;
+        cartContainer.appendChild(div);
+        total += item.price * item.quantity;
+      });
+      totalAmount.innerText = "Total: ₹" + total;
     }
 
-    let orderDetails = "Hello BBETA,\nHere is my order:\n\n";
-    cart.forEach(item => {
-      orderDetails += `• ${item.product} x ${item.qty} (₹${item.price}) = ₹${item.price * item.qty}\n`;
-    });
-    orderDetails += `\nTotal: ₹${grandTotal}\n\n👤 Name: ${name}\n📞 Contact: ${phone}\n🏠 Address: ${address}`;
+    function removeItem(index) {
+      cart.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      displayCart();
+    }
 
-    // WhatsApp number (update here)
-    let whatsappNumber = "919490648430"; 
-    let whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(orderDetails)}`;
+    function placeOrder() {
+      let name = document.getElementById("customerName").value;
+      let phone = document.getElementById("customerPhone").value;
+      let address = document.getElementById("customerAddress").value;
 
-    window.open(whatsappLink, "_blank");
-    localStorage.removeItem('cart');
-  }
+      if (!name || !phone || !address) {
+        alert("Please fill all details!");
+        return;
+      }
 
-  loadCart();
-</script>
+      let total = 0;
+      let orderDetails = "Hello BBETA,%0AHere is my order:%0A";
+      cart.forEach(item => {
+        orderDetails += `• ${item.name} (${item.quantity} × ₹${item.price})%0A`;
+        total += item.price * item.quantity;
+      });
+      orderDetails += `%0ATotal: ₹${total}%0A%0A👤 Name: ${name}%0A📞 Contact: ${phone}%0A🏠 Address: ${address}`;
 
+      let whatsappUrl = `https://wa.me/7093242271?text=${orderDetails}`;
+      window.open(whatsappUrl, "_blank");
+
+      localStorage.removeItem("cart");
+      window.location.href = "thankyou.html";
+    }
+
+    displayCart();
+  </script>
 </body>
 </html>
