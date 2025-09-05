@@ -15,18 +15,18 @@
     /* Header */
     header {
       background-color: #333;
-      padding: 15px;
+      padding: 20px 10px;
       color: white;
     }
 
     .logo {
-      width: 160px;
+      width: 180px;
       display: block;
       margin: 0 auto 10px auto;
     }
 
     .store-name {
-      font-size: 32px;
+      font-size: 38px;
       font-weight: bold;
     }
 
@@ -38,14 +38,26 @@
       color: red;
     }
 
+    .store-name .green {
+      color: #00ff66;
+    }
+
     .cart {
-      margin-top: 8px;
-      background: green;
+      margin-top: 12px;
+      background: #28a745;
       color: white;
-      padding: 5px 12px;
-      border-radius: 5px;
+      padding: 8px 16px;
+      border-radius: 8px;
       display: inline-block;
-      font-size: 14px;
+      font-size: 16px;
+      font-weight: bold;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      transition: 0.3s;
+    }
+
+    .cart:hover {
+      background: #218838;
+      cursor: pointer;
     }
 
     /* Main Section */
@@ -97,6 +109,11 @@
       border-radius: 5px;
       cursor: pointer;
       font-size: 14px;
+      transition: 0.3s;
+    }
+
+    .product button:hover {
+      background: #006400;
     }
 
     /* Footer */
@@ -118,7 +135,7 @@
   <header>
     <img src="assets/logo.png" alt="BBETA Logo" class="logo">
     <div class="store-name">
-      <span class="orange">B</span><span class="red">BETA</span> Store
+      <span class="orange">B</span><span class="red">BETA</span> <span class="green">STORE</span>
     </div>
     <div class="cart">🛒 Cart: 0</div>
   </header>
