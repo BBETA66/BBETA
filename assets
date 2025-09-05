@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BBETA - Fast Delivery Service</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      color: #333;
+      text-align: center;
+    }
+    header {
+      background: #111;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+    header img {
+      height: 60px;
+    }
+    header h1 {
+      color: white;
+      margin: 0;
+      font-size: 28px;
+    }
+    .hero {
+      padding: 80px 20px;
+      background: linear-gradient(to right, #ff9800, #4caf50);
+      color: white;
+    }
+    .hero h2 {
+      font-size: 40px;
+      margin-bottom: 10px;
+    }
+    .hero p {
+      font-size: 20px;
+    }
+    footer {
+      background: #111;
+      color: #aaa;
+      padding: 20px;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="assets/logo.png" alt="BBETA Logo">
+    <h1>BBETA</h1>
+  </header>
+
+  <section class="hero">
+    <h2>Fast & Reliable Delivery</h2>
+    <p>BBETA – Bringing speed and trust to your doorstep 🚀</p>
+  </section>
+
+  <footer>
+    <p
