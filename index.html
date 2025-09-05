@@ -10,82 +10,87 @@
       margin: 0;
       padding: 0;
       background: #f4f4f9;
-      text-align: center;
     }
     header {
       background: #333;
       color: white;
-      padding: 20px 10px;
+      padding: 20px;
       text-align: center;
     }
     header img {
-      height: 120px;   /* 🔥 logo aur bada kar diya */
-      width: auto;
+      height: 150px;       /* Logo bada */
       display: block;
-      margin: 0 auto 10px; /* center + neeche gap */
+      margin: 0 auto 15px; /* Center aur neeche gap */
     }
     header h1 {
-      font-size: 32px;
-      margin: 5px 0;
+      margin: 10px 0;
+      font-size: 28px;
     }
     .cart-link {
       display: inline-block;
       margin-top: 10px;
-      color: white;
-      text-decoration: none;
-      font-size: 18px;
       background: #28a745;
-      padding: 6px 12px;
-      border-radius: 6px;
+      color: white;
+      padding: 8px 15px;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+    .cart-link:hover {
+      background: #218838;
     }
     main {
       padding: 20px;
+      text-align: center;
     }
     h2 {
-      margin: 10px 0;
+      margin-bottom: 5px;
     }
     .quote {
       font-style: italic;
-      color: #555;
       margin-bottom: 20px;
     }
-    .grid {
+    .categories {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 20px;
-      padding: 10px;
+      margin-top: 20px;
     }
-    .card {
+    .category {
       background: white;
-      border-radius: 8px;
+      border-radius: 10px;
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
       padding: 15px;
     }
-    .card img {
-      max-width: 100%;
-      border-radius: 8px;
+    .category img {
+      width: 100%;
       height: 150px;
       object-fit: cover;
+      border-radius: 10px;
     }
-    .card h3 {
+    .category h3 {
       margin: 10px 0;
     }
-    .card button {
-      padding: 8px 12px;
+    button {
       background: #28a745;
       color: white;
       border: none;
+      padding: 8px 12px;
       border-radius: 5px;
       cursor: pointer;
     }
-    .card button:hover {
+    button:hover {
       background: #218838;
     }
     footer {
-      margin-top: 20px;
-      padding: 10px;
       background: #333;
       color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 20px;
+    }
+    footer a {
+      color: #28a745;
+      text-decoration: none;
     }
   </style>
 </head>
@@ -99,35 +104,35 @@
   <main>
     <h2>Welcome to BBETA Store</h2>
     <p class="quote">"B for Bada Beta, Apka Apna Beta!"</p>
-    
-    <div class="grid">
-      <div class="card">
-        <img src="assets/vegetables.jpg" alt="Fresh Vegetables">
+
+    <div class="categories">
+      <div class="category">
+        <img src="assets/vegetables.jpg" alt="Vegetables">
         <h3>Fresh Vegetables</h3>
         <button onclick="addToCart('Fresh Vegetables')">Add to Cart</button>
       </div>
-      <div class="card">
-        <img src="assets/fruits.jpg" alt="Fresh Fruits">
+      <div class="category">
+        <img src="assets/fruits.jpg" alt="Fruits">
         <h3>Fresh Fruits</h3>
         <button onclick="addToCart('Fresh Fruits')">Add to Cart</button>
       </div>
-      <div class="card">
-        <img src="assets/groceries.jpg" alt="Kirana Items">
+      <div class="category">
+        <img src="assets/groceries.jpg" alt="Groceries">
         <h3>Kirana Items</h3>
         <button onclick="addToCart('Kirana Items')">Add to Cart</button>
       </div>
-      <div class="card">
+      <div class="category">
         <img src="assets/medicines.jpg" alt="Medicines">
         <h3>Medicines</h3>
         <button onclick="addToCart('Medicines')">Add to Cart</button>
       </div>
-      <div class="card">
-        <img src="assets/bakery.jpg" alt="Bakery Items">
+      <div class="category">
+        <img src="assets/bakery.jpg" alt="Bakery">
         <h3>Bakery Items</h3>
         <button onclick="addToCart('Bakery Items')">Add to Cart</button>
       </div>
-      <div class="card">
-        <img src="assets/dairy.jpg" alt="Dairy Products">
+      <div class="category">
+        <img src="assets/dairy.jpg" alt="Dairy">
         <h3>Dairy Products</h3>
         <button onclick="addToCart('Dairy Products')">Add to Cart</button>
       </div>
@@ -135,8 +140,8 @@
   </main>
 
   <footer>
-    <p>📍 Nalgonda, Telangana, India - 508001</p>
-    <p>📞 WhatsApp: <a href="https://wa.me/917093242271" style="color:#0f0;">7093242271</a></p>
+    📍 Nalgonda, Telangana, India - 508001 <br>
+    📞 WhatsApp: <a href="https://wa.me/917093242271" target="_blank">7093242271</a>
   </footer>
 
   <script>
@@ -151,4 +156,4 @@
     }
   </script>
 </body>
-</html>
+  </html>
