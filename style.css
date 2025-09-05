@@ -1,65 +1,206 @@
-/* Cart Page Styling */
-header h1 {
-  text-align: center;
-  color: red;
-  margin: 20px 0;
-  font-size: 28px;
-  border-bottom: 2px solid #ddd;
-  padding-bottom: 10px;
+/* ===== General Reset ===== */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f9f9f9;
+  color: #333;
 }
 
-.cart-items {
-  max-width: 600px;
-  margin: 20px auto;
-  padding: 15px;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.empty-cart {
-  text-align: center;
-  font-size: 18px;
-  color: #666;
-}
-
-.checkout-form {
-  max-width: 600px;
-  margin: 20px auto;
-  padding: 20px;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.checkout-form input,
-.checkout-form textarea {
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  width: 100%;
-}
-
-.checkout-form textarea {
-  resize: none;
-  height: 80px;
-}
-
-.order-btn {
-  padding: 12px;
-  font-size: 18px;
-  background: green;
+/* ===== Header ===== */
+header {
+  background: #222;
   color: #fff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: 0.2s ease-in-out;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
-.order-btn:hover {
-  background: darkgreen;
+header h1 {
+  margin: 0;
+  font-size: 26px;
+  color: #ff4444; /* BBETA red */
+}
+
+header p {
+  margin: 0;
+  font-size: 14px;
+  font-style: italic;
+}
+
+header .cart-link {
+  background: #28a745;
+  color: white;
+  padding: 8px 15px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+header .cart-link:hover {
+  background: #218838;
+}
+
+/* ===== Products Grid ===== */
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.product {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.product:hover {
+  transform: translateY(-5px);
+}
+
+.product img {
+  max-width: 100%;
+  height: 200px;
+  object-fit: cover; /* crop nicely */
+  border-radius: 8px;
+}
+
+.product h2 {
+  margin: 10px 0 5px;
+  font-size: 18px;
+}
+
+.product p {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 5px 0 10px;
+}
+
+.product input[type="number"] {
+  width: 60px;
+  padding: 5px;
+  margin-right: 5px;
+}
+
+.product button {
+  padding: 8px 14px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.product button:hover {
+  background: #0056b3;
+}
+
+/* ===== Cart Page ===== */
+.cart-container {
+  padding: 20px;
+}
+
+.cart-item {
+  background: white;
+  margin: 10px auto;
+  padding: 15px;
+  border-radius: 8px;
+  max-width: 600px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart-item span {
+  font-weight: bold;
+}
+
+button.remove {
+  padding: 5px 10px;
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button.remove:hover {
+  background: #c82333;
+}
+
+/* ===== Checkout Form ===== */
+.checkout-form {
+  margin: 20px auto;
+  max-width: 600px;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.checkout-form h2 {
+  margin-bottom: 15px;
+}
+
+.checkout-form input, 
+.checkout-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.checkout-form button {
+  width: 100%;
+  padding: 12px;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.checkout-form button:hover {
+  background: #218838;
+}
+
+/* ===== Thank You Page ===== */
+.thankyou {
+  text-align: center;
+  margin: 50px auto;
+  padding: 20px;
+}
+
+.thankyou h1 {
+  color: #28a745;
+  font-size: 28px;
+}
+
+.thankyou p {
+  font-size: 18px;
+  margin: 15px 0;
+}
+
+.thankyou a {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 20px;
+  background: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.thankyou a:hover {
+  background: #0056b3;
 }
