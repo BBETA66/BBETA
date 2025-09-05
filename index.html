@@ -4,72 +4,109 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BBETA - Apka Apna Bada Beta</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f9; }
-    header { background: #222; color: white; padding: 20px; text-align: center; }
-    header h1 { margin: 0; font-size: 32px; color: #ff4444; }
-    header p { margin: 5px 0 0; font-size: 16px; color: #eee; }
-    .products { display: flex; flex-wrap: wrap; justify-content: center; padding: 20px; }
-    .product { background: white; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin: 10px; padding: 15px; width: 200px; text-align: center; }
-    .product img { width: 100%; height: 150px; object-fit: cover; border-radius: 8px; }
-    .product h3 { margin: 10px 0 5px; font-size: 18px; }
-    .product p { margin: 5px 0; font-size: 16px; }
-    .product input { width: 50px; padding: 5px; margin-top: 5px; text-align: center; }
-    .product button { margin-top: 10px; padding: 8px 12px; border: none; border-radius: 5px; background: #28a745; color: white; cursor: pointer; }
-    .product button:hover { background: #218838; }
-    footer { background: #333; color: white; text-align: center; padding: 15px; margin-top: 20px; }
-    .map { margin: 20px 0; }
-    .whatsapp { display: inline-block; margin-top: 10px; padding: 10px 15px; background: #25d366; color: white; text-decoration: none; border-radius: 5px; }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
     <h1>BBETA</h1>
     <p>Apka Apna Bada Beta 🛒</p>
+    <a href="cart.html" class="cart-link">Go to Cart</a>
   </header>
 
-  <div class="products">
-    <div class="product">
-      <img src="assets/apple.jpg" alt="Apple">
-      <h3>Fresh Apples</h3>
-      <p>₹50 / kg</p>
-      <input type="number" min="1" value="1" id="qty-apple">
-      <button onclick="addToCart('Fresh Apples', 50, document.getElementById('qty-apple').value)">Add to Cart</button>
-    </div>
+  <main>
+    <div class="products">
+      <!-- Product 1 -->
+      <div class="product">
+        <img src="assets/fruits.jpg" alt="Apples">
+        <h2>Fresh Apples</h2>
+        <p>₹50 / kg</p>
+        <input type="number" value="1" min="1" class="qty">
+        <button onclick="addToCart('Fresh Apples', 50, this)">Add to Cart</button>
+      </div>
 
-    <div class="product">
-      <img src="assets/tomato.jpg" alt="Tomato">
-      <h3>Tomatoes</h3>
-      <p>₹30 / kg</p>
-      <input type="number" min="1" value="1" id="qty-tomato">
-      <button onclick="addToCart('Tomatoes', 30, document.getElementById('qty-tomato').value)">Add to Cart</button>
-    </div>
+      <!-- Product 2 -->
+      <div class="product">
+        <img src="assets/vegetables.jpg" alt="Tomatoes">
+        <h2>Tomatoes</h2>
+        <p>₹30 / kg</p>
+        <input type="number" value="1" min="1" class="qty">
+        <button onclick="addToCart('Tomatoes', 30, this)">Add to Cart</button>
+      </div>
 
-    <div class="product">
-      <img src="assets/rice.jpg" alt="Rice">
-      <h3>Rice</h3>
-      <p>₹80 / 5kg</p>
-      <input type="number" min="1" value="1" id="qty-rice">
-      <button onclick="addToCart('Rice', 80, document.getElementById('qty-rice').value)">Add to Cart</button>
-    </div>
-  </div>
+      <!-- Product 3 -->
+      <div class="product">
+        <img src="assets/rice.jpg" alt="Rice">
+        <h2>Rice</h2>
+        <p>₹60 / kg</p>
+        <input type="number" value="1" min="1" class="qty">
+        <button onclick="addToCart('Rice', 60, this)">Add to Cart</button>
+      </div>
 
-  <footer>
-    <p>📍 Location: Nalgonda, Telangana, India - 508001</p>
-    <div class="map">
-      <iframe src="https://www.google.com/maps?q=Nalgonda,Telangana,India,508001&output=embed" width="300" height="200" style="border:0;" allowfullscreen></iframe>
-    </div>
-    <a href="cart.html" class="whatsapp">View Cart 🛒</a>
-    <p>Contact us on WhatsApp: <b>7093242271</b></p>
-  </footer>
+      <!-- Product 4 -->
+      <div class="product">
+        <img src="assets/sugar.jpg" alt="Sugar">
+        <h2>Sugar</h2>
+        <p>₹40 / kg</p>
+        <input type="number" value="1" min="1" class="qty">
+        <button onclick="addToCart('Sugar', 40, this)">Add to Cart</button>
+      </div>
 
-  <script>
-    function addToCart(name, price, qty) {
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      cart.push({ name, price, qty: parseInt(qty) });
-      localStorage.setItem("cart", JSON.stringify(cart));
-      alert(qty + " x " + name + " added to cart!");
-    }
-  </script>
+      <!-- Product 5 -->
+      <div class="product">
+        <img src="assets/oil.jpg" alt="Cooking Oil">
+        <h2>Cooking Oil</h2>
+        <p>₹150 / litre</p>
+        <input type="number" value="1" min="1" class="qty">
+        <button onclick="addToCart('Cooking Oil', 150, this)">Add to Cart</button>
+      </div>
+
+      <!-- Product 6 -->
+      <div class="product">
+        <img src="assets/milk.jpg" alt="Milk">
+        <h2>Milk</h2>
+        <p>₹25 / litre</p>
+        <input type="number" value="1" min="1" class="qty">
+        <button onclick="addToCart('Milk', 25, this)">Add to Cart</button>
+      </div>
+
+      <!-- Product 7 -->
+      <div class="product">
+        <img src="assets/bread.jpg" alt="Bread">
+        <h2>Bread</h2>
+        <p>₹30 / pack</p>
+        <input type="number" value="1" min="1" class="qty">
+        <button onclick="addToCart('Bread', 30, this)">Add to Cart</button>
+      </div>
+
+      <!-- Product 8 -->
+      <div class="product">
+        <img src="assets/tea.jpg" alt="Tea">
+        <h2>Tea</h2>
+        <p>₹120 / 250g</p>
+        <input type="number" value="1" min="1" class="qty">
+        <button onclick="addToCart('Tea', 120, this)">Add to Cart</button>
+      </div>
+
+      <!-- Product 9 -->
+      <div class="product">
+        <img src="assets/snacks.jpg" alt="Snacks">
+        <h2>Snacks</h2>
+        <p>₹20 / pack</p>
+        <input type="number" value="1" min="1" class="qty">
+        <button onclick="addToCart('Snacks', 20, this)">Add to Cart</button>
+      </div>
+
+      <!-- Product 10 -->
+      <div class="product">
+        <img src="assets/cold_drink.jpg" alt="Cold Drink">
+        <h2>Cold Drink</h2>
+        <p>₹35 / bottle</p>
+        <input type="number" value="1" min="1" class="qty">
+        <button onclick="addToCart('Cold Drink', 35, this)">Add to Cart</button>
+      </div>
+    </div>
+  </main>
+
+  <script src="cart.js"></script>
 </body>
 </html>
