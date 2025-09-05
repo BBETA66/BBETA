@@ -12,18 +12,51 @@
       background: #f4f4f9;
       text-align: center;
     }
+
+    :root {
+      --logo-size: clamp(38px, 7vw, 66px);
+      --glow1: rgba(0,255,140,0.6);
+      --glow2: rgba(0,200,120,0.45);
+      --glow3: rgba(0,180,110,0.25);
+      --brand-green-1:#00ff88;
+      --brand-green-2:#00cc66;
+      --brand-green-3:#00aa66;
+    }
+
     header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #333;
-      padding: 10px 20px;
-      color: white;
+      background:#111;
+      color:white;
+      padding:20px;
     }
-    header img {
-      height: 60px; /* 👈 logo yaha bhi bada */
-      width: auto;
+
+    /* Logo Row */
+    .logo-wordmark {
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      margin-bottom:8px;
     }
+    .logo-cart {
+      width: clamp(28px, 4.5vw, 38px);
+      fill: #aaffdd;
+      filter: drop-shadow(0 0 6px var(--glow2));
+    }
+    .logo-text {
+      font-weight:900;
+      font-size: var(--logo-size);
+      background: linear-gradient(90deg, var(--brand-green-1), var(--brand-green-2), var(--brand-green-3));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow:0 0 10px var(--glow1),0 0 18px var(--glow2),0 0 28px var(--glow3);
+    }
+    .logo-store {
+      margin-left: 8px;
+      font-size: calc(var(--logo-size) * 0.5);
+      color:#c7ffe8;
+    }
+
     .cart-container {
       padding: 20px;
     }
@@ -62,12 +95,24 @@
     .back-btn:hover {
       background: #218838;
     }
+
+    footer {
+      background:#333;
+      color:white;
+      padding:15px;
+      margin-top:20px;
+    }
   </style>
 </head>
 <body>
   <header>
-    <img src="assets/logo.png" alt="BBETA Logo">
-    <h1>🛒 Your Cart</h1>
+    <div class="logo-wordmark">
+      <svg class="logo-cart" viewBox="0 0 24 24">
+        <path d="M7 4h-2l-1 2h2l3.6 7.59-1.35 2.44A2 2 0 0 0 10 19h9v-2h-8.42a.25.25 0 0 1-.22-.37L11.1 14h6.55a2 2 0 0 0 1.8-1.1l3.2-6.4A1 1 0 0 0 21.8 5H7.42L7 4zM7 20.5A1.5 1.5 0 1 0 7 17.5 1.5 1.5 0 0 0 7 20.5zm10 0A1.5 1.5 0 1 0 17 17.5 1.5 1.5 0 0 0 17 20.5z"/>
+      </svg>
+      <span class="logo-text">BBETA <span class="logo-store">Store</span></span>
+    </div>
+    <h2>Your Cart</h2>
   </header>
 
   <div class="cart-container" id="cartItems">
@@ -75,6 +120,12 @@
   </div>
 
   <a href="index.html" class="back-btn">⬅ Back to Shop</a>
+
+  <footer>
+    <p>📍 Nalgonda, Telangana, India - 508001</p>
+    <p>📞 WhatsApp: 7093242271</p>
+    <p>B for Bada, Beta aapka apna – <b>BBETA Store</b></p>
+  </footer>
 
   <script>
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
