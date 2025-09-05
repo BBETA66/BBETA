@@ -17,14 +17,10 @@
       color: white;
       padding: 20px 10px;
     }
-    header img {
-      max-height: 70px;
-      margin-bottom: 10px;
-    }
     /* Logo text styling */
     .logo-text {
       display: inline-block;
-      font-size: 50px;
+      font-size: 48px;
       font-weight: bold;
     }
     .logo-b {
@@ -34,11 +30,11 @@
       color: red;
     }
     .logo-store {
-      color: limegreen; /* Store green color */
+      color: limegreen;
     }
     .cart {
       margin-top: 10px;
-      padding: 10px 20px;
+      padding: 8px 16px;
       background: #28a745;
       color: white;
       border-radius: 5px;
@@ -47,7 +43,7 @@
     }
     h2 {
       margin-top: 20px;
-      font-size: 24px;
+      font-size: 26px;
     }
     .product-grid {
       display: grid;
@@ -84,7 +80,7 @@
     .footer {
       background: #333;
       color: white;
-      padding: 10px;
+      padding: 12px;
       margin-top: 20px;
       font-size: 14px;
     }
@@ -96,11 +92,10 @@
 </head>
 <body>
   <header>
-    <img src="logo.png" alt="BBETA Logo"><br>
-    <!-- Custom BBETA text with colors -->
-    <span class="logo-text">
+    <!-- Logo Text -->
+    <div class="logo-text">
       <span class="logo-b">B</span><span class="logo-beta">BETA</span> <span class="logo-store">Store</span>
-    </span>
+    </div>
     <div class="cart">🛒 Cart: 0</div>
   </header>
 
@@ -109,12 +104,12 @@
 
   <div class="product-grid">
     <div class="product">
-      <img src="vegetables.jpg" alt="Fresh Vegetables">
+      <img src="vegetables.jpg" alt="Fresh Vegetables" onerror="this.src='https://via.placeholder.com/300x200?text=Vegetables'">
       <h3>Fresh Vegetables</h3>
       <button>Add to Cart</button>
     </div>
     <div class="product">
-      <img src="fruits.jpg" alt="Fresh Fruits">
+      <img src="fruits.jpg" alt="Fresh Fruits" onerror="this.src='https://via.placeholder.com/300x200?text=Fruits'">
       <h3>Fresh Fruits</h3>
       <button>Add to Cart</button>
     </div>
@@ -124,17 +119,17 @@
       <button>Add to Cart</button>
     </div>
     <div class="product">
-      <img src="medicines.jpg" alt="Medicines">
+      <img src="medicines.jpg" alt="Medicines" onerror="this.src='https://via.placeholder.com/300x200?text=Medicines'">
       <h3>Medicines</h3>
       <button>Add to Cart</button>
     </div>
     <div class="product">
-      <img src="bakery.jpg" alt="Bakery Items">
+      <img src="bakery.jpg" alt="Bakery Items" onerror="this.src='https://via.placeholder.com/300x200?text=Bakery'">
       <h3>Bakery Items</h3>
       <button>Add to Cart</button>
     </div>
     <div class="product">
-      <img src="dairy.jpg" alt="Dairy Products">
+      <img src="dairy.jpg" alt="Dairy Products" onerror="this.src='https://via.placeholder.com/300x200?text=Dairy'">
       <h3>Dairy Products</h3>
       <button>Add to Cart</button>
     </div>
@@ -145,5 +140,4 @@
     📞 WhatsApp: <a href="https://wa.me/917093242271">7093242271</a>
   </div>
 </body>
-</html>body>
-  </html>
+</html>
