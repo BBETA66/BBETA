@@ -3,65 +3,76 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Cart - BBETA</title>
+  <title>BBETA - Cart</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    body { background: #f8f9fa; text-align:center; }
-    header { background:#28a745; color:white; padding:15px; }
-    .cart-container { max-width:600px; margin:20px auto; }
-    .cart-item {
-      background:white;
-      margin:10px 0;
-      padding:15px;
-      border-radius:10px;
-      box-shadow:0 4px 6px rgba(0,0,0,0.1);
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
+    body { background: #f8f9fa; }
+    .container { margin-top: 50px; }
+    .btn-whatsapp {
+      background-color: #25D366;
+      color: white;
+      font-weight: bold;
+    }
+    .btn-whatsapp:hover {
+      background-color: #1ebe57;
+      color: white;
     }
   </style>
 </head>
 <body>
-  <header><h2>🛒 Your Cart</h2></header>
-  <div class="cart-container" id="cartItems"></div>
-  <h4 id="total"></h4>
-  <a href="index.html" class="btn btn-secondary m-2">⬅ Back to Shop</a>
-  <a href="checkout.html" class="btn btn-success m-2">Proceed to Checkout</a>
+  <div class="container">
+    <h2 class="mb-4 text-center">🛒 Your Cart</h2>
+    <div id="cart-items"></div>
+    <h4 class="mt-4">Total: ₹<span id="cart-total">0</span></h4>
+    
+    <button class="btn btn-success mt-3" onclick="checkout()">Proceed to Checkout</button>
+    <button class="btn btn-whatsapp mt-3" onclick="sendToWhatsApp()">📩 Place Order on WhatsApp</button>
+    <a href="index.html" class="btn btn-secondary mt-3">Continue Shopping</a>
+  </div>
 
   <script>
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const cartContainer = document.getElementById("cartItems");
-    const totalElement = document.getElementById("total");
+    let cartItemsDiv = document.getElementById("cart-items");
+    let cartTotalSpan = document.getElementById("cart-total");
 
-    function displayCart() {
-      cartContainer.innerHTML = "";
-      if (cart.length === 0) {
-        cartContainer.innerHTML = "<p>Your cart is empty 🛍️</p>";
-        totalElement.innerHTML = "";
-        return;
-      }
+    function renderCart() {
+      cartItemsDiv.innerHTML = "";
       let total = 0;
       cart.forEach((item, index) => {
-        let price = parseInt(item.match(/\d+/)[0]); 
-        total += price;
-        let div = document.createElement("div");
-        div.classList.add("cart-item");
-        div.innerHTML = `
-          <span>${item}</span>
-          <button class="btn btn-danger btn-sm" onclick="removeItem(${index})">Remove</button>
+        cartItemsDiv.innerHTML += `
+          <div class="d-flex justify-content-between align-items-center border-bottom py-2">
+            <span>${item.name} - ₹${item.price} x ${item.quantity}</span>
+            <span>₹${item.price * item.quantity}</span>
+          </div>
         `;
-        cartContainer.appendChild(div);
+        total += item.price * item.quantity;
       });
-      totalElement.innerHTML = "Total: ₹" + total;
+      cartTotalSpan.textContent = total;
     }
 
-    function removeItem(index) {
-      cart.splice(index, 1);
-      localStorage.setItem("cart", JSON.stringify(cart));
-      displayCart();
+    function checkout() {
+      window.location.href = "checkout.html";
     }
 
-    displayCart();
+    function sendToWhatsApp() {
+      if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+      }
+      let message = "🛒 BBETA Order:%0A";
+      let total = 0;
+      cart.forEach(item => {
+        message += `${item.name} - ₹${item.price} x ${item.quantity} = ₹${item.price * item.quantity}%0A`;
+        total += item.price * item.quantity;
+      });
+      message += `%0ATotal: ₹${total}`;
+      
+      let phone = "917093242271"; // Tumhara WhatsApp number
+      let url = `https://wa.me/${phone}?text=${message}`;
+      window.open(url, "_blank");
+    }
+
+    renderCart();
   </script>
 </body>
 </html>
