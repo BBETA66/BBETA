@@ -1,81 +1,65 @@
-/* General Styling */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background: #f4f4f9;
-}
-
-/* Header */
-header {
-  background: #111;
-  color: white;
-  padding: 15px;
-  text-align: center;
-}
-
+/* Cart Page Styling */
 header h1 {
-  margin: 0;
-  color: red;
-}
-
-header p {
-  margin: 5px 0;
-}
-
-.cart-link {
-  color: #fff;
-  font-weight: bold;
-  text-decoration: none;
-}
-
-/* Products Grid */
-.products {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  padding: 20px;
-}
-
-.product {
-  background: white;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
+  color: red;
+  margin: 20px 0;
+  font-size: 28px;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
 }
 
-.product img {
-  max-width: 100%;
-  border-radius: 8px;
-  margin-bottom: 10px;
+.cart-items {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 15px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.product h2 {
-  font-size: 20px;
-  margin: 10px 0;
+.empty-cart {
+  text-align: center;
+  font-size: 18px;
+  color: #666;
 }
 
-.product p {
+.checkout-form {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.checkout-form input,
+.checkout-form textarea {
+  padding: 10px;
   font-size: 16px;
-  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 100%;
 }
 
-.qty {
-  width: 60px;
-  padding: 5px;
-  margin-right: 10px;
+.checkout-form textarea {
+  resize: none;
+  height: 80px;
 }
 
-button {
-  padding: 8px 15px;
+.order-btn {
+  padding: 12px;
+  font-size: 18px;
   background: green;
-  color: white;
+  color: #fff;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
+  transition: 0.2s ease-in-out;
 }
 
-button:hover {
+.order-btn:hover {
   background: darkgreen;
 }
