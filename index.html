@@ -9,157 +9,144 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background: #f4f4f9;
+      background-color: #f8f9fa;
+      text-align: center;
     }
     header {
       background: #333;
       color: white;
-      padding: 25px 10px;
-      text-align: center;
+      padding: 20px 10px;
     }
     header img {
-      height: 250px;      /* Logo bada */
-      display: block;
-      margin: 0 auto 10px;
+      max-height: 70px;
+      margin-bottom: 10px;
     }
     header h1 {
       margin: 5px 0;
-      font-size: 45px;     /* Heading aur bada */
+      font-size: 50px;
       font-weight: bold;
-      color: #28a745;      /* Green color for BBETA Store */
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
     }
-    .cart-btn {
+    /* BETA store logo color styling */
+    .logo-text {
       display: inline-block;
-      margin: 10px 0;
+      font-size: 50px;
+      font-weight: bold;
+    }
+    .logo-b {
+      color: orange;
+    }
+    .logo-beta {
+      color: red; /* BETA ab red hoga */
+    }
+    .cart {
+      margin-top: 10px;
       padding: 10px 20px;
       background: #28a745;
       color: white;
       border-radius: 5px;
-      text-decoration: none;
+      display: inline-block;
       font-weight: bold;
     }
-    .cart-btn:hover {
-      background: #218838;
+    h2 {
+      margin-top: 20px;
+      font-size: 24px;
     }
-    .container {
-      padding: 20px;
-      text-align: center;
-    }
-    .container h2 {
-      font-size: 28px;
-      margin-bottom: 10px;
-    }
-    .categories {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 20px;
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
     }
-    .category {
+    .product {
       background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       padding: 15px;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      width: 200px;
     }
-    .category img {
+    .product img {
       width: 100%;
-      border-radius: 8px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 10px;
     }
-    .category h3 {
+    .product h3 {
+      font-size: 18px;
       margin: 10px 0;
     }
-    .category button {
-      padding: 8px 12px;
+    .product button {
       background: #28a745;
       color: white;
       border: none;
+      padding: 10px 15px;
       border-radius: 5px;
       cursor: pointer;
-      font-weight: bold;
     }
-    .category button:hover {
-      background: #218838;
-    }
-    footer {
-      margin-top: 20px;
+    .footer {
       background: #333;
       color: white;
-      padding: 15px;
-      text-align: center;
+      padding: 10px;
+      margin-top: 20px;
+      font-size: 14px;
     }
-    footer a {
+    .footer a {
       color: #28a745;
       text-decoration: none;
-      font-weight: bold;
     }
   </style>
 </head>
 <body>
   <header>
-    <img src="assets/logo.png" alt="BBETA Logo">
-    <h1>BBETA Store</h1>
-    <a href="cart.html" class="cart-btn">🛒 Cart: <span id="cartCount">0</span></a>
+    <img src="logo.png" alt="BBETA Logo"><br>
+    <!-- Custom BBETA text with red BETA -->
+    <span class="logo-text">
+      <span class="logo-b">B</span><span class="logo-beta">BETA</span> Store
+    </span>
+    <div class="cart">🛒 Cart: 0</div>
   </header>
 
-  <div class="container">
-    <h2>Welcome to BBETA Store</h2>
-    <p><i>"B for Bada Beta, Apka Apna Beta!"</i></p>
-    <div class="categories">
-      <div class="category">
-        <img src="assets/vegetables.jpg" alt="Fresh Vegetables">
-        <h3>Fresh Vegetables</h3>
-        <button onclick="addToCart('Fresh Vegetables')">Add to Cart</button>
-      </div>
-      <div class="category">
-        <img src="assets/fruits.jpg" alt="Fresh Fruits">
-        <h3>Fresh Fruits</h3>
-        <button onclick="addToCart('Fresh Fruits')">Add to Cart</button>
-      </div>
-      <div class="category">
-        <img src="assets/kirana.jpg" alt="Kirana Items">
-        <h3>Kirana Items</h3>
-        <button onclick="addToCart('Kirana Items')">Add to Cart</button>
-      </div>
-      <div class="category">
-        <img src="assets/medicines.jpg" alt="Medicines">
-        <h3>Medicines</h3>
-        <button onclick="addToCart('Medicines')">Add to Cart</button>
-      </div>
-      <div class="category">
-        <img src="assets/bakery.jpg" alt="Bakery Items">
-        <h3>Bakery Items</h3>
-        <button onclick="addToCart('Bakery Items')">Add to Cart</button>
-      </div>
-      <div class="category">
-        <img src="assets/dairy.jpg" alt="Dairy Products">
-        <h3>Dairy Products</h3>
-        <button onclick="addToCart('Dairy Products')">Add to Cart</button>
-      </div>
+  <h2>Welcome to BBETA Store</h2>
+  <p><i>"B for Bada Beta, Apka Apna Beta!"</i></p>
+
+  <div class="product-grid">
+    <div class="product">
+      <img src="vegetables.jpg" alt="Fresh Vegetables">
+      <h3>Fresh Vegetables</h3>
+      <button>Add to Cart</button>
+    </div>
+    <div class="product">
+      <img src="fruits.jpg" alt="Fresh Fruits">
+      <h3>Fresh Fruits</h3>
+      <button>Add to Cart</button>
+    </div>
+    <div class="product">
+      <img src="kirana.jpg" alt="Kirana Items" onerror="this.src='https://via.placeholder.com/300x200?text=Kirana+Items'">
+      <h3>Kirana Items</h3>
+      <button>Add to Cart</button>
+    </div>
+    <div class="product">
+      <img src="medicines.jpg" alt="Medicines">
+      <h3>Medicines</h3>
+      <button>Add to Cart</button>
+    </div>
+    <div class="product">
+      <img src="bakery.jpg" alt="Bakery Items">
+      <h3>Bakery Items</h3>
+      <button>Add to Cart</button>
+    </div>
+    <div class="product">
+      <img src="dairy.jpg" alt="Dairy Products">
+      <h3>Dairy Products</h3>
+      <button>Add to Cart</button>
     </div>
   </div>
 
-  <footer>
+  <div class="footer">
     📍 Nalgonda, Telangana, India - 508001 <br>
-    📞 WhatsApp: <a href="https://wa.me/7093242271">7093242271</a>
-  </footer>
-
-  <script>
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const cartCount = document.getElementById("cartCount");
-
-    function addToCart(item) {
-      cart.push(item);
-      localStorage.setItem("cart", JSON.stringify(cart));
-      updateCartCount();
-    }
-
-    function updateCartCount() {
-      cartCount.textContent = cart.length;
-    }
-
-    updateCartCount();
-  </script>
+    📞 WhatsApp: <a href="https://wa.me/917093242271">7093242271</a>
+  </div>
 </body>
+</html>body>
   </html>
