@@ -3,53 +3,83 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BBETA - Apna Apna Beta!</title>
-  <link rel="stylesheet" href="style.css">
+  <title>BBETA - Online Store</title>
   <style>
-    body { font-family: Arial, sans-serif; background: #f8f9fa; margin: 0; padding: 0; }
-    header { background: #28a745; color: white; text-align: center; padding: 15px; font-size: 22px; font-weight: bold; }
-    .logo { display: block; margin: 10px auto; max-width: 120px; }
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f9; }
+    header { text-align: center; padding: 20px; background: #fff; }
+    header h1 {
+      font-size: 2.2rem; font-weight: bold;
+      background: linear-gradient(90deg, #28a745, #ff0000);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.4);
+    }
     .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; padding: 20px; }
-    .card { background: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding: 15px; text-align: center; }
-    .card img { max-width: 100%; height: 150px; object-fit: cover; border-radius: 10px; }
-    .card h3 { margin: 10px 0; }
-    .price { font-size: 16px; font-weight: bold; color: #333; }
-    .btn { background: #007bff; color: white; padding: 8px 15px; border: none; border-radius: 5px; cursor: pointer; }
-    .cart-btn { display: block; margin: 20px auto; background: #ffc107; color: black; font-weight: bold; }
+    .product { background: white; padding: 15px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center; }
+    .product img { width: 100%; height: 150px; object-fit: cover; border-radius: 8px; }
+    .product h3 { margin: 10px 0; }
+    .product p { font-weight: bold; }
+    input[type=number] { width: 60px; padding: 5px; margin: 5px 0; }
+    button { padding: 8px 12px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    button:hover { background: #218838; }
+    .footer { text-align: center; padding: 20px; background: #333; color: white; }
+    .footer a { color: #0f0; text-decoration: none; font-weight: bold; }
+    iframe { width: 100%; height: 250px; border: none; margin-top: 15px; }
   </style>
 </head>
 <body>
-
   <header>
-    <img src="assets/logo.png" class="logo" alt="BBETA Logo">
-    BBETA - B for Bada, BBETA Apna Apna Beta!
+    <h1>🛍️ Apka Apna Bada BBETA</h1>
   </header>
 
   <section class="products">
-    <div class="card"><img src="assets/vegetables.jpg"><h3>Fresh Vegetables</h3><p class="price">₹50 / kg</p><button class="btn" onclick="addToCart('Fresh Vegetables', 50)">Add to Cart</button></div>
-    <div class="card"><img src="assets/fruits.jpg"><h3>Fresh Fruits</h3><p class="price">₹80 / kg</p><button class="btn" onclick="addToCart('Fresh Fruits', 80)">Add to Cart</button></div>
-    <div class="card"><img src="assets/groceries.jpg"><h3>Groceries</h3><p class="price">₹200 / pack</p><button class="btn" onclick="addToCart('Groceries', 200)">Add to Cart</button></div>
-    <div class="card"><img src="assets/medicines.jpg"><h3>Medicines</h3><p class="price">₹100 / item</p><button class="btn" onclick="addToCart('Medicines', 100)">Add to Cart</button></div>
-    <div class="card"><img src="assets/bakery.jpg"><h3>Bakery Items</h3><p class="price">₹120 / pack</p><button class="btn" onclick="addToCart('Bakery Items', 120)">Add to Cart</button></div>
-    <div class="card"><img src="assets/dairy.jpg"><h3>Dairy Products</h3><p class="price">₹60 / litre</p><button class="btn" onclick="addToCart('Dairy Products', 60)">Add to Cart</button></div>
-    <div class="card"><img src="assets/milk.jpg"><h3>Milk</h3><p class="price">₹50 / litre</p><button class="btn" onclick="addToCart('Milk', 50)">Add to Cart</button></div>
-    <div class="card"><img src="assets/oil.jpg"><h3>Cooking Oil</h3><p class="price">₹150 / litre</p><button class="btn" onclick="addToCart('Cooking Oil', 150)">Add to Cart</button></div>
-    <div class="card"><img src="assets/rice.jpg"><h3>Rice</h3><p class="price">₹60 / kg</p><button class="btn" onclick="addToCart('Rice', 60)">Add to Cart</button></div>
-    <div class="card"><img src="assets/sugar.jpg"><h3>Sugar</h3><p class="price">₹40 / kg</p><button class="btn" onclick="addToCart('Sugar', 40)">Add to Cart</button></div>
-    <div class="card"><img src="assets/tea.jpg"><h3>Tea</h3><p class="price">₹120 / pack</p><button class="btn" onclick="addToCart('Tea', 120)">Add to Cart</button></div>
-    <div class="card"><img src="assets/snacks.jpg"><h3>Snacks</h3><p class="price">₹50 / pack</p><button class="btn" onclick="addToCart('Snacks', 50)">Add to Cart</button></div>
-    <div class="card"><img src="assets/bread.jpg"><h3>Bread</h3><p class="price">₹30 / pack</p><button class="btn" onclick="addToCart('Bread', 30)">Add to Cart</button></div>
-    <div class="card"><img src="assets/cold_drink.jpg"><h3>Cold Drink</h3><p class="price">₹40 / bottle</p><button class="btn" onclick="addToCart('Cold Drink', 40)">Add to Cart</button></div>
+    <div class="product">
+      <img src="assets/vegetables.jpg" alt="Vegetables">
+      <h3>Fresh Vegetables</h3>
+      <p>₹50 / kg</p>
+      <input type="number" id="vegQty" min="1" value="1">
+      <button onclick="addToCart('Fresh Vegetables', 50, document.getElementById('vegQty').value)">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="assets/fruits.jpg" alt="Fruits">
+      <h3>Fresh Fruits</h3>
+      <p>₹80 / kg</p>
+      <input type="number" id="fruitQty" min="1" value="1">
+      <button onclick="addToCart('Fresh Fruits', 80, document.getElementById('fruitQty').value)">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="assets/groceries.jpg" alt="Groceries">
+      <h3>Kirana Items</h3>
+      <p>₹120</p>
+      <input type="number" id="groceryQty" min="1" value="1">
+      <button onclick="addToCart('Kirana Items', 120, document.getElementById('groceryQty').value)">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="assets/medicines.jpg" alt="Medicines">
+      <h3>Medicines</h3>
+      <p>₹200</p>
+      <input type="number" id="medQty" min="1" value="1">
+      <button onclick="addToCart('Medicines', 200, document.getElementById('medQty').value)">Add to Cart</button>
+    </div>
   </section>
 
-  <a href="cart.html"><button class="btn cart-btn">🛒 Go to Cart</button></a>
+  <div class="footer">
+    <p>📍 Location: Nalgonda, Telangana, India - 508001</p>
+    <p>📞 Order on WhatsApp: <a href="https://wa.me/917093242271" target="_blank">+91 7093242271</a></p>
+    <iframe src="https://www.google.com/maps?q=Nalgonda,+Telangana,+India+508001&output=embed"></iframe>
+    <br>
+    <a href="cart.html">Go to Cart 🛒</a>
+  </div>
 
   <script>
-    function addToCart(name, price) {
+    function addToCart(name, price, qty) {
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      cart.push({ name, price });
+      cart.push({ name: name, price: price, qty: parseInt(qty) });
       localStorage.setItem("cart", JSON.stringify(cart));
-      alert(name + " added to cart!");
+      alert(qty + " x " + name + " added to cart ✅");
     }
   </script>
 </body>
