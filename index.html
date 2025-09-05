@@ -3,84 +3,76 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BBETA Shop</title>
+  <title>BBETA - Ecommerce</title>
   <style>
-    body { font-family: Arial, sans-serif; background: #f4f4f9; margin: 0; padding: 0; }
-    header { background: #28a745; color: white; padding: 15px; text-align: center; }
-    header h1 { margin: 0; font-size: 22px; }
-    .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; padding: 20px; }
-    .product { background: white; border-radius: 8px; padding: 10px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
-    .product img { width: 100%; height: 120px; object-fit: cover; border-radius: 6px; }
-    .product h3 { font-size: 16px; margin: 8px 0 4px; }
-    .product p { margin: 4px 0; font-weight: bold; }
-    .btn { background: #007bff; color: white; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer; margin-top: 5px; }
-    .btn:hover { background: #0056b3; }
-    .go-cart { display: block; margin: 20px auto; background: orange; padding: 10px 15px; text-align: center; width: fit-content; border-radius: 5px; font-weight: bold; text-decoration: none; color: black; }
+    body { font-family: Arial, sans-serif; background: #f9f9f9; margin: 0; padding: 0; }
+    header { background: #2e7d32; padding: 15px; text-align: center; color: white; font-size: 22px; font-weight: bold; }
+    .container { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; padding: 20px; }
+    .card { background: white; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.15); padding: 10px; text-align: center; }
+    .card img { width: 100%; height: 150px; object-fit: cover; border-radius: 5px; }
+    .btn { background: #1976d2; color: white; padding: 8px 12px; border: none; border-radius: 5px; cursor: pointer; }
+    .btn:hover { background: #0d47a1; }
+    .cart-btn { display: block; width: 180px; margin: 20px auto; background: orange; text-align: center; padding: 10px; border-radius: 6px; text-decoration: none; font-weight: bold; color: black; }
   </style>
 </head>
 <body>
-  <header>
-    <h1>🛍 BBETA - B for Bada, BBETA aapka apna beta!</h1>
-  </header>
 
-  <div class="products">
-    <div class="product">
-      <img src="https://i.ibb.co/CMZ5c9J/vegetables.jpg" alt="Fresh Vegetables">
+  <header>🛒 BBETA - B for Bada, BBETA aapka apna beta!</header>
+
+  <div class="container">
+    <div class="card">
+      <img src="https://i.ibb.co/8rjz9xv/vegetables.jpg" alt="Fresh Vegetables">
       <h3>Fresh Vegetables</h3>
       <p>₹50 / kg</p>
       <button class="btn" onclick="addToCart('Fresh Vegetables', 50)">Add to Cart</button>
     </div>
 
-    <div class="product">
-      <img src="https://i.ibb.co/nBP0mYw/fruits.jpg" alt="Fresh Fruits">
+    <div class="card">
+      <img src="https://i.ibb.co/1ZR7qfQ/fruits.jpg" alt="Fresh Fruits">
       <h3>Fresh Fruits</h3>
       <p>₹80 / kg</p>
       <button class="btn" onclick="addToCart('Fresh Fruits', 80)">Add to Cart</button>
     </div>
 
-    <div class="product">
-      <img src="https://i.ibb.co/J7yT4Km/groceries.jpg" alt="Groceries">
+    <div class="card">
+      <img src="https://i.ibb.co/6nsb7LJ/groceries.jpg" alt="Groceries">
       <h3>Groceries</h3>
       <p>₹200 / pack</p>
       <button class="btn" onclick="addToCart('Groceries', 200)">Add to Cart</button>
     </div>
 
-    <div class="product">
-      <img src="https://i.ibb.co/N9McVXp/medicines.jpg" alt="Medicines">
+    <div class="card">
+      <img src="https://i.ibb.co/Z8x9Lpw/medicines.jpg" alt="Medicines">
       <h3>Medicines</h3>
       <p>₹100 / item</p>
       <button class="btn" onclick="addToCart('Medicines', 100)">Add to Cart</button>
     </div>
 
-    <div class="product">
-      <img src="https://i.ibb.co/LZC9rhc/bakery.jpg" alt="Bakery Items">
+    <div class="card">
+      <img src="https://i.ibb.co/4ZsmPp2/bakery.jpg" alt="Bakery Items">
       <h3>Bakery Items</h3>
       <p>₹120 / pack</p>
       <button class="btn" onclick="addToCart('Bakery Items', 120)">Add to Cart</button>
     </div>
 
-    <div class="product">
-      <img src="https://i.ibb.co/N3d2Vmp/dairy.jpg" alt="Dairy Products">
+    <div class="card">
+      <img src="https://i.ibb.co/M2Whsm9/dairy.jpg" alt="Dairy Products">
       <h3>Dairy Products</h3>
       <p>₹60 / litre</p>
       <button class="btn" onclick="addToCart('Dairy Products', 60)">Add to Cart</button>
     </div>
   </div>
 
-  <a href="cart.html" class="go-cart">🛒 Go to Cart</a>
+  <a href="cart.html" class="cart-btn">🛍 Go to Cart</a>
 
   <script>
-    function addToCart(name, price) {
+    function addToCart(product, price) {
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      let item = cart.find(i => i.name === name);
-      if (item) {
-        item.qty += 1;
-      } else {
-        cart.push({ name, price, qty: 1 });
-      }
+      cart.push({ product, price });
       localStorage.setItem("cart", JSON.stringify(cart));
-      alert(name + " added to cart!");
+      alert(product + " added to cart!");
     }
   </script>
+
 </body>
-  </html>
+</html>
