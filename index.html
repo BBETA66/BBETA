@@ -13,38 +13,42 @@
       text-align: center;
     }
     header {
-      background: #222;
+      background: linear-gradient(90deg, #0f9d58, #34a853);
       color: white;
       padding: 20px;
-      font-size: 28px;
+    }
+    header h1 {
+      font-size: 40px;
       font-weight: bold;
+      text-shadow: 0 0 10px rgba(0,255,0,0.7);
     }
-    header span {
-      color: red;
-    }
-    .container {
+    .products {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
       padding: 20px;
     }
-    .card {
+    .product {
       background: white;
       padding: 15px;
       border-radius: 10px;
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
-    .card img {
+    .product img {
       width: 100%;
-      height: 180px;
+      height: 150px;
       object-fit: cover;
       border-radius: 8px;
     }
-    .card h3 {
-      margin: 10px 0;
+    .product h3 {
+      margin: 10px 0 5px;
     }
-    .btn {
-      padding: 10px 15px;
+    .product p {
+      margin: 5px 0;
+      font-weight: bold;
+    }
+    button {
+      padding: 8px 12px;
       background: #28a745;
       color: white;
       border: none;
@@ -52,81 +56,95 @@
       cursor: pointer;
       margin-top: 5px;
     }
-    .btn:hover {
+    button:hover {
       background: #218838;
     }
-    .cart-link {
+    .cart-btn {
       display: inline-block;
-      margin: 20px;
+      margin: 20px auto;
       padding: 12px 20px;
       background: #007bff;
       color: white;
-      text-decoration: none;
       border-radius: 5px;
+      text-decoration: none;
     }
-    .cart-link:hover {
+    .cart-btn:hover {
       background: #0056b3;
     }
   </style>
 </head>
 <body>
   <header>
-    BB<span>BETA</span>
+    <h1>🛍️ BBETA STORE</h1>
+    <p>Groceries • Fruits • Vegetables • Daily Essentials</p>
   </header>
 
-  <div class="container">
-    <div class="card">
-      <img src="assets/vegetables.jpg" alt="Fresh Vegetables">
-      <h3>Fresh Vegetables</h3>
-      <p>₹50</p>
-      <button class="btn" onclick="addToCart('Fresh Vegetables', 50)">Add to Cart</button>
+  <div class="products">
+    <div class="product">
+      <img src="https://source.unsplash.com/400x300/?rice" alt="Rice">
+      <h3>Rice</h3>
+      <p>₹50 / kg</p>
+      <button onclick="addToCart('Rice', 50)">Add to Cart</button>
     </div>
 
-    <div class="card">
-      <img src="assets/fruits.jpg" alt="Fresh Fruits">
+    <div class="product">
+      <img src="https://source.unsplash.com/400x300/?oil" alt="Oil">
+      <h3>Sunflower Oil</h3>
+      <p>₹120 / L</p>
+      <button onclick="addToCart('Sunflower Oil', 120)">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="https://source.unsplash.com/400x300/?sugar" alt="Sugar">
+      <h3>Sugar</h3>
+      <p>₹45 / kg</p>
+      <button onclick="addToCart('Sugar', 45)">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="https://source.unsplash.com/400x300/?tea" alt="Tea">
+      <h3>Tea Powder</h3>
+      <p>₹80 / 250g</p>
+      <button onclick="addToCart('Tea Powder', 80)">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="https://source.unsplash.com/400x300/?biscuits" alt="Biscuits">
+      <h3>Biscuits</h3>
+      <p>₹30 / pack</p>
+      <button onclick="addToCart('Biscuits', 30)">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="https://source.unsplash.com/400x300/?milk" alt="Milk">
+      <h3>Fresh Milk</h3>
+      <p>₹25 / L</p>
+      <button onclick="addToCart('Fresh Milk', 25)">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="https://source.unsplash.com/400x300/?vegetables" alt="Vegetables">
+      <h3>Mixed Vegetables</h3>
+      <p>₹60 / kg</p>
+      <button onclick="addToCart('Mixed Vegetables', 60)">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="https://source.unsplash.com/400x300/?fruits" alt="Fruits">
       <h3>Fresh Fruits</h3>
-      <p>₹80</p>
-      <button class="btn" onclick="addToCart('Fresh Fruits', 80)">Add to Cart</button>
-    </div>
-
-    <div class="card">
-      <img src="assets/groceries.jpg" alt="Groceries">
-      <h3>Groceries</h3>
-      <p>₹200</p>
-      <button class="btn" onclick="addToCart('Groceries', 200)">Add to Cart</button>
-    </div>
-
-    <div class="card">
-      <img src="assets/medicines.jpg" alt="Medicines">
-      <h3>Medicines</h3>
-      <p>₹100</p>
-      <button class="btn" onclick="addToCart('Medicines', 100)">Add to Cart</button>
-    </div>
-
-    <div class="card">
-      <img src="assets/bakery.jpg" alt="Bakery Items">
-      <h3>Bakery Items</h3>
-      <p>₹120</p>
-      <button class="btn" onclick="addToCart('Bakery Items', 120)">Add to Cart</button>
-    </div>
-
-    <div class="card">
-      <img src="assets/dairy.jpg" alt="Dairy Products">
-      <h3>Dairy Products</h3>
-      <p>₹60</p>
-      <button class="btn" onclick="addToCart('Dairy Products', 60)">Add to Cart</button>
+      <p>₹100 / kg</p>
+      <button onclick="addToCart('Fresh Fruits', 100)">Add to Cart</button>
     </div>
   </div>
 
-  <a href="cart.html" class="cart-link">🛒 View Cart</a>
+  <a href="cart.html" class="cart-btn">🛒 Go to Cart</a>
 
   <script>
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-    function addToCart(name, price) {
-      cart.push({ name: name, price: price });
+    function addToCart(product, price) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.push({ product, price });
       localStorage.setItem("cart", JSON.stringify(cart));
-      alert(`${name} added to cart!`);
+      alert(product + " added to cart ✅");
     }
   </script>
 </body>
