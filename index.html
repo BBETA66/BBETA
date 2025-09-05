@@ -5,128 +5,65 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BBETA - Fast Delivery Service</title>
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f9f9f9;
-      color: #333;
-      text-align: center;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; background: #f4f4f9; color: #333; }
+
     header {
-      background: #111;
+      background: linear-gradient(90deg, orange, green);
       padding: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 15px;
-    }
-    header img {
-      height: 60px;
-    }
-    header h1 {
-      color: white;
-      margin: 0;
-      font-size: 28px;
-    }
-    .hero {
-      padding: 80px 20px;
-      background: linear-gradient(to right, #ff9800, #4caf50);
+      text-align: center;
       color: white;
     }
-    .hero h2 {
-      font-size: 40px;
+    header img { width: 80px; height: 80px; animation: pulse 2s infinite; }
+    header h1 { font-size: 32px; margin-top: 10px; }
+    header p { font-size: 18px; margin-top: 5px; font-style: italic; }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .hero { text-align: center; padding: 40px 20px; }
+    .hero h2 { font-size: 30px; margin-bottom: 10px; }
+    .hero p { font-size: 18px; margin-bottom: 20px; }
+    .btn { padding: 12px 25px; background: orange; color: white; border-radius: 8px; text-decoration: none; font-weight: bold; }
+    .btn:hover { background: #4caf50; }
+
+    .products { padding: 50px 20px; text-align: center; }
+    .products h2 { font-size: 28px; margin-bottom: 30px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: white;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 8px;
       margin-bottom: 10px;
     }
-    .hero p {
-      font-size: 20px;
-    }
-    .btn {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 12px 24px;
-      background: #ff9800;
-      color: white;
-      text-decoration: none;
-      border-radius: 6px;
-      font-size: 18px;
-      font-weight: bold;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-      transition: 0.3s;
-    }
-    .btn:hover {
-      background: #4caf50;
-      color: white;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
-    }
-    /* Products Section */
-    .products {
-      padding: 60px 20px;
-      background: #f9f9f9;
-    }
-    .products h2 {
-      font-size: 32px;
-      margin-bottom: 40px;
-    }
-    .product-grid {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-    .product-card {
-      background: white;
-      border-radius: 12px;
-      padding: 20px;
-      width: 250px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      transition: 0.3s;
-      text-align: center;
-    }
-    .product-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
-    }
-    .product-card img {
-      width: 100%;
-      height: 160px;
-      object-fit: cover;
-      border-radius: 10px;
-      margin-bottom: 15px;
-    }
-    .product-card h3 {
-      font-size: 20px;
-      margin: 10px 0;
-    }
-    .product-card p {
-      font-size: 16px;
-      margin: 5px 0 15px;
-    }
+    .card h3 { margin-bottom: 8px; }
+    .card p { margin-bottom: 12px; font-size: 16px; }
     .contact {
       padding: 50px 20px;
       background: #fff;
+      text-align: center;
     }
-    .contact h3 {
-      font-size: 28px;
-      margin-bottom: 20px;
-    }
-    .contact p {
-      font-size: 18px;
-      margin: 8px 0;
-    }
-    .map {
-      margin-top: 20px;
-    }
-    .map iframe {
-      width: 100%;
-      height: 300px;
-      border: 0;
-      border-radius: 10px;
-    }
+    .contact h3 { font-size: 28px; margin-bottom: 20px; }
+    .contact p { font-size: 18px; margin: 8px 0; }
     footer {
       background: #111;
       color: #aaa;
       padding: 20px;
-      margin-top: 50px;
+      text-align: center;
     }
   </style>
 </head>
@@ -135,6 +72,7 @@
   <header>
     <img src="assets/logo.png" alt="BBETA Logo">
     <h1>BBETA</h1>
+    <p>“B for Bada Beta, Apka Apna BBETA 🚀”</p>
   </header>
 
   <section class="hero">
@@ -145,71 +83,61 @@
 
   <section class="products">
     <h2>🛒 Our Products</h2>
-    <div class="product-grid">
-
-      <div class="product-card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/69/Veggies.jpg" alt="Vegetables">
+    <div class="grid">
+      <div class="card">
+        <img src="assets/vegetables.jpg" alt="Vegetables">
         <h3>Fresh Vegetables</h3>
         <p>₹50 / Kg</p>
-        <a href="https://wa.me/917093242271?text=I%20want%20to%20order%20Fresh%20Vegetables" class="btn">Order Now</a>
+        <a href="https://wa.me/917093242271?text=I%20want%20Vegetables" class="btn">Order Now</a>
       </div>
-
-      <div class="product-card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/7/70/Kirana_store_items.jpg" alt="Groceries">
+      <div class="card">
+        <img src="assets/groceries.jpg" alt="Groceries">
         <h3>Kirana Items</h3>
         <p>Starting ₹20</p>
-        <a href="https://wa.me/917093242271?text=I%20want%20to%20order%20Kirana%20Items" class="btn">Order Now</a>
+        <a href="https://wa.me/917093242271?text=I%20want%20Kirana%20Items" class="btn">Order Now</a>
       </div>
-
-      <div class="product-card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/8/88/Pharmacy_medical_medicines.jpg" alt="Medicines">
+      <div class="card">
+        <img src="assets/medicines.jpg" alt="Medicines">
         <h3>Medicines</h3>
         <p>MRP Prices</p>
-        <a href="https://wa.me/917093242271?text=I%20want%20to%20order%20Medicines" class="btn">Order Now</a>
+        <a href="https://wa.me/917093242271?text=I%20want%20Medicines" class="btn">Order Now</a>
       </div>
-
-      <div class="product-card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/1/15/Red_Apple.jpg" alt="Fruits">
+      <div class="card">
+        <img src="assets/fruits.jpg" alt="Fruits">
         <h3>Fresh Fruits</h3>
         <p>₹60 / Kg</p>
-        <a href="https://wa.me/917093242271?text=I%20want%20to%20order%20Fruits" class="btn">Order Now</a>
+        <a href="https://wa.me/917093242271?text=I%20want%20Fruits" class="btn">Order Now</a>
       </div>
-
-      <div class="product-card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5b/Milk_glass.jpg" alt="Dairy">
+      <div class="card">
+        <img src="assets/dairy.jpg" alt="Dairy">
         <h3>Dairy Products</h3>
         <p>Milk, Curd, Butter</p>
-        <a href="https://wa.me/917093242271?text=I%20want%20to%20order%20Dairy%20Products" class="btn">Order Now</a>
+        <a href="https://wa.me/917093242271?text=I%20want%20Dairy%20Products" class="btn">Order Now</a>
       </div>
-
-      <div class="product-card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Indian_snacks.jpg" alt="Snacks">
+      <div class="card">
+        <img src="assets/snacks.jpg" alt="Snacks">
         <h3>Snacks</h3>
         <p>₹10 onwards</p>
-        <a href="https://wa.me/917093242271?text=I%20want%20to%20order%20Snacks" class="btn">Order Now</a>
+        <a href="https://wa.me/917093242271?text=I%20want%20Snacks" class="btn">Order Now</a>
       </div>
-
-      <div class="product-card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Bakery_bread.jpg" alt="Bakery">
+      <div class="card">
+        <img src="assets/bakery.jpg" alt="Bakery">
         <h3>Bakery</h3>
         <p>Bread, Cakes, Biscuits</p>
-        <a href="https://wa.me/917093242271?text=I%20want%20to%20order%20Bakery" class="btn">Order Now</a>
+        <a href="https://wa.me/917093242271?text=I%20want%20Bakery%20Items" class="btn">Order Now</a>
       </div>
-
-      <div class="product-card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Soft_drinks.jpg" alt="Drinks">
+      <div class="card">
+        <img src="assets/drinks.jpg" alt="Drinks">
         <h3>Cold Drinks</h3>
         <p>All Brands</p>
-        <a href="https://wa.me/917093242271?text=I%20want%20to%20order%20Cold%20Drinks" class="btn">Order Now</a>
+        <a href="https://wa.me/917093242271?text=I%20want%20Cold%20Drinks" class="btn">Order Now</a>
       </div>
-
-      <div class="product-card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Cleaning_products.jpg" alt="Household">
+      <div class="card">
+        <img src="assets/household.jpg" alt="Household">
         <h3>Household Items</h3>
         <p>Detergents, Cleaners</p>
-        <a href="https://wa.me/917093242271?text=I%20want%20to%20order%20Household%20Items" class="btn">Order Now</a>
+        <a href="https://wa.me/917093242271?text=I%20want%20Household%20Items" class="btn">Order Now</a>
       </div>
-
     </div>
   </section>
 
@@ -218,14 +146,14 @@
     <p>Phone: +91 70932 42271</p>
     <p>Email: support@bbeta.com</p>
     <p>Address: Nalgonda, Telangana, India - 508001</p>
-
-    <!-- Google Maps Embed -->
-    <div class="map">
-      <iframe 
-        src="https://www.google.com/maps?q=Nalgonda,+Telangana,+India+508001&output=embed"
-        allowfullscreen>
-      </iframe>
-    </div>
+    <iframe 
+      src="https://www.google.com/maps?q=Nalgonda,+Telangana,+India&output=embed" 
+      width="100%" 
+      height="250" 
+      style="border:0;" 
+      allowfullscreen="" 
+      loading="lazy">
+    </iframe>
   </section>
 
   <footer>
@@ -233,4 +161,4 @@
   </footer>
 
 </body>
-  </html>
+</html>
