@@ -58,6 +58,49 @@
       color: white;
       box-shadow: 0 6px 12px rgba(0,0,0,0.3);
     }
+    /* Products Section */
+    .products {
+      padding: 60px 20px;
+      background: #f9f9f9;
+    }
+    .products h2 {
+      font-size: 32px;
+      margin-bottom: 40px;
+    }
+    .product-grid {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .product-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      width: 250px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: 0.3s;
+      text-align: center;
+    }
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    }
+    .product-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+    .product-card h3 {
+      font-size: 20px;
+      margin: 10px 0;
+    }
+    .product-card p {
+      font-size: 16px;
+      margin: 5px 0 15px;
+    }
     .contact {
       padding: 50px 20px;
       background: #fff;
@@ -98,6 +141,34 @@
     <h2>Fast & Reliable Delivery 🚀</h2>
     <p>BBETA – Bringing speed and trust to your doorstep</p>
     <a href="https://wa.me/917093242271?text=Hi%20I%20want%20to%20order%20from%20BBETA" class="btn">Chat on WhatsApp</a>
+  </section>
+
+  <section class="products">
+    <h2>🛒 Our Products</h2>
+    <div class="product-grid">
+
+      <div class="product-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/69/Veggies.jpg" alt="Vegetables">
+        <h3>Fresh Vegetables</h3>
+        <p>₹50 / Kg</p>
+        <a href="https://wa.me/917093242271?text=I%20want%20to%20order%20Fresh%20Vegetables" class="btn">Order Now</a>
+      </div>
+
+      <div class="product-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/70/Kirana_store_items.jpg" alt="Groceries">
+        <h3>Kirana Items</h3>
+        <p>Starting ₹20</p>
+        <a href="https://wa.me/917093242271?text=I%20want%20to%20order%20Kirana%20Items" class="btn">Order Now</a>
+      </div>
+
+      <div class="product-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/88/Pharmacy_medical_medicines.jpg" alt="Medicines">
+        <h3>Medicines</h3>
+        <p>MRP Prices</p>
+        <a href="https://wa.me/917093242271?text=I%20want%20to%20order%20Medicines" class="btn">Order Now</a>
+      </div>
+
+    </div>
   </section>
 
   <section class="contact">
