@@ -4,88 +4,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Your Cart - BBETA</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f9f9f9; text-align: center; }
-    header { background: #222; color: white; padding: 15px; }
-    .cart-container { padding: 20px; }
-    .cart-item { background: white; margin: 10px auto; padding: 15px; border-radius: 8px; width: 90%; max-width: 400px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; }
-    .total { font-size: 20px; margin-top: 20px; font-weight: bold; }
-    input, button { padding: 8px; margin: 5px; border-radius: 5px; border: 1px solid #ccc; }
-    .order-btn { margin-top: 20px; background: #25d366; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; }
-    .back-btn { display: inline-block; margin-top: 20px; padding: 10px 15px; background: #007bff; color: white; text-decoration: none; border-radius: 5px; }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
     <h1>Your Cart</h1>
   </header>
 
-  <div class="cart-container" id="cartItems"></div>
-  <p class="total" id="totalAmount">Total: ₹0</p>
+  <main>
+    <div id="cart-items"></div>
+    <h3 id="cart-total"></h3>
 
-  <h3>Enter your details:</h3>
-  <input type="text" id="custName" placeholder="Your Name" required><br>
-  <input type="text" id="custNumber" placeholder="Your Contact Number" required><br>
-  <input type="text" id="custAddress" placeholder="Your Address" required><br>
+    <form onsubmit="placeOrder(event)">
+      <input type="text" id="name" placeholder="Full Name" required>
+      <input type="tel" id="phone" placeholder="Contact Number" required>
+      <textarea id="address" placeholder="Delivery Address" required></textarea>
+      <button type="submit">Place Order</button>
+    </form>
+  </main>
 
-  <button class="order-btn" onclick="placeOrder()">Place Order via WhatsApp</button><br>
-  <a href="index.html" class="back-btn">⬅ Back to Shop</a>
-
-  <script>
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const cartContainer = document.getElementById("cartItems");
-    const totalAmount = document.getElementById("totalAmount");
-
-    function displayCart() {
-      cartContainer.innerHTML = "";
-      let total = 0;
-      if (cart.length === 0) {
-        cartContainer.innerHTML = "<p>Your cart is empty 🛍️</p>";
-        totalAmount.textContent = "Total: ₹0";
-        return;
-      }
-      cart.forEach((item, index) => {
-        let itemTotal = item.price * item.qty;
-        total += itemTotal;
-        let div = document.createElement("div");
-        div.classList.add("cart-item");
-        div.innerHTML = `<span>${item.name} (${item.qty}) - ₹${itemTotal}</span>
-                         <button onclick="removeItem(${index})">Remove</button>`;
-        cartContainer.appendChild(div);
-      });
-      totalAmount.textContent = "Total: ₹" + total;
-    }
-
-    function removeItem(index) {
-      cart.splice(index, 1);
-      localStorage.setItem("cart", JSON.stringify(cart));
-      displayCart();
-    }
-
-    function placeOrder() {
-      if (cart.length === 0) { alert("Cart is empty!"); return; }
-      let name = document.getElementById("custName").value;
-      let number = document.getElementById("custNumber").value;
-      let address = document.getElementById("custAddress").value;
-      if (!name || !number || !address) {
-        alert("Please enter all details!");
-        return;
-      }
-      let orderText = "Hello BBETA,\nHere is my order:\n";
-      let total = 0;
-      cart.forEach(item => {
-        let itemTotal = item.price * item.qty;
-        total += itemTotal;
-        orderText += `• ${item.name} (${item.qty}) - ₹${itemTotal}\n`;
-      });
-      orderText += `\nTotal: ₹${total}\n\n👤 Name: ${name}\n📞 Contact: ${number}\n🏠 Address: ${address}`;
-      let whatsappURL = "https://wa.me/917093242271?text=" + encodeURIComponent(orderText);
-      window.open(whatsappURL, "_blank");
-      localStorage.removeItem("cart");
-      window.location.href = "thankyou.html";
-    }
-
-    displayCart();
-  </script>
+  <script src="cart.js"></script>
 </body>
 </html>
