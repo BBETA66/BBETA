@@ -1,65 +1,73 @@
-// Add to Cart
-function addToCart(name, price) {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  cart.push({ name, price });
-  localStorage.setItem("cart", JSON.stringify(cart));
-  alert(name + " added to cart!");
-}
-
-// Display Cart Items
-function displayCart() {
+function loadCart() {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
   let cartItemsDiv = document.getElementById("cart-items");
   let total = 0;
-  cartItemsDiv.innerHTML = "";
 
   if (cart.length === 0) {
-    cartItemsDiv.innerHTML = "<p>Your cart is empty 🛒</p>";
-  } else {
-    cart.forEach((item, index) => {
-      total += item.price;
-      cartItemsDiv.innerHTML += `
-        <div class="cart-item d-flex justify-content-between">
-          <span>${item.name}</span>
-          <span>₹${item.price}</span>
-          <button class="btn btn-sm btn-danger" onclick="removeItem(${index})">❌</button>
-        </div>
-      `;
-    });
+    cartItemsDiv.innerHTML = "<p>Your cart is empty.</p>";
+    document.getElementById("total").innerText = 0;
+    return;
   }
 
-  document.getElementById("cart-total").innerText = "Total: ₹" + total;
+  cartItemsDiv.innerHTML = "";
+  cart.forEach((item, index) => {
+    let itemTotal = item.price * item.quantity;
+    total += itemTotal;
+
+    cartItemsDiv.innerHTML += `
+      <div class="card cart-card p-3 mb-3">
+        <h5>${item.name}</h5>
+        <p>₹${item.price} x ${item.quantity} = ₹${itemTotal}</p>
+        <button class="btn btn-sm btn-secondary" onclick="updateQuantity(${index}, -1)">➖</button>
+        <button class="btn btn-sm btn-secondary" onclick="updateQuantity(${index}, 1)">➕</button>
+        <button class="btn btn-sm btn-danger" onclick="removeItem(${index})">🗑 Remove</button>
+      </div>
+    `;
+  });
+
+  document.getElementById("total").innerText = total;
 }
 
-// Remove Item
+function updateQuantity(index, change) {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  if (cart[index]) {
+    cart[index].quantity += change;
+    if (cart[index].quantity <= 0) {
+      cart.splice(index, 1);
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+    loadCart();
+  }
+}
+
 function removeItem(index) {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
   cart.splice(index, 1);
   localStorage.setItem("cart", JSON.stringify(cart));
-  displayCart();
+  loadCart();
 }
 
-// Checkout via WhatsApp
 function checkout() {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
   if (cart.length === 0) {
     alert("Cart is empty!");
     return;
   }
-  let message = "🛒 BBETA Order:%0A";
+
+  let message = "🛍 *New Order from BBETA* 🛍\n\n";
   let total = 0;
-
   cart.forEach(item => {
-    message += `- ${item.name}: ₹${item.price}%0A`;
-    total += item.price;
+    let itemTotal = item.price * item.quantity;
+    total += itemTotal;
+    message += `• ${item.name} - ${item.quantity} x ₹${item.price} = ₹${itemTotal}\n`;
   });
+  message += `\n💰 *Total: ₹${total}*`;
 
-  message += `%0ATotal: ₹${total}`;
-  let phone = "917093242271"; // WhatsApp number
-  window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
+  let phone = "917093242271"; // ✅ Tumhara WhatsApp number yaha set hai
+  let url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+  window.open(url, "_blank");
+
+  localStorage.removeItem("cart"); // clear after checkout
 }
 
-// Load Cart on Page Open
-if (document.getElementById("cart-items")) {
-  displayCart();
-}
+window.onload = loadCart;
