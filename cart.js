@@ -1,73 +1,60 @@
+// Load Cart
 function loadCart() {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  let cartItemsDiv = document.getElementById("cart-items");
-  let total = 0;
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const cartItemsDiv = document.getElementById("cart-items");
+  const cartTotalSpan = document.getElementById("cart-total");
 
-  if (cart.length === 0) {
-    cartItemsDiv.innerHTML = "<p>Your cart is empty.</p>";
-    document.getElementById("total").innerText = 0;
-    return;
-  }
-
-  cartItemsDiv.innerHTML = "";
-  cart.forEach((item, index) => {
-    let itemTotal = item.price * item.quantity;
-    total += itemTotal;
-
-    cartItemsDiv.innerHTML += `
-      <div class="card cart-card p-3 mb-3">
-        <h5>${item.name}</h5>
-        <p>₹${item.price} x ${item.quantity} = ₹${itemTotal}</p>
-        <button class="btn btn-sm btn-secondary" onclick="updateQuantity(${index}, -1)">➖</button>
-        <button class="btn btn-sm btn-secondary" onclick="updateQuantity(${index}, 1)">➕</button>
-        <button class="btn btn-sm btn-danger" onclick="removeItem(${index})">🗑 Remove</button>
-      </div>
-    `;
-  });
-
-  document.getElementById("total").innerText = total;
-}
-
-function updateQuantity(index, change) {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  if (cart[index]) {
-    cart[index].quantity += change;
-    if (cart[index].quantity <= 0) {
-      cart.splice(index, 1);
+  if (cartItemsDiv) {
+    if (cart.length === 0) {
+      cartItemsDiv.innerHTML = "<p>Your cart is empty.</p>";
+    } else {
+      let html = "<ul>";
+      let total = 0;
+      cart.forEach(item => {
+        html += `<li>${item.name} - ${item.qty} x ₹${item.price} = ₹${item.qty * item.price}</li>`;
+        total += item.qty * item.price;
+      });
+      html += "</ul>";
+      cartItemsDiv.innerHTML = html;
+      cartTotalSpan.textContent = total;
     }
-    localStorage.setItem("cart", JSON.stringify(cart));
-    loadCart();
   }
 }
+loadCart();
 
-function removeItem(index) {
+// Add to Cart
+function addToCart(name, price, btn) {
+  const qty = parseInt(btn.previousElementSibling.value);
+
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  cart.splice(index, 1);
+  cart.push({ name, price, qty });
   localStorage.setItem("cart", JSON.stringify(cart));
-  loadCart();
+  alert(`${qty} ${name} added to cart`);
 }
 
-function checkout() {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  if (cart.length === 0) {
-    alert("Cart is empty!");
-    return;
-  }
+// Place Order
+const placeOrderBtn = document.getElementById("place-order");
+if (placeOrderBtn) {
+  placeOrderBtn.addEventListener("click", () => {
+    const name = document.getElementById("cust-name").value.trim();
+    const phone = document.getElementById("cust-phone").value.trim();
+    const address = document.getElementById("cust-address").value.trim();
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-  let message = "🛍 *New Order from BBETA* 🛍\n\n";
-  let total = 0;
-  cart.forEach(item => {
-    let itemTotal = item.price * item.quantity;
-    total += itemTotal;
-    message += `• ${item.name} - ${item.quantity} x ₹${item.price} = ₹${itemTotal}\n`;
+    if (!name || !phone || !address || cart.length === 0) {
+      alert("Please fill details and add items to cart.");
+      return;
+    }
+
+    const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+    const orderDetails = {
+      items: cart,
+      total,
+      customer: { name, phone, address }
+    };
+
+    localStorage.setItem("orderDetails", JSON.stringify(orderDetails));
+    localStorage.removeItem("cart");
+    window.location.href = "thankyou.html";
   });
-  message += `\n💰 *Total: ₹${total}*`;
-
-  let phone = "917093242271"; // ✅ Tumhara WhatsApp number yaha set hai
-  let url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-  window.open(url, "_blank");
-
-  localStorage.removeItem("cart"); // clear after checkout
 }
-
-window.onload = loadCart;
