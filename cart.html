@@ -8,87 +8,32 @@
 </head>
 <body>
   <header>
-    <h1>BBETA</h1>
-    <p>Apka Apna Bada Beta 🛒</p>
+    <h1>🛒 Your Cart</h1>
     <a href="index.html" class="cart-link">⬅ Back to Shop</a>
   </header>
 
   <main>
-    <h2>Your Cart</h2>
     <div id="cart-items"></div>
-    <p class="cart-total" id="cart-total">Total: ₹0</p>
+    <p id="cart-total" class="cart-total">Total: ₹0</p>
 
     <!-- Customer Details -->
     <div class="customer-details">
-      <h3>Customer Details</h3>
-      <input type="text" id="cust-name" placeholder="Enter your name" required>
-      <input type="text" id="cust-phone" placeholder="Enter your phone number" required>
+      <h3>📝 Customer Details</h3>
+      <input type="text" id="customer-name" placeholder="Enter your name">
+      <input type="tel" id="customer-phone" placeholder="Enter your mobile number">
     </div>
 
-    <!-- WhatsApp Order Button -->
+    <!-- WhatsApp Button -->
     <button class="whatsapp-btn" onclick="placeOrder()">
-      <img src="https://upload.wikimedia.org/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
       Place Order on WhatsApp
     </button>
   </main>
 
-  <!-- Floating WhatsApp Icon -->
-  <a href="https://wa.me/917093242271?text=Hello%20BBETA%2C%20I%20want%20to%20place%20an%20order" 
-     class="floating-whatsapp" target="_blank">
-    <img src="https://upload.wikimedia.org/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-  </a>
-
   <script src="shop.js"></script>
   <script>
-    function loadCart() {
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      let cartItemsDiv = document.getElementById("cart-items");
-      let cartTotal = document.getElementById("cart-total");
-      cartItemsDiv.innerHTML = "";
-      let total = 0;
-
-      cart.forEach(item => {
-        let div = document.createElement("div");
-        div.classList.add("cart-item");
-        div.textContent = `${item.qty} x ${item.name} - ₹${item.price * item.qty}`;
-        cartItemsDiv.appendChild(div);
-        total += item.price * item.qty;
-      });
-
-      cartTotal.textContent = "Total: ₹" + total;
-    }
-
-    function placeOrder() {
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      if (cart.length === 0) {
-        alert("Your cart is empty!");
-        return;
-      }
-
-      let name = document.getElementById("cust-name").value.trim();
-      let phone = document.getElementById("cust-phone").value.trim();
-
-      if (!name || !phone) {
-        alert("Please enter your name and phone number.");
-        return;
-      }
-
-      let message = "🛒 *New Order from BBETA*%0A";
-      cart.forEach(item => {
-        message += `${item.qty} x ${item.name} = ₹${item.price * item.qty}%0A`;
-      });
-
-      let total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-      message += `%0A*Total:* ₹${total}`;
-      message += `%0A👤 Name: ${name}`;
-      message += `%0A📞 Phone: ${phone}`;
-      message += `%0A📍 Location: Nalgonda, Telangana 508001`;
-
-      let whatsappURL = `https://wa.me/917093242271?text=${message}`;
-      window.open(whatsappURL, "_blank");
-    }
-
-    loadCart();
+    // Load cart on page load
+    window.onload = loadCart;
   </script>
 </body>
 </html>
