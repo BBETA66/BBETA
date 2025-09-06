@@ -1,83 +1,41 @@
-// 🛒 Add to Cart
-function addToCart(product, price, element) {
-  let qty = element.parentElement.querySelector(".qty").value;
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  cart.push({ product, price, qty });
-  localStorage.setItem("cart", JSON.stringify(cart));
-  alert(`${qty} x ${product} added to cart ✅`);
-}
+// shop.js
 
-// 🛒 Display Cart
-function displayCart() {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  let container = document.getElementById("cart-items");
-  let total = 0;
-  container.innerHTML = "";
+const products = [
+  { name: "Fresh Fruits", price: 50, unit: "/kg", image: "images/fruits.jpg" },
+  { name: "Vegetables", price: 30, unit: "/kg", image: "images/vegetables.jpg" },
+  { name: "Bakery", price: 50, unit: "/item", image: "images/bakery.jpg" },
+  { name: "Bread", price: 30, unit: "/item", image: "images/bread.jpg" },
+  { name: "Cold Drink", price: 35, unit: "/bottle", image: "images/cold_drink.jpg" },
+  { name: "Dairy", price: 25, unit: "/litre", image: "images/milk.jpg" },
+  { name: "Snacks", price: 20, unit: "/packet", image: "images/snacks.jpg" },
+  { name: "Cooking Oil", price: 150, unit: "/litre", image: "images/oil.jpg" }
+];
 
-  if (cart.length === 0) {
-    container.innerHTML = "<p>Your cart is empty 🛒</p>";
-    document.getElementById("cart-total").textContent = "Total: ₹0";
-    return;
-  }
+function loadProducts() {
+  const shopContainer = document.getElementById("shop");
+  shopContainer.innerHTML = "";
 
-  cart.forEach((item, index) => {
-    let subtotal = item.price * item.qty;
-    total += subtotal;
-    container.innerHTML += `
-      <div class="cart-item">
-        ${item.qty} x ${item.product} = ₹${subtotal}
-        <button onclick="removeItem(${index})">❌ Remove</button>
+  products.forEach((product, index) => {
+    const productCard = `
+      <div class="product-card">
+        <img src="${product.image}" alt="${product.name}">
+        <h3>${product.name}</h3>
+        <p>₹${product.price} ${product.unit}</p>
+        <input type="number" id="qty-${index}" value="1" min="1">
+        <button onclick="addToCart(${index})">Add to Cart</button>
       </div>
     `;
+    shopContainer.innerHTML += productCard;
   });
-
-  document.getElementById("cart-total").textContent = `Total: ₹${total}`;
 }
 
-// 🗑 Remove Item
-function removeItem(index) {
+function addToCart(index) {
+  const qty = parseInt(document.getElementById(`qty-${index}`).value);
+  const product = products[index];
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  cart.splice(index, 1);
+  cart.push({ ...product, qty });
   localStorage.setItem("cart", JSON.stringify(cart));
-  displayCart();
+  alert(`${product.name} added to cart!`);
 }
 
-// ✅ Place Order via WhatsApp
-function placeOrder() {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  if (cart.length === 0) {
-    alert("Your cart is empty 🛒");
-    return;
-  }
-
-  let name = document.getElementById("customer-name").value;
-  let phone = document.getElementById("customer-phone").value;
-  let address = document.getElementById("customer-address").value;
-  let gps = document.getElementById("customer-gps").value;
-
-  if (!name || !phone || !address) {
-    alert("Please fill in all required fields (Name, Phone, Address)");
-    return;
-  }
-
-  let orderText = `🛒 *New Order from BBETA* 🛒\n\n👤 Name: ${name}\n📱 Phone: ${phone}\n📍 Address: ${address}\n🌐 GPS: ${gps || "Not provided"}\n\n*Order Details:*\n`;
-
-  let total = 0;
-  cart.forEach(item => {
-    let subtotal = item.price * item.qty;
-    total += subtotal;
-    orderText += `${item.qty} x ${item.product} = ₹${subtotal}\n`;
-  });
-
-  orderText += `\n💰 Total: ₹${total}\n\n✅ Thank you for shopping with *BBETA - Apka Apna Bada Beta*`;
-
-  let whatsappUrl = `https://wa.me/917093242271?text=${encodeURIComponent(orderText)}`;
-  window.open(whatsappUrl, "_blank");
-
-  localStorage.removeItem("cart");
-}
-
-// Load cart on cart.html
-if (document.getElementById("cart-items")) {
-  displayCart();
-}
+window.onload = loadProducts;
