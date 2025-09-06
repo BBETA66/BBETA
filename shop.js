@@ -1,72 +1,120 @@
-// Save cart to localStorage
-function addToCart(product, price) {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  cart.push({ product, price });
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function saveCart() {
   localStorage.setItem("cart", JSON.stringify(cart));
-  alert(product + " added to cart!");
-  window.location.href = "cart.html"; // direct cart page open
 }
 
-// Load cart items on cart.html
-function loadCart() {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  let cartItemsDiv = document.getElementById("cart-items");
-  let totalPrice = 0;
+// Add to cart
+function addToCart(name, price, btn) {
+  let qtyInput = btn.parentElement.querySelector("input");
+  let quantity = parseInt(qtyInput.value);
 
-  if (cart.length === 0) {
-    cartItemsDiv.innerHTML = "<p class='text-center'>🛒 Your cart is empty</p>";
-    document.getElementById("total-price").innerText = "₹0";
+  if (quantity < 1) {
+    alert("Please select valid quantity!");
     return;
   }
 
+  let existing = cart.find(item => item.name === name);
+  if (existing) {
+    existing.quantity += quantity;
+  } else {
+    cart.push({ name, price, quantity });
+  }
+
+  saveCart();
+  alert(`${name} added to cart!`);
+}
+
+// Show cart on cart.html
+function displayCart() {
+  let cartItemsDiv = document.getElementById("cart-items");
+  let totalDiv = document.getElementById("cart-total");
+  if (!cartItemsDiv || !totalDiv) return;
+
   cartItemsDiv.innerHTML = "";
+  let total = 0;
+
   cart.forEach((item, index) => {
-    totalPrice += item.price;
+    let itemTotal = item.price * item.quantity;
+    total += itemTotal;
+
     let div = document.createElement("div");
-    div.className = "card p-2 mb-2";
+    div.className = "d-flex justify-content-between align-items-center border p-2 mb-2";
     div.innerHTML = `
-      ${index + 1} x ${item.product} = ₹${item.price}
-      <button class="btn btn-sm btn-danger float-end" onclick="removeItem(${index})">Remove</button>
+      <div>
+        <strong>${item.name}</strong> - ₹${item.price} × 
+        <input type="number" value="${item.quantity}" min="1" 
+          onchange="updateQuantity(${index}, this.value)" 
+          style="width:60px;">
+      </div>
+      <div>
+        ₹${itemTotal} 
+        <button class="btn btn-sm btn-danger" onclick="removeFromCart(${index})">❌</button>
+      </div>
     `;
     cartItemsDiv.appendChild(div);
   });
 
-  document.getElementById("total-price").innerText = "₹" + totalPrice;
+  totalDiv.innerHTML = `<h5>Total: ₹${total}</h5>`;
 }
 
-// Remove item from cart
-function removeItem(index) {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+// Update quantity
+function updateQuantity(index, qty) {
+  qty = parseInt(qty);
+  if (qty < 1) {
+    removeFromCart(index);
+    return;
+  }
+  cart[index].quantity = qty;
+  saveCart();
+  displayCart();
+}
+
+// Remove item
+function removeFromCart(index) {
   cart.splice(index, 1);
-  localStorage.setItem("cart", JSON.stringify(cart));
-  loadCart();
+  saveCart();
+  displayCart();
 }
 
-// Place order on WhatsApp
-function placeOrder() {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+// Checkout via WhatsApp
+function checkout() {
   if (cart.length === 0) {
     alert("Your cart is empty!");
     return;
   }
 
-  let phone = document.getElementById("phone").value;
-  let location = document.getElementById("location").value;
+  let name = prompt("Enter your Name:");
+  let address = prompt("Enter your Address:");
+  let phone = prompt("Enter your Contact Number:");
 
-  if (!phone || !location) {
-    alert("Please enter phone number and location!");
+  if (!name || !address || !phone) {
+    alert("Please fill all details!");
     return;
   }
 
-  let message = "🛒 *New Order from BBETA Shop*%0A%0A";
-  cart.forEach((item, index) => {
-    message += `${index + 1}) ${item.product} - ₹${item.price}%0A`;
+  let orderText = `🛒 *New Order from BBETA Shop* 🛒\n\n`;
+  cart.forEach(item => {
+    orderText += `${item.name} - ${item.quantity} × ₹${item.price} = ₹${item.price * item.quantity}\n`;
   });
 
-  let total = cart.reduce((sum, item) => sum + item.price, 0);
-  message += `%0ATotal: ₹${total}%0A📞 Phone: ${phone}%0A📍 Location: ${location}`;
+  let total = cart.reduce((sum, i) => sum + i.price * i.quantity, 0);
+  orderText += `\n💰 *Total:* ₹${total}\n\n👤 Name: ${name}\n📍 Address: ${address}\n📞 Contact: ${phone}`;
 
-  let whatsappNumber = "917093242271"; // your WhatsApp number
-  let url = `https://wa.me/${whatsappNumber}?text=${message}`;
+  let url = `https://wa.me/917093242271?text=${encodeURIComponent(orderText)}`;
   window.open(url, "_blank");
+
+  // Clear cart after checkout
+  cart = [];
+  saveCart();
+  if (document.getElementById("cart-items")) {
+    displayCart();
+  }
 }
+
+// Auto load cart on cart.html
+window.onload = function () {
+  if (document.getElementById("cart-items")) {
+    displayCart();
+  }
+};
