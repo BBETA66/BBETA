@@ -1,132 +1,111 @@
-/* ===== General Page Styling ===== */
+/* General */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background: #f9f9f9;
-}
-
-.container {
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 20px;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
-}
-
-/* ===== Headings ===== */
-h2, h3 {
-  text-align: center;
-  color: #222;
-}
-
-/* ===== Cart Items ===== */
-.cart-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #fafafa;
-  margin: 10px 0;
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-}
-
-.cart-item p {
-  margin: 0;
-  font-size: 16px;
-}
-
-.cart-item button {
-  background: #ff4d4d;
-  color: #fff;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.cart-item button:hover {
-  background: #e60000;
-}
-
-/* ===== Total Price ===== */
-.cart-total {
-  font-size: 18px;
-  font-weight: bold;
-  text-align: right;
-  margin-top: 15px;
+  background: #f5f5f5;
   color: #333;
 }
 
-/* ===== Customer Details Form ===== */
-#customer-form {
-  margin-top: 30px;
+/* Header */
+header {
+  background: #28a745;
+  color: #fff;
   padding: 15px;
-  border-top: 2px solid #eee;
-}
-
-#customer-form label {
-  display: block;
-  margin: 10px 0 5px;
-  font-weight: bold;
-  color: #444;
-}
-
-#customer-form input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 15px;
-}
-
-/* ===== Buttons ===== */
-button, .confirm-btn {
-  display: inline-block;
-  background: #25d366;
-  color: white;
-  border: none;
-  padding: 12px 18px;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: 0.3s;
-  margin-top: 10px;
-}
-
-button:hover, .confirm-btn:hover {
-  background: #1ebc57;
-}
-
-/* ===== GPS Button ===== */
-.gps-btn {
-  background: #007bff;
-}
-
-.gps-btn:hover {
-  background: #0056b3;
-}
-
-/* ===== Floating WhatsApp Button ===== */
-.whatsapp-float {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #25d366;
-  color: white;
-  border-radius: 50%;
-  padding: 14px;
-  font-size: 24px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-  cursor: pointer;
-  text-decoration: none;
+  text-align: center;
+  position: sticky;
+  top: 0;
   z-index: 1000;
 }
 
-.whatsapp-float:hover {
-  background: #1ebc57;
+header h1 {
+  margin: 0;
+  font-size: 22px;
+}
+
+header .back-btn {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 6px 12px;
+  background: #fff;
+  color: #28a745;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+/* Cart Items */
+#cart-items {
+  max-width: 800px;
+  margin: 20px auto;
+  background: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr auto;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.cart-item:last-child {
+  border-bottom: none;
+}
+
+.cart-item span {
+  font-size: 16px;
+}
+
+.qty-input {
+  width: 60px;
+  padding: 5px;
+  text-align: center;
+}
+
+.remove-btn {
+  padding: 5px 10px;
+  border: none;
+  background: #dc3545;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.remove-btn:hover {
+  background: #b02a37;
+}
+
+/* Cart Summary */
+#cart-summary {
+  max-width: 800px;
+  margin: 20px auto;
+  text-align: right;
+  background: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+#cart-summary h3 {
+  margin: 0 0 10px;
+  font-size: 18px;
+}
+
+#checkout-btn {
+  padding: 10px 20px;
+  background: #25d366;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#checkout-btn:hover {
+  background: #1ebe5d;
 }
