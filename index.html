@@ -4,249 +4,211 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BBETA Shop</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
       background-color: #f8f9fa;
     }
-    .header {
-      background-color: #007bff;
-      color: white;
-      padding: 20px;
-      text-align: center;
+    .navbar {
+      background-color: #0d6efd;
     }
-    .header h1 {
-      margin: 0;
-      font-size: 2rem;
+    .navbar-brand {
+      color: #fff !important;
+      font-weight: bold;
+      font-size: 20px;
     }
     .product-card {
       border: 1px solid #ddd;
-      border-radius: 10px;
+      border-radius: 8px;
       padding: 10px;
-      text-align: center;
       background: #fff;
-      box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+      box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
+      text-align: center;
     }
     .product-card img {
-      max-width: 100%;
-      height: 150px;
+      max-height: 120px;
       object-fit: cover;
-      border-radius: 8px;
+      border-radius: 5px;
+      margin-bottom: 10px;
     }
-    .whatsapp-float {
-      position: fixed;
-      width: 60px;
-      height: 60px;
-      bottom: 20px;
-      right: 20px;
-      background-color: #25d366;
+    .footer {
+      background: #0d6efd;
       color: white;
-      border-radius: 50%;
       text-align: center;
-      font-size: 30px;
-      box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
-      z-index: 100;
-    }
-    .whatsapp-float i {
-      margin-top: 15px;
-    }
-    footer {
-      background: #343a40;
-      color: white;
-      padding: 20px;
-      text-align: center;
+      padding: 15px;
       margin-top: 20px;
+    }
+    .btn-cart {
+      background: green;
+      color: #fff;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
-  <div class="header">
-    <h1>🛒 BBETA Shop</h1>
-    <a href="cart.html" class="btn btn-warning mt-2">Go to Cart</a>
-  </div>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">🛍️ BBETA Shop</a>
+      <a href="cart.html" class="btn btn-warning">View Cart</a>
+    </div>
+  </nav>
 
-  <!-- Products -->
-  <div class="container my-4">
-    <h3 class="mb-3 text-center">🛍️ Our Products</h3>
+  <!-- Products Section -->
+  <div class="container py-4">
+    <h3 class="text-center mb-4">🛒 Our Products</h3>
     <div class="row g-3">
       
       <!-- Bakery -->
       <div class="col-6 col-md-3">
         <div class="product-card">
-          <img src="assets/bakery.jpg" alt="Bakery">
+          <img src="assets/bakery.jpg" alt="Bakery" class="img-fluid">
           <h6>Bakery</h6>
           <p>₹50</p>
-          <input type="number" value="1" min="1" class="form-control mb-2">
-          <button class="btn btn-success" onclick="addToCart('Bakery', 50, this)">Add to Cart</button>
+          <button class="btn btn-cart" onclick="addToCart('Bakery', 50)">Add to Cart</button>
         </div>
       </div>
 
       <!-- Bread -->
       <div class="col-6 col-md-3">
         <div class="product-card">
-          <img src="assets/bread.jpg" alt="Bread">
+          <img src="assets/bread.jpg" alt="Bread" class="img-fluid">
           <h6>Bread</h6>
           <p>₹30</p>
-          <input type="number" value="1" min="1" class="form-control mb-2">
-          <button class="btn btn-success" onclick="addToCart('Bread', 30, this)">Add to Cart</button>
+          <button class="btn btn-cart" onclick="addToCart('Bread', 30)">Add to Cart</button>
         </div>
       </div>
 
       <!-- Cold Drink -->
       <div class="col-6 col-md-3">
         <div class="product-card">
-          <img src="assets/cold_drink.jpg" alt="Cold Drink">
+          <img src="assets/cold_drink.jpg" alt="Cold Drink" class="img-fluid">
           <h6>Cold Drink</h6>
           <p>₹35</p>
-          <input type="number" value="1" min="1" class="form-control mb-2">
-          <button class="btn btn-success" onclick="addToCart('Cold Drink', 35, this)">Add to Cart</button>
+          <button class="btn btn-cart" onclick="addToCart('Cold Drink', 35)">Add to Cart</button>
         </div>
       </div>
 
       <!-- Dairy -->
       <div class="col-6 col-md-3">
         <div class="product-card">
-          <img src="assets/dairy.jpg" alt="Dairy">
+          <img src="assets/dairy.jpg" alt="Dairy" class="img-fluid">
           <h6>Dairy</h6>
           <p>₹40</p>
-          <input type="number" value="1" min="1" class="form-control mb-2">
-          <button class="btn btn-success" onclick="addToCart('Dairy', 40, this)">Add to Cart</button>
+          <button class="btn btn-cart" onclick="addToCart('Dairy', 40)">Add to Cart</button>
         </div>
       </div>
 
       <!-- Fresh Fruits -->
       <div class="col-6 col-md-3">
         <div class="product-card">
-          <img src="assets/fruits.jpg" alt="Fresh Fruits">
+          <img src="assets/fruits.jpg" alt="Fresh Fruits" class="img-fluid">
           <h6>Fresh Fruits</h6>
           <p>₹50</p>
-          <input type="number" value="1" min="1" class="form-control mb-2">
-          <button class="btn btn-success" onclick="addToCart('Fresh Fruits', 50, this)">Add to Cart</button>
+          <button class="btn btn-cart" onclick="addToCart('Fresh Fruits', 50)">Add to Cart</button>
         </div>
       </div>
 
       <!-- Groceries -->
       <div class="col-6 col-md-3">
         <div class="product-card">
-          <img src="assets/groceries.jpg" alt="Groceries">
+          <img src="assets/groceries.jpg" alt="Groceries" class="img-fluid">
           <h6>Groceries</h6>
           <p>₹100</p>
-          <input type="number" value="1" min="1" class="form-control mb-2">
-          <button class="btn btn-success" onclick="addToCart('Groceries', 100, this)">Add to Cart</button>
+          <button class="btn btn-cart" onclick="addToCart('Groceries', 100)">Add to Cart</button>
         </div>
       </div>
 
       <!-- Medicines -->
       <div class="col-6 col-md-3">
         <div class="product-card">
-          <img src="assets/medicines.jpg" alt="Medicines">
+          <img src="assets/medicines.jpg" alt="Medicines" class="img-fluid">
           <h6>Medicines</h6>
           <p>₹150</p>
-          <input type="number" value="1" min="1" class="form-control mb-2">
-          <button class="btn btn-success" onclick="addToCart('Medicines', 150, this)">Add to Cart</button>
+          <button class="btn btn-cart" onclick="addToCart('Medicines', 150)">Add to Cart</button>
         </div>
       </div>
 
       <!-- Milk -->
       <div class="col-6 col-md-3">
         <div class="product-card">
-          <img src="assets/milk.jpg" alt="Milk">
+          <img src="assets/milk.jpg" alt="Milk" class="img-fluid">
           <h6>Milk</h6>
           <p>₹25</p>
-          <input type="number" value="1" min="1" class="form-control mb-2">
-          <button class="btn btn-success" onclick="addToCart('Milk', 25, this)">Add to Cart</button>
+          <button class="btn btn-cart" onclick="addToCart('Milk', 25)">Add to Cart</button>
         </div>
       </div>
 
-      <!-- Oil -->
+      <!-- Cooking Oil -->
       <div class="col-6 col-md-3">
         <div class="product-card">
-          <img src="assets/oil.jpg" alt="Cooking Oil">
+          <img src="assets/oil.jpg" alt="Cooking Oil" class="img-fluid">
           <h6>Cooking Oil</h6>
           <p>₹120</p>
-          <input type="number" value="1" min="1" class="form-control mb-2">
-          <button class="btn btn-success" onclick="addToCart('Cooking Oil', 120, this)">Add to Cart</button>
+          <button class="btn btn-cart" onclick="addToCart('Cooking Oil', 120)">Add to Cart</button>
         </div>
       </div>
 
       <!-- Rice -->
       <div class="col-6 col-md-3">
         <div class="product-card">
-          <img src="assets/rice.jpg" alt="Rice">
+          <img src="assets/rice.jpg" alt="Rice" class="img-fluid">
           <h6>Rice</h6>
           <p>₹200</p>
-          <input type="number" value="1" min="1" class="form-control mb-2">
-          <button class="btn btn-success" onclick="addToCart('Rice', 200, this)">Add to Cart</button>
+          <button class="btn btn-cart" onclick="addToCart('Rice', 200)">Add to Cart</button>
         </div>
       </div>
 
       <!-- Snacks -->
       <div class="col-6 col-md-3">
         <div class="product-card">
-          <img src="assets/snacks.jpg" alt="Snacks">
+          <img src="assets/snacks.jpg" alt="Snacks" class="img-fluid">
           <h6>Snacks</h6>
           <p>₹20</p>
-          <input type="number" value="1" min="1" class="form-control mb-2">
-          <button class="btn btn-success" onclick="addToCart('Snacks', 20, this)">Add to Cart</button>
+          <button class="btn btn-cart" onclick="addToCart('Snacks', 20)">Add to Cart</button>
         </div>
       </div>
 
       <!-- Sugar -->
       <div class="col-6 col-md-3">
         <div class="product-card">
-          <img src="assets/sugar.jpg" alt="Sugar">
+          <img src="assets/sugar.jpg" alt="Sugar" class="img-fluid">
           <h6>Sugar</h6>
           <p>₹40</p>
-          <input type="number" value="1" min="1" class="form-control mb-2">
-          <button class="btn btn-success" onclick="addToCart('Sugar', 40, this)">Add to Cart</button>
+          <button class="btn btn-cart" onclick="addToCart('Sugar', 40)">Add to Cart</button>
         </div>
       </div>
 
       <!-- Tea -->
       <div class="col-6 col-md-3">
         <div class="product-card">
-          <img src="assets/tea.jpg" alt="Tea">
+          <img src="assets/tea.jpg" alt="Tea" class="img-fluid">
           <h6>Tea</h6>
           <p>₹60</p>
-          <input type="number" value="1" min="1" class="form-control mb-2">
-          <button class="btn btn-success" onclick="addToCart('Tea', 60, this)">Add to Cart</button>
+          <button class="btn btn-cart" onclick="addToCart('Tea', 60)">Add to Cart</button>
         </div>
       </div>
 
       <!-- Vegetables -->
       <div class="col-6 col-md-3">
         <div class="product-card">
-          <img src="assets/vegetables.jpg" alt="Vegetables">
+          <img src="assets/vegetables.jpg" alt="Vegetables" class="img-fluid">
           <h6>Vegetables</h6>
           <p>₹80</p>
-          <input type="number" value="1" min="1" class="form-control mb-2">
-          <button class="btn btn-success" onclick="addToCart('Vegetables', 80, this)">Add to Cart</button>
+          <button class="btn btn-cart" onclick="addToCart('Vegetables', 80)">Add to Cart</button>
         </div>
       </div>
+
     </div>
   </div>
 
-  <!-- Location -->
-  <div class="container my-4">
-    <h3 class="text-center">📍 Our Location</h3>
-    <iframe src="https://www.google.com/maps?q=Nalgonda,Telangana,508001&output=embed" 
-      width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy">
-    </iframe>
+  <!-- Footer -->
+  <div class="footer">
+    <p>📍 BBETA Shop | 📞 Contact: +91 7093242271</p>
+    <p>Powered by BBETA</p>
   </div>
 
-  <!-- WhatsApp Floating Button -->
-  <a href="https://wa.me/917093242271" target="_blank" class="whatsapp-float">
-    <i class="bi bi-whatsapp"></i>
-  </a>
-
-  <!-- Footer -->
-  <footer>
-    © 2025 BBETA - Apka Apna Bada Beta
-  </footer>
-
   <script src="shop.js"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </body>
 </html>
