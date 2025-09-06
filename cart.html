@@ -6,55 +6,58 @@
   <title>Your Cart - BBETA</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<a href="https://wa.me/917093242271" class="floating-whatsapp" target="_blank">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-</a>
-  <body>
+<body>
   <header>
     <h1>BBETA</h1>
     <p>Apka Apna Bada Beta 🛒</p>
-    <a href="index.html" class="cart-link">← Back to Shop</a>
+    <a href="index.html" class="cart-link">⬅ Back to Shop</a>
   </header>
 
   <main>
     <h2>Your Cart</h2>
     <div id="cart-items"></div>
-    <h3 id="cart-total">Total: ₹0</h3>
+    <p class="cart-total" id="cart-total">Total: ₹0</p>
 
+    <!-- Customer Details -->
     <div class="customer-details">
       <h3>Customer Details</h3>
-      <input type="text" id="custName" placeholder="Enter your name" required>
-      <input type="text" id="custPhone" placeholder="Enter your phone number" required>
-      <input type="text" id="custAddress" placeholder="Enter your address" required>
+      <input type="text" id="cust-name" placeholder="Enter your name" required>
+      <input type="text" id="cust-phone" placeholder="Enter your phone number" required>
     </div>
 
+    <!-- WhatsApp Order Button -->
     <button class="whatsapp-btn" onclick="placeOrder()">
-      <img src="https://img.icons8.com/?size=48&id=16713&format=png" alt="WhatsApp">
-      Place Order
+      <img src="https://upload.wikimedia.org/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+      Place Order on WhatsApp
     </button>
   </main>
 
+  <!-- Floating WhatsApp Icon -->
+  <a href="https://wa.me/917093242271?text=Hello%20BBETA%2C%20I%20want%20to%20place%20an%20order" 
+     class="floating-whatsapp" target="_blank">
+    <img src="https://upload.wikimedia.org/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+  </a>
+
+  <script src="shop.js"></script>
   <script>
-    // Load cart items
     function loadCart() {
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
       let cartItemsDiv = document.getElementById("cart-items");
-      let cartTotalDiv = document.getElementById("cart-total");
+      let cartTotal = document.getElementById("cart-total");
       cartItemsDiv.innerHTML = "";
       let total = 0;
 
       cart.forEach(item => {
         let div = document.createElement("div");
         div.classList.add("cart-item");
-        div.textContent = item.qty + " x " + item.name + " - ₹" + (item.price * item.qty);
+        div.textContent = `${item.qty} x ${item.name} - ₹${item.price * item.qty}`;
         cartItemsDiv.appendChild(div);
         total += item.price * item.qty;
       });
 
-      cartTotalDiv.textContent = "Total: ₹" + total;
+      cartTotal.textContent = "Total: ₹" + total;
     }
 
-    // Place order via WhatsApp
     function placeOrder() {
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
       if (cart.length === 0) {
@@ -62,34 +65,27 @@
         return;
       }
 
-      let name = document.getElementById("custName").value;
-      let phone = document.getElementById("custPhone").value;
-      let address = document.getElementById("custAddress").value;
+      let name = document.getElementById("cust-name").value.trim();
+      let phone = document.getElementById("cust-phone").value.trim();
 
-      if (!name || !phone || !address) {
-        alert("Please fill all customer details!");
+      if (!name || !phone) {
+        alert("Please enter your name and phone number.");
         return;
       }
 
-      let orderText = "🛒 New Order from BBETA:%0A";
+      let message = "🛒 *New Order from BBETA*%0A";
       cart.forEach(item => {
-        orderText += item.qty + " x " + item.name + " = ₹" + (item.price * item.qty) + "%0A";
+        message += `${item.qty} x ${item.name} = ₹${item.price * item.qty}%0A`;
       });
 
       let total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-      orderText += "%0ATotal: ₹" + total;
-      orderText += "%0A👤 Name: " + name;
-      orderText += "%0A📞 Phone: " + phone;
-      orderText += "%0A📍 Address: " + address;
+      message += `%0A*Total:* ₹${total}`;
+      message += `%0A👤 Name: ${name}`;
+      message += `%0A📞 Phone: ${phone}`;
+      message += `%0A📍 Location: Nalgonda, Telangana 508001`;
 
-      // ✅ Aapka WhatsApp number
-      let whatsappNumber = "917093242271";
-      let whatsappURL = "https://wa.me/" + whatsappNumber + "?text=" + orderText;
-
+      let whatsappURL = `https://wa.me/917093242271?text=${message}`;
       window.open(whatsappURL, "_blank");
-
-      // Clear cart
-      localStorage.removeItem("cart");
     }
 
     loadCart();
