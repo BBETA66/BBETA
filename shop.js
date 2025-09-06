@@ -1,4 +1,4 @@
-// ========== Add to Cart ==========
+// ====== CART MANAGEMENT ======
 function addToCart(name, price, btn) {
   let qty = btn.previousElementSibling.value;
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -13,91 +13,97 @@ function addToCart(name, price, btn) {
   alert(qty + " x " + name + " added to cart!");
 }
 
-// ========== Load Cart Items ==========
-function loadCart() {
-  let cartItemsDiv = document.getElementById("cart-items");
-  if (!cartItemsDiv) return;
-
+// ====== DISPLAY CART ======
+function displayCart() {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  cartItemsDiv.innerHTML = "";
-
-  if (cart.length === 0) {
-    cartItemsDiv.innerHTML = "<p>Your cart is empty.</p>";
-    return;
-  }
+  let cartContainer = document.getElementById("cart-items");
+  let totalContainer = document.getElementById("cart-total");
+  cartContainer.innerHTML = "";
 
   let total = 0;
-  cart.forEach((item, index) => {
-    let itemTotal = item.price * item.qty;
-    total += itemTotal;
 
+  cart.forEach((item, index) => {
     let div = document.createElement("div");
     div.classList.add("cart-item");
+
     div.innerHTML = `
-      <p>${item.qty} x ${item.name} = ₹${itemTotal}</p>
-      <button onclick="removeFromCart(${index})">❌ Remove</button>
+      <p>${item.qty} x ${item.name} = ₹${item.price * item.qty}</p>
+      <button onclick="removeFromCart(${index})">Remove</button>
     `;
-    cartItemsDiv.appendChild(div);
+
+    cartContainer.appendChild(div);
+    total += item.price * item.qty;
   });
 
-  let totalDiv = document.createElement("div");
-  totalDiv.classList.add("cart-total");
-  totalDiv.innerText = "Total: ₹" + total;
-  cartItemsDiv.appendChild(totalDiv);
+  totalContainer.innerText = "Total: ₹" + total;
 }
 
-// ========== Remove from Cart ==========
+// ====== REMOVE FROM CART ======
 function removeFromCart(index) {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
   cart.splice(index, 1);
   localStorage.setItem("cart", JSON.stringify(cart));
-  loadCart();
+  displayCart();
 }
 
-// ========== Send Order on WhatsApp ==========
-function sendOrderOnWhatsApp() {
+// ====== GPS LOCATION ======
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition, showError);
+  } else {
+    alert("Geolocation is not supported by this browser.");
+  }
+}
+
+function showPosition(position) {
+  let gpsInput = document.getElementById("gps");
+  gpsInput.value = `https://www.google.com/maps?q=${position.coords.latitude},${position.coords.longitude}`;
+}
+
+function showError(error) {
+  alert("Error fetching location. Please allow GPS access.");
+}
+
+// ====== PLACE ORDER ======
+function placeOrder() {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
   if (cart.length === 0) {
     alert("Your cart is empty!");
     return;
   }
 
-  let name = document.getElementById("customer-name").value;
-  let phone = document.getElementById("customer-phone").value;
-  let location = document.getElementById("customer-location").value;
+  let name = document.getElementById("customer-name").value.trim();
+  let phone = document.getElementById("customer-phone").value.trim();
+  let address = document.getElementById("customer-address").value.trim();
+  let gps = document.getElementById("gps").value.trim();
 
-  if (!name || !phone || !location) {
-    alert("Please fill all customer details!");
+  if (!name || !phone || !address) {
+    alert("Please fill all customer details.");
     return;
   }
 
-  let message = "🛒 *New Order from BBETA*:%0A%0A";
+  let message = `🛒 *New Order from BBETA*%0A`;
   cart.forEach(item => {
     message += `${item.qty} x ${item.name} = ₹${item.price * item.qty}%0A`;
   });
 
   let total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-  message += `%0A*Total:* ₹${total}%0A%0A`;
-  message += `👤 *Name:* ${name}%0A📞 *Phone:* ${phone}%0A🏠 *Location:* ${location}%0A`;
+  message += `%0A*Total:* ₹${total}%0A`;
+  message += `%0A👤 *Name:* ${name}`;
+  message += `%0A📞 *Phone:* ${phone}`;
+  message += `%0A🏠 *Address:* ${address}`;
+  if (gps) message += `%0A📍 *GPS:* ${gps}`;
 
-  let whatsappNumber = "917093242271"; // Your number
-  let url = `https://wa.me/${whatsappNumber}?text=${message}`;
-  window.open(url, "_blank");
+  // WhatsApp Number (replace with yours)
+  let whatsappNumber = "917093242271";
+  let whatsappURL = `https://wa.me/${whatsappNumber}?text=${message}`;
+
+  window.open(whatsappURL, "_blank");
 }
 
-// ========== Get GPS Location ==========
-function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function (position) {
-      let lat = position.coords.latitude;
-      let long = position.coords.longitude;
-      let gpsLink = `https://www.google.com/maps?q=${lat},${long}`;
-      document.getElementById("customer-location").value = gpsLink;
-    });
-  } else {
-    alert("Geolocation is not supported by this browser.");
+// ====== AUTO LOAD CART ======
+window.onload = function () {
+  if (document.getElementById("cart-items")) {
+    displayCart();
   }
-}
-
-// Auto load cart on page load
-window.onload = loadCart;
+};
