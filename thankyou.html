@@ -10,14 +10,32 @@
   <header>
     <h1>BBETA</h1>
     <p>Apka Apna Bada Beta 🛒</p>
-    <a href="index.html" class="cart-link">⬅ Back to Shop</a>
   </header>
 
   <main class="thankyou">
-    <h1>🎉 Thank You for Your Order!</h1>
-    <p>We have received your order successfully.  
-       Our team will contact you soon at your given details.</p>
-    <a href="index.html">Continue Shopping</a>
+    <h2>✅ Thank You for Your Order!</h2>
+    <p>Your order has been placed successfully.</p>
+
+    <div id="order-summary"></div>
+
+    <a href="index.html" class="cart-link">← Back to Shop</a>
   </main>
+
+  <script>
+    const orderDetails = JSON.parse(localStorage.getItem("orderDetails")) || {};
+    const summaryDiv = document.getElementById("order-summary");
+
+    if (orderDetails.items && orderDetails.items.length > 0) {
+      let html = "<h3>Order Summary</h3><ul>";
+      orderDetails.items.forEach(item => {
+        html += `<li>${item.name} - ${item.qty} x ₹${item.price} = ₹${item.qty * item.price}</li>`;
+      });
+      html += `</ul><p><b>Total:</b> ₹${orderDetails.total}</p>`;
+      html += `<p><b>Name:</b> ${orderDetails.customer.name}</p>`;
+      html += `<p><b>Phone:</b> ${orderDetails.customer.phone}</p>`;
+      html += `<p><b>Address:</b> ${orderDetails.customer.address}</p>`;
+      summaryDiv.innerHTML = html;
+    }
+  </script>
 </body>
 </html>
