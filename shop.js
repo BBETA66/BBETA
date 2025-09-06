@@ -1,38 +1,62 @@
-const products = [
-  { id: 1, name: "Fresh Fruits", price: 50, image: "https://i.ibb.co/8m2tWgJ/fruits.jpg" },
-  { id: 2, name: "Vegetables", price: 30, image: "https://i.ibb.co/1ZcL2L7/vegetables.jpg" },
-  { id: 3, name: "Bakery", price: 80, image: "https://i.ibb.co/6bKQdX9/bakery.jpg" },
-  { id: 4, name: "Bread", price: 30, image: "https://i.ibb.co/3cG9NDb/bread.jpg" }
-];
+// Save cart in localStorage
+function addToCart(name, price, qty) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let existing = cart.find(item => item.name === name);
 
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    if (existing) {
+        existing.qty += qty;
+    } else {
+        cart.push({ name, price, qty });
+    }
 
-const shopContainer = document.getElementById("shop");
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert(name + " added to cart!");
+}
 
-products.forEach(product => {
-  const card = document.createElement("div");
-  card.classList.add("product-card");
-  card.innerHTML = `
-    <img src="${product.image}" alt="${product.name}">
-    <h3>${product.name}</h3>
-    <p>₹${product.price} / kg</p>
-    <input type="number" id="qty-${product.id}" min="1" value="1">
-    <button onclick="addToCart(${product.id})">Add to Cart</button>
-  `;
-  shopContainer.appendChild(card);
-});
+// Render cart items
+function renderCart() {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let cartContainer = document.getElementById("cart-items");
+    let totalPrice = 0;
+    cartContainer.innerHTML = "";
 
-function addToCart(id) {
-  const qty = parseInt(document.getElementById(`qty-${id}`).value);
-  const product = products.find(p => p.id === id);
-  const existing = cart.find(item => item.id === id);
+    cart.forEach(item => {
+        let itemTotal = item.price * item.qty;
+        totalPrice += itemTotal;
 
-  if (existing) {
-    existing.qty += qty;
-  } else {
-    cart.push({ ...product, qty });
-  }
+        cartContainer.innerHTML += `
+            <div class="cart-item">
+                <span>${item.name} (x${item.qty})</span>
+                <span>₹${itemTotal}</span>
+            </div>
+        `;
+    });
 
-  localStorage.setItem("cart", JSON.stringify(cart));
-  alert(product.name + " added to cart!");
+    document.getElementById("total").innerText = "Total: ₹" + totalPrice;
+}
+
+// Send order on WhatsApp
+function sendOrder() {
+    let name = document.getElementById("cust-name").value;
+    let phone = document.getElementById("cust-phone").value;
+    let address = document.getElementById("cust-address").value;
+    let mapLink = document.getElementById("cust-map").value;
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    if (cart.length === 0) {
+        alert("Cart is empty!");
+        return;
+    }
+
+    let orderText = `🛒 *New Order from ${name}*%0A📞 Phone: ${phone}%0A🏠 Address: ${address}%0A📍 Map: ${mapLink}%0A%0A*Items:*%0A`;
+
+    cart.forEach(item => {
+        orderText += `- ${item.name} (x${item.qty}) = ₹${item.price * item.qty}%0A`;
+    });
+
+    let totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+    orderText += `%0A💰 Total: ₹${totalPrice}`;
+
+    let whatsappUrl = `https://wa.me/917093242271?text=${orderText}`;
+    window.open(whatsappUrl, "_blank");
 }
