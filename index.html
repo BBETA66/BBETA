@@ -3,114 +3,93 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BBETA Online Shop</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <title>🛍️ BBETA Online Shop</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    body { background: #f8f9fa; }
-    .product-card { border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-    .product-card img { border-radius: 12px 12px 0 0; height: 200px; object-fit: cover; }
-    footer { margin-top: 30px; padding: 20px; background: #343a40; color: #fff; text-align: center; border-radius: 12px; }
-    .modal-content { border-radius: 15px; }
-    .modal-body img { width: 120px; cursor: pointer; }
+    .floating-whatsapp {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 999;
+    }
+    footer {
+      margin-top: 50px;
+    }
+    .card img {
+      height: 180px;
+      object-fit: cover;
+    }
   </style>
 </head>
 <body>
-
-  <!-- Header -->
-  <nav class="navbar navbar-light bg-light shadow-sm">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="#">
-        🛍️ BBETA Online Shop
-      </a>
-      <a href="cart.html" class="btn btn-success">🛒 View Cart</a>
-    </div>
-  </nav>
-
   <div class="container my-4">
-    <div class="row" id="product-list">
-      <!-- Products will be inserted here -->
-    </div>
-  </div>
+    <h2 class="text-center mb-4">🛍️ BBETA Online Shop</h2>
 
-  <!-- WhatsApp Modal -->
-  <div class="modal fade" id="whatsappModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content text-center">
-        <div class="modal-header">
-          <h5 class="modal-title">📞 Contact us on WhatsApp</h5>
+    <div class="row" id="product-list">
+      <!-- Example Product 1 -->
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <img src="assets/medicine.jpg" class="card-img-top" alt="Medicine">
+          <div class="card-body">
+            <h5 class="card-title">Medicine</h5>
+            <p>₹200</p>
+            <input type="number" id="medicineQty" value="1" min="1" class="form-control mb-2">
+            <button class="btn btn-success w-100" onclick="addToCart('Medicine', 200, document.getElementById('medicineQty').value)">Add to Cart</button>
+          </div>
         </div>
-        <div class="modal-body">
-          <p>Click the logo to chat with us!</p>
-          <a href="https://wa.me/917093242271" target="_blank">
-            <img src="assets/logo.png" alt="BBETA WhatsApp">
-          </a>
+      </div>
+
+      <!-- Example Product 2 -->
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <img src="assets/tomato.jpg" class="card-img-top" alt="Tomato">
+          <div class="card-body">
+            <h5 class="card-title">Tomato</h5>
+            <p>₹40</p>
+            <input type="number" id="tomatoQty" value="1" min="1" class="form-control mb-2">
+            <button class="btn btn-success w-100" onclick="addToCart('Tomato', 40, document.getElementById('tomatoQty').value)">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Example Product 3 -->
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <img src="assets/apple.jpg" class="card-img-top" alt="Apple">
+          <div class="card-body">
+            <h5 class="card-title">Apple</h5>
+            <p>₹120</p>
+            <input type="number" id="appleQty" value="1" min="1" class="form-control mb-2">
+            <button class="btn btn-success w-100" onclick="addToCart('Apple', 120, document.getElementById('appleQty').value)">Add to Cart</button>
+          </div>
         </div>
       </div>
     </div>
+
+    <div class="text-center mt-4">
+      <a href="cart.html" class="btn btn-primary">Go to Cart</a>
+    </div>
   </div>
 
-  <!-- Footer -->
-  <footer>
-    <p>© 2025 BBETA Online Shop | All Rights Reserved</p>
+  <!-- Footer with Google Map -->
+  <footer class="bg-light text-center p-3">
+    <h6>📍 Our Location</h6>
+    <p>Nalgonda, Telangana 508001</p>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!..." width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
   </footer>
 
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/917093242271" target="_blank" class="floating-whatsapp">
+    <img src="assets/whatsapp.png" width="60" height="60" alt="WhatsApp">
+  </a>
+
   <script>
-    // Products list from assets
-    const products = [
-      { name: "Bakery", price: 150, image: "assets/bakery.jpg" },
-      { name: "Bread", price: 50, image: "assets/bread.jpg" },
-      { name: "Cold Drink", price: 40, image: "assets/cold_drink.jpg" },
-      { name: "Dairy", price: 120, image: "assets/dairy.jpg" },
-      { name: "Fruits", price: 200, image: "assets/fruits.jpg" },
-      { name: "Groceries", price: 250, image: "assets/groceries.jpg" },
-      { name: "Medicines", price: 100, image: "assets/medicines.jpg" },
-      { name: "Milk", price: 60, image: "assets/milk.jpg" },
-      { name: "Oil", price: 180, image: "assets/oil.jpg" },
-      { name: "Rice", price: 90, image: "assets/rice.jpg" },
-      { name: "Snacks", price: 70, image: "assets/snacks.jpg" },
-      { name: "Sugar", price: 45, image: "assets/sugar.jpg" },
-      { name: "Tea", price: 110, image: "assets/tea.jpg" },
-      { name: "Vegetables", price: 130, image: "assets/vegetables.jpg" }
-    ];
-
-    // Load products
-    const productList = document.getElementById("product-list");
-    products.forEach((p, index) => {
-      productList.innerHTML += `
-        <div class="col-md-3 mb-4">
-          <div class="card product-card">
-            <img src="${p.image}" class="card-img-top" alt="${p.name}">
-            <div class="card-body text-center">
-              <h5 class="card-title">${p.name}</h5>
-              <p class="card-text">₹${p.price}</p>
-              <input type="number" id="qty-${index}" value="1" min="1" class="form-control mb-2">
-              <button class="btn btn-success w-100" onclick="addToCart('${p.name}', ${p.price}, document.getElementById('qty-${index}').value)">Add to Cart</button>
-            </div>
-          </div>
-        </div>
-      `;
-    });
-
-    // Cart system
     function addToCart(name, price, qty) {
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      let existing = cart.find(item => item.name === name);
-      if (existing) {
-        existing.qty += parseInt(qty);
-      } else {
-        cart.push({ name, price, qty: parseInt(qty) });
-      }
+      cart.push({ name, price, qty });
       localStorage.setItem("cart", JSON.stringify(cart));
-      alert(`${name} added to cart!`);
-    }
-
-    // Show WhatsApp modal on page load
-    window.onload = function() {
-      const myModal = new bootstrap.Modal(document.getElementById('whatsappModal'));
-      myModal.show();
+      alert(name + " added to cart!");
     }
   </script>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
