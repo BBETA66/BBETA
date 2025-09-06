@@ -153,3 +153,57 @@ main {
   border-radius: 5px;
   border: 1px solid #ccc;
 }
+/* Cart Page Styling */
+.customer-details {
+  margin: 20px 0;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: #fafafa;
+}
+
+.customer-details h3 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #333;
+}
+
+.customer-details input {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* WhatsApp Button */
+.whatsapp-btn {
+  background-color: #25d366;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: 0.3s;
+  width: 100%;
+  max-width: 300px;
+  margin: 20px auto;
+}
+
+.whatsapp-btn:hover {
+  background-color: #20b954;
+}
+
+.whatsapp-btn img {
+  width: 24px;
+  height: 24px;
+}
