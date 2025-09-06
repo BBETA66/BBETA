@@ -1,120 +1,83 @@
-// Save cart to localStorage
-function saveCart(cart) {
+// 🛒 Add to Cart
+function addToCart(product, price, element) {
+  let qty = element.parentElement.querySelector(".qty").value;
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  cart.push({ product, price, qty });
   localStorage.setItem("cart", JSON.stringify(cart));
+  alert(`${qty} x ${product} added to cart ✅`);
 }
 
-// Load cart from localStorage
-function loadCart() {
-  return JSON.parse(localStorage.getItem("cart")) || [];
-}
+// 🛒 Display Cart
+function displayCart() {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let container = document.getElementById("cart-items");
+  let total = 0;
+  container.innerHTML = "";
 
-// Add product to cart
-function addToCart(name, price, btn) {
-  let qtyInput = btn.parentElement.querySelector("input");
-  let quantity = parseInt(qtyInput.value);
-
-  if (quantity < 1 || isNaN(quantity)) quantity = 1;
-
-  let cart = loadCart();
-  let existing = cart.find(item => item.name === name);
-
-  if (existing) {
-    existing.quantity += quantity;
-  } else {
-    cart.push({ name, price, quantity });
+  if (cart.length === 0) {
+    container.innerHTML = "<p>Your cart is empty 🛒</p>";
+    document.getElementById("cart-total").textContent = "Total: ₹0";
+    return;
   }
 
-  saveCart(cart);
-  alert(`${name} (${quantity} added)`);
-}
-
-// Display cart items
-function displayCart() {
-  let cart = loadCart();
-  let cartItemsDiv = document.getElementById("cart-items");
-  let cartTotalDiv = document.getElementById("cart-total");
-
-  if (!cartItemsDiv || !cartTotalDiv) return;
-
-  cartItemsDiv.innerHTML = "";
-  let total = 0;
-
   cart.forEach((item, index) => {
-    let itemTotal = item.price * item.quantity;
-    total += itemTotal;
-
-    cartItemsDiv.innerHTML += `
-      <div class="d-flex justify-content-between align-items-center border p-2 mb-2 rounded">
-        <strong>${item.name}</strong> - ₹${item.price} × 
-        <input type="number" min="1" value="${item.quantity}" class="form-control d-inline w-25 me-2" onchange="updateQuantity(${index}, this.value)">
-        <span>₹${itemTotal}</span>
-        <button class="btn btn-danger btn-sm ms-2" onclick="removeFromCart(${index})">❌</button>
+    let subtotal = item.price * item.qty;
+    total += subtotal;
+    container.innerHTML += `
+      <div class="cart-item">
+        ${item.qty} x ${item.product} = ₹${subtotal}
+        <button onclick="removeItem(${index})">❌ Remove</button>
       </div>
     `;
   });
 
-  cartTotalDiv.innerHTML = `<h4 class="text-success">Total: ₹${total}</h4>`;
+  document.getElementById("cart-total").textContent = `Total: ₹${total}`;
 }
 
-// Update quantity
-function updateQuantity(index, newQty) {
-  let cart = loadCart();
-  newQty = parseInt(newQty);
-
-  if (newQty > 0) {
-    cart[index].quantity = newQty;
-  } else {
-    cart[index].quantity = 1;
-  }
-
-  saveCart(cart);
-  displayCart();
-}
-
-// Remove product from cart
-function removeFromCart(index) {
-  let cart = loadCart();
+// 🗑 Remove Item
+function removeItem(index) {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
   cart.splice(index, 1);
-  saveCart(cart);
+  localStorage.setItem("cart", JSON.stringify(cart));
   displayCart();
 }
 
-// Place order on WhatsApp
+// ✅ Place Order via WhatsApp
 function placeOrder() {
-  let name = document.getElementById("customer-name").value.trim();
-  let phone = document.getElementById("customer-phone").value.trim();
-  let location = document.getElementById("customer-location").value.trim();
-
-  if (!name || !phone || !location) {
-    alert("Please enter your Name, Phone, and Location.");
-    return;
-  }
-
-  let cart = loadCart();
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
   if (cart.length === 0) {
-    alert("Your cart is empty.");
+    alert("Your cart is empty 🛒");
     return;
   }
 
-  let orderText = `🛒 *New Order Received* 🛒\n\n👤 Name: ${name}\n📞 Phone: ${phone}\n📍 Location: ${location}\n\n*Order Details:*\n`;
+  let name = document.getElementById("customer-name").value;
+  let phone = document.getElementById("customer-phone").value;
+  let address = document.getElementById("customer-address").value;
+  let gps = document.getElementById("customer-gps").value;
+
+  if (!name || !phone || !address) {
+    alert("Please fill in all required fields (Name, Phone, Address)");
+    return;
+  }
+
+  let orderText = `🛒 *New Order from BBETA* 🛒\n\n👤 Name: ${name}\n📱 Phone: ${phone}\n📍 Address: ${address}\n🌐 GPS: ${gps || "Not provided"}\n\n*Order Details:*\n`;
 
   let total = 0;
   cart.forEach(item => {
-    let itemTotal = item.price * item.quantity;
-    orderText += `- ${item.name} × ${item.quantity} = ₹${itemTotal}\n`;
-    total += itemTotal;
+    let subtotal = item.price * item.qty;
+    total += subtotal;
+    orderText += `${item.qty} x ${item.product} = ₹${subtotal}\n`;
   });
 
-  orderText += `\n💰 *Total: ₹${total}*`;
+  orderText += `\n💰 Total: ₹${total}\n\n✅ Thank you for shopping with *BBETA - Apka Apna Bada Beta*`;
 
-  // WhatsApp number
-  let whatsappNumber = "917093242271"; // Change if needed
-  let whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(orderText)}`;
+  let whatsappUrl = `https://wa.me/917093242271?text=${encodeURIComponent(orderText)}`;
+  window.open(whatsappUrl, "_blank");
 
-  window.open(whatsappURL, "_blank");
+  localStorage.removeItem("cart");
 }
 
-// Run when cart.html loads
-if (window.location.pathname.includes("cart.html")) {
+// Load cart on cart.html
+if (document.getElementById("cart-items")) {
   displayCart();
 }
