@@ -6,255 +6,108 @@
   <title>BBETA - Apka Apna Beta</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    /* ===== Reset & Font ===== */
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
       background: #f9f9f9;
     }
-
-    /* ===== Header ===== */
     header {
-      background: #28a745;
-      color: #fff;
-      padding: 15px;
-      text-align: center;
-    }
-    header img {
-      height: 40px;
-      vertical-align: middle;
-      margin-right: 10px;
-    }
-    header h1 {
-      display: inline-block;
-      font-size: 22px;
-      margin: 0;
-      vertical-align: middle;
-    }
-
-    /* ===== Products Grid ===== */
-    .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 15px;
-      padding: 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-    .product-card {
-      background: #fff;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
-      padding: 10px;
-      text-align: center;
-    }
-    .product-card img {
-      width: 100%;
-      height: 150px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-    .product-card h3 {
-      margin: 10px 0 5px;
-      font-size: 16px;
-    }
-    .product-card p {
-      margin: 0 0 10px;
-      color: #555;
-    }
-    .product-card input {
-      width: 50px;
-      padding: 5px;
-      text-align: center;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    .product-card button {
-      display: block;
-      width: 100%;
-      margin-top: 10px;
-      background: #007bff;
-      color: white;
-      border: none;
-      padding: 8px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .product-card button:hover {
-      background: #0056b3;
-    }
-
-    /* ===== Footer ===== */
-    footer {
-      background: #222;
-      color: white;
-      text-align: center;
-      padding: 12px;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      font-size: 14px;
-    }
-    footer a {
-      color: #25d366;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    /* ===== Floating WhatsApp ===== */
-    .whatsapp-float {
-      position: fixed;
-      bottom: 70px;
-      right: 20px;
       background: #25d366;
       color: white;
-      border-radius: 50%;
-      width: 55px;
-      height: 55px;
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      box-shadow: 0px 4px 8px rgba(0,0,0,0.3);
+      padding: 15px 20px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .cart-icon {
+      position: relative;
+      cursor: pointer;
+    }
+    .cart-icon img {
+      width: 32px;
+    }
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: red;
+      color: white;
+      font-size: 14px;
+      font-weight: bold;
+      border-radius: 50%;
+      padding: 2px 6px;
+    }
+    .footer {
+      background: #f1f1f1;
+      text-align: center;
+      padding: 20px;
+      margin-top: 30px;
+      font-size: 16px;
+    }
+    .map-container {
+      margin: 20px auto;
+      max-width: 600px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      cursor: pointer;
+      text-decoration: none;
       z-index: 1000;
     }
-    .whatsapp-float:hover {
-      background: #1ebc57;
+    .whatsapp-float img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
     }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
+  <!-- Header with Logo and Cart -->
   <header>
-    <img src="assets/logo.png" alt="Logo">
-    <h1>BBETA - Apka Apna Beta</h1>
+    <div>BBETA - Apka Apna Beta</div>
+    <div class="cart-icon" onclick="window.location.href='cart.html'">
+      <img src="https://cdn-icons-png.flaticon.com/512/1170/1170576.png" alt="Cart">
+      <span class="cart-count" id="cart-count">0</span>
+    </div>
   </header>
 
-  <!-- Products -->
-  <section class="products">
-    <div class="product-card">
-      <img src="assets/bakery.jpg" alt="Bakery">
-      <h3>Bakery</h3>
-      <p>₹150</p>
-      <input type="number" value="1" min="1">
-      <button>Add to Cart</button>
+  <!-- Products Section -->
+  <div class="container">
+    <h2 style="text-align:center;">Hamare Products</h2>
+    <div id="products"></div>
+  </div>
+
+  <!-- Footer with Contact & Map -->
+  <div class="footer">
+    <p><b>WhatsApp:</b> +91 7093242271</p>
+    <p><b>Location:</b> Nalgonda, Telangana 508001</p>
+    <div class="map-container">
+      <iframe 
+        src="https://www.google.com/maps?q=Nalgonda,%20Telangana%20508001&output=embed" 
+        width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy">
+      </iframe>
     </div>
+  </div>
 
-    <div class="product-card">
-      <img src="assets/bread.jpg" alt="Bread">
-      <h3>Bread</h3>
-      <p>₹60</p>
-      <input type="number" value="1" min="1">
-      <button>Add to Cart</button>
-    </div>
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/917093242271" class="whatsapp-float" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
+         alt="WhatsApp">
+  </a>
 
-    <div class="product-card">
-      <img src="assets/oil.jpg" alt="Oil">
-      <h3>Oil</h3>
-      <p>₹150</p>
-      <input type="number" value="1" min="1">
-      <button>Add to Cart</button>
-    </div>
-
-    <div class="product-card">
-      <img src="assets/rice.jpg" alt="Rice">
-      <h3>Rice</h3>
-      <p>₹70</p>
-      <input type="number" value="1" min="1">
-      <button>Add to Cart</button>
-    </div>
-
-    <div class="product-card">
-      <img src="assets/milk.jpg" alt="Milk">
-      <h3>Milk</h3>
-      <p>₹50</p>
-      <input type="number" value="1" min="1">
-      <button>Add to Cart</button>
-    </div>
-
-    <div class="product-card">
-      <img src="assets/sugar.jpg" alt="Sugar">
-      <h3>Sugar</h3>
-      <p>₹45</p>
-      <input type="number" value="1" min="1">
-      <button>Add to Cart</button>
-    </div>
-
-    <div class="product-card">
-      <img src="assets/snacks.jpg" alt="Snacks">
-      <h3>Snacks</h3>
-      <p>₹80</p>
-      <input type="number" value="1" min="1">
-      <button>Add to Cart</button>
-    </div>
-
-    <div class="product-card">
-      <img src="assets/vegetables.jpg" alt="Vegetables">
-      <h3>Vegetables</h3>
-      <p>₹130</p>
-      <input type="number" value="1" min="1">
-      <button>Add to Cart</button>
-    </div>
-
-    <div class="product-card">
-      <img src="assets/fruits.jpg" alt="Fruits">
-      <h3>Fruits</h3>
-      <p>₹100</p>
-      <input type="number" value="1" min="1">
-      <button>Add to Cart</button>
-    </div>
-
-    <div class="product-card">
-      <img src="assets/tea.jpg" alt="Tea">
-      <h3>Tea</h3>
-      <p>₹110</p>
-      <input type="number" value="1" min="1">
-      <button>Add to Cart</button>
-    </div>
-
-    <div class="product-card">
-      <img src="assets/dairy.jpg" alt="Dairy">
-      <h3>Dairy</h3>
-      <p>₹90</p>
-      <input type="number" value="1" min="1">
-      <button>Add to Cart</button>
-    </div>
-
-    <div class="product-card">
-      <img src="assets/groceries.jpg" alt="Groceries">
-      <h3>Groceries</h3>
-      <p>₹200</p>
-      <input type="number" value="1" min="1">
-      <button>Add to Cart</button>
-    </div>
-
-    <div class="product-card">
-      <img src="assets/medicines.jpg" alt="Medicines">
-      <h3>Medicines</h3>
-      <p>₹250</p>
-      <input type="number" value="1" min="1">
-      <button>Add to Cart</button>
-    </div>
-
-    <div class="product-card">
-      <img src="assets/cold_drink.jpg" alt="Cold Drink">
-      <h3>Cold Drink</h3>
-      <p>₹35</p>
-      <input type="number" value="1" min="1">
-      <button>Add to Cart</button>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    📍 Location: Nalgonda, Telangana 508001 | 
-    📞 <a href="https://wa.me/917093242271">+91 7093242271</a>
-  </footer>
-
-  <!-- Floating WhatsApp -->
-  <a href="https://wa.me/917093242271" class="whatsapp-float" target="_blank">💬</a>
-
+  <script src="shop.js"></script>
 </body>
 </html>
