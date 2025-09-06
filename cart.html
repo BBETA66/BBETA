@@ -16,17 +16,60 @@
   <main>
     <h2>Your Cart</h2>
     <div id="cart-items"></div>
-    <h3 id="cart-total">Total: ₹0</h3>
-
-    <h3>Customer Details</h3>
-    <form id="orderForm">
-      <input type="text" id="name" placeholder="Name" required>
-      <input type="text" id="phone" placeholder="Phone" required>
-      <input type="text" id="address" placeholder="Address" required>
-      <button type="submit">Place Order</button>
-    </form>
+    <p id="cart-total"></p>
+    <button id="place-order">✅ Place Order</button>
   </main>
 
-  <script src="cart.js"></script>
+  <script>
+    function renderCart() {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      let cartItemsDiv = document.getElementById("cart-items");
+      let total = 0;
+
+      if (cart.length === 0) {
+        cartItemsDiv.innerHTML = "<p>Your cart is empty!</p>";
+        document.getElementById("cart-total").innerText = "";
+        return;
+      }
+
+      cartItemsDiv.innerHTML = "";
+      cart.forEach((item, index) => {
+        total += item.price * item.qty;
+        cartItemsDiv.innerHTML += `
+          <p>${item.qty} x ${item.name} - ₹${item.price * item.qty}</p>
+        `;
+      });
+
+      document.getElementById("cart-total").innerText = "Total: ₹" + total;
+    }
+
+    document.getElementById("place-order").addEventListener("click", function() {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+      }
+
+      let orderText = "🛒 New Order from BBETA:%0A";
+      cart.forEach(item => {
+        orderText += `${item.qty} x ${item.name} = ₹${item.price * item.qty}%0A`;
+      });
+
+      let total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+      orderText += `%0ATotal: ₹${total}%0A📍 Location: Nalgonda, Telangana 508001`;
+
+      // ✅ WhatsApp number (replace with your number)
+      let phone = "917093242271";
+      let whatsappURL = `https://wa.me/${phone}?text=${orderText}`;
+
+      localStorage.removeItem("cart"); // Empty cart
+      window.location.href = whatsappURL; // Open WhatsApp
+      setTimeout(() => {
+        window.location.href = "thankyou.html";
+      }, 2000);
+    });
+
+    renderCart();
+  </script>
 </body>
 </html>
