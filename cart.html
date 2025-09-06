@@ -3,93 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BBETA - Your Cart</title>
+  <title>Your Cart - BBETA</title>
   <link rel="stylesheet" href="cart.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-
   <header>
-    🛒 BBETA - Your Cart
+    <div>🛒 Your Cart - BBETA</div>
+    <a href="index.html">⬅ Back to Shop</a>
   </header>
 
   <div class="cart-container">
-    <h2>Your Order Details</h2>
+    <div id="cart-items"></div>
 
-    <p><strong>Total: ₹<span id="total">0</span></strong></p>
+    <!-- Customer Details Form -->
+    <div class="customer-details">
+      <h3>Customer Details</h3>
+      <input type="text" id="customer-name" placeholder="Enter your name" required>
+      <input type="tel" id="customer-phone" placeholder="Enter your phone number" required>
+      <input type="text" id="customer-location" placeholder="Enter your address" required>
+      <button onclick="getLocation()">📍 Use My GPS Location</button>
+    </div>
 
-    <label for="name"><i class="fa-solid fa-user"></i> Name</label>
-    <input type="text" id="name" placeholder="Enter your name">
-
-    <label for="contact"><i class="fa-solid fa-phone"></i> Contact Number</label>
-    <input type="tel" id="contact" placeholder="Enter your contact number">
-
-    <label for="address"><i class="fa-solid fa-house"></i> Address</label>
-    <textarea id="address" placeholder="Enter your delivery address"></textarea>
-
-    <button class="gps-btn" onclick="getLocation()">
-      <i class="fa-solid fa-location-dot"></i> Use My GPS Location
-    </button>
-    <input type="text" id="gps" placeholder="GPS Location" readonly>
-
-    <button onclick="placeOrder()">
-      ✅ Place Order on WhatsApp
-    </button>
+    <!-- Confirm Order -->
+    <button class="confirm-btn" onclick="sendOrderOnWhatsApp()">✅ Confirm Order on WhatsApp</button>
   </div>
 
-  <div class="cart-container" style="margin-top:20px;">
+  <!-- 📍 Location Map -->
+  <footer>
     <h2>📍 Our Location</h2>
+    <p>Nalgonda, Telangana 508001</p>
     <iframe 
-      src="https://www.google.com/maps?q=Nalgonda,Telangana,508001&output=embed" 
-      width="100%" height="250" style="border:0; border-radius:12px;" allowfullscreen="" loading="lazy">
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3805.8491127896724!2d79.26356427485021!3d17.057541983847895!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a34a31b79e0533f%3A0xe7af77e6c2f3dd6c!2sNalgonda%2C%20Telangana%20508001!5e0!3m2!1sen!2sin!4v1693924505178!5m2!1sen!2sin" 
+      width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy">
     </iframe>
-  </div>
+    <p>&copy; 2025 BBETA - Apka Apna Bada Beta</p>
+  </footer>
 
-  <!-- WhatsApp Floating Button -->
-  <a href="https://wa.me/917093242271" target="_blank" class="footer-whatsapp">
-    <i class="fa-brands fa-whatsapp"></i>
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/917093242271" class="footer-whatsapp" target="_blank">
+    💬
   </a>
 
-  <script>
-    let total = 0;
-
-    function updateCartTotal(value) {
-      total = value;
-      document.getElementById('total').innerText = total;
-    }
-
-    function getLocation() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition, showError);
-      } else {
-        alert("Geolocation is not supported by this browser.");
-      }
-    }
-
-    function showPosition(position) {
-      let gpsInput = document.getElementById("gps");
-      gpsInput.value = `https://www.google.com/maps?q=${position.coords.latitude},${position.coords.longitude}`;
-    }
-
-    function showError(error) {
-      alert("Unable to retrieve location. Please allow GPS permission.");
-    }
-
-    function placeOrder() {
-      let name = document.getElementById("name").value;
-      let contact = document.getElementById("contact").value;
-      let address = document.getElementById("address").value;
-      let gps = document.getElementById("gps").value;
-
-      if (!name || !contact || !address) {
-        alert("Please fill all required fields.");
-        return;
-      }
-
-      let message = `*New Order from BBETA*%0A%0A👤 Name: ${name}%0A📞 Contact: ${contact}%0A🏠 Address: ${address}%0A📍 GPS: ${gps}%0A🛒 Total: ₹${total}`;
-      let url = `https://wa.me/917093242271?text=${message}`;
-      window.open(url, "_blank");
-    }
-  </script>
+  <script src="shop.js"></script>
 </body>
 </html>
