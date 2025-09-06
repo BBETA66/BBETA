@@ -3,28 +3,90 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Cart</title>
+  <title>Your Cart - BBETA Online Shop</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="cart-header">
-    <h1>🛍️ Your Cart</h1>
+  <header>
+    <h1>🛒 Your Cart</h1>
     <a href="index.html">← Back to Shop</a>
   </header>
 
   <main>
     <div id="cart-items"></div>
-    <h2 id="total">Total: ₹0</h2>
+    <h2>Total: ₹<span id="total">0</span></h2>
 
-    <form id="orderForm">
-      <input type="text" id="customerName" placeholder="Enter your name" required>
-      <input type="text" id="customerPhone" placeholder="Enter your phone" required>
-      <input type="text" id="customerAddress" placeholder="Enter delivery address" required>
-      <input type="text" id="customerMap" placeholder="Paste Google Maps link (optional)">
-      <button type="submit" class="order-btn">📩 Send Order on WhatsApp</button>
+    <form id="order-form">
+      <input type="text" id="customer-name" placeholder="Enter your name" required>
+      <input type="tel" id="customer-phone" placeholder="Enter your phone" required>
+      <input type="text" id="customer-address" placeholder="Enter delivery address" required>
+      <input type="text" id="google-map" placeholder="Paste Google Maps link (optional)">
+      <button type="submit">📩 Send Order on WhatsApp</button>
     </form>
   </main>
 
-  <script src="cart.js"></script>
+  <footer>
+    <p>📍 Address: Nalgonda, Telangana 508001</p>
+    <p>📞 Contact: +91 7093242271</p>
+  </footer>
+
+  <script>
+    function loadCart() {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      let cartItems = document.getElementById("cart-items");
+      let total = 0;
+      cartItems.innerHTML = "";
+
+      cart.forEach((item, index) => {
+        let itemTotal = item.price * item.quantity;
+        total += itemTotal;
+        cartItems.innerHTML += `
+          <div class="cart-item">
+            ${item.name} x ${item.quantity} = ₹${itemTotal}
+            <button onclick="removeItem(${index})">❌ Remove</button>
+          </div>
+        `;
+      });
+
+      document.getElementById("total").innerText = total;
+    }
+
+    function removeItem(index) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      loadCart();
+    }
+
+    document.getElementById("order-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+      }
+
+      let name = document.getElementById("customer-name").value;
+      let phone = document.getElementById("customer-phone").value;
+      let address = document.getElementById("customer-address").value;
+      let map = document.getElementById("google-map").value;
+
+      let orderText = `🛒 *New Order from BBETA Online Shop*%0A%0A👤 Name: ${name}%0A📞 Phone: ${phone}%0A📍 Address: ${address}%0A🌍 Map: ${map}%0A%0A*Order Details:*%0A`;
+
+      let total = 0;
+      cart.forEach(item => {
+        let itemTotal = item.price * item.quantity;
+        total += itemTotal;
+        orderText += `${item.name} x ${item.quantity} = ₹${itemTotal}%0A`;
+      });
+
+      orderText += `%0A*Total = ₹${total}*%0A%0A✅ Deliver to: Nalgonda, Telangana 508001`;
+
+      let whatsappUrl = `https://wa.me/917093242271?text=${orderText}`;
+      window.open(whatsappUrl, "_blank");
+    });
+
+    loadCart();
+  </script>
 </body>
 </html>
