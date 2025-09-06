@@ -14,16 +14,17 @@
 
   <main>
     <div id="cart-items"></div>
-    <p id="cart-total" class="cart-total">Total: ₹0</p>
+    <p class="cart-total" id="cart-total">Total: ₹0</p>
 
     <!-- Customer Details -->
     <div class="customer-details">
       <h3>📝 Customer Details</h3>
-      <input type="text" id="customer-name" placeholder="Enter your name">
-      <input type="tel" id="customer-phone" placeholder="Enter your mobile number">
+      <input type="text" id="customerName" placeholder="Enter your name">
+      <input type="text" id="customerPhone" placeholder="Enter your mobile number">
+      <input type="text" id="customerLocation" placeholder="Enter your location">
     </div>
 
-    <!-- WhatsApp Button -->
+    <!-- WhatsApp Order Button -->
     <button class="whatsapp-btn" onclick="placeOrder()">
       <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
       Place Order on WhatsApp
@@ -31,9 +32,5 @@
   </main>
 
   <script src="shop.js"></script>
-  <script>
-    // Load cart on page load
-    window.onload = loadCart;
-  </script>
 </body>
 </html>
