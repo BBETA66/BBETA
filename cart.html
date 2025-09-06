@@ -7,33 +7,32 @@
   <link rel="stylesheet" href="cart.css">
 </head>
 <body>
-  <header style="background:#28a745; color:white; padding:15px; text-align:center;">
-    <h2>🛒 BBETA - Your Cart</h2>
-  </header>
-
   <div class="container">
+    <h2>Your Shopping Cart</h2>
     <div id="cart-items"></div>
-    <p class="cart-total">Total: ₹0</p>
+    <p class="cart-total">Total: ₹<span id="total-price">0</span></p>
 
+    <h3>Customer Details</h3>
     <form id="customer-form">
-      <label>👤 Name</label>
-      <input type="text" id="cust-name" placeholder="Enter your name" required>
+      <label for="name">Full Name</label>
+      <input type="text" id="name" placeholder="Enter your name" required>
 
-      <label>📞 Contact Number</label>
-      <input type="tel" id="cust-phone" placeholder="Enter your contact number" required>
+      <label for="address">Address</label>
+      <input type="text" id="address" placeholder="Enter your address" required>
 
-      <label>🏠 Address</label>
-      <input type="text" id="cust-address" placeholder="Enter your delivery address" required>
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" placeholder="Enter your phone number" required>
 
-      <button type="button" class="gps-btn" onclick="getLocation()">📍 Use My GPS Location</button>
-      <input type="text" id="cust-location" placeholder="GPS Location">
+      <button type="button" class="gps-btn" onclick="getLocation()">📍 Use GPS Location</button>
 
-      <button type="button" class="confirm-btn" onclick="placeOrder()">✅ Place Order on WhatsApp</button>
+      <button type="submit" class="confirm-btn">Confirm Order on WhatsApp</button>
     </form>
   </div>
 
   <!-- Floating WhatsApp -->
-  <a href="https://wa.me/917093242271" class="whatsapp-float">💬</a>
+  <a href="https://wa.me/917093242271" class="whatsapp-float" target="_blank">
+    💬
+  </a>
 
   <script src="shop.js"></script>
 </body>
