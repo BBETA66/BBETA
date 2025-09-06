@@ -4,144 +4,257 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BBETA - Apka Apna Beta</title>
-  <link rel="stylesheet" href="cart.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ===== Reset & Font ===== */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+    }
+
+    /* ===== Header ===== */
+    header {
+      background: #28a745;
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+    }
+    header img {
+      height: 40px;
+      vertical-align: middle;
+      margin-right: 10px;
+    }
+    header h1 {
+      display: inline-block;
+      font-size: 22px;
+      margin: 0;
+      vertical-align: middle;
+    }
+
+    /* ===== Products Grid ===== */
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 15px;
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .product-card {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+      padding: 10px;
+      text-align: center;
+    }
+    .product-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .product-card h3 {
+      margin: 10px 0 5px;
+      font-size: 16px;
+    }
+    .product-card p {
+      margin: 0 0 10px;
+      color: #555;
+    }
+    .product-card input {
+      width: 50px;
+      padding: 5px;
+      text-align: center;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .product-card button {
+      display: block;
+      width: 100%;
+      margin-top: 10px;
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 8px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .product-card button:hover {
+      background: #0056b3;
+    }
+
+    /* ===== Footer ===== */
+    footer {
+      background: #222;
+      color: white;
+      text-align: center;
+      padding: 12px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      font-size: 14px;
+    }
+    footer a {
+      color: #25d366;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    /* ===== Floating WhatsApp ===== */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 70px;
+      right: 20px;
+      background: #25d366;
+      color: white;
+      border-radius: 50%;
+      width: 55px;
+      height: 55px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      box-shadow: 0px 4px 8px rgba(0,0,0,0.3);
+      z-index: 1000;
+    }
+    .whatsapp-float:hover {
+      background: #1ebc57;
+    }
+  </style>
 </head>
 <body>
+
   <!-- Header -->
-  <header style="background:#28a745; color:white; padding:20px; text-align:center;">
+  <header>
+    <img src="assets/logo.png" alt="Logo">
     <h1>BBETA - Apka Apna Beta</h1>
-    <p>Fresh Vegetables, Fruits & Daily Essentials</p>
-    <a href="cart.html">
-      <button style="background:white; color:#28a745; border:none; padding:10px 20px; border-radius:8px; font-size:16px; cursor:pointer;">
-        View Cart
-      </button>
-    </a>
   </header>
 
-  <!-- Products Section -->
-  <div class="container">
-    <h2>Our Products</h2>
-
-    <div class="products-grid">
-
-      <!-- Vegetables -->
-      <div class="product-card">
-        <img src="assets/vegetables.jpg" alt="Vegetables">
-        <h3>Vegetables</h3>
-        <p>₹100 / kg</p>
-        <button onclick="addToCart('Vegetables', 100)">Add to Cart</button>
-      </div>
-
-      <!-- Fruits -->
-      <div class="product-card">
-        <img src="assets/fruits.jpg" alt="Fruits">
-        <h3>Fruits</h3>
-        <p>₹120 / kg</p>
-        <button onclick="addToCart('Fruits', 120)">Add to Cart</button>
-      </div>
-
-      <!-- Bakery -->
-      <div class="product-card">
-        <img src="assets/bakery.jpg" alt="Bakery">
-        <h3>Bakery</h3>
-        <p>₹150</p>
-        <button onclick="addToCart('Bakery', 150)">Add to Cart</button>
-      </div>
-
-      <!-- Bread -->
-      <div class="product-card">
-        <img src="assets/bread.jpg" alt="Bread">
-        <h3>Bread</h3>
-        <p>₹50</p>
-        <button onclick="addToCart('Bread', 50)">Add to Cart</button>
-      </div>
-
-      <!-- Rice -->
-      <div class="product-card">
-        <img src="assets/rice.jpg" alt="Rice">
-        <h3>Rice</h3>
-        <p>₹70 / kg</p>
-        <button onclick="addToCart('Rice', 70)">Add to Cart</button>
-      </div>
-
-      <!-- Sugar -->
-      <div class="product-card">
-        <img src="assets/sugar.jpg" alt="Sugar">
-        <h3>Sugar</h3>
-        <p>₹40 / kg</p>
-        <button onclick="addToCart('Sugar', 40)">Add to Cart</button>
-      </div>
-
-      <!-- Milk -->
-      <div class="product-card">
-        <img src="assets/milk.jpg" alt="Milk">
-        <h3>Milk</h3>
-        <p>₹60 / litre</p>
-        <button onclick="addToCart('Milk', 60)">Add to Cart</button>
-      </div>
-
-      <!-- Oil -->
-      <div class="product-card">
-        <img src="assets/oil.jpg" alt="Oil">
-        <h3>Cooking Oil</h3>
-        <p>₹150 / litre</p>
-        <button onclick="addToCart('Oil', 150)">Add to Cart</button>
-      </div>
-
-      <!-- Tea -->
-      <div class="product-card">
-        <img src="assets/tea.jpg" alt="Tea">
-        <h3>Tea</h3>
-        <p>₹90</p>
-        <button onclick="addToCart('Tea', 90)">Add to Cart</button>
-      </div>
-
-      <!-- Snacks -->
-      <div class="product-card">
-        <img src="assets/snacks.jpg" alt="Snacks">
-        <h3>Snacks</h3>
-        <p>₹50</p>
-        <button onclick="addToCart('Snacks', 50)">Add to Cart</button>
-      </div>
-
-      <!-- Cold Drink -->
-      <div class="product-card">
-        <img src="assets/cold_drink.jpg" alt="Cold Drink">
-        <h3>Cold Drink</h3>
-        <p>₹40</p>
-        <button onclick="addToCart('Cold Drink', 40)">Add to Cart</button>
-      </div>
-
-      <!-- Groceries -->
-      <div class="product-card">
-        <img src="assets/groceries.jpg" alt="Groceries">
-        <h3>Groceries</h3>
-        <p>₹200</p>
-        <button onclick="addToCart('Groceries', 200)">Add to Cart</button>
-      </div>
-
-      <!-- Medicines -->
-      <div class="product-card">
-        <img src="assets/medicines.jpg" alt="Medicines">
-        <h3>Medicines</h3>
-        <p>₹100</p>
-        <button onclick="addToCart('Medicines', 100)">Add to Cart</button>
-      </div>
-
-      <!-- Dairy -->
-      <div class="product-card">
-        <img src="assets/dairy.jpg" alt="Dairy">
-        <h3>Dairy Products</h3>
-        <p>₹80</p>
-        <button onclick="addToCart('Dairy Products', 80)">Add to Cart</button>
-      </div>
-
+  <!-- Products -->
+  <section class="products">
+    <div class="product-card">
+      <img src="assets/bakery.jpg" alt="Bakery">
+      <h3>Bakery</h3>
+      <p>₹150</p>
+      <input type="number" value="1" min="1">
+      <button>Add to Cart</button>
     </div>
-  </div>
+
+    <div class="product-card">
+      <img src="assets/bread.jpg" alt="Bread">
+      <h3>Bread</h3>
+      <p>₹60</p>
+      <input type="number" value="1" min="1">
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="assets/oil.jpg" alt="Oil">
+      <h3>Oil</h3>
+      <p>₹150</p>
+      <input type="number" value="1" min="1">
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="assets/rice.jpg" alt="Rice">
+      <h3>Rice</h3>
+      <p>₹70</p>
+      <input type="number" value="1" min="1">
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="assets/milk.jpg" alt="Milk">
+      <h3>Milk</h3>
+      <p>₹50</p>
+      <input type="number" value="1" min="1">
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="assets/sugar.jpg" alt="Sugar">
+      <h3>Sugar</h3>
+      <p>₹45</p>
+      <input type="number" value="1" min="1">
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="assets/snacks.jpg" alt="Snacks">
+      <h3>Snacks</h3>
+      <p>₹80</p>
+      <input type="number" value="1" min="1">
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="assets/vegetables.jpg" alt="Vegetables">
+      <h3>Vegetables</h3>
+      <p>₹130</p>
+      <input type="number" value="1" min="1">
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="assets/fruits.jpg" alt="Fruits">
+      <h3>Fruits</h3>
+      <p>₹100</p>
+      <input type="number" value="1" min="1">
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="assets/tea.jpg" alt="Tea">
+      <h3>Tea</h3>
+      <p>₹110</p>
+      <input type="number" value="1" min="1">
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="assets/dairy.jpg" alt="Dairy">
+      <h3>Dairy</h3>
+      <p>₹90</p>
+      <input type="number" value="1" min="1">
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="assets/groceries.jpg" alt="Groceries">
+      <h3>Groceries</h3>
+      <p>₹200</p>
+      <input type="number" value="1" min="1">
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="assets/medicines.jpg" alt="Medicines">
+      <h3>Medicines</h3>
+      <p>₹250</p>
+      <input type="number" value="1" min="1">
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="assets/cold_drink.jpg" alt="Cold Drink">
+      <h3>Cold Drink</h3>
+      <p>₹35</p>
+      <input type="number" value="1" min="1">
+      <button>Add to Cart</button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    📍 Location: Nalgonda, Telangana 508001 | 
+    📞 <a href="https://wa.me/917093242271">+91 7093242271</a>
+  </footer>
 
   <!-- Floating WhatsApp -->
-  <a href="https://wa.me/917093242271" class="whatsapp-float">💬</a>
+  <a href="https://wa.me/917093242271" class="whatsapp-float" target="_blank">💬</a>
 
-  <script src="shop.js"></script>
 </body>
 </html>
