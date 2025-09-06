@@ -8,29 +8,71 @@
 </head>
 <body>
   <header>
-    <h1>🛒 Your Cart</h1>
+    <h1 style="color: red;">🛒 Your Cart</h1>
     <a href="index.html" class="cart-link">⬅ Back to Shop</a>
   </header>
 
   <main>
-    <div id="cart-items"></div>
-    <p class="cart-total" id="cart-total">Total: ₹0</p>
+    <div id="cartItems"></div>
+    <h2 id="total">Total: ₹0</h2>
 
     <!-- Customer Details -->
     <div class="customer-details">
       <h3>📝 Customer Details</h3>
-      <input type="text" id="customerName" placeholder="Enter your name">
-      <input type="text" id="customerPhone" placeholder="Enter your mobile number">
-      <input type="text" id="customerLocation" placeholder="Enter your location">
+      <input type="text" id="custName" placeholder="Enter your name" required>
+      <input type="text" id="custNumber" placeholder="Enter your mobile number" required>
+      <input type="text" id="custAddress" placeholder="Enter your address / location" required>
     </div>
 
     <!-- WhatsApp Order Button -->
-    <button class="whatsapp-btn" onclick="placeOrder()">
+    <button id="placeOrder" class="whatsapp-btn">
       <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
       Place Order on WhatsApp
     </button>
   </main>
 
-  <script src="shop.js"></script>
+  <script>
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let cartItemsDiv = document.getElementById("cartItems");
+    let totalPrice = 0;
+
+    if (cart.length === 0) {
+      cartItemsDiv.innerHTML = "<p>Your cart is empty.</p>";
+    } else {
+      cart.forEach(item => {
+        let div = document.createElement("div");
+        div.classList.add("cart-item");
+        div.innerHTML = `<p>${item.qty} x ${item.name} = ₹${item.price * item.qty}</p>`;
+        cartItemsDiv.appendChild(div);
+        totalPrice += item.price * item.qty;
+      });
+      document.getElementById("total").innerText = "Total: ₹" + totalPrice;
+    }
+
+    // ✅ WhatsApp Order
+    document.getElementById("placeOrder").addEventListener("click", function () {
+      let name = document.getElementById("custName").value;
+      let number = document.getElementById("custNumber").value;
+      let address = document.getElementById("custAddress").value;
+
+      if (!name || !number || !address) {
+        alert("Please fill all details including address.");
+        return;
+      }
+
+      let message = `New Order from ${name} (%2B91${number})%0AAddress: ${address}%0A%0A`;
+      let total = 0;
+
+      cart.forEach(item => {
+        message += `${item.qty} x ${item.name} = ₹${item.price * item.qty}%0A`;
+        total += item.price * item.qty;
+      });
+
+      message += `%0ATotal: ₹${total}`;
+
+      let whatsappURL = `https://wa.me/917093242271?text=${message}`;
+      window.open(whatsappURL, "_blank");
+    });
+  </script>
 </body>
 </html>
