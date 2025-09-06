@@ -3,202 +3,118 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BBETA Shop</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    .product-card { min-height: 100%; }
-    .product-card img { height: 150px; object-fit: cover; }
-  </style>
+  <title>BBETA - Apka Apna Bada Beta</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-light">
+<body>
+  <!-- Floating WhatsApp -->
+  <a href="https://wa.me/917093242271" class="floating-whatsapp" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+  </a>
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="index.html">🛒 BBETA Shop</a>
-      <a href="cart.html" class="btn btn-light">🛍️ View Cart</a>
+  <header>
+    <h1>BBETA</h1>
+    <p>Apka Apna Bada Beta 🛒</p>
+    <a href="cart.html" class="cart-link">🛒 Cart</a>
+  </header>
+
+  <main>
+    <div class="products">
+      <!-- Product List -->
+      <div class="product">
+        <img src="assets/fruits.jpg" alt="Apples">
+        <h2>Fresh Apples</h2>
+        <p>₹50 / kg</p>
+        <input type="number" value="1" min="1" class="qty">
+        <button onclick="addToCart('Fresh Apples', 50, this)">Add to Cart</button>
+      </div>
+
+      <div class="product">
+        <img src="assets/vegetables.jpg" alt="Tomatoes">
+        <h2>Tomatoes</h2>
+        <p>₹30 / kg</p>
+        <input type="number" value="1" min="1" class="qty">
+        <button onclick="addToCart('Tomatoes', 30, this)">Add to Cart</button>
+      </div>
+
+      <div class="product">
+        <img src="assets/rice.jpg" alt="Rice">
+        <h2>Rice</h2>
+        <p>₹60 / kg</p>
+        <input type="number" value="1" min="1" class="qty">
+        <button onclick="addToCart('Rice', 60, this)">Add to Cart</button>
+      </div>
+
+      <div class="product">
+        <img src="assets/sugar.jpg" alt="Sugar">
+        <h2>Sugar</h2>
+        <p>₹40 / kg</p>
+        <input type="number" value="1" min="1" class="qty">
+        <button onclick="addToCart('Sugar', 40, this)">Add to Cart</button>
+      </div>
+
+      <div class="product">
+        <img src="assets/oil.jpg" alt="Cooking Oil">
+        <h2>Cooking Oil</h2>
+        <p>₹150 / litre</p>
+        <input type="number" value="1" min="1" class="qty">
+        <button onclick="addToCart('Cooking Oil', 150, this)">Add to Cart</button>
+      </div>
+
+      <div class="product">
+        <img src="assets/milk.jpg" alt="Milk">
+        <h2>Milk</h2>
+        <p>₹25 / litre</p>
+        <input type="number" value="1" min="1" class="qty">
+        <button onclick="addToCart('Milk', 25, this)">Add to Cart</button>
+      </div>
+
+      <div class="product">
+        <img src="assets/bread.jpg" alt="Bread">
+        <h2>Bread</h2>
+        <p>₹30 / pack</p>
+        <input type="number" value="1" min="1" class="qty">
+        <button onclick="addToCart('Bread', 30, this)">Add to Cart</button>
+      </div>
+
+      <div class="product">
+        <img src="assets/tea.jpg" alt="Tea">
+        <h2>Tea</h2>
+        <p>₹120 / 250g</p>
+        <input type="number" value="1" min="1" class="qty">
+        <button onclick="addToCart('Tea', 120, this)">Add to Cart</button>
+      </div>
+
+      <div class="product">
+        <img src="assets/snacks.jpg" alt="Snacks">
+        <h2>Snacks</h2>
+        <p>₹20 / pack</p>
+        <input type="number" value="1" min="1" class="qty">
+        <button onclick="addToCart('Snacks', 20, this)">Add to Cart</button>
+      </div>
+
+      <div class="product">
+        <img src="assets/cold_drink.jpg" alt="Cold Drink">
+        <h2>Cold Drink</h2>
+        <p>₹35 / bottle</p>
+        <input type="number" value="1" min="1" class="qty">
+        <button onclick="addToCart('Cold Drink', 35, this)">Add to Cart</button>
+      </div>
     </div>
-  </nav>
+  </main>
 
-  <div class="container mt-4">
-    <h2 class="text-center mb-4">🛍️ Our Products</h2>
-    <div class="row g-3">
-
-      <!-- Products -->
-      <div class="col-md-3 col-6">
-        <div class="card product-card shadow-sm">
-          <img src="BBETA/assets/bakery.jpg" class="card-img-top" alt="Bakery">
-          <div class="card-body text-center">
-            <h5>Bakery</h5>
-            <p>₹50</p>
-            <input type="number" value="1" min="1" class="form-control mb-2">
-            <button class="btn btn-success w-100" onclick="addToCart('Bakery', 50, this)">Add to Cart</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3 col-6">
-        <div class="card product-card shadow-sm">
-          <img src="BBETA/assets/bread.jpg" class="card-img-top" alt="Bread">
-          <div class="card-body text-center">
-            <h5>Bread</h5>
-            <p>₹30</p>
-            <input type="number" value="1" min="1" class="form-control mb-2">
-            <button class="btn btn-success w-100" onclick="addToCart('Bread', 30, this)">Add to Cart</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3 col-6">
-        <div class="card product-card shadow-sm">
-          <img src="BBETA/assets/cold_drink.jpg" class="card-img-top" alt="Cold Drink">
-          <div class="card-body text-center">
-            <h5>Cold Drink</h5>
-            <p>₹35</p>
-            <input type="number" value="1" min="1" class="form-control mb-2">
-            <button class="btn btn-success w-100" onclick="addToCart('Cold Drink', 35, this)">Add to Cart</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3 col-6">
-        <div class="card product-card shadow-sm">
-          <img src="BBETA/assets/dairy.jpg" class="card-img-top" alt="Dairy">
-          <div class="card-body text-center">
-            <h5>Dairy</h5>
-            <p>₹40</p>
-            <input type="number" value="1" min="1" class="form-control mb-2">
-            <button class="btn btn-success w-100" onclick="addToCart('Dairy', 40, this)">Add to Cart</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3 col-6">
-        <div class="card product-card shadow-sm">
-          <img src="BBETA/assets/fruits.jpg" class="card-img-top" alt="Fruits">
-          <div class="card-body text-center">
-            <h5>Fresh Fruits</h5>
-            <p>₹50</p>
-            <input type="number" value="1" min="1" class="form-control mb-2">
-            <button class="btn btn-success w-100" onclick="addToCart('Fresh Fruits', 50, this)">Add to Cart</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3 col-6">
-        <div class="card product-card shadow-sm">
-          <img src="BBETA/assets/groceries.jpg" class="card-img-top" alt="Groceries">
-          <div class="card-body text-center">
-            <h5>Groceries</h5>
-            <p>₹100</p>
-            <input type="number" value="1" min="1" class="form-control mb-2">
-            <button class="btn btn-success w-100" onclick="addToCart('Groceries', 100, this)">Add to Cart</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3 col-6">
-        <div class="card product-card shadow-sm">
-          <img src="BBETA/assets/medicines.jpg" class="card-img-top" alt="Medicines">
-          <div class="card-body text-center">
-            <h5>Medicines</h5>
-            <p>₹150</p>
-            <input type="number" value="1" min="1" class="form-control mb-2">
-            <button class="btn btn-success w-100" onclick="addToCart('Medicines', 150, this)">Add to Cart</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3 col-6">
-        <div class="card product-card shadow-sm">
-          <img src="BBETA/assets/milk.jpg" class="card-img-top" alt="Milk">
-          <div class="card-body text-center">
-            <h5>Milk</h5>
-            <p>₹25</p>
-            <input type="number" value="1" min="1" class="form-control mb-2">
-            <button class="btn btn-success w-100" onclick="addToCart('Milk', 25, this)">Add to Cart</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3 col-6">
-        <div class="card product-card shadow-sm">
-          <img src="BBETA/assets/oil.jpg" class="card-img-top" alt="Oil">
-          <div class="card-body text-center">
-            <h5>Cooking Oil</h5>
-            <p>₹120</p>
-            <input type="number" value="1" min="1" class="form-control mb-2">
-            <button class="btn btn-success w-100" onclick="addToCart('Cooking Oil', 120, this)">Add to Cart</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3 col-6">
-        <div class="card product-card shadow-sm">
-          <img src="BBETA/assets/rice.jpg" class="card-img-top" alt="Rice">
-          <div class="card-body text-center">
-            <h5>Rice</h5>
-            <p>₹200</p>
-            <input type="number" value="1" min="1" class="form-control mb-2">
-            <button class="btn btn-success w-100" onclick="addToCart('Rice', 200, this)">Add to Cart</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3 col-6">
-        <div class="card product-card shadow-sm">
-          <img src="BBETA/assets/snacks.jpg" class="card-img-top" alt="Snacks">
-          <div class="card-body text-center">
-            <h5>Snacks</h5>
-            <p>₹20</p>
-            <input type="number" value="1" min="1" class="form-control mb-2">
-            <button class="btn btn-success w-100" onclick="addToCart('Snacks', 20, this)">Add to Cart</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3 col-6">
-        <div class="card product-card shadow-sm">
-          <img src="BBETA/assets/sugar.jpg" class="card-img-top" alt="Sugar">
-          <div class="card-body text-center">
-            <h5>Sugar</h5>
-            <p>₹40</p>
-            <input type="number" value="1" min="1" class="form-control mb-2">
-            <button class="btn btn-success w-100" onclick="addToCart('Sugar', 40, this)">Add to Cart</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3 col-6">
-        <div class="card product-card shadow-sm">
-          <img src="BBETA/assets/tea.jpg" class="card-img-top" alt="Tea">
-          <div class="card-body text-center">
-            <h5>Tea</h5>
-            <p>₹60</p>
-            <input type="number" value="1" min="1" class="form-control mb-2">
-            <button class="btn btn-success w-100" onclick="addToCart('Tea', 60, this)">Add to Cart</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3 col-6">
-        <div class="card product-card shadow-sm">
-          <img src="BBETA/assets/vegetables.jpg" class="card-img-top" alt="Vegetables">
-          <div class="card-body text-center">
-            <h5>Vegetables</h5>
-            <p>₹80</p>
-            <input type="number" value="1" min="1" class="form-control mb-2">
-            <button class="btn btn-success w-100" onclick="addToCart('Vegetables', 80, this)">Add to Cart</button>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- Footer -->
-  <footer class="bg-dark text-white text-center py-3 mt-5">
-    📍 Nalgonda, Telangana 508001
+  <!-- 📍 Location Section -->
+  <footer>
+    <p>&copy; 2025 BBETA - Apka Apna Bada Beta</p>
+    <h2>📍 Our Location</h2>
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3805.8491127896724!2d79.26356427485021!3d17.057541983847895!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a34a31b79e0533f%3A0xe7af77e6c2f3dd6c!2sNalgonda%2C%20Telangana%20508001!5e0!3m2!1sen!2sin!4v1693924505178!5m2!1sen!2sin" 
+      width="100%" 
+      height="300" 
+      style="border:0;" 
+      allowfullscreen="" 
+      loading="lazy">
+    </iframe>
   </footer>
 
   <script src="shop.js"></script>
