@@ -3,40 +3,85 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Cart - BBETA</title>
+  <title>Your Cart - BBETA Shop</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
-    <h1>Your Cart</h1>
-    <a href="index.html">⬅ Back to Shop</a>
+    <h1>🛒 Your Cart</h1>
+    <a href="index.html">← Back to Shop</a>
   </header>
 
   <main>
     <div id="cart-items"></div>
     <h2 id="cart-total">Total: ₹0</h2>
 
-    <!-- Customer Info -->
     <div class="customer-info">
-      <label>👤 Name:</label>
-      <input type="text" id="customer-name" placeholder="Enter your name" required>
-
-      <label>📱 Phone:</label>
-      <input type="text" id="customer-phone" placeholder="Enter your phone" required>
-
-      <label>📍 Address:</label>
-      <input type="text" id="customer-address" placeholder="Enter delivery address" required>
-
-      <label>🌐 GPS Location:</label>
-      <input type="text" id="customer-gps" placeholder="Paste Google Maps link (optional)">
+      <input type="text" id="customerName" placeholder="Enter your name">
+      <input type="text" id="customerPhone" placeholder="Enter your phone">
+      <input type="text" id="customerAddress" placeholder="Enter delivery address">
+      <input type="text" id="customerMap" placeholder="Paste Google Maps link (optional)">
     </div>
 
-    <!-- WhatsApp Order -->
-    <button class="whatsapp-btn" onclick="placeOrder()">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"> Place Order on WhatsApp
-    </button>
+    <button id="whatsapp-btn">📩 Send Order on WhatsApp</button>
   </main>
 
-  <script src="shop.js"></script>
+  <script>
+    function loadCart() {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const cartItemsDiv = document.getElementById("cart-items");
+      cartItemsDiv.innerHTML = "";
+      let total = 0;
+
+      cart.forEach((item, index) => {
+        let subTotal = item.price * item.qty;
+        total += subTotal;
+
+        const itemDiv = document.createElement("div");
+        itemDiv.className = "cart-item";
+        itemDiv.innerHTML = `
+          ${item.name} - ₹${item.price} × ${item.qty} = ₹${subTotal}
+          <button onclick="removeItem(${index})">❌ Remove</button>
+        `;
+        cartItemsDiv.appendChild(itemDiv);
+      });
+
+      document.getElementById("cart-total").innerText = "Total: ₹" + total;
+    }
+
+    function removeItem(index) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      loadCart();
+    }
+
+    document.getElementById("whatsapp-btn").addEventListener("click", function () {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+      }
+
+      let name = document.getElementById("customerName").value;
+      let phone = document.getElementById("customerPhone").value;
+      let address = document.getElementById("customerAddress").value;
+      let map = document.getElementById("customerMap").value;
+
+      let orderText = `🛍️ New Order:%0A-------------------%0A`;
+      cart.forEach(item => {
+        orderText += `${item.name} × ${item.qty} = ₹${item.price * item.qty}%0A`;
+      });
+
+      let total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+      orderText += `-------------------%0ATotal: ₹${total}%0A%0A`;
+      orderText += `👤 Name: ${name}%0A📞 Phone: ${phone}%0A📍 Address: ${address}%0A🌐 Map: ${map}`;
+
+      let whatsappUrl = `https://wa.me/917093242271?text=${orderText}`;
+      window.open(whatsappUrl, "_blank");
+    });
+
+    window.onload = loadCart;
+  </script>
 </body>
 </html>
