@@ -3,31 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BBETA - Cart</title>
+  <title>Your Cart - BBETA</title>
   <link rel="stylesheet" href="cart.css">
 </head>
 <body>
   <div class="container">
-    <h2>🛒 Your Cart</h2>
+    <h2>Your Cart</h2>
     <div id="cart-items"></div>
-    <p class="cart-total">Total: ₹<span id="total">0</span></p>
+    <div class="cart-total" id="cart-total">Total: ₹0</div>
 
     <!-- Customer Form -->
     <form id="customer-form">
-      <h3>📋 Customer Details</h3>
-      <label for="name">Name</label>
+      <label for="name">Customer Name:</label>
       <input type="text" id="name" placeholder="Enter your name" required>
 
-      <label for="phone">Phone Number</label>
-      <input type="tel" id="phone" placeholder="Enter your phone number" required>
+      <label for="phone">Contact Number:</label>
+      <input type="text" id="phone" placeholder="Enter your phone number" required>
 
-      <label for="address">Address</label>
+      <label for="address">Delivery Address:</label>
       <input type="text" id="address" placeholder="Enter your address" required>
 
       <button type="button" class="gps-btn" onclick="getLocation()">📍 Use GPS Location</button>
-      <input type="text" id="gps" placeholder="GPS coordinates" readonly>
+      <input type="hidden" id="gps">
 
-      <button type="button" class="confirm-btn" onclick="confirmOrder()">✅ Send Order on WhatsApp</button>
+      <button type="button" class="confirm-btn" onclick="sendOrder()">✅ Confirm Order on WhatsApp</button>
     </form>
   </div>
 
