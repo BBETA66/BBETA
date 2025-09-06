@@ -1,105 +1,172 @@
-let products = [
-  { id: 1, name: "Bakery", price: 150, image: "images/bakery.jpg" },
-  { id: 2, name: "Bread", price: 60, image: "images/bread.jpg" },
-  { id: 3, name: "Oil", price: 150, image: "images/oil.jpg" },
-  { id: 4, name: "Rice", price: 70, image: "images/rice.jpg" },
-  { id: 5, name: "Milk", price: 50, image: "images/milk.jpg" },
-  { id: 6, name: "Sugar", price: 45, image: "images/sugar.jpg" },
-  { id: 7, name: "Snacks", price: 80, image: "images/snacks.jpg" },
-  { id: 8, name: "Vegetables", price: 130, image: "images/vegetables.jpg" },
-  { id: 9, name: "Fruits", price: 100, image: "images/fruits.jpg" },
-  { id: 10, name: "Tea", price: 110, image: "images/tea.jpg" },
-  { id: 11, name: "Dairy", price: 90, image: "images/dairy.jpg" },
-  { id: 12, name: "Groceries", price: 200, image: "images/groceries.jpg" },
-  { id: 13, name: "Medicines", price: 250, image: "images/medicines.jpg" },
-  { id: 14, name: "Cold Drink", price: 35, image: "images/cold_drink.jpg" }
-];
-
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-// Function to render products on homepage
-function renderProducts() {
-  let productsDiv = document.getElementById("products");
-  productsDiv.innerHTML = "";
-  products.forEach(product => {
-    let productDiv = document.createElement("div");
-    productDiv.classList.add("product-card");
-    productDiv.innerHTML = `
-      <img src="${product.image}" alt="${product.name}">
-      <h3>${product.name}</h3>
-      <p>₹${product.price}</p>
-      <input type="number" id="qty-${product.id}" value="1" min="1" style="width:50px;">
-      <button onclick="addToCart(${product.id})">Add to Cart</button>
-    `;
-    productsDiv.appendChild(productDiv);
-  });
+/* ===== Cart helpers (localStorage) ===== */
+function getCart() {
+  return JSON.parse(localStorage.getItem("cart")) || [];
+}
+function saveCart(cart) {
+  localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-// Function to add product to cart
-function addToCart(id) {
-  let qty = parseInt(document.getElementById(`qty-${id}`).value);
-  let product = products.find(p => p.id === id);
+/* ===== Index page: Add to Cart ===== */
+function addToCart(name, price, btn) {
+  const qtyInput = btn.previousElementSibling;
+  const qty = Math.max(1, parseInt(qtyInput.value || "1", 10));
 
-  let existing = cart.find(item => item.id === id);
+  let cart = getCart();
+
+  const existing = cart.find(item => item.name === name && item.price === price);
   if (existing) {
     existing.qty += qty;
   } else {
-    cart.push({ ...product, qty: qty });
+    cart.push({ name, price, qty });
   }
+  saveCart(cart);
 
-  localStorage.setItem("cart", JSON.stringify(cart));
+  // Update header count if present
   updateCartCount();
-  alert(`${product.name} added to cart!`);
+
+  alert(`${qty} x ${name} added to cart!`);
 }
 
-// Function to update cart count in header
+/* ===== Header Cart Count (both pages) ===== */
 function updateCartCount() {
-  let totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
-  document.getElementById("cart-count").textContent = totalQty;
+  const el = document.getElementById("cart-count");
+  if (!el) return;
+  const cart = getCart();
+  const totalQty = cart.reduce((s, i) => s + i.qty, 0);
+  el.textContent = totalQty;
 }
 
-// Function to render cart items in cart.html
+/* ===== Cart page rendering ===== */
 function renderCart() {
-  let cartDiv = document.getElementById("cart-items");
-  let totalPrice = 0;
-  cartDiv.innerHTML = "";
+  const wrap = document.getElementById("cart-items");
+  if (!wrap) return;
+
+  const cart = getCart();
+  wrap.innerHTML = "";
 
   if (cart.length === 0) {
-    cartDiv.innerHTML = "<p>Cart is empty</p>";
-    document.getElementById("total-price").textContent = "₹0";
+    wrap.innerHTML = `<p>Your cart is empty.</p>`;
+    document.getElementById("total-qty").textContent = "0";
+    document.getElementById("total-price").textContent = "0";
     return;
   }
 
-  cart.forEach((item, index) => {
-    totalPrice += item.price * item.qty;
-    let itemDiv = document.createElement("div");
-    itemDiv.classList.add("cart-item");
-    itemDiv.innerHTML = `
-      <img src="${item.image}" alt="${item.name}">
-      <h3>${item.name}</h3>
-      <p>₹${item.price} x ${item.qty} = ₹${item.price * item.qty}</p>
-      <button onclick="removeFromCart(${index})">Remove</button>
+  let totalQty = 0;
+  let totalPrice = 0;
+
+  cart.forEach((item, idx) => {
+    totalQty += item.qty;
+    totalPrice += item.qty * item.price;
+
+    const row = document.createElement("div");
+    row.className = "cart-item";
+    row.innerHTML = `
+      <p><strong>${item.name}</strong><br>₹${item.price} × 
+        <input type="number" min="1" value="${item.qty}" class="line-qty" data-index="${idx}" />
+        = ₹${item.price * item.qty}
+      </p>
+      <button onclick="removeItem(${idx})">Remove</button>
     `;
-    cartDiv.appendChild(itemDiv);
+    wrap.appendChild(row);
   });
 
-  document.getElementById("total-price").textContent = "₹" + totalPrice;
+  document.getElementById("total-qty").textContent = totalQty;
+  document.getElementById("total-price").textContent = totalPrice;
+
+  // Attach change listeners for qty inputs
+  wrap.querySelectorAll(".line-qty").forEach(inp => {
+    inp.addEventListener("change", (e) => {
+      const index = parseInt(e.target.getAttribute("data-index"), 10);
+      let cartNow = getCart();
+      const newQty = Math.max(1, parseInt(e.target.value || "1", 10));
+      cartNow[index].qty = newQty;
+      saveCart(cartNow);
+      renderCart();
+      updateCartCount();
+    });
+  });
 }
 
-// Function to remove item from cart
-function removeFromCart(index) {
+function removeItem(index) {
+  let cart = getCart();
   cart.splice(index, 1);
-  localStorage.setItem("cart", JSON.stringify(cart));
+  saveCart(cart);
   renderCart();
   updateCartCount();
 }
 
-// On page load
-if (document.getElementById("products")) {
-  renderProducts();
-  updateCartCount();
+/* ===== GPS capture ===== */
+function getLocation() {
+  const status = document.getElementById("gpsStatus");
+  const gpsLink = document.getElementById("gpsLink");
+  if (!navigator.geolocation) {
+    status.textContent = "Geolocation is not supported on this device.";
+    return;
+  }
+  status.textContent = "Getting your location…";
+  navigator.geolocation.getCurrentPosition(
+    (pos) => {
+      const { latitude, longitude } = pos.coords;
+      const link = `https://maps.google.com/?q=${latitude},${longitude}`;
+      gpsLink.value = link;
+      status.innerHTML = `📍 Location captured: <a href="${link}" target="_blank">Open in Maps</a>`;
+    },
+    (err) => {
+      status.textContent = "Unable to fetch GPS location. Please enter address manually.";
+    },
+    { enableHighAccuracy: true, timeout: 15000 }
+  );
 }
-if (document.getElementById("cart-items")) {
-  renderCart();
-  updateCartCount();
+
+/* ===== WhatsApp checkout ===== */
+function sendOrder() {
+  const cart = getCart();
+  if (cart.length === 0) {
+    alert("Your cart is empty.");
+    return;
+  }
+
+  // Customer details
+  const name = (document.getElementById("custName") || {}).value || "";
+  const phone = (document.getElementById("custPhone") || {}).value || "";
+  const addr  = (document.getElementById("custAddress") || {}).value || "";
+  const gps   = (document.getElementById("gpsLink") || {}).value || "";
+
+  // Build order text
+  let lines = [];
+  lines.push("🛒 *New Order from BBETA*");
+  lines.push("");
+
+  let total = 0;
+  cart.forEach(it => {
+    const line = `${it.qty} × ${it.name} = ₹${it.qty * it.price}`;
+    total += it.qty * it.price;
+    lines.push(line);
+  });
+
+  lines.push("");
+  lines.push(`*Total:* ₹${total}`);
+  lines.push("");
+  if (name)  lines.push(`👤 *Name:* ${name}`);
+  if (phone) lines.push(`📞 *Contact:* ${phone}`);
+  if (addr)  lines.push(`🏠 *Address:* ${addr}`);
+  if (gps)   lines.push(`📍 *GPS:* ${gps}`);
+
+  // Destination = Merchant WhatsApp
+  const merchant = "917093242271";
+  const text = encodeURIComponent(lines.join("\n"));
+  const waUrl = `https://wa.me/${merchant}?text=${text}`;
+
+  window.open(waUrl, "_blank");
+
+  // (optional) Clear cart after opening WhatsApp:
+  // localStorage.removeItem("cart");
+  // renderCart();
+  // updateCartCount();
 }
+
+/* ===== Init on load ===== */
+document.addEventListener("DOMContentLoaded", () => {
+  updateCartCount();
+  renderCart(); // will only run on cart page
+});
