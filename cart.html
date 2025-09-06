@@ -3,90 +3,103 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Cart - BBETA Online Shop</title>
-  <link rel="stylesheet" href="style.css">
+  <title>BBETA Shop</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+    .product { border: 1px solid #ddd; margin: 15px; padding: 15px; border-radius: 8px; text-align: center; }
+    img { max-width: 200px; border-radius: 8px; }
+    .btn { background: #28a745; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 6px; display: inline-block; }
+    .btn:hover { background: #218838; }
+    .cart-container { padding: 20px; }
+    input { padding: 8px; margin: 5px 0; width: 95%; }
+    footer { background: #222; color: #fff; padding: 15px; text-align: center; }
+    .wa-btn { background: #25D366; color: #fff; padding: 12px; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>🛒 Your Cart</h1>
-    <a href="index.html">← Back to Shop</a>
-  </header>
 
-  <main>
-    <div id="cart-items"></div>
-    <h2>Total: ₹<span id="total">0</span></h2>
+  <h2 style="text-align:center;">🛍️ BBETA Online Shop</h2>
 
-    <form id="order-form">
-      <input type="text" id="customer-name" placeholder="Enter your name" required>
-      <input type="tel" id="customer-phone" placeholder="Enter your phone" required>
-      <input type="text" id="customer-address" placeholder="Enter delivery address" required>
-      <input type="text" id="google-map" placeholder="Paste Google Maps link (optional)">
-      <button type="submit">📩 Send Order on WhatsApp</button>
-    </form>
-  </main>
+  <!-- Product List -->
+  <div class="product">
+    <img src="https://i.postimg.cc/sgtKXzQ7/medicines.jpg" alt="Medicines">
+    <h3>Medicines</h3>
+    <p>₹100</p>
+    <input type="number" id="medQty" value="1" min="1">
+    <button class="btn" onclick="addToCart('Medicines',100,document.getElementById('medQty').value)">Add to Cart</button>
+  </div>
+
+  <div class="product">
+    <img src="https://i.postimg.cc/NfWz2k4c/groceries.jpg" alt="Groceries">
+    <h3>Groceries</h3>
+    <p>₹200</p>
+    <input type="number" id="groQty" value="1" min="1">
+    <button class="btn" onclick="addToCart('Groceries',200,document.getElementById('groQty').value)">Add to Cart</button>
+  </div>
+
+  <div style="text-align:center;">
+    <a href="#cart" class="btn">Go to Cart</a>
+  </div>
+
+  <!-- Cart Section -->
+  <div id="cart" class="cart-container">
+    <h2>Your Cart</h2>
+    <div id="cartItems"></div>
+    <h3>Total: ₹<span id="total">0</span></h3>
+
+    <input type="text" id="name" placeholder="Enter your name">
+    <input type="text" id="phone" placeholder="Enter your phone">
+    <input type="text" id="address" placeholder="Enter delivery address">
+    <input type="text" id="mapLink" placeholder="Paste Google Maps link (optional)">
+    
+    <button class="wa-btn" onclick="sendOrder()">📩 Send Order on WhatsApp</button>
+  </div>
 
   <footer>
-    <p>📍 Address: Nalgonda, Telangana 508001</p>
-    <p>📞 Contact: +91 7093242271</p>
+    📍 Address: Nalgonda, Telangana 508001 <br>
+    📞 Contact: +91 7093242271
   </footer>
 
-  <script>
-    function loadCart() {
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      let cartItems = document.getElementById("cart-items");
-      let total = 0;
-      cartItems.innerHTML = "";
+<script>
+  let cart = [];
+  
+  function addToCart(name, price, qty) {
+    qty = parseInt(qty);
+    let item = {name: name, price: price, qty: qty};
+    cart.push(item);
+    displayCart();
+  }
 
-      cart.forEach((item, index) => {
-        let itemTotal = item.price * item.quantity;
-        total += itemTotal;
-        cartItems.innerHTML += `
-          <div class="cart-item">
-            ${item.name} x ${item.quantity} = ₹${itemTotal}
-            <button onclick="removeItem(${index})">❌ Remove</button>
-          </div>
-        `;
-      });
-
-      document.getElementById("total").innerText = total;
-    }
-
-    function removeItem(index) {
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      cart.splice(index, 1);
-      localStorage.setItem("cart", JSON.stringify(cart));
-      loadCart();
-    }
-
-    document.getElementById("order-form").addEventListener("submit", function(e) {
-      e.preventDefault();
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      if (cart.length === 0) {
-        alert("Your cart is empty!");
-        return;
-      }
-
-      let name = document.getElementById("customer-name").value;
-      let phone = document.getElementById("customer-phone").value;
-      let address = document.getElementById("customer-address").value;
-      let map = document.getElementById("google-map").value;
-
-      let orderText = `🛒 *New Order from BBETA Online Shop*%0A%0A👤 Name: ${name}%0A📞 Phone: ${phone}%0A📍 Address: ${address}%0A🌍 Map: ${map}%0A%0A*Order Details:*%0A`;
-
-      let total = 0;
-      cart.forEach(item => {
-        let itemTotal = item.price * item.quantity;
-        total += itemTotal;
-        orderText += `${item.name} x ${item.quantity} = ₹${itemTotal}%0A`;
-      });
-
-      orderText += `%0A*Total = ₹${total}*%0A%0A✅ Deliver to: Nalgonda, Telangana 508001`;
-
-      let whatsappUrl = `https://wa.me/917093242271?text=${orderText}`;
-      window.open(whatsappUrl, "_blank");
+  function displayCart() {
+    let cartItems = document.getElementById('cartItems');
+    let total = 0;
+    cartItems.innerHTML = "";
+    cart.forEach(item => {
+      total += item.price * item.qty;
+      cartItems.innerHTML += `<p>${item.name} x ${item.qty} = ₹${item.price * item.qty}</p>`;
     });
+    document.getElementById('total').innerText = total;
+  }
 
-    loadCart();
-  </script>
+  function sendOrder() {
+    let name = document.getElementById('name').value;
+    let phone = document.getElementById('phone').value;
+    let address = document.getElementById('address').value;
+    let mapLink = document.getElementById('mapLink').value;
+
+    let orderDetails = "🛍️ *New Order from BBETA*%0A";
+    cart.forEach(item => {
+      orderDetails += `${item.name} x ${item.qty} = ₹${item.price * item.qty}%0A`;
+    });
+    orderDetails += `------------------------%0A`;
+    orderDetails += `*Total:* ₹${document.getElementById('total').innerText}%0A`;
+    orderDetails += `👤 Name: ${name}%0A📞 Phone: ${phone}%0A🏠 Address: ${address}%0A`;
+    if(mapLink) orderDetails += `📍 Location: ${mapLink}%0A`;
+
+    let waUrl = `https://wa.me/917093242271?text=${orderDetails}`;
+    window.open(waUrl, '_blank');
+  }
+</script>
+
 </body>
 </html>
