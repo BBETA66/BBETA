@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BBETA Shop</title>
+  <title>BBETA Online Shop</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,22 +11,122 @@
     <h1>🛒 BBETA Online Shop</h1>
   </header>
 
-  <main id="shop"></main>
+  <main>
+    <div class="product-card">
+      <img src="assets/fruits.jpg" alt="Fresh Fruits">
+      <h3>Fresh Fruits</h3>
+      <p>₹50 / kg</p>
+      <input type="number" min="1" value="1" id="qty-fruits">
+      <button onclick="addToCart('Fresh Fruits', 50, document.getElementById('qty-fruits').value)">Add to Cart</button>
+    </div>
 
-  <a href="cart.html" class="cart-btn">View Cart</a>
+    <div class="product-card">
+      <img src="assets/vegetables.jpg" alt="Vegetables">
+      <h3>Vegetables</h3>
+      <p>₹30 / kg</p>
+      <input type="number" min="1" value="1" id="qty-veggies">
+      <button onclick="addToCart('Vegetables', 30, document.getElementById('qty-veggies').value)">Add to Cart</button>
+    </div>
 
-  <!-- Floating WhatsApp -->
-  <a href="https://wa.me/917093242271" class="whatsapp-float" target="_blank">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-  </a>
+    <div class="product-card">
+      <img src="assets/milk.jpg" alt="Milk">
+      <h3>Milk</h3>
+      <p>₹25 / litre</p>
+      <input type="number" min="1" value="1" id="qty-milk">
+      <button onclick="addToCart('Milk', 25, document.getElementById('qty-milk').value)">Add to Cart</button>
+    </div>
 
-  <!-- Footer with Google Map -->
+    <div class="product-card">
+      <img src="assets/bakery.jpg" alt="Bakery">
+      <h3>Bakery</h3>
+      <p>₹50</p>
+      <input type="number" min="1" value="1" id="qty-bakery">
+      <button onclick="addToCart('Bakery', 50, document.getElementById('qty-bakery').value)">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="assets/bread.jpg" alt="Bread">
+      <h3>Bread</h3>
+      <p>₹30</p>
+      <input type="number" min="1" value="1" id="qty-bread">
+      <button onclick="addToCart('Bread', 30, document.getElementById('qty-bread').value)">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="assets/dairy.jpg" alt="Dairy">
+      <h3>Dairy</h3>
+      <p>₹40</p>
+      <input type="number" min="1" value="1" id="qty-dairy">
+      <button onclick="addToCart('Dairy', 40, document.getElementById('qty-dairy').value)">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="assets/cold_drink.jpg" alt="Cold Drinks">
+      <h3>Cold Drinks</h3>
+      <p>₹80</p>
+      <input type="number" min="1" value="1" id="qty-cold">
+      <button onclick="addToCart('Cold Drinks', 80, document.getElementById('qty-cold').value)">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="assets/snacks.jpg" alt="Snacks">
+      <h3>Snacks</h3>
+      <p>₹20</p>
+      <input type="number" min="1" value="1" id="qty-snacks">
+      <button onclick="addToCart('Snacks', 20, document.getElementById('qty-snacks').value)">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="assets/tea.jpg" alt="Tea">
+      <h3>Tea</h3>
+      <p>₹60 / kg</p>
+      <input type="number" min="1" value="1" id="qty-tea">
+      <button onclick="addToCart('Tea', 60, document.getElementById('qty-tea').value)">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="assets/sugar.jpg" alt="Sugar">
+      <h3>Sugar</h3>
+      <p>₹45 / kg</p>
+      <input type="number" min="1" value="1" id="qty-sugar">
+      <button onclick="addToCart('Sugar', 45, document.getElementById('qty-sugar').value)">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="assets/rice.jpg" alt="Rice">
+      <h3>Rice</h3>
+      <p>₹70 / kg</p>
+      <input type="number" min="1" value="1" id="qty-rice">
+      <button onclick="addToCart('Rice', 70, document.getElementById('qty-rice').value)">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="assets/oil.jpg" alt="Cooking Oil">
+      <h3>Cooking Oil</h3>
+      <p>₹120 / litre</p>
+      <input type="number" min="1" value="1" id="qty-oil">
+      <button onclick="addToCart('Cooking Oil', 120, document.getElementById('qty-oil').value)">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="assets/medicines.jpg" alt="Medicines">
+      <h3>Medicines</h3>
+      <p>₹100</p>
+      <input type="number" min="1" value="1" id="qty-medicines">
+      <button onclick="addToCart('Medicines', 100, document.getElementById('qty-medicines').value)">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="assets/groceries.jpg" alt="Groceries">
+      <h3>Groceries</h3>
+      <p>₹200</p>
+      <input type="number" min="1" value="1" id="qty-groceries">
+      <button onclick="addToCart('Groceries', 200, document.getElementById('qty-groceries').value)">Add to Cart</button>
+    </div>
+  </main>
+
   <footer>
-    <p>📍 Address: Nalgonda, Telangana 508001</p>
-    <iframe 
-      src="https://www.google.com/maps?q=Nalgonda,+Telangana+508001&output=embed" 
-      width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy">
-    </iframe>
+    <a href="cart.html">Go to Cart</a>
   </footer>
 
   <script src="shop.js"></script>
