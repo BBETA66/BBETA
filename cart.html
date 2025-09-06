@@ -10,66 +10,86 @@
   <header>
     <h1>BBETA</h1>
     <p>Apka Apna Bada Beta 🛒</p>
-    <a href="index.html" class="cart-link">⬅ Back to Shop</a>
+    <a href="index.html" class="cart-link">← Back to Shop</a>
   </header>
 
   <main>
     <h2>Your Cart</h2>
     <div id="cart-items"></div>
-    <p id="cart-total"></p>
-    <button id="place-order">✅ Place Order</button>
+    <h3 id="cart-total">Total: ₹0</h3>
+
+    <div class="customer-details">
+      <h3>Customer Details</h3>
+      <input type="text" id="custName" placeholder="Enter your name" required>
+      <input type="text" id="custPhone" placeholder="Enter your phone number" required>
+      <input type="text" id="custAddress" placeholder="Enter your address" required>
+    </div>
+
+    <button class="whatsapp-btn" onclick="placeOrder()">
+      <img src="https://img.icons8.com/?size=48&id=16713&format=png" alt="WhatsApp">
+      Place Order
+    </button>
   </main>
 
   <script>
-    function renderCart() {
+    // Load cart items
+    function loadCart() {
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
       let cartItemsDiv = document.getElementById("cart-items");
+      let cartTotalDiv = document.getElementById("cart-total");
+      cartItemsDiv.innerHTML = "";
       let total = 0;
 
-      if (cart.length === 0) {
-        cartItemsDiv.innerHTML = "<p>Your cart is empty!</p>";
-        document.getElementById("cart-total").innerText = "";
-        return;
-      }
-
-      cartItemsDiv.innerHTML = "";
-      cart.forEach((item, index) => {
+      cart.forEach(item => {
+        let div = document.createElement("div");
+        div.classList.add("cart-item");
+        div.textContent = item.qty + " x " + item.name + " - ₹" + (item.price * item.qty);
+        cartItemsDiv.appendChild(div);
         total += item.price * item.qty;
-        cartItemsDiv.innerHTML += `
-          <p>${item.qty} x ${item.name} - ₹${item.price * item.qty}</p>
-        `;
       });
 
-      document.getElementById("cart-total").innerText = "Total: ₹" + total;
+      cartTotalDiv.textContent = "Total: ₹" + total;
     }
 
-    document.getElementById("place-order").addEventListener("click", function() {
+    // Place order via WhatsApp
+    function placeOrder() {
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
       if (cart.length === 0) {
         alert("Your cart is empty!");
         return;
       }
 
+      let name = document.getElementById("custName").value;
+      let phone = document.getElementById("custPhone").value;
+      let address = document.getElementById("custAddress").value;
+
+      if (!name || !phone || !address) {
+        alert("Please fill all customer details!");
+        return;
+      }
+
       let orderText = "🛒 New Order from BBETA:%0A";
       cart.forEach(item => {
-        orderText += `${item.qty} x ${item.name} = ₹${item.price * item.qty}%0A`;
+        orderText += item.qty + " x " + item.name + " = ₹" + (item.price * item.qty) + "%0A";
       });
 
-      let total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-      orderText += `%0ATotal: ₹${total}%0A📍 Location: Nalgonda, Telangana 508001`;
+      let total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+      orderText += "%0ATotal: ₹" + total;
+      orderText += "%0A👤 Name: " + name;
+      orderText += "%0A📞 Phone: " + phone;
+      orderText += "%0A📍 Address: " + address;
 
-      // ✅ WhatsApp number (replace with your number)
-      let phone = "917093242271";
-      let whatsappURL = `https://wa.me/${phone}?text=${orderText}`;
+      // ✅ Aapka WhatsApp number
+      let whatsappNumber = "917093242271";
+      let whatsappURL = "https://wa.me/" + whatsappNumber + "?text=" + orderText;
 
-      localStorage.removeItem("cart"); // Empty cart
-      window.location.href = whatsappURL; // Open WhatsApp
-      setTimeout(() => {
-        window.location.href = "thankyou.html";
-      }, 2000);
-    });
+      window.open(whatsappURL, "_blank");
 
-    renderCart();
+      // Clear cart
+      localStorage.removeItem("cart");
+    }
+
+    loadCart();
   </script>
 </body>
 </html>
