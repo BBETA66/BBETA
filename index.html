@@ -4,31 +4,138 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BBETA - Apka Apna Beta</title>
-  <link rel="stylesheet" href="cart.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header style="background:#28a745; color:white; padding:15px; text-align:center;">
+  <header>
     <h1>BBETA - Apka Apna Beta</h1>
     <p>Fresh Vegetables, Fruits & Daily Essentials</p>
-    <a href="cart.html" style="background:white; color:#28a745; padding:8px 12px; border-radius:6px; text-decoration:none; font-weight:bold;">View Cart</a>
+    <a href="cart.html" class="btn">View Cart</a>
   </header>
 
-  <div class="container">
+  <section class="products">
     <h2>Our Products</h2>
-    <div id="product-list" class="products"></div>
-  </div>
+    <div class="product-list">
 
-  <footer style="background:#222; color:white; text-align:center; padding:20px; margin-top:30px;">
-    <p>📍 Location: Nalgonda, Telangana 508001</p>
-    <iframe 
-      src="https://www.google.com/maps?q=Nalgonda,+Telangana+508001&output=embed"
-      width="100%" height="250" style="border:0; border-radius:10px;" allowfullscreen="" loading="lazy">
-    </iframe>
-    <p>📞 WhatsApp: <a href="https://wa.me/917093242271" style="color:#25d366; text-decoration:none;">+91 7093242271</a></p>
-  </footer>
+      <!-- Bakery -->
+      <div class="product">
+        <img src="assets/bakery.jpg" alt="Bakery">
+        <h3>Bakery</h3>
+        <p>₹50 / item</p>
+        <button onclick="addToCart('Bakery', 50)">Add to Cart</button>
+      </div>
+
+      <!-- Bread -->
+      <div class="product">
+        <img src="assets/bread.jpg" alt="Bread">
+        <h3>Bread</h3>
+        <p>₹40 / pack</p>
+        <button onclick="addToCart('Bread', 40)">Add to Cart</button>
+      </div>
+
+      <!-- Cold Drink -->
+      <div class="product">
+        <img src="assets/cold_drink.jpg" alt="Cold Drink">
+        <h3>Cold Drink</h3>
+        <p>₹35 / bottle</p>
+        <button onclick="addToCart('Cold Drink', 35)">Add to Cart</button>
+      </div>
+
+      <!-- Dairy -->
+      <div class="product">
+        <img src="assets/dairy.jpg" alt="Dairy">
+        <h3>Dairy</h3>
+        <p>₹60 / pack</p>
+        <button onclick="addToCart('Dairy', 60)">Add to Cart</button>
+      </div>
+
+      <!-- Fruits -->
+      <div class="product">
+        <img src="assets/fruits.jpg" alt="Fruits">
+        <h3>Fruits</h3>
+        <p>₹120 / kg</p>
+        <button onclick="addToCart('Fruits', 120)">Add to Cart</button>
+      </div>
+
+      <!-- Groceries -->
+      <div class="product">
+        <img src="assets/groceries.jpg" alt="Groceries">
+        <h3>Groceries</h3>
+        <p>₹80 / pack</p>
+        <button onclick="addToCart('Groceries', 80)">Add to Cart</button>
+      </div>
+
+      <!-- Medicines -->
+      <div class="product">
+        <img src="assets/medicines.jpg" alt="Medicines">
+        <h3>Medicines</h3>
+        <p>₹100 / item</p>
+        <button onclick="addToCart('Medicines', 100)">Add to Cart</button>
+      </div>
+
+      <!-- Milk -->
+      <div class="product">
+        <img src="assets/milk.jpg" alt="Milk">
+        <h3>Milk</h3>
+        <p>₹50 / litre</p>
+        <button onclick="addToCart('Milk', 50)">Add to Cart</button>
+      </div>
+
+      <!-- Oil -->
+      <div class="product">
+        <img src="assets/oil.jpg" alt="Oil">
+        <h3>Oil</h3>
+        <p>₹140 / litre</p>
+        <button onclick="addToCart('Oil', 140)">Add to Cart</button>
+      </div>
+
+      <!-- Rice -->
+      <div class="product">
+        <img src="assets/rice.jpg" alt="Rice">
+        <h3>Rice</h3>
+        <p>₹60 / kg</p>
+        <button onclick="addToCart('Rice', 60)">Add to Cart</button>
+      </div>
+
+      <!-- Snacks -->
+      <div class="product">
+        <img src="assets/snacks.jpg" alt="Snacks">
+        <h3>Snacks</h3>
+        <p>₹30 / pack</p>
+        <button onclick="addToCart('Snacks', 30)">Add to Cart</button>
+      </div>
+
+      <!-- Sugar -->
+      <div class="product">
+        <img src="assets/sugar.jpg" alt="Sugar">
+        <h3>Sugar</h3>
+        <p>₹45 / kg</p>
+        <button onclick="addToCart('Sugar', 45)">Add to Cart</button>
+      </div>
+
+      <!-- Tea -->
+      <div class="product">
+        <img src="assets/tea.jpg" alt="Tea">
+        <h3>Tea</h3>
+        <p>₹70 / pack</p>
+        <button onclick="addToCart('Tea', 70)">Add to Cart</button>
+      </div>
+
+      <!-- Vegetables -->
+      <div class="product">
+        <img src="assets/vegetables.jpg" alt="Vegetables">
+        <h3>Vegetables</h3>
+        <p>₹40 / kg</p>
+        <button onclick="addToCart('Vegetables', 40)">Add to Cart</button>
+      </div>
+
+    </div>
+  </section>
 
   <!-- Floating WhatsApp -->
-  <a href="https://wa.me/917093242271" class="whatsapp-float">💬</a>
+  <a href="https://wa.me/917093242271" class="whatsapp-float" target="_blank">
+    💬
+  </a>
 
   <script src="shop.js"></script>
 </body>
