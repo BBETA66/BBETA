@@ -7,81 +7,39 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+  <!-- Header -->
   <header>
-    <h1>🛒 Your Cart</h1>
-    <a href="index.html">← Back to Shop</a>
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <a href="index.html" style="text-decoration:none; color:#000; font-weight:bold;">← Back to Shop</a>
+      <h1 style="font-size:20px;">🛒 Your Cart</h1>
+    </div>
   </header>
 
-  <main>
-    <div id="cart-items"></div>
-    <h2 id="cart-total">Total: ₹0</h2>
+  <!-- Cart Items -->
+  <section id="cart-items" style="margin:20px;">
+    <!-- Cart products will be loaded here -->
+  </section>
 
-    <div class="customer-info">
-      <input type="text" id="customerName" placeholder="Enter your name">
-      <input type="text" id="customerPhone" placeholder="Enter your phone">
-      <input type="text" id="customerAddress" placeholder="Enter delivery address">
-      <input type="text" id="customerMap" placeholder="Paste Google Maps link (optional)">
-    </div>
+  <!-- Total -->
+  <h2 id="total" style="margin:20px;">Total: ₹0</h2>
 
-    <button id="whatsapp-btn">📩 Send Order on WhatsApp</button>
-  </main>
+  <!-- Customer Info -->
+  <section style="margin:20px;">
+    <h3>Customer Details</h3>
+    <input type="text" id="customerName" placeholder="Enter your name"><br><br>
+    <input type="text" id="customerPhone" placeholder="Enter your phone"><br><br>
+    <input type="text" id="customerAddress" placeholder="Enter delivery address"><br><br>
+    <input type="text" id="customerLocation" placeholder="Paste Google Maps link (optional)">
+  </section>
 
-  <script>
-    function loadCart() {
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      const cartItemsDiv = document.getElementById("cart-items");
-      cartItemsDiv.innerHTML = "";
-      let total = 0;
+  <!-- WhatsApp Button -->
+  <div style="text-align:center; margin:20px;">
+    <button onclick="sendOrder()" style="background:#25D366; color:white; padding:15px 25px; border:none; border-radius:10px; font-size:18px;">
+      📩 Send Order on WhatsApp
+    </button>
+  </div>
 
-      cart.forEach((item, index) => {
-        let subTotal = item.price * item.qty;
-        total += subTotal;
-
-        const itemDiv = document.createElement("div");
-        itemDiv.className = "cart-item";
-        itemDiv.innerHTML = `
-          ${item.name} - ₹${item.price} × ${item.qty} = ₹${subTotal}
-          <button onclick="removeItem(${index})">❌ Remove</button>
-        `;
-        cartItemsDiv.appendChild(itemDiv);
-      });
-
-      document.getElementById("cart-total").innerText = "Total: ₹" + total;
-    }
-
-    function removeItem(index) {
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      cart.splice(index, 1);
-      localStorage.setItem("cart", JSON.stringify(cart));
-      loadCart();
-    }
-
-    document.getElementById("whatsapp-btn").addEventListener("click", function () {
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      if (cart.length === 0) {
-        alert("Your cart is empty!");
-        return;
-      }
-
-      let name = document.getElementById("customerName").value;
-      let phone = document.getElementById("customerPhone").value;
-      let address = document.getElementById("customerAddress").value;
-      let map = document.getElementById("customerMap").value;
-
-      let orderText = `🛍️ New Order:%0A-------------------%0A`;
-      cart.forEach(item => {
-        orderText += `${item.name} × ${item.qty} = ₹${item.price * item.qty}%0A`;
-      });
-
-      let total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-      orderText += `-------------------%0ATotal: ₹${total}%0A%0A`;
-      orderText += `👤 Name: ${name}%0A📞 Phone: ${phone}%0A📍 Address: ${address}%0A🌐 Map: ${map}`;
-
-      let whatsappUrl = `https://wa.me/917093242271?text=${orderText}`;
-      window.open(whatsappUrl, "_blank");
-    });
-
-    window.onload = loadCart;
-  </script>
+  <script src="cart.js"></script>
 </body>
 </html>
