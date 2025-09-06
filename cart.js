@@ -1,109 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Cart</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    body {
-      background: #f8f9fa;
-    }
-    .header {
-      background: #007bff;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
-    .cart-item {
-      background: white;
-      padding: 12px;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    .total {
-      font-size: 1.3rem;
-      font-weight: bold;
-      color: green;
-      margin-top: 10px;
-    }
-    .whatsapp-btn {
-      background: #25d366;
-      color: white;
-      font-size: 1.2rem;
-      padding: 12px;
-      border-radius: 8px;
-      border: none;
-      width: 100%;
-    }
-    .whatsapp-btn:hover {
-      background: #1ebe5a;
-    }
-  </style>
-</head>
-<body>
-  <div class="header">
-    <h2>🛒 Your Cart</h2>
-    <a href="index.html" class="btn btn-warning mt-2">← Back to Shop</a>
-  </div>
+// Load cart from localStorage
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let cartItems = document.getElementById("cart-items");
+let totalEl = document.getElementById("total");
 
-  <div class="container my-4">
-    <div id="cart-items"></div>
-    <div class="total" id="cart-total"></div>
+// Display Cart
+function renderCart() {
+  cartItems.innerHTML = "";
+  let total = 0;
 
-    <h5 class="mt-4">📝 Enter Your Details</h5>
-    <input type="tel" id="phone" class="form-control mb-2" placeholder="📞 Enter your phone number">
-    <input type="text" id="location" class="form-control mb-3" placeholder="📍 Enter your location">
+  if (cart.length === 0) {
+    cartItems.innerHTML = "<p>Your cart is empty!</p>";
+    totalEl.innerText = "Total: ₹0";
+    return;
+  }
 
-    <button class="whatsapp-btn" onclick="placeOrder()">
-      <i class="bi bi-whatsapp"></i> 📲 Place Order on WhatsApp
-    </button>
-  </div>
+  cart.forEach((item, index) => {
+    let price = item.price * item.qty;
+    total += price;
 
-  <script>
-    function loadCart() {
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      let cartItemsContainer = document.getElementById("cart-items");
-      let cartTotal = document.getElementById("cart-total");
+    cartItems.innerHTML += `
+      <div style="border-bottom:1px solid #ddd; padding:10px;">
+        ${item.name} × ${item.qty} = ₹${price}
+        <button onclick="removeItem(${index})" style="color:red; margin-left:10px;">❌ Remove</button>
+      </div>
+    `;
+  });
 
-      cartItemsContainer.innerHTML = "";
-      let total = 0;
+  totalEl.innerText = "Total: ₹" + total;
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
 
-      cart.forEach(item => {
-        let itemDiv = document.createElement("div");
-        itemDiv.classList.add("cart-item");
-        itemDiv.innerHTML = `${item.quantity} x ${item.name} = ₹${item.price * item.quantity}`;
-        cartItemsContainer.appendChild(itemDiv);
+// Remove item
+function removeItem(index) {
+  cart.splice(index, 1);
+  renderCart();
+}
 
-        total += item.price * item.quantity;
-      });
+// Send order via WhatsApp
+function sendOrder() {
+  let name = document.getElementById("customerName").value;
+  let phone = document.getElementById("customerPhone").value;
+  let address = document.getElementById("customerAddress").value;
+  let location = document.getElementById("customerLocation").value;
 
-      cartTotal.innerHTML = `Total: ₹${total}`;
-    }
+  if (!name || !phone || !address) {
+    alert("Please fill in all required fields.");
+    return;
+  }
 
-    function placeOrder() {
-      let phone = document.getElementById("phone").value;
-      let location = document.getElementById("location").value;
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let orderText = `🛒 *New Order from BBETA Shop* \n\n`;
+  cart.forEach(item => {
+    orderText += `• ${item.name} × ${item.qty} = ₹${item.price * item.qty}\n`;
+  });
+  orderText += `\nTotal: ${totalEl.innerText}\n\n👤 Name: ${name}\n📞 Phone: ${phone}\n🏠 Address: ${address}\n📍 Location: ${location}`;
 
-      if (!phone || !location) {
-        alert("Please enter your phone number and location.");
-        return;
-      }
+  let whatsappURL = `https://wa.me/91XXXXXXXXXX?text=${encodeURIComponent(orderText)}`;
+  window.open(whatsappURL, "_blank");
+}
 
-      let orderDetails = "🛒 *New Order*%0A%0A";
-      cart.forEach(item => {
-        orderDetails += `${item.quantity} x ${item.name} = ₹${item.price * item.quantity}%0A`;
-      });
-      let total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-      orderDetails += `%0A*Total:* ₹${total}%0A%0A📞 Phone: ${phone}%0A📍 Location: ${location}`;
-
-      let whatsappURL = `https://wa.me/917093242271?text=${orderDetails}`;
-      window.open(whatsappURL, "_blank");
-    }
-
-    loadCart();
-  </script>
-</body>
-</html>
+// Initialize
+renderCart();
