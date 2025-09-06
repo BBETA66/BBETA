@@ -4,60 +4,47 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Your Cart - BBETA</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="cart.css">
 </head>
 <body>
+  <nav class="navbar navbar-dark bg-success p-3">
+    <span class="navbar-brand">🛒 BBETA - Your Cart</span>
+    <a href="index.html" class="btn btn-light">Back to Shop</a>
+  </nav>
 
-  <!-- Header -->
-  <header>
-    🛒 BBETA - Your Cart
-  </header>
+  <div class="container mt-4">
+    <div id="cart-items"></div>
+    <h4 class="mt-3">Total: ₹<span id="cart-total">0</span></h4>
 
-  <!-- Cart Container -->
-  <div class="cart-container">
-    <div id="cart-items">
-      <!-- Cart items will appear here -->
-    </div>
-
-    <!-- Cart Total -->
-    <p id="cart-total">Total: ₹0</p>
-
-    <!-- Customer Details -->
-    <div class="customer-details">
-      <label for="customer-name">👤 Name</label>
-      <input type="text" id="customer-name" placeholder="Enter your name" required>
-
-      <label for="customer-contact">📞 Contact Number</label>
-      <input type="text" id="customer-contact" placeholder="Enter your contact number" required>
-
-      <label for="customer-address">🏠 Address</label>
-      <textarea id="customer-address" rows="3" placeholder="Enter your delivery address" required></textarea>
-
-      <!-- GPS Button -->
-      <button id="gps-btn" onclick="getLocation()">📍 Use My GPS Location</button>
-      <input type="text" id="customer-location" placeholder="GPS Location" readonly>
-    </div>
-
-    <!-- Place Order -->
-    <button class="place-order-btn" onclick="placeOrder()">✅ Place Order on WhatsApp</button>
+    <form id="order-form" class="mt-3">
+      <div class="mb-2">
+        <label class="form-label">👤 Name</label>
+        <input type="text" id="customer-name" class="form-control" placeholder="Enter your name" required>
+      </div>
+      <div class="mb-2">
+        <label class="form-label">📞 Contact Number</label>
+        <input type="text" id="customer-phone" class="form-control" placeholder="Enter your contact number" required>
+      </div>
+      <div class="mb-2">
+        <label class="form-label">🏠 Address</label>
+        <textarea id="customer-address" class="form-control" placeholder="Enter your delivery address"></textarea>
+      </div>
+      <div class="mb-2">
+        <button type="button" class="btn btn-primary" onclick="getLocation()">📍 Use My GPS Location</button>
+        <input type="text" id="gps-location" class="form-control mt-2" placeholder="GPS Location">
+      </div>
+      <button type="button" class="btn btn-success w-100" onclick="sendToWhatsApp()">✅ Place Order on WhatsApp</button>
+    </form>
   </div>
 
-  <!-- Google Map Section -->
-  <div class="cart-container" style="margin-top:20px;">
-    <h3>📍 Our Location</h3>
-    <iframe 
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3805.8491127896724!2d79.26356427485021!3d17.057541983847895!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a34a31b79e0533f%3A0xe7af77e6c2f3dd6c!2sNalgonda%2C%20Telangana%20508001!5e0!3m2!1sen!2sin!4v1693924505178!5m2!1sen!2sin" 
-      width="100%" 
-      height="300" 
-      style="border:0;" 
-      allowfullscreen="" 
-      loading="lazy">
-    </iframe>
+  <div class="container mt-4">
+    <h5>📍 Our Location</h5>
+    <iframe src="https://www.google.com/maps?q=Nalgonda,Telangana,508001&output=embed" width="100%" height="250" style="border:0;" allowfullscreen></iframe>
   </div>
 
-  <!-- Floating WhatsApp -->
-  <a href="https://wa.me/917093242271" class="whatsapp-float" target="_blank">
-    💬
+  <a href="https://wa.me/917093242271" class="whatsapp-float">
+    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="40" alt="WhatsApp">
   </a>
 
   <script src="shop.js"></script>
