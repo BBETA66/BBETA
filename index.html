@@ -25,7 +25,7 @@
     }
     .shop-container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 20px;
       padding: 20px;
     }
@@ -38,7 +38,7 @@
     }
     .product img {
       width: 100%;
-      max-height: 180px;
+      max-height: 160px;
       object-fit: contain;
       border-radius: 10px;
     }
@@ -103,11 +103,91 @@
       </div>
 
       <div class="product">
+        <img src="assets/fruits.jpg" alt="Fruits">
+        <h3>Fruits</h3>
+        <p>₹50 / kg</p>
+        <input type="number" id="fruQty" value="1" min="1">
+        <button class="btn" onclick="addToCart('Fruits',50,document.getElementById('fruQty').value)">Add to Cart</button>
+      </div>
+
+      <div class="product">
         <img src="assets/milk.jpg" alt="Milk">
         <h3>Milk</h3>
         <p>₹25 / litre</p>
         <input type="number" id="milkQty" value="1" min="1">
         <button class="btn" onclick="addToCart('Milk',25,document.getElementById('milkQty').value)">Add to Cart</button>
+      </div>
+
+      <div class="product">
+        <img src="assets/dairy.jpg" alt="Dairy Products">
+        <h3>Dairy Products</h3>
+        <p>₹80</p>
+        <input type="number" id="daiQty" value="1" min="1">
+        <button class="btn" onclick="addToCart('Dairy Products',80,document.getElementById('daiQty').value)">Add to Cart</button>
+      </div>
+
+      <div class="product">
+        <img src="assets/bakery.jpg" alt="Bakery">
+        <h3>Bakery</h3>
+        <p>₹120</p>
+        <input type="number" id="bakQty" value="1" min="1">
+        <button class="btn" onclick="addToCart('Bakery',120,document.getElementById('bakQty').value)">Add to Cart</button>
+      </div>
+
+      <div class="product">
+        <img src="assets/bread.jpg" alt="Bread">
+        <h3>Bread</h3>
+        <p>₹25</p>
+        <input type="number" id="breQty" value="1" min="1">
+        <button class="btn" onclick="addToCart('Bread',25,document.getElementById('breQty').value)">Add to Cart</button>
+      </div>
+
+      <div class="product">
+        <img src="assets/snacks.jpg" alt="Snacks">
+        <h3>Snacks</h3>
+        <p>₹40</p>
+        <input type="number" id="snaQty" value="1" min="1">
+        <button class="btn" onclick="addToCart('Snacks',40,document.getElementById('snaQty').value)">Add to Cart</button>
+      </div>
+
+      <div class="product">
+        <img src="assets/cold_drink.jpg" alt="Cold Drink">
+        <h3>Cold Drink</h3>
+        <p>₹35</p>
+        <input type="number" id="colQty" value="1" min="1">
+        <button class="btn" onclick="addToCart('Cold Drink',35,document.getElementById('colQty').value)">Add to Cart</button>
+      </div>
+
+      <div class="product">
+        <img src="assets/tea.jpg" alt="Tea">
+        <h3>Tea</h3>
+        <p>₹60</p>
+        <input type="number" id="teaQty" value="1" min="1">
+        <button class="btn" onclick="addToCart('Tea',60,document.getElementById('teaQty').value)">Add to Cart</button>
+      </div>
+
+      <div class="product">
+        <img src="assets/sugar.jpg" alt="Sugar">
+        <h3>Sugar</h3>
+        <p>₹45 / kg</p>
+        <input type="number" id="sugQty" value="1" min="1">
+        <button class="btn" onclick="addToCart('Sugar',45,document.getElementById('sugQty').value)">Add to Cart</button>
+      </div>
+
+      <div class="product">
+        <img src="assets/rice.jpg" alt="Rice">
+        <h3>Rice</h3>
+        <p>₹70 / kg</p>
+        <input type="number" id="ricQty" value="1" min="1">
+        <button class="btn" onclick="addToCart('Rice',70,document.getElementById('ricQty').value)">Add to Cart</button>
+      </div>
+
+      <div class="product">
+        <img src="assets/oil.jpg" alt="Oil">
+        <h3>Oil</h3>
+        <p>₹150 / litre</p>
+        <input type="number" id="oilQty" value="1" min="1">
+        <button class="btn" onclick="addToCart('Oil',150,document.getElementById('oilQty').value)">Add to Cart</button>
       </div>
 
     </div>
