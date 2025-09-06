@@ -1,41 +1,38 @@
-// shop.js
-
 const products = [
-  { name: "Fresh Fruits", price: 50, unit: "/kg", image: "images/fruits.jpg" },
-  { name: "Vegetables", price: 30, unit: "/kg", image: "images/vegetables.jpg" },
-  { name: "Bakery", price: 50, unit: "/item", image: "images/bakery.jpg" },
-  { name: "Bread", price: 30, unit: "/item", image: "images/bread.jpg" },
-  { name: "Cold Drink", price: 35, unit: "/bottle", image: "images/cold_drink.jpg" },
-  { name: "Dairy", price: 25, unit: "/litre", image: "images/milk.jpg" },
-  { name: "Snacks", price: 20, unit: "/packet", image: "images/snacks.jpg" },
-  { name: "Cooking Oil", price: 150, unit: "/litre", image: "images/oil.jpg" }
+  { id: 1, name: "Fresh Fruits", price: 50, image: "https://i.ibb.co/8m2tWgJ/fruits.jpg" },
+  { id: 2, name: "Vegetables", price: 30, image: "https://i.ibb.co/1ZcL2L7/vegetables.jpg" },
+  { id: 3, name: "Bakery", price: 80, image: "https://i.ibb.co/6bKQdX9/bakery.jpg" },
+  { id: 4, name: "Bread", price: 30, image: "https://i.ibb.co/3cG9NDb/bread.jpg" }
 ];
 
-function loadProducts() {
-  const shopContainer = document.getElementById("shop");
-  shopContainer.innerHTML = "";
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-  products.forEach((product, index) => {
-    const productCard = `
-      <div class="product-card">
-        <img src="${product.image}" alt="${product.name}">
-        <h3>${product.name}</h3>
-        <p>₹${product.price} ${product.unit}</p>
-        <input type="number" id="qty-${index}" value="1" min="1">
-        <button onclick="addToCart(${index})">Add to Cart</button>
-      </div>
-    `;
-    shopContainer.innerHTML += productCard;
-  });
-}
+const shopContainer = document.getElementById("shop");
 
-function addToCart(index) {
-  const qty = parseInt(document.getElementById(`qty-${index}`).value);
-  const product = products[index];
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  cart.push({ ...product, qty });
+products.forEach(product => {
+  const card = document.createElement("div");
+  card.classList.add("product-card");
+  card.innerHTML = `
+    <img src="${product.image}" alt="${product.name}">
+    <h3>${product.name}</h3>
+    <p>₹${product.price} / kg</p>
+    <input type="number" id="qty-${product.id}" min="1" value="1">
+    <button onclick="addToCart(${product.id})">Add to Cart</button>
+  `;
+  shopContainer.appendChild(card);
+});
+
+function addToCart(id) {
+  const qty = parseInt(document.getElementById(`qty-${id}`).value);
+  const product = products.find(p => p.id === id);
+  const existing = cart.find(item => item.id === id);
+
+  if (existing) {
+    existing.qty += qty;
+  } else {
+    cart.push({ ...product, qty });
+  }
+
   localStorage.setItem("cart", JSON.stringify(cart));
-  alert(`${product.name} added to cart!`);
+  alert(product.name + " added to cart!");
 }
-
-window.onload = loadProducts;
