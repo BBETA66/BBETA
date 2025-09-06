@@ -1,89 +1,91 @@
-// Load cart from localStorage
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let cart = [];
 
-// Add to cart function
-function addToCart(productName, price) {
-  const item = cart.find(p => p.name === productName);
+// Add item to cart
+function addToCart(name, price) {
+  const item = cart.find(product => product.name === name);
   if (item) {
-    item.quantity += 1;
+    item.quantity++;
   } else {
-    cart.push({ name: productName, price: price, quantity: 1 });
+    cart.push({ name, price, quantity: 1 });
   }
-  localStorage.setItem("cart", JSON.stringify(cart));
-  alert(productName + " added to cart!");
+  updateCart();
 }
 
-// Display cart items
-function displayCart() {
+// Remove item from cart
+function removeFromCart(name) {
+  cart = cart.filter(product => product.name !== name);
+  updateCart();
+}
+
+// Update cart display
+function updateCart() {
   const cartItemsContainer = document.getElementById("cart-items");
-  const totalPriceEl = document.getElementById("total-price");
-
-  if (!cartItemsContainer) return;
-
+  const cartTotal = document.getElementById("cart-total");
   cartItemsContainer.innerHTML = "";
+
   let total = 0;
 
-  cart.forEach((item, index) => {
-    const itemEl = document.createElement("div");
-    itemEl.classList.add("cart-item");
-    itemEl.innerHTML = `
-      <p><strong>${item.name}</strong> - ₹${item.price} × ${item.quantity}</p>
-      <button onclick="removeFromCart(${index})">❌ Remove</button>
+  cart.forEach(item => {
+    const itemElement = document.createElement("div");
+    itemElement.classList.add("cart-item");
+    itemElement.innerHTML = `
+      <p>${item.name} (x${item.quantity}) - ₹${item.price * item.quantity}</p>
+      <button onclick="removeFromCart('${item.name}')">❌ Remove</button>
     `;
-    cartItemsContainer.appendChild(itemEl);
+    cartItemsContainer.appendChild(itemElement);
     total += item.price * item.quantity;
   });
 
-  totalPriceEl.innerText = total;
+  cartTotal.textContent = total;
 }
 
-// Remove item
-function removeFromCart(index) {
-  cart.splice(index, 1);
-  localStorage.setItem("cart", JSON.stringify(cart));
-  displayCart();
-}
-
-// GPS location
+// Get GPS Location
 function getLocation() {
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition((pos) => {
-      const lat = pos.coords.latitude;
-      const lon = pos.coords.longitude;
-      document.getElementById("address").value = `https://www.google.com/maps?q=${lat},${lon}`;
-    });
+    navigator.geolocation.getCurrentPosition(showPosition, showError);
   } else {
-    alert("Geolocation not supported");
+    alert("Geolocation is not supported by this browser.");
   }
 }
 
-// Confirm order via WhatsApp
-const form = document.getElementById("customer-form");
-if (form) {
-  form.addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    const name = document.getElementById("name").value;
-    const address = document.getElementById("address").value;
-    const phone = document.getElementById("phone").value;
-
-    let message = `*New Order from BBETA*%0A%0A`;
-    message += `👤 Name: ${name}%0A`;
-    message += `📞 Phone: ${phone}%0A`;
-    message += `🏠 Address: ${address}%0A%0A`;
-    message += `🛒 *Order Details*%0A`;
-
-    cart.forEach(item => {
-      message += `- ${item.name} × ${item.quantity} = ₹${item.price * item.quantity}%0A`;
-    });
-
-    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    message += `%0A💰 Total: ₹${total}`;
-
-    const whatsappUrl = `https://wa.me/917093242271?text=${message}`;
-    window.open(whatsappUrl, "_blank");
-  });
+function showPosition(position) {
+  const gpsInput = document.getElementById("gps");
+  gpsInput.value = `https://www.google.com/maps?q=${position.coords.latitude},${position.coords.longitude}`;
 }
 
-// Show cart when opening cart.html
-displayCart();
+function showError(error) {
+  alert("Unable to fetch location. Please allow GPS access.");
+}
+
+// Send Order via WhatsApp
+function sendOrder() {
+  if (cart.length === 0) {
+    alert("Your cart is empty!");
+    return;
+  }
+
+  const name = document.getElementById("name").value;
+  const phone = document.getElementById("phone").value;
+  const address = document.getElementById("address").value;
+  const gps = document.getElementById("gps").value;
+
+  if (!name || !phone || !address) {
+    alert("Please fill all required details.");
+    return;
+  }
+
+  let orderDetails = "🛒 *New Order Received*\n\n";
+  cart.forEach(item => {
+    orderDetails += `• ${item.name} (x${item.quantity}) - ₹${item.price * item.quantity}\n`;
+  });
+
+  orderDetails += `\n💰 *Total:* ₹${document.getElementById("cart-total").textContent}\n\n`;
+  orderDetails += `👤 *Customer:* ${name}\n📞 *Phone:* ${phone}\n🏠 *Address:* ${address}\n`;
+
+  if (gps) {
+    orderDetails += `📍 *Location:* ${gps}\n`;
+  }
+
+  const whatsappURL = `https://wa.me/917093242271?text=${encodeURIComponent(orderDetails)}`;
+  window.open(whatsappURL, "_blank");
+}
