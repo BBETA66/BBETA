@@ -1,62 +1,61 @@
-/* ========== General ========== */
-body {
-  font-family: Arial, sans-serif;
+/* General Reset */
+* {
   margin: 0;
   padding: 0;
-  background: #f9f9f9;
-  color: #333;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
-/* ========== Header ========== */
+body {
+  background: #f8f9fa;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Header */
 header {
-  background: #4CAF50;
+  background: #007bff;
   color: white;
   padding: 15px;
   text-align: center;
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 header h1 {
-  margin: 0;
   font-size: 28px;
 }
 
 header p {
-  margin: 5px 0;
   font-size: 16px;
 }
 
 .cart-link {
-  position: absolute;
-  right: 15px;
-  top: 15px;
-  background: white;
-  color: #4CAF50;
-  padding: 8px 15px;
-  border-radius: 5px;
+  background: #ffc107;
+  color: #000;
   text-decoration: none;
+  padding: 8px 15px;
+  border-radius: 8px;
+  margin-top: 10px;
+  display: inline-block;
   font-weight: bold;
 }
 
-.cart-link:hover {
-  background: #e8f5e9;
-}
-
-/* ========== Products ========== */
+/* Product Grid */
 .products {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 15px;
+  gap: 20px;
   padding: 20px;
 }
 
 .product {
   background: white;
-  border: 1px solid #ddd;
-  padding: 15px;
-  text-align: center;
   border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  padding: 15px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  text-align: center;
   transition: transform 0.2s;
 }
 
@@ -66,124 +65,129 @@ header p {
 
 .product img {
   width: 100%;
-  max-height: 150px;
+  height: 160px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 10px;
+  margin-bottom: 10px;
 }
 
 .product h2 {
   font-size: 18px;
-  margin: 10px 0;
+  margin-bottom: 5px;
 }
 
 .product p {
   font-size: 16px;
-  margin: 5px 0;
-  color: #555;
+  margin-bottom: 10px;
+  color: #28a745;
+  font-weight: bold;
 }
 
-.product input {
+.product input.qty {
   width: 60px;
   padding: 5px;
-  margin: 5px 0;
+  margin-right: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
 }
 
 .product button {
-  background: #4CAF50;
+  background: #007bff;
   color: white;
   border: none;
-  padding: 8px 15px;
-  border-radius: 5px;
+  padding: 8px 12px;
+  border-radius: 6px;
   cursor: pointer;
   font-size: 14px;
+  transition: background 0.3s;
 }
 
 .product button:hover {
-  background: #45a049;
+  background: #0056b3;
 }
 
-/* ========== Cart Page ========== */
-#cart-items {
-  padding: 20px;
-}
-
+/* Cart Page */
 .cart-item {
   background: white;
-  margin-bottom: 10px;
+  margin: 10px 0;
   padding: 10px;
   border-radius: 8px;
-  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .cart-total {
   font-size: 18px;
   font-weight: bold;
-  padding: 15px;
+  margin-top: 15px;
   text-align: right;
+  color: #28a745;
 }
 
-/* ========== Customer Details ========== */
+/* Customer Details */
 .customer-details {
-  background: #fff;
-  padding: 20px;
-  margin: 20px;
+  background: white;
+  margin: 20px 0;
+  padding: 15px;
   border-radius: 10px;
-  border: 1px solid #ddd;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 .customer-details h3 {
   margin-bottom: 10px;
+  font-size: 18px;
 }
 
 .customer-details input {
   display: block;
   width: 100%;
+  margin: 8px 0;
   padding: 10px;
-  margin-bottom: 12px;
+  font-size: 16px;
   border: 1px solid #ccc;
-  border-radius: 6px;
+  border-radius: 8px;
 }
 
-/* ========== WhatsApp Button ========== */
+/* WhatsApp Button */
 .whatsapp-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #25D366;
+  background-color: #25d366;
   color: white;
   border: none;
-  padding: 12px 20px;
-  border-radius: 8px;
+  padding: 12px 18px;
   font-size: 16px;
+  font-weight: bold;
+  border-radius: 10px;
   cursor: pointer;
-  margin: 20px auto;
-  width: 90%;
-  max-width: 400px;
-}
-
-.whatsapp-btn img {
-  width: 20px;
-  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  transition: background 0.3s;
 }
 
 .whatsapp-btn:hover {
-  background: #20b954;
+  background-color: #1da851;
 }
 
-/* ========== Floating WhatsApp Icon ========== */
+.whatsapp-btn img {
+  width: 22px;
+  height: 22px;
+}
+
+/* Floating WhatsApp Icon */
 .floating-whatsapp {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  width: 60px;
-  height: 60px;
-  background: #25D366;
+  background: #25d366;
+  padding: 12px;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: transform 0.2s;
+}
+
+.floating-whatsapp:hover {
+  transform: scale(1.1);
 }
 
 .floating-whatsapp img {
@@ -191,15 +195,15 @@ header p {
   height: 35px;
 }
 
-/* ========== Footer ========== */
+/* Footer */
 footer {
-  background: #333;
+  text-align: center;
+  background: #343a40;
   color: white;
   padding: 20px;
-  text-align: center;
+  margin-top: 20px;
 }
 
 footer h2 {
-  margin-top: 15px;
-  font-size: 18px;
+  margin: 10px 0;
 }
