@@ -3,35 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Cart</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <title>Your Cart - BBETA</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-light">
+<body>
+  <header>
+    <h1>Your Cart</h1>
+    <a href="index.html">⬅ Back to Shop</a>
+  </header>
 
-  <!-- Header -->
-  <nav class="navbar navbar-dark bg-success mb-4">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="index.html">🛍️ My Shop</a>
+  <main>
+    <div id="cart-items"></div>
+    <h2 id="cart-total">Total: ₹0</h2>
+
+    <!-- Customer Info -->
+    <div class="customer-info">
+      <label>👤 Name:</label>
+      <input type="text" id="customer-name" placeholder="Enter your name" required>
+
+      <label>📱 Phone:</label>
+      <input type="text" id="customer-phone" placeholder="Enter your phone" required>
+
+      <label>📍 Address:</label>
+      <input type="text" id="customer-address" placeholder="Enter delivery address" required>
+
+      <label>🌐 GPS Location:</label>
+      <input type="text" id="customer-gps" placeholder="Paste Google Maps link (optional)">
     </div>
-  </nav>
 
-  <!-- Cart Section -->
-  <div class="container">
-    <h2 class="mb-3">🛒 Your Cart</h2>
-    <div id="cart-items" class="mb-3"></div>
-    <div id="cart-total" class="fw-bold mb-4"></div>
-
-    <!-- Customer Details -->
-    <div class="card shadow p-3">
-      <h4>✏️ Enter Your Details</h4>
-      <input type="text" id="customer-name" class="form-control mb-2" placeholder="Enter your name">
-      <input type="text" id="customer-phone" class="form-control mb-2" placeholder="Enter your phone number">
-      <input type="text" id="customer-location" class="form-control mb-3" placeholder="Enter your location">
-      <button class="btn btn-success w-100" onclick="placeOrder()">
-        📲 Place Order on WhatsApp
-      </button>
-    </div>
-  </div>
+    <!-- WhatsApp Order -->
+    <button class="whatsapp-btn" onclick="placeOrder()">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"> Place Order on WhatsApp
+    </button>
+  </main>
 
   <script src="shop.js"></script>
 </body>
