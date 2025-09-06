@@ -3,162 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BBETA - Apka Apna Bada Beta</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <title>BBETA Online Shop</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="cart.css">
   <style>
-    .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
+    .product-card img { height: 200px; object-fit: cover; }
+    .whatsapp-float {
+      position: fixed; bottom: 20px; right: 20px;
+      background: #25D366; color: white;
+      border-radius: 50%; padding: 15px;
+      font-size: 28px; z-index: 999;
     }
-    .product {
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      padding: 15px;
-      text-align: center;
-      background: #fff;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-    .product img {
-      width: 100%;
-      height: 150px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-    header {
-      text-align: center;
-      padding: 20px;
-      background: #28a745;
-      color: #fff;
-    }
-    .cart-link {
-      position: absolute;
-      right: 20px;
-      top: 20px;
-      font-weight: bold;
-      color: #fff;
-      text-decoration: none;
-    }
-    .floating-whatsapp {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 999;
-    }
-    footer {
-      margin-top: 40px;
-      background: #f8f9fa;
-      padding: 20px;
-      text-align: center;
-    }
+    .map-container { height: 300px; }
   </style>
 </head>
 <body>
-  <!-- Floating WhatsApp -->
-  <a href="https://wa.me/917093242271" class="floating-whatsapp" target="_blank">
-    <img src="assets/whatsapp.png" width="60" height="60" alt="WhatsApp">
-  </a>
+  <nav class="navbar navbar-light bg-light p-3">
+    <span class="navbar-brand mb-0 h1">🛒 BBETA Online Shop</span>
+    <a href="cart.html" class="btn btn-success">View Cart</a>
+  </nav>
 
-  <header>
-    <h1>BBETA</h1>
-    <p>Apka Apna Bada Beta 🛒</p>
-    <a href="cart.html" class="cart-link">🛒 Cart</a>
-  </header>
+  <div class="container mt-4">
+    <div id="product-list" class="row g-4"></div>
+  </div>
 
-  <main class="container my-4">
-    <div class="products">
-      <!-- Product List -->
-      <div class="product">
-        <img src="assets/fruits.jpg" alt="Fresh Apples">
-        <h2>Fresh Apples</h2>
-        <p>₹50 / kg</p>
-        <input type="number" value="1" min="1" class="qty">
-        <button class="btn btn-success mt-2" onclick="addToCart('Fresh Apples', 50, this)">Add to Cart</button>
-      </div>
-
-      <div class="product">
-        <img src="assets/vegetables.jpg" alt="Tomatoes">
-        <h2>Tomatoes</h2>
-        <p>₹30 / kg</p>
-        <input type="number" value="1" min="1" class="qty">
-        <button class="btn btn-success mt-2" onclick="addToCart('Tomatoes', 30, this)">Add to Cart</button>
-      </div>
-
-      <div class="product">
-        <img src="assets/rice.jpg" alt="Rice">
-        <h2>Rice</h2>
-        <p>₹60 / kg</p>
-        <input type="number" value="1" min="1" class="qty">
-        <button class="btn btn-success mt-2" onclick="addToCart('Rice', 60, this)">Add to Cart</button>
-      </div>
-
-      <div class="product">
-        <img src="assets/sugar.jpg" alt="Sugar">
-        <h2>Sugar</h2>
-        <p>₹40 / kg</p>
-        <input type="number" value="1" min="1" class="qty">
-        <button class="btn btn-success mt-2" onclick="addToCart('Sugar', 40, this)">Add to Cart</button>
-      </div>
-
-      <div class="product">
-        <img src="assets/oil.jpg" alt="Cooking Oil">
-        <h2>Cooking Oil</h2>
-        <p>₹150 / litre</p>
-        <input type="number" value="1" min="1" class="qty">
-        <button class="btn btn-success mt-2" onclick="addToCart('Cooking Oil', 150, this)">Add to Cart</button>
-      </div>
-
-      <div class="product">
-        <img src="assets/milk.jpg" alt="Milk">
-        <h2>Milk</h2>
-        <p>₹25 / litre</p>
-        <input type="number" value="1" min="1" class="qty">
-        <button class="btn btn-success mt-2" onclick="addToCart('Milk', 25, this)">Add to Cart</button>
-      </div>
-
-      <div class="product">
-        <img src="assets/bread.jpg" alt="Bread">
-        <h2>Bread</h2>
-        <p>₹30 / pack</p>
-        <input type="number" value="1" min="1" class="qty">
-        <button class="btn btn-success mt-2" onclick="addToCart('Bread', 30, this)">Add to Cart</button>
-      </div>
-
-      <div class="product">
-        <img src="assets/tea.jpg" alt="Tea">
-        <h2>Tea</h2>
-        <p>₹120 / 250g</p>
-        <input type="number" value="1" min="1" class="qty">
-        <button class="btn btn-success mt-2" onclick="addToCart('Tea', 120, this)">Add to Cart</button>
-      </div>
-
-      <div class="product">
-        <img src="assets/snacks.jpg" alt="Snacks">
-        <h2>Snacks</h2>
-        <p>₹20 / pack</p>
-        <input type="number" value="1" min="1" class="qty">
-        <button class="btn btn-success mt-2" onclick="addToCart('Snacks', 20, this)">Add to Cart</button>
-      </div>
-
-      <div class="product">
-        <img src="assets/cold_drink.jpg" alt="Cold Drink">
-        <h2>Cold Drink</h2>
-        <p>₹35 / bottle</p>
-        <input type="number" value="1" min="1" class="qty">
-        <button class="btn btn-success mt-2" onclick="addToCart('Cold Drink', 35, this)">Add to Cart</button>
-      </div>
+  <footer class="bg-dark text-white text-center p-3 mt-5">
+    <p>📍 Location: Nalgonda, Telangana 508001</p>
+    <p>📞 WhatsApp: <a href="https://wa.me/917093242271" class="text-white">7093242271</a></p>
+    <div class="map-container">
+      <iframe src="https://www.google.com/maps?q=Nalgonda,Telangana,508001&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen></iframe>
     </div>
-  </main>
-
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 BBETA - Apka Apna Bada Beta</p>
-    <h2>📍 Our Location</h2>
-    <p>Nalgonda, Telangana 508001</p>
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!..." 
-      width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy">
-    </iframe>
+    <p class="mt-3">© 2025 BBETA Online Shop | All Rights Reserved</p>
   </footer>
+
+  <a href="https://wa.me/917093242271" class="whatsapp-float">
+    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="40" alt="WhatsApp">
+  </a>
 
   <script src="shop.js"></script>
 </body>
