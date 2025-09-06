@@ -4,167 +4,113 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BBETA Online Shop</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    body {
-      background: #f8f9fa;
-    }
-    .product-card {
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      margin-bottom: 20px;
-    }
-    .product-card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-top-left-radius: 10px;
-      border-top-right-radius: 10px;
-    }
-    .product-card .card-body {
-      text-align: center;
-    }
-    .navbar-brand {
-      font-weight: bold;
-    }
-    .footer {
-      background: #343a40;
-      color: white;
-      padding: 20px 0;
-      text-align: center;
-      margin-top: 30px;
-    }
-    .whatsapp-logo {
-      width: 60px;
-    }
+    body { background: #f8f9fa; }
+    .product-card { border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .product-card img { border-radius: 12px 12px 0 0; height: 200px; object-fit: cover; }
+    footer { margin-top: 30px; padding: 20px; background: #343a40; color: #fff; text-align: center; border-radius: 12px; }
+    .modal-content { border-radius: 15px; }
+    .modal-body img { width: 120px; cursor: pointer; }
   </style>
 </head>
 <body>
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-light bg-light shadow-sm mb-4">
+  <!-- Header -->
+  <nav class="navbar navbar-light bg-light shadow-sm">
     <div class="container">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand fw-bold" href="#">
         🛍️ BBETA Online Shop
       </a>
-      <a href="cart.html" class="btn btn-outline-primary">🛒 Cart</a>
+      <a href="cart.html" class="btn btn-success">🛒 View Cart</a>
     </div>
   </nav>
 
-  <!-- Products -->
-  <div class="container">
-    <div class="row">
+  <div class="container my-4">
+    <div class="row" id="product-list">
+      <!-- Products will be inserted here -->
+    </div>
+  </div>
 
-      <!-- Medicines -->
-      <div class="col-md-4">
-        <div class="card product-card">
-          <img src="assets/medicines.jpg" alt="Medicines">
-          <div class="card-body">
-            <h5 class="card-title">Medicines</h5>
-            <p>₹100</p>
-            <input type="number" value="1" min="1" class="form-control mb-2">
-            <button class="btn btn-success">Add to Cart</button>
-          </div>
+  <!-- WhatsApp Modal -->
+  <div class="modal fade" id="whatsappModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content text-center">
+        <div class="modal-header">
+          <h5 class="modal-title">📞 Contact us on WhatsApp</h5>
+        </div>
+        <div class="modal-body">
+          <p>Click the logo to chat with us!</p>
+          <a href="https://wa.me/917093242271" target="_blank">
+            <img src="assets/logo.png" alt="BBETA WhatsApp">
+          </a>
         </div>
       </div>
-
-      <!-- Fruits -->
-      <div class="col-md-4">
-        <div class="card product-card">
-          <img src="assets/fruits.jpg" alt="Fruits">
-          <div class="card-body">
-            <h5 class="card-title">Fruits</h5>
-            <p>₹150</p>
-            <input type="number" value="1" min="1" class="form-control mb-2">
-            <button class="btn btn-success">Add to Cart</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Vegetables -->
-      <div class="col-md-4">
-        <div class="card product-card">
-          <img src="assets/vegetables.jpg" alt="Vegetables">
-          <div class="card-body">
-            <h5 class="card-title">Vegetables</h5>
-            <p>₹80</p>
-            <input type="number" value="1" min="1" class="form-control mb-2">
-            <button class="btn btn-success">Add to Cart</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Groceries -->
-      <div class="col-md-4">
-        <div class="card product-card">
-          <img src="assets/groceries.jpg" alt="Groceries">
-          <div class="card-body">
-            <h5 class="card-title">Groceries</h5>
-            <p>₹200</p>
-            <input type="number" value="1" min="1" class="form-control mb-2">
-            <button class="btn btn-success">Add to Cart</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Electronics -->
-      <div class="col-md-4">
-        <div class="card product-card">
-          <img src="assets/electronics.jpg" alt="Electronics">
-          <div class="card-body">
-            <h5 class="card-title">Electronics</h5>
-            <p>₹500</p>
-            <input type="number" value="1" min="1" class="form-control mb-2">
-            <button class="btn btn-success">Add to Cart</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Clothing -->
-      <div class="col-md-4">
-        <div class="card product-card">
-          <img src="assets/clothing.jpg" alt="Clothing">
-          <div class="card-body">
-            <h5 class="card-title">Clothing</h5>
-            <p>₹300</p>
-            <input type="number" value="1" min="1" class="form-control mb-2">
-            <button class="btn btn-success">Add to Cart</button>
-          </div>
-        </div>
-      </div>
-
     </div>
   </div>
 
   <!-- Footer -->
-  <div class="footer">
-    <p>📍 Location: Nalgonda, Telangana, India</p>
-    <p>© 2025 BBETA Online Shop</p>
-  </div>
+  <footer>
+    <p>© 2025 BBETA Online Shop | All Rights Reserved</p>
+  </footer>
 
-  <!-- WhatsApp Modal -->
-  <div class="modal fade" id="whatsappModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content text-center p-4">
-        <h5>📞 Contact us on WhatsApp</h5>
-        <a href="https://wa.me/917093242271" target="_blank">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
-               alt="WhatsApp" class="whatsapp-logo mt-3">
-        </a>
-        <p class="mt-2">Click the logo to chat with us!</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
+    // Products list from assets
+    const products = [
+      { name: "Bakery", price: 150, image: "assets/bakery.jpg" },
+      { name: "Bread", price: 50, image: "assets/bread.jpg" },
+      { name: "Cold Drink", price: 40, image: "assets/cold_drink.jpg" },
+      { name: "Dairy", price: 120, image: "assets/dairy.jpg" },
+      { name: "Fruits", price: 200, image: "assets/fruits.jpg" },
+      { name: "Groceries", price: 250, image: "assets/groceries.jpg" },
+      { name: "Medicines", price: 100, image: "assets/medicines.jpg" },
+      { name: "Milk", price: 60, image: "assets/milk.jpg" },
+      { name: "Oil", price: 180, image: "assets/oil.jpg" },
+      { name: "Rice", price: 90, image: "assets/rice.jpg" },
+      { name: "Snacks", price: 70, image: "assets/snacks.jpg" },
+      { name: "Sugar", price: 45, image: "assets/sugar.jpg" },
+      { name: "Tea", price: 110, image: "assets/tea.jpg" },
+      { name: "Vegetables", price: 130, image: "assets/vegetables.jpg" }
+    ];
+
+    // Load products
+    const productList = document.getElementById("product-list");
+    products.forEach((p, index) => {
+      productList.innerHTML += `
+        <div class="col-md-3 mb-4">
+          <div class="card product-card">
+            <img src="${p.image}" class="card-img-top" alt="${p.name}">
+            <div class="card-body text-center">
+              <h5 class="card-title">${p.name}</h5>
+              <p class="card-text">₹${p.price}</p>
+              <input type="number" id="qty-${index}" value="1" min="1" class="form-control mb-2">
+              <button class="btn btn-success w-100" onclick="addToCart('${p.name}', ${p.price}, document.getElementById('qty-${index}').value)">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+
+    // Cart system
+    function addToCart(name, price, qty) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      let existing = cart.find(item => item.name === name);
+      if (existing) {
+        existing.qty += parseInt(qty);
+      } else {
+        cart.push({ name, price, qty: parseInt(qty) });
+      }
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert(`${name} added to cart!`);
+    }
+
     // Show WhatsApp modal on page load
     window.onload = function() {
-      var whatsappModal = new bootstrap.Modal(document.getElementById('whatsappModal'));
-      whatsappModal.show();
+      const myModal = new bootstrap.Modal(document.getElementById('whatsappModal'));
+      myModal.show();
     }
   </script>
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
