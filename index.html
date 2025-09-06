@@ -7,43 +7,27 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  <!-- Header Fixed -->
   <header>
-    <div style="display:flex; justify-content:space-between; align-items:center;">
-      <!-- Logo + Title -->
-      <div style="display:flex; align-items:center; gap:10px;">
-        <img src="logo.png" alt="BBETA Logo" style="height:40px; width:40px; border-radius:50%;">
-        <h1 style="font-size:20px;">BBETA Shop</h1>
-      </div>
-
-      <!-- Cart Button -->
-      <a href="cart.html" style="background:#ffc107; padding:8px 15px; border-radius:5px; color:#000; font-weight:bold;">
-        🛒 Cart
-      </a>
-    </div>
+    <h1>🛒 BBETA Online Shop</h1>
   </header>
 
-  <!-- Shop Section -->
-  <section id="shop">
-    <div class="product-card">
-      <img src="images/bread.jpg" alt="Bread">
-      <h3>Bread</h3>
-      <p>₹30</p>
-      <input type="number" min="1" value="1" id="qty-bread">
-      <button onclick="addToCart('Bread',30,document.getElementById('qty-bread').value)">Add to Cart</button>
-    </div>
+  <main id="shop"></main>
 
-    <div class="product-card">
-      <img src="images/bakery.jpg" alt="Bakery">
-      <h3>Bakery</h3>
-      <p>₹50</p>
-      <input type="number" min="1" value="1" id="qty-bakery">
-      <button onclick="addToCart('Bakery',50,document.getElementById('qty-bakery').value)">Add to Cart</button>
-    </div>
-    
-    <!-- Aur products yahan add karte jao -->
-  </section>
+  <a href="cart.html" class="cart-btn">View Cart</a>
+
+  <!-- Floating WhatsApp -->
+  <a href="https://wa.me/917093242271" class="whatsapp-float" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+  </a>
+
+  <!-- Footer with Google Map -->
+  <footer>
+    <p>📍 Address: Nalgonda, Telangana 508001</p>
+    <iframe 
+      src="https://www.google.com/maps?q=Nalgonda,+Telangana+508001&output=embed" 
+      width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy">
+    </iframe>
+  </footer>
 
   <script src="shop.js"></script>
 </body>
