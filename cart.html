@@ -10,20 +10,20 @@
   <header>
     <h1>BBETA</h1>
     <p>Apka Apna Bada Beta 🛒</p>
-    <a href="index.html" class="cart-link">⬅ Back to Shop</a>
+    <a href="index.html" class="cart-link">← Back to Shop</a>
   </header>
 
-  <main class="cart-container">
+  <main>
     <h2>Your Cart</h2>
     <div id="cart-items"></div>
     <h3>Total: ₹<span id="cart-total">0</span></h3>
 
-    <div class="checkout-form">
-      <h2>Customer Details</h2>
-      <input type="text" id="customerName" placeholder="Enter your name" required>
-      <input type="text" id="customerPhone" placeholder="Enter your phone number" required>
-      <textarea id="customerAddress" placeholder="Enter your address" required></textarea>
-      <button onclick="placeOrder()">Place Order</button>
+    <div class="customer-form">
+      <h3>Customer Details</h3>
+      <input type="text" id="cust-name" placeholder="Full Name">
+      <input type="text" id="cust-phone" placeholder="Phone Number">
+      <input type="text" id="cust-address" placeholder="Address">
+      <button id="place-order">Place Order</button>
     </div>
   </main>
 
