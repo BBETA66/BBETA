@@ -1,62 +1,94 @@
-// Save cart in localStorage
-function addToCart(name, price, qty) {
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    let existing = cart.find(item => item.name === name);
+// shop.js
 
-    if (existing) {
-        existing.qty += qty;
-    } else {
-        cart.push({ name, price, qty });
-    }
+let cart = [];
 
-    localStorage.setItem("cart", JSON.stringify(cart));
-    alert(name + " added to cart!");
+// Add item to cart
+function addToCart(name, price) {
+  let item = cart.find(product => product.name === name);
+  if (item) {
+    item.quantity++;
+  } else {
+    cart.push({ name, price, quantity: 1 });
+  }
+  updateCart();
 }
 
-// Render cart items
-function renderCart() {
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    let cartContainer = document.getElementById("cart-items");
-    let totalPrice = 0;
-    cartContainer.innerHTML = "";
+// Update cart display
+function updateCart() {
+  let cartItemsContainer = document.getElementById("cart-items");
+  let totalContainer = document.getElementById("cart-total");
+  cartItemsContainer.innerHTML = "";
 
-    cart.forEach(item => {
-        let itemTotal = item.price * item.qty;
-        totalPrice += itemTotal;
+  let total = 0;
+  cart.forEach((item, index) => {
+    total += item.price * item.quantity;
+    cartItemsContainer.innerHTML += `
+      <div class="cart-item">
+        <span>${item.name} (x${item.quantity})</span>
+        <span>₹${item.price * item.quantity}</span>
+        <button onclick="removeFromCart(${index})">❌</button>
+      </div>
+    `;
+  });
 
-        cartContainer.innerHTML += `
-            <div class="cart-item">
-                <span>${item.name} (x${item.qty})</span>
-                <span>₹${itemTotal}</span>
-            </div>
-        `;
-    });
-
-    document.getElementById("total").innerText = "Total: ₹" + totalPrice;
+  totalContainer.innerText = `Total: ₹${total}`;
 }
 
-// Send order on WhatsApp
-function sendOrder() {
-    let name = document.getElementById("cust-name").value;
-    let phone = document.getElementById("cust-phone").value;
-    let address = document.getElementById("cust-address").value;
-    let mapLink = document.getElementById("cust-map").value;
+// Remove item
+function removeFromCart(index) {
+  cart.splice(index, 1);
+  updateCart();
+}
 
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    if (cart.length === 0) {
-        alert("Cart is empty!");
-        return;
-    }
+// Place order
+function placeOrder() {
+  if (cart.length === 0) {
+    alert("Cart is empty!");
+    return;
+  }
 
-    let orderText = `🛒 *New Order from ${name}*%0A📞 Phone: ${phone}%0A🏠 Address: ${address}%0A📍 Map: ${mapLink}%0A%0A*Items:*%0A`;
+  let name = document.getElementById("customer-name").value.trim();
+  let address = document.getElementById("customer-address").value.trim();
+  let phone = document.getElementById("customer-phone").value.trim();
+  let location = document.getElementById("customer-location").value.trim();
 
-    cart.forEach(item => {
-        orderText += `- ${item.name} (x${item.qty}) = ₹${item.price * item.qty}%0A`;
-    });
+  if (!name || !address || !phone) {
+    alert("Please enter your name, address, and phone number.");
+    return;
+  }
 
-    let totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-    orderText += `%0A💰 Total: ₹${totalPrice}`;
+  let orderText = `🛒 *New Order from BBETA* \n\n`;
+  cart.forEach(item => {
+    orderText += `${item.quantity} x ${item.name} = ₹${item.price * item.quantity}\n`;
+  });
 
-    let whatsappUrl = `https://wa.me/917093242271?text=${orderText}`;
-    window.open(whatsappUrl, "_blank");
+  let total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+  orderText += `\n💰 Total: ₹${total}\n\n👤 Name: ${name}\n📞 Phone: ${phone}\n📍 Address: ${address}`;
+  if (location) {
+    orderText += `\n📌 Location: ${location}`;
+  }
+
+  let whatsappNumber = "917093242271"; // Your WhatsApp number
+  let url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(orderText)}`;
+  window.open(url, "_blank");
+}
+
+// Auto fetch GPS
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        let latitude = position.coords.latitude;
+        let longitude = position.coords.longitude;
+        let mapLink = `https://www.google.com/maps?q=${latitude},${longitude}`;
+        document.getElementById("customer-location").value = mapLink;
+      },
+      error => {
+        alert("Unable to fetch location. Please enable GPS.");
+      }
+    );
+  } else {
+    alert("Geolocation is not supported by this browser.");
+  }
 }
