@@ -1,154 +1,132 @@
-/* General Reset */
-* {
+/* ===== General Page Styling ===== */
+body {
+  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-}
-
-body {
   background: #f9f9f9;
-  color: #333;
-  line-height: 1.5;
 }
 
-/* Header */
-header {
-  background: #ff9800;
-  color: white;
-  padding: 15px;
-  font-size: 22px;
-  font-weight: bold;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-header a {
-  background: white;
-  color: #ff9800;
-  padding: 6px 14px;
-  border-radius: 6px;
-  font-size: 14px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: 0.3s;
-}
-
-header a:hover {
-  background: #fff3e0;
-}
-
-/* Cart Container */
-.cart-container {
+.container {
   max-width: 900px;
-  margin: 20px auto;
+  margin: 40px auto;
   padding: 20px;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
 }
 
-/* Cart Item */
+/* ===== Headings ===== */
+h2, h3 {
+  text-align: center;
+  color: #222;
+}
+
+/* ===== Cart Items ===== */
 .cart-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #ddd;
-  padding: 12px 0;
-}
-
-.cart-item:last-child {
-  border-bottom: none;
-}
-
-.cart-item h3 {
-  font-size: 18px;
-}
-
-.cart-item p {
-  font-size: 16px;
-  font-weight: bold;
-  color: #ff9800;
-}
-
-/* Customer Details */
-.customer-details {
-  margin: 20px 0;
-  padding: 15px;
   background: #fafafa;
+  margin: 10px 0;
+  padding: 12px;
   border-radius: 10px;
   border: 1px solid #ddd;
 }
 
-.customer-details h3 {
-  margin-bottom: 10px;
+.cart-item p {
+  margin: 0;
+  font-size: 16px;
+}
+
+.cart-item button {
+  background: #ff4d4d;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.cart-item button:hover {
+  background: #e60000;
+}
+
+/* ===== Total Price ===== */
+.cart-total {
   font-size: 18px;
+  font-weight: bold;
+  text-align: right;
+  margin-top: 15px;
   color: #333;
 }
 
-.customer-details input {
+/* ===== Customer Details Form ===== */
+#customer-form {
+  margin-top: 30px;
+  padding: 15px;
+  border-top: 2px solid #eee;
+}
+
+#customer-form label {
   display: block;
+  margin: 10px 0 5px;
+  font-weight: bold;
+  color: #444;
+}
+
+#customer-form input {
   width: 100%;
   padding: 10px;
-  margin: 8px 0;
-  font-size: 16px;
-  border-radius: 6px;
+  margin-bottom: 15px;
   border: 1px solid #ccc;
-  box-sizing: border-box;
+  border-radius: 8px;
+  font-size: 15px;
 }
 
-/* Confirm Order Button */
-.confirm-btn {
-  display: block;
-  width: 100%;
-  max-width: 320px;
-  margin: 20px auto;
-  padding: 12px;
+/* ===== Buttons ===== */
+button, .confirm-btn {
+  display: inline-block;
   background: #25d366;
   color: white;
-  font-weight: bold;
-  font-size: 18px;
   border: none;
+  padding: 12px 18px;
   border-radius: 8px;
+  font-size: 16px;
   cursor: pointer;
   transition: 0.3s;
+  margin-top: 10px;
 }
 
-.confirm-btn:hover {
-  background: #20b954;
+button:hover, .confirm-btn:hover {
+  background: #1ebc57;
 }
 
-/* Footer */
-footer {
-  background: #333;
-  color: white;
-  text-align: center;
-  padding: 20px;
-  margin-top: 30px;
+/* ===== GPS Button ===== */
+.gps-btn {
+  background: #007bff;
 }
 
-footer a {
-  color: #ff9800;
-  text-decoration: none;
-  font-weight: bold;
+.gps-btn:hover {
+  background: #0056b3;
 }
 
-/* WhatsApp Floating Button */
-.footer-whatsapp {
+/* ===== Floating WhatsApp Button ===== */
+.whatsapp-float {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background: #25D366;
+  background: #25d366;
   color: white;
-  font-size: 28px;
-  padding: 14px 16px;
   border-radius: 50%;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-  z-index: 999;
-  transition: 0.3s;
+  padding: 14px;
+  font-size: 24px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  cursor: pointer;
+  text-decoration: none;
+  z-index: 1000;
 }
 
-.footer-whatsapp:hover {
-  background: #20b955;
+.whatsapp-float:hover {
+  background: #1ebc57;
 }
