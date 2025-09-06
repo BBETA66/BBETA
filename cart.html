@@ -4,132 +4,62 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Your Cart - BBETA</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    .floating-whatsapp {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 999;
-    }
-    footer {
-      margin-top: 50px;
-    }
-  </style>
+  <link rel="stylesheet" href="cart.css">
 </head>
 <body>
-  <div class="container my-4">
-    <h2 class="text-center mb-4">🛒 Your Cart</h2>
 
-    <div id="cart-items"></div>
-    <h4 class="mt-3">Total: ₹<span id="cart-total">0</span></h4>
+  <!-- Header -->
+  <header>
+    🛒 BBETA - Your Cart
+  </header>
 
-    <hr>
-
-    <h5>📝 Customer Details</h5>
-    <form id="orderForm">
-      <div class="mb-2">
-        <label class="form-label">Full Name</label>
-        <input type="text" id="custName" class="form-control" required>
-      </div>
-      <div class="mb-2">
-        <label class="form-label">Contact Number</label>
-        <input type="text" id="custPhone" class="form-control" required>
-      </div>
-      <div class="mb-2">
-        <label class="form-label">Address</label>
-        <textarea id="custAddress" class="form-control" rows="2" required></textarea>
-      </div>
-      <div class="mb-2">
-        <button type="button" class="btn btn-secondary" onclick="getLocation()">📍 Use My GPS Location</button>
-        <input type="text" id="custLocation" class="form-control mt-2" placeholder="GPS Coordinates">
-      </div>
-      <button type="submit" class="btn btn-success w-100 mt-2">✅ Send Order on WhatsApp</button>
-    </form>
-
-    <div class="text-center mt-3">
-      <a href="index.html" class="btn btn-primary">⬅️ Continue Shopping</a>
+  <!-- Cart Container -->
+  <div class="cart-container">
+    <div id="cart-items">
+      <!-- Cart items will appear here -->
     </div>
+
+    <!-- Cart Total -->
+    <p id="cart-total">Total: ₹0</p>
+
+    <!-- Customer Details -->
+    <div class="customer-details">
+      <label for="customer-name">👤 Name</label>
+      <input type="text" id="customer-name" placeholder="Enter your name" required>
+
+      <label for="customer-contact">📞 Contact Number</label>
+      <input type="text" id="customer-contact" placeholder="Enter your contact number" required>
+
+      <label for="customer-address">🏠 Address</label>
+      <textarea id="customer-address" rows="3" placeholder="Enter your delivery address" required></textarea>
+
+      <!-- GPS Button -->
+      <button id="gps-btn" onclick="getLocation()">📍 Use My GPS Location</button>
+      <input type="text" id="customer-location" placeholder="GPS Location" readonly>
+    </div>
+
+    <!-- Place Order -->
+    <button class="place-order-btn" onclick="placeOrder()">✅ Place Order on WhatsApp</button>
   </div>
 
-  <!-- Footer with Google Map -->
-  <footer class="bg-light text-center p-3">
-    <h6>📍 Our Location</h6>
-    <p>Nalgonda, Telangana 508001</p>
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!..." width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-  </footer>
+  <!-- Google Map Section -->
+  <div class="cart-container" style="margin-top:20px;">
+    <h3>📍 Our Location</h3>
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3805.8491127896724!2d79.26356427485021!3d17.057541983847895!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a34a31b79e0533f%3A0xe7af77e6c2f3dd6c!2sNalgonda%2C%20Telangana%20508001!5e0!3m2!1sen!2sin!4v1693924505178!5m2!1sen!2sin" 
+      width="100%" 
+      height="300" 
+      style="border:0;" 
+      allowfullscreen="" 
+      loading="lazy">
+    </iframe>
+  </div>
 
-  <!-- Floating WhatsApp Button -->
-  <a href="https://wa.me/917093242271" target="_blank" class="floating-whatsapp">
-    <img src="assets/whatsapp.png" width="60" height="60" alt="WhatsApp">
+  <!-- Floating WhatsApp -->
+  <a href="https://wa.me/917093242271" class="whatsapp-float" target="_blank">
+    💬
   </a>
 
-  <script>
-    function loadCart() {
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      let cartHTML = "";
-      let total = 0;
-
-      cart.forEach((item, index) => {
-        let subtotal = item.price * item.qty;
-        total += subtotal;
-        cartHTML += `
-          <div class="card mb-2 p-2">
-            <h5>${item.name}</h5>
-            <p>₹${item.price} x ${item.qty} = ₹${subtotal}</p>
-            <button class="btn btn-danger btn-sm" onclick="removeItem(${index})">Remove</button>
-          </div>
-        `;
-      });
-
-      document.getElementById("cart-items").innerHTML = cartHTML || "<p>Your cart is empty</p>";
-      document.getElementById("cart-total").textContent = total;
-    }
-
-    function removeItem(index) {
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      cart.splice(index, 1);
-      localStorage.setItem("cart", JSON.stringify(cart));
-      loadCart();
-    }
-
-    document.getElementById("orderForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      let name = document.getElementById("custName").value;
-      let phone = document.getElementById("custPhone").value;
-      let address = document.getElementById("custAddress").value;
-      let location = document.getElementById("custLocation").value;
-
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      let orderText = "🛍️ *New Order from BBETA* %0A%0A";
-      orderText += "*Customer Name:* " + name + "%0A";
-      orderText += "*Phone:* " + phone + "%0A";
-      orderText += "*Address:* " + address + "%0A";
-      if(location) orderText += "*GPS Location:* " + location + "%0A";
-      orderText += "%0A*Items:*%0A";
-
-      cart.forEach(item => {
-        orderText += "- " + item.name + " x " + item.qty + " = ₹" + (item.price * item.qty) + "%0A";
-      });
-
-      orderText += "%0A*Total:* ₹" + document.getElementById("cart-total").textContent;
-
-      let whatsappURL = "https://wa.me/917093242271?text=" + orderText;
-      window.open(whatsappURL, "_blank");
-    });
-
-    function getLocation() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-          document.getElementById("custLocation").value =
-            position.coords.latitude + ", " + position.coords.longitude;
-        });
-      } else {
-        alert("Geolocation is not supported by this browser.");
-      }
-    }
-
-    loadCart();
-  </script>
+  <script src="shop.js"></script>
 </body>
 </html>
