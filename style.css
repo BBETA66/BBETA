@@ -1,95 +1,125 @@
+/* ===== Global ===== */
+* { box-sizing: border-box; }
 body {
-  margin: 0;
   font-family: Arial, sans-serif;
-  background: #f8f8f8;
+  margin: 0; padding: 0;
+  background: #f9f9f9; color: #333;
 }
 
-header {
-  background: #4CAF50;
-  color: white;
-  padding: 15px;
-  text-align: center;
-  position: relative;
-}
-
-.cart-icon {
-  position: absolute;
-  right: 20px;
-  top: 15px;
-}
-
-.cart-icon a {
-  color: white;
-  text-decoration: none;
-  font-size: 20px;
-}
-
-.product-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  padding: 20px;
-  justify-content: center;
-}
-
-.product-card {
-  background: white;
-  padding: 15px;
-  border-radius: 8px;
-  width: 200px;
-  text-align: center;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.product-card img {
-  width: 100%;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 5px;
-}
-
-button {
-  background: #4CAF50;
-  color: white;
-  border: none;
-  padding: 8px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 5px;
-}
-button:hover {
-  background: #45a049;
-}
-
-.contact, .map {
-  padding: 20px;
-  background: white;
-  margin: 20px;
-  border-radius: 8px;
-}
-
-footer {
-  background: #222;
-  color: white;
-  padding: 10px;
-  text-align: center;
-}
-
-/* Floating WhatsApp */
-.whatsapp-float {
-  position: fixed;
-  width: 60px;
-  height: 60px;
-  bottom: 20px;
-  right: 20px;
-  background: #25D366;
-  border-radius: 50%;
+/* ===== Header ===== */
+.site-header {
+  background: #000;
+  color: #fff;
+  padding: 14px 16px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  justify-content: space-between;
 }
-.whatsapp-float img {
-  width: 40px;
-  height: 40px;
+.site-header .logo {
+  margin: 0; font-size: 30px; color: #ff2d2d; letter-spacing: 1px;
+}
+.site-header .tagline {
+  margin: 4px 0 0; font-size: 14px; color: #ddd;
+}
+.site-header .brand { line-height: 1; }
+.cart-link {
+  color: #fff; background: #28a745; text-decoration: none;
+  padding: 8px 12px; border-radius: 6px; font-weight: bold;
+}
+
+/* ===== Contact strip ===== */
+.contact-strip {
+  background: #fff;
+  display: grid; gap: 6px;
+  grid-template-columns: 1fr;
+  padding: 10px 16px;
+  border-bottom: 1px solid #eee;
+}
+.contact-strip a { color: #007bff; text-decoration: none; }
+
+/* ===== Products Grid ===== */
+main { padding: 18px; }
+.products {
+  display: grid; gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+.product {
+  background: #fff; border-radius: 10px; padding: 14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  text-align: center;
+}
+.product img {
+  width: 100%; height: 140px; object-fit: cover; border-radius: 8px;
+}
+.product h2 { font-size: 18px; margin: 10px 0 6px; }
+.product p { margin: 6px 0; font-weight: bold; }
+.product .qty { width: 70px; padding: 6px; }
+.product button {
+  background: #007bff; color: #fff; border: 0;
+  padding: 8px 12px; border-radius: 6px; cursor: pointer;
+}
+.product button:hover { background: #0056b3; }
+
+/* ===== Cart Page ===== */
+.container {
+  max-width: 900px; margin: 24px auto; padding: 16px;
+  background: #fff; border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+.cart-item {
+  display: flex; justify-content: space-between; align-items: center;
+  background: #fafafa; padding: 12px; border-radius: 10px; margin: 10px 0;
+  border: 1px solid #eee;
+}
+.cart-item p { margin: 0; }
+.cart-item input.line-qty { width: 70px; padding: 6px; margin: 0 6px; }
+.cart-item button {
+  background: #ff4d4d; color: #fff; border: 0;
+  padding: 8px 12px; border-radius: 8px; cursor: pointer;
+}
+.cart-item button:hover { background: #e60000; }
+
+.cart-summary { text-align: right; margin-top: 10px; font-size: 16px; }
+.customer-details {
+  margin-top: 18px; padding-top: 14px; border-top: 2px solid #f0f0f0;
+}
+.customer-details h3 { margin: 0 0 10px; }
+.customer-details label { display: block; margin: 10px 0 4px; font-weight: bold; }
+.customer-details input {
+  width: 100%; padding: 10px; border-radius: 8px;
+  border: 1px solid #ccc; font-size: 15px; margin-bottom: 10px;
+}
+.gps-btn {
+  background: #007bff; color: #fff; border: 0; padding: 10px 14px;
+  border-radius: 8px; cursor: pointer;
+}
+.gps-btn:hover { background: #0056b3; }
+.confirm-btn {
+  display: block; width: 100%; max-width: 320px; margin: 16px auto 0;
+  background: #25d366; color: #fff; border: 0; padding: 12px 16px;
+  border-radius: 10px; font-weight: bold; cursor: pointer;
+}
+.confirm-btn:hover { background: #1ebc57; }
+.gps-status { margin-top: 8px; font-size: 14px; }
+
+/* ===== Footer & Map ===== */
+.site-footer {
+  margin-top: 24px; padding: 16px; background: #fff; text-align: center;
+  border-top: 1px solid #eee;
+}
+.site-footer h3 { margin: 8px 0 12px; }
+
+/* ===== Floating WhatsApp ===== */
+.floating-whatsapp {
+  position: fixed; right: 16px; bottom: 16px;
+  width: 54px; height: 54px; display: inline-flex; align-items: center; justify-content: center;
+  background: #25d366; border-radius: 50%; box-shadow: 0 6px 16px rgba(0,0,0,.25);
+  z-index: 1000;
+}
+.floating-whatsapp img { width: 28px; height: 28px; filter: drop-shadow(0 1px 1px rgba(0,0,0,.2)); }
+
+/* ===== Responsive tweaks ===== */
+@media (max-width: 480px){
+  .site-header .logo { font-size: 26px; }
+  .product img { height: 130px; }
 }
