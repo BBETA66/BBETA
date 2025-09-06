@@ -115,45 +115,8 @@ main {
 }
 
 /* ===================
-   WhatsApp Order Button + Phone Input
+   Customer Details
 =================== */
-.whatsapp-btn {
-  background-color: #25d366;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  font-size: 16px;
-  font-weight: bold;
-  border-radius: 8px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 15px;
-}
-
-.whatsapp-btn img {
-  width: 24px;
-  height: 24px;
-}
-
-.phone-input {
-  margin: 15px 0;
-}
-
-.phone-input label {
-  font-weight: bold;
-}
-
-.phone-input input {
-  padding: 8px;
-  width: 100%;
-  font-size: 16px;
-  margin-top: 5px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-/* Cart Page Styling */
 .customer-details {
   margin: 20px 0;
   padding: 15px;
@@ -179,7 +142,9 @@ main {
   box-sizing: border-box;
 }
 
-/* WhatsApp Button */
+/* ===================
+   WhatsApp Order Button
+=================== */
 .whatsapp-btn {
   background-color: #25d366;
   color: white;
@@ -207,30 +172,28 @@ main {
   width: 24px;
   height: 24px;
 }
-/* Floating WhatsApp Icon */
+
+/* ===================
+   Floating WhatsApp Icon
+=================== */
 .floating-whatsapp {
   position: fixed;
   bottom: 20px;
   right: 20px;
   background-color: #25d366;
   border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 12px;
   box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-  cursor: pointer;
   z-index: 999;
   transition: transform 0.3s ease;
 }
 
 .floating-whatsapp:hover {
   transform: scale(1.1);
-  background-color: #20b954;
 }
 
 .floating-whatsapp img {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
+  display: block;
 }
