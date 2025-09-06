@@ -1,53 +1,35 @@
-// Load cart from localStorage
 function loadCart() {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
   let cartItemsDiv = document.getElementById("cart-items");
-  let cartTotalSpan = document.getElementById("cart-total");
-
-  if (cart.length === 0) {
-    cartItemsDiv.innerHTML = "Your cart is empty.";
-    cartTotalSpan.innerText = "0";
-    return;
-  }
+  let totalDiv = document.getElementById("cart-total");
+  cartItemsDiv.innerHTML = "";
 
   let total = 0;
-  let html = "<ul>";
-  cart.forEach(item => {
-    let itemTotal = item.price * item.quantity;
-    total += itemTotal;
-    html += `<li>${item.name} (${item.quantity}) - ₹${itemTotal}</li>`;
-  });
-  html += "</ul>";
 
-  cartItemsDiv.innerHTML = html;
-  cartTotalSpan.innerText = total;
+  cart.forEach(item => {
+    let div = document.createElement("div");
+    div.textContent = `${item.qty} x ${item.name} - ₹${item.price * item.qty}`;
+    cartItemsDiv.appendChild(div);
+    total += item.price * item.qty;
+  });
+
+  totalDiv.textContent = "Total: ₹" + total;
 }
 
-// Handle Place Order
 document.getElementById("orderForm").addEventListener("submit", function(e) {
   e.preventDefault();
 
-  let name = document.getElementById("customerName").value;
-  let phone = document.getElementById("customerPhone").value;
-  let address = document.getElementById("customerAddress").value;
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let name = document.getElementById("name").value;
+  let phone = document.getElementById("phone").value;
+  let address = document.getElementById("address").value;
 
-  if (cart.length === 0) {
-    alert("Cart is empty. Please add items before placing order.");
+  if (!name || !phone || !address) {
+    alert("Please fill all details");
     return;
   }
 
-  let orderDetails = {
-    customer: { name, phone, address },
-    items: cart,
-    total: document.getElementById("cart-total").innerText
-  };
-
-  console.log("Order Placed:", orderDetails);
-
-  // Clear cart after placing order
+  alert("Order placed successfully!\nThank you " + name);
   localStorage.removeItem("cart");
-  alert("✅ Order Placed Successfully!\nThank you for shopping with BBETA.");
   window.location.href = "thankyou.html";
 });
 
