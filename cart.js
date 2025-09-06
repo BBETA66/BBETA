@@ -1,66 +1,54 @@
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-function addToCart(name, price, button) {
-  const qty = parseInt(button.parentElement.querySelector(".qty").value);
-  cart.push({ name, price, qty });
-  localStorage.setItem("cart", JSON.stringify(cart));
-  alert(`${qty} x ${name} added to cart`);
-}
-
-// Load cart
+// Load cart from localStorage
 function loadCart() {
-  const cartItems = document.getElementById("cart-items");
-  const totalElement = document.getElementById("total");
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let cartItemsDiv = document.getElementById("cart-items");
+  let cartTotalSpan = document.getElementById("cart-total");
 
-  if (!cartItems || !totalElement) return;
+  if (cart.length === 0) {
+    cartItemsDiv.innerHTML = "Your cart is empty.";
+    cartTotalSpan.innerText = "0";
+    return;
+  }
 
-  cartItems.innerHTML = "";
   let total = 0;
+  let html = "<ul>";
+  cart.forEach(item => {
+    let itemTotal = item.price * item.quantity;
+    total += itemTotal;
+    html += `<li>${item.name} (${item.quantity}) - ₹${itemTotal}</li>`;
+  });
+  html += "</ul>";
+
+  cartItemsDiv.innerHTML = html;
+  cartTotalSpan.innerText = total;
+}
+
+// Handle Place Order
+document.getElementById("orderForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  let name = document.getElementById("customerName").value;
+  let phone = document.getElementById("customerPhone").value;
+  let address = document.getElementById("customerAddress").value;
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
   if (cart.length === 0) {
-    cartItems.innerHTML = "<p>Your cart is empty.</p>";
-  } else {
-    cart.forEach((item, index) => {
-      let itemTotal = item.price * item.qty;
-      total += itemTotal;
-
-      cartItems.innerHTML += `
-        <div>
-          ${item.qty} x ${item.name} - ₹${itemTotal}
-          <button onclick="removeItem(${index})">Remove</button>
-        </div>
-      `;
-    });
-  }
-
-  totalElement.textContent = "Total: ₹" + total;
-}
-
-function removeItem(index) {
-  cart.splice(index, 1);
-  localStorage.setItem("cart", JSON.stringify(cart));
-  loadCart();
-}
-
-function placeOrder() {
-  const name = document.getElementById("cust-name").value;
-  const phone = document.getElementById("cust-phone").value;
-  const address = document.getElementById("cust-address").value;
-
-  if (!name || !phone || !address) {
-    alert("Please fill all customer details!");
+    alert("Cart is empty. Please add items before placing order.");
     return;
   }
 
-  if (cart.length === 0) {
-    alert("Cart is empty!");
-    return;
-  }
+  let orderDetails = {
+    customer: { name, phone, address },
+    items: cart,
+    total: document.getElementById("cart-total").innerText
+  };
 
+  console.log("Order Placed:", orderDetails);
+
+  // Clear cart after placing order
   localStorage.removeItem("cart");
+  alert("✅ Order Placed Successfully!\nThank you for shopping with BBETA.");
   window.location.href = "thankyou.html";
-}
+});
 
-if (document.getElementById("cart-items")) {
-  loadCart();
-}
+window.onload = loadCart;
