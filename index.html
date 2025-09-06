@@ -4,40 +4,144 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BBETA Online Shop</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="cart.css">
-  <style>
-    .product-card img { height: 200px; object-fit: cover; }
-    .whatsapp-float {
-      position: fixed; bottom: 20px; right: 20px;
-      background: #25D366; color: white;
-      border-radius: 50%; padding: 15px;
-      font-size: 28px; z-index: 999;
-    }
-    .map-container { height: 300px; }
-  </style>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <nav class="navbar navbar-light bg-light p-3">
-    <span class="navbar-brand mb-0 h1">🛒 BBETA Online Shop</span>
-    <a href="cart.html" class="btn btn-success">View Cart</a>
-  </nav>
 
-  <div class="container mt-4">
-    <div id="product-list" class="row g-4"></div>
+  <!-- Header -->
+  <header>
+    🛒 BBETA Online Shop
+    <a href="cart.html" class="view-cart-btn">View Cart</a>
+  </header>
+
+  <!-- Product Section -->
+  <div class="shop-container">
+    <div class="product" data-name="Bakery" data-price="150">
+      <img src="https://i.ibb.co/FzWvHgf/bakery.jpg" alt="Bakery">
+      <h3>Bakery</h3>
+      <p>₹150</p>
+      <input type="number" min="1" value="1">
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product" data-name="Bread" data-price="60">
+      <img src="https://i.ibb.co/vB3QmH2/bread.jpg" alt="Bread">
+      <h3>Bread</h3>
+      <p>₹60</p>
+      <input type="number" min="1" value="1">
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product" data-name="Oil" data-price="150">
+      <img src="https://i.ibb.co/g9F53jP/oil.jpg" alt="Oil">
+      <h3>Oil</h3>
+      <p>₹150</p>
+      <input type="number" min="1" value="1">
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product" data-name="Rice" data-price="70">
+      <img src="https://i.ibb.co/bHd0kJN/rice.jpg" alt="Rice">
+      <h3>Rice</h3>
+      <p>₹70</p>
+      <input type="number" min="1" value="1">
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product" data-name="Milk" data-price="50">
+      <img src="https://i.ibb.co/FnP3GkH/milk.jpg" alt="Milk">
+      <h3>Milk</h3>
+      <p>₹50</p>
+      <input type="number" min="1" value="1">
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product" data-name="Sugar" data-price="45">
+      <img src="https://i.ibb.co/R6Mz6rs/sugar.jpg" alt="Sugar">
+      <h3>Sugar</h3>
+      <p>₹45</p>
+      <input type="number" min="1" value="1">
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product" data-name="Snacks" data-price="80">
+      <img src="https://i.ibb.co/f2ZC2Vb/snacks.jpg" alt="Snacks">
+      <h3>Snacks</h3>
+      <p>₹80</p>
+      <input type="number" min="1" value="1">
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product" data-name="Vegetables" data-price="130">
+      <img src="https://i.ibb.co/Mc1Q7rR/vegetables.jpg" alt="Vegetables">
+      <h3>Vegetables</h3>
+      <p>₹130</p>
+      <input type="number" min="1" value="1">
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product" data-name="Fruits" data-price="100">
+      <img src="https://i.ibb.co/3rFHZ6C/fruits.jpg" alt="Fruits">
+      <h3>Fruits</h3>
+      <p>₹100</p>
+      <input type="number" min="1" value="1">
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product" data-name="Tea" data-price="110">
+      <img src="https://i.ibb.co/sF5ctvQ/tea.jpg" alt="Tea">
+      <h3>Tea</h3>
+      <p>₹110</p>
+      <input type="number" min="1" value="1">
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product" data-name="Dairy" data-price="90">
+      <img src="https://i.ibb.co/j4V7ZpQ/dairy.jpg" alt="Dairy">
+      <h3>Dairy</h3>
+      <p>₹90</p>
+      <input type="number" min="1" value="1">
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product" data-name="Groceries" data-price="200">
+      <img src="https://i.ibb.co/7zHX1LR/groceries.jpg" alt="Groceries">
+      <h3>Groceries</h3>
+      <p>₹200</p>
+      <input type="number" min="1" value="1">
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product" data-name="Medicines" data-price="250">
+      <img src="https://i.ibb.co/9wFgzXs/medicines.jpg" alt="Medicines">
+      <h3>Medicines</h3>
+      <p>₹250</p>
+      <input type="number" min="1" value="1">
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product" data-name="Cold Drink" data-price="35">
+      <img src="https://i.ibb.co/N2jt2mn/cold-drink.jpg" alt="Cold Drink">
+      <h3>Cold Drink</h3>
+      <p>₹35</p>
+      <input type="number" min="1" value="1">
+      <button>Add to Cart</button>
+    </div>
   </div>
 
-  <footer class="bg-dark text-white text-center p-3 mt-5">
+  <!-- Footer with Map -->
+  <footer>
     <p>📍 Location: Nalgonda, Telangana 508001</p>
-    <p>📞 WhatsApp: <a href="https://wa.me/917093242271" class="text-white">7093242271</a></p>
-    <div class="map-container">
-      <iframe src="https://www.google.com/maps?q=Nalgonda,Telangana,508001&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen></iframe>
-    </div>
-    <p class="mt-3">© 2025 BBETA Online Shop | All Rights Reserved</p>
+    <p>WhatsApp: <a href="https://wa.me/917093242271" target="_blank">7093242271</a></p>
+    <iframe src="https://www.google.com/maps?q=Nalgonda,Telangana,508001&output=embed"
+      width="100%" height="250" style="border:0; border-radius:12px;" allowfullscreen="" loading="lazy"></iframe>
+    <p>© 2025 BBETA Online Shop | All Rights Reserved</p>
   </footer>
 
-  <a href="https://wa.me/917093242271" class="whatsapp-float">
-    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="40" alt="WhatsApp">
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/917093242271" target="_blank" class="footer-whatsapp">
+    <i class="fa-brands fa-whatsapp"></i>
   </a>
 
   <script src="shop.js"></script>
