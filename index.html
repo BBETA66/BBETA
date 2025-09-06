@@ -3,124 +3,120 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BBETA Shop</title>
+  <title>🛍️ BBETA Online Shop</title>
+  <link rel="stylesheet" href="style.css">
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f9f9f9; }
-    h2 { text-align: center; margin: 20px 0; }
-    .shop-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; padding: 15px; }
-    .product { border: 1px solid #ddd; background: #fff; border-radius: 8px; padding: 10px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-    .product img { width: 100%; max-height: 150px; object-fit: contain; border-radius: 8px; }
-    .btn { background: #28a745; color: #fff; padding: 8px 15px; text-decoration: none; border-radius: 6px; display: inline-block; margin-top: 5px; border: none; cursor: pointer; }
-    .btn:hover { background: #218838; }
-    .cart-container { padding: 20px; }
-    input[type=number] { width: 60px; padding: 5px; text-align: center; }
-    input[type=text] { padding: 10px; margin: 6px 0; width: 100%; border: 1px solid #ccc; border-radius: 5px; }
-    footer { background: #222; color: #fff; padding: 15px; text-align: center; margin-top: 20px; }
-    .wa-btn { background: #25D366; color: #fff; padding: 12px; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; width: 100%; margin-top: 10px; }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+    }
+    header {
+      background: #4CAF50;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+    nav a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+    .shop-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+    .product {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .product img {
+      width: 100%;
+      max-height: 180px;
+      object-fit: contain;
+      border-radius: 10px;
+    }
+    .product h3 {
+      margin: 10px 0 5px;
+    }
+    .btn {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      margin-top: 10px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .btn:hover {
+      background: #45a049;
+    }
+    footer {
+      text-align: center;
+      padding: 15px;
+      margin-top: 20px;
+      background: #333;
+      color: white;
+    }
   </style>
 </head>
 <body>
+  <header>
+    <h1>🛍️ BBETA Online Shop</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="cart.html">Cart 🛒</a>
+    </nav>
+  </header>
 
-  <h2>🛍️ BBETA Online Shop</h2>
+  <main>
+    <div class="shop-container">
+      
+      <div class="product">
+        <img src="assets/medicines.jpg" alt="Medicines">
+        <h3>Medicines</h3>
+        <p>₹100</p>
+        <input type="number" id="medQty" value="1" min="1">
+        <button class="btn" onclick="addToCart('Medicines',100,document.getElementById('medQty').value)">Add to Cart</button>
+      </div>
 
-  <!-- Product List -->
-  <div class="shop-container">
-    <div class="product">
-      <img src="https://i.postimg.cc/sgtKXzQ7/medicines.jpg" alt="Medicines">
-      <h3>Medicines</h3>
-      <p>₹100</p>
-      <input type="number" id="medQty" value="1" min="1">
-      <button class="btn" onclick="addToCart('Medicines',100,document.getElementById('medQty').value)">Add to Cart</button>
+      <div class="product">
+        <img src="assets/groceries.jpg" alt="Groceries">
+        <h3>Groceries</h3>
+        <p>₹200</p>
+        <input type="number" id="groQty" value="1" min="1">
+        <button class="btn" onclick="addToCart('Groceries',200,document.getElementById('groQty').value)">Add to Cart</button>
+      </div>
+
+      <div class="product">
+        <img src="assets/vegetables.jpg" alt="Vegetables">
+        <h3>Vegetables</h3>
+        <p>₹30 / kg</p>
+        <input type="number" id="vegQty" value="1" min="1">
+        <button class="btn" onclick="addToCart('Vegetables',30,document.getElementById('vegQty').value)">Add to Cart</button>
+      </div>
+
+      <div class="product">
+        <img src="assets/milk.jpg" alt="Milk">
+        <h3>Milk</h3>
+        <p>₹25 / litre</p>
+        <input type="number" id="milkQty" value="1" min="1">
+        <button class="btn" onclick="addToCart('Milk',25,document.getElementById('milkQty').value)">Add to Cart</button>
+      </div>
+
     </div>
-
-    <div class="product">
-      <img src="https://i.postimg.cc/NfWz2k4c/groceries.jpg" alt="Groceries">
-      <h3>Groceries</h3>
-      <p>₹200</p>
-      <input type="number" id="groQty" value="1" min="1">
-      <button class="btn" onclick="addToCart('Groceries',200,document.getElementById('groQty').value)">Add to Cart</button>
-    </div>
-
-    <div class="product">
-      <img src="https://i.postimg.cc/0Qf2H6qz/vegetables.jpg" alt="Vegetables">
-      <h3>Vegetables</h3>
-      <p>₹30 / kg</p>
-      <input type="number" id="vegQty" value="1" min="1">
-      <button class="btn" onclick="addToCart('Vegetables',30,document.getElementById('vegQty').value)">Add to Cart</button>
-    </div>
-
-    <div class="product">
-      <img src="https://i.postimg.cc/yY0vCQdX/milk.jpg" alt="Milk">
-      <h3>Milk</h3>
-      <p>₹25 / litre</p>
-      <input type="number" id="milkQty" value="1" min="1">
-      <button class="btn" onclick="addToCart('Milk',25,document.getElementById('milkQty').value)">Add to Cart</button>
-    </div>
-  </div>
-
-  <div style="text-align:center; margin:20px;">
-    <a href="#cart" class="btn">Go to Cart</a>
-  </div>
-
-  <!-- Cart Section -->
-  <div id="cart" class="cart-container">
-    <h2>Your Cart</h2>
-    <div id="cartItems"></div>
-    <h3>Total: ₹<span id="total">0</span></h3>
-
-    <input type="text" id="name" placeholder="Enter your name">
-    <input type="text" id="phone" placeholder="Enter your phone">
-    <input type="text" id="address" placeholder="Enter delivery address">
-    <input type="text" id="mapLink" placeholder="Paste Google Maps link (optional)">
-    
-    <button class="wa-btn" onclick="sendOrder()">📩 Send Order on WhatsApp</button>
-  </div>
+  </main>
 
   <footer>
-    📍 Address: Nalgonda, Telangana 508001 <br>
-    📞 Contact: +91 7093242271
+    <p>© 2025 BBETA Online Shop</p>
   </footer>
 
-<script>
-  let cart = [];
-  
-  function addToCart(name, price, qty) {
-    qty = parseInt(qty);
-    let item = {name: name, price: price, qty: qty};
-    cart.push(item);
-    displayCart();
-  }
-
-  function displayCart() {
-    let cartItems = document.getElementById('cartItems');
-    let total = 0;
-    cartItems.innerHTML = "";
-    cart.forEach(item => {
-      total += item.price * item.qty;
-      cartItems.innerHTML += `<p>${item.name} x ${item.qty} = ₹${item.price * item.qty}</p>`;
-    });
-    document.getElementById('total').innerText = total;
-  }
-
-  function sendOrder() {
-    let name = document.getElementById('name').value;
-    let phone = document.getElementById('phone').value;
-    let address = document.getElementById('address').value;
-    let mapLink = document.getElementById('mapLink').value;
-
-    let orderDetails = "🛍️ *New Order from BBETA*%0A";
-    cart.forEach(item => {
-      orderDetails += `${item.name} x ${item.qty} = ₹${item.price * item.qty}%0A`;
-    });
-    orderDetails += `------------------------%0A`;
-    orderDetails += `*Total:* ₹${document.getElementById('total').innerText}%0A`;
-    orderDetails += `👤 Name: ${name}%0A📞 Phone: ${phone}%0A🏠 Address: ${address}%0A`;
-    if(mapLink) orderDetails += `📍 Location: ${mapLink}%0A`;
-
-    let waUrl = `https://wa.me/917093242271?text=${orderDetails}`;
-    window.open(waUrl, '_blank');
-  }
-</script>
-
+  <script src="shop.js"></script>
 </body>
 </html>
