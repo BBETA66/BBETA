@@ -7,66 +7,60 @@
 }
 
 body {
-  background: #f5f5f5;
+  background: #f9f9f9;
   color: #333;
   line-height: 1.6;
 }
 
 /* Header */
 header {
-  background: #000;
-  color: #fff;
-  padding: 15px;
+  background: #0077cc;
+  color: white;
   text-align: center;
+  padding: 20px;
   position: sticky;
   top: 0;
   z-index: 1000;
 }
 
 header h1 {
-  color: #e60000;
-  font-size: 28px;
+  margin-bottom: 5px;
 }
 
 header p {
-  margin: 5px 0;
-  font-size: 14px;
+  margin-bottom: 10px;
 }
 
-.cart-link {
-  display: inline-block;
-  background: #28a745;
-  color: #fff;
+header .cart-link {
+  background: white;
+  color: #0077cc;
   padding: 8px 15px;
-  margin-top: 10px;
   text-decoration: none;
-  border-radius: 5px;
   font-weight: bold;
+  border-radius: 5px;
+  transition: 0.3s;
 }
 
-.cart-link:hover {
-  background: #218838;
-}
-
-/* Main container */
-main {
-  padding: 20px;
+header .cart-link:hover {
+  background: #005fa3;
+  color: white;
 }
 
 /* Product Grid */
 .products {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 20px;
+  padding: 20px;
 }
 
 .product {
-  background: #fff;
+  background: white;
+  border: 1px solid #ddd;
   padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   text-align: center;
-  transition: transform 0.2s ease-in-out;
+  border-radius: 10px;
+  transition: transform 0.2s ease;
 }
 
 .product:hover {
@@ -74,113 +68,105 @@ main {
 }
 
 .product img {
-  width: 100%;
+  max-width: 100%;
   height: 150px;
   object-fit: cover;
-  border-radius: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
 }
 
 .product h2 {
-  margin: 10px 0;
   font-size: 18px;
-  color: #222;
+  margin: 10px 0;
 }
 
 .product p {
-  margin: 5px 0;
-  font-size: 16px;
-  font-weight: bold;
   color: #555;
+  margin-bottom: 10px;
 }
 
 .product input.qty {
   width: 60px;
   padding: 5px;
-  margin: 10px 0;
-  text-align: center;
+  margin-right: 5px;
 }
 
 .product button {
-  background: #007bff;
-  color: #fff;
+  background: #0077cc;
+  color: white;
   padding: 8px 12px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 14px;
-}
-
-.product button:hover {
-  background: #0056b3;
-}
-
-/* Cart Page */
-#cart-items {
-  margin: 15px 0;
-  background: #fff;
-  padding: 10px;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
-#cart-items div {
-  padding: 8px;
-  border-bottom: 1px solid #eee;
-}
-
-#cart-total {
-  margin: 15px 0;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-/* Form */
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-top: 15px;
-}
-
-form input {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
-}
-
-form button {
-  background: #28a745;
-  color: #fff;
-  padding: 10px;
-  border: none;
-  border-radius: 6px;
-  font-size: 16px;
-  cursor: pointer;
   transition: 0.3s;
 }
 
-form button:hover {
+.product button:hover {
+  background: #005fa3;
+}
+
+/* Cart Page */
+main {
+  padding: 20px;
+}
+
+#cart-items p {
+  background: #fff;
+  padding: 10px;
+  border: 1px solid #ddd;
+  margin: 5px 0;
+  border-radius: 5px;
+}
+
+#cart-total {
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+#place-order {
+  margin-top: 20px;
+  background: #28a745;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+#place-order:hover {
   background: #218838;
 }
 
 /* Thank You Page */
-main h2 {
-  color: #28a745;
-  margin-bottom: 10px;
+.btn {
+  display: inline-block;
+  background: #0077cc;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: 0.3s;
 }
 
-main p {
-  font-size: 16px;
-  color: #444;
+.btn:hover {
+  background: #005fa3;
 }
 
-/* Responsive Fix */
-@media (max-width: 600px) {
-  header h1 {
-    font-size: 22px;
-  }
-  .product img {
-    height: 120px;
-  }
+/* Footer with Map */
+footer {
+  margin-top: 30px;
+  text-align: center;
+  padding: 20px;
+  background: #f1f1f1;
+  border-top: 1px solid #ddd;
+}
+
+footer iframe {
+  width: 100%;
+  height: 250px;
+  border: none;
+  border-radius: 10px;
+  margin-top: 10px;
 }
