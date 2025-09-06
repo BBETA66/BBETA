@@ -15,14 +15,14 @@
 
   <main>
     <h2>Your Cart</h2>
-    <div id="cart-items">Your cart is empty.</div>
-    <p><strong>Total:</strong> ₹<span id="cart-total">0</span></p>
+    <div id="cart-items"></div>
+    <h3 id="cart-total">Total: ₹0</h3>
 
     <h3>Customer Details</h3>
     <form id="orderForm">
-      <input type="text" id="customerName" placeholder="Name" required><br>
-      <input type="text" id="customerPhone" placeholder="Phone" required><br>
-      <input type="text" id="customerAddress" placeholder="Address" required><br>
+      <input type="text" id="name" placeholder="Name" required>
+      <input type="text" id="phone" placeholder="Phone" required>
+      <input type="text" id="address" placeholder="Address" required>
       <button type="submit">Place Order</button>
     </form>
   </main>
