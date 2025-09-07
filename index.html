@@ -4,164 +4,93 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BBETA Store</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background: #f5f5f5;
-    }
-
-    /* Header */
-    header {
-      background: #28a745;
-      color: white;
-      text-align: center;
-      padding: 20px 10px;
-      border-radius: 0 0 15px 15px;
-    }
-
-    header h1 {
-      margin: 5px 0;
-      font-size: 26px;
-    }
-
-    header p {
-      margin: 4px 0;
-      font-size: 14px;
-    }
-
-    #cart-count {
-      font-weight: bold;
-      background: white;
-      color: #28a745;
-      padding: 2px 8px;
-      border-radius: 8px;
-      margin-left: 5px;
-    }
-
-    /* Product Cards */
-    .product-card {
-      background: #fff;
-      border-radius: 12px;
-      padding: 15px;
-      margin: 15px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-
-    .product-card img {
-      width: 100%;
-      max-height: 160px;
-      border-radius: 10px;
-      object-fit: cover;
-    }
-
-    .product-card h2 {
-      margin: 10px 0 5px;
-      font-size: 20px;
-      color: #333;
-    }
-
-    .product-card p {
-      margin: 5px 0;
-      font-size: 16px;
-      color: #666;
-    }
-
-    .product-card input {
-      width: 50px;
-      padding: 5px;
-      margin-right: 8px;
-      text-align: center;
-    }
-
-    .product-card button {
-      background: #28a745;
-      color: white;
-      border: none;
-      padding: 8px 15px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 14px;
-    }
-
-    /* Checkout Button */
-    .checkout {
-      display: block;
-      text-align: center;
-      margin: 20px;
-    }
-
-    .checkout button {
-      background: #007bff;
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 10px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <!-- Header -->
   <header>
+    <img src="assets/logo.png" alt="BBETA Logo" style="height:50px;">
     <h1>BBETA</h1>
-    <p>Apka Apna Bada Beta 🛒 <span id="cart-count">0</span></p>
-    <p>📞 WhatsApp: +91 7093242271</p>
+    <p>Apka Apna Bada Beta 🛒</p>
+    <p>📞 WhatsApp: <a href="https://wa.me/917093242271" target="_blank">+91 7093242271</a></p>
     <p>📍 Location: Nalgonda, Telangana 508001</p>
+    <p><a href="cart.html">🛒 Cart (<span id="cart-count">0</span>)</a></p>
   </header>
 
-  <!-- Product 1 -->
-  <div class="product-card">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/1/15/Red_Apple.jpg" alt="Apples">
-    <h2>Fresh Apples</h2>
-    <p>₹50 / kg</p>
-    <input type="number" value="1" min="1" id="qty-apples">
-    <button onclick="addToCart('Fresh Apples', 50, 'kg', 'qty-apples')">Add to Cart</button>
-  </div>
+  <!-- Products Section -->
+  <main id="products" class="products">
+    <!-- Product 1 -->
+    <div class="product-card">
+      <img src="assets/fruits.jpg" alt="Fresh Apples">
+      <h2>Fresh Apples</h2>
+      <p>₹50 / kg</p>
+      <input type="number" id="qty-1" value="1" min="1">
+      <button onclick="addToCart(1)">Add to Cart</button>
+    </div>
 
-  <!-- Product 2 -->
-  <div class="product-card">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Tomato_je.jpg" alt="Tomatoes">
-    <h2>Tomatoes</h2>
-    <p>₹30 / kg</p>
-    <input type="number" value="1" min="1" id="qty-tomatoes">
-    <button onclick="addToCart('Tomatoes', 30, 'kg', 'qty-tomatoes')">Add to Cart</button>
-  </div>
+    <!-- Product 2 -->
+    <div class="product-card">
+      <img src="assets/vegetables.jpg" alt="Tomatoes">
+      <h2>Tomatoes</h2>
+      <p>₹30 / kg</p>
+      <input type="number" id="qty-2" value="1" min="1">
+      <button onclick="addToCart(2)">Add to Cart</button>
+    </div>
 
-  <!-- Product 3 -->
-  <div class="product-card">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Rice.jpg" alt="Rice">
-    <h2>Rice</h2>
-    <p>₹60 / kg</p>
-    <input type="number" value="1" min="1" id="qty-rice">
-    <button onclick="addToCart('Rice', 60, 'kg', 'qty-rice')">Add to Cart</button>
-  </div>
+    <!-- Product 3 -->
+    <div class="product-card">
+      <img src="assets/rice.jpg" alt="Rice">
+      <h2>Rice</h2>
+      <p>₹60 / kg</p>
+      <input type="number" id="qty-3" value="1" min="1">
+      <button onclick="addToCart(3)">Add to Cart</button>
+    </div>
 
-  <!-- Product 4 -->
-  <div class="product-card">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/3/39/Sugar_cubes.jpg" alt="Sugar">
-    <h2>Sugar</h2>
-    <p>₹40 / kg</p>
-    <input type="number" value="1" min="1" id="qty-sugar">
-    <button onclick="addToCart('Sugar', 40, 'kg', 'qty-sugar')">Add to Cart</button>
-  </div>
+    <!-- Product 4 -->
+    <div class="product-card">
+      <img src="assets/sugar.jpg" alt="Sugar">
+      <h2>Sugar</h2>
+      <p>₹40 / kg</p>
+      <input type="number" id="qty-4" value="1" min="1">
+      <button onclick="addToCart(4)">Add to Cart</button>
+    </div>
 
-  <!-- Product 5 -->
-  <div class="product-card">
-    <img src="https://5.imimg.com/data5/AK/RA/MY-6842865/cooking-oil.jpg" alt="Cooking Oil">
-    <h2>Cooking Oil</h2>
-    <p>₹120 / litre</p>
-    <input type="number" value="1" min="1" id="qty-oil">
-    <button onclick="addToCart('Cooking Oil', 120, 'litre', 'qty-oil')">Add to Cart</button>
-  </div>
+    <!-- Product 5 -->
+    <div class="product-card">
+      <img src="assets/oil.jpg" alt="Cooking Oil">
+      <h2>Cooking Oil</h2>
+      <p>₹120 / litre</p>
+      <input type="number" id="qty-5" value="1" min="1">
+      <button onclick="addToCart(5)">Add to Cart</button>
+    </div>
+
+    <!-- Product 6 -->
+    <div class="product-card">
+      <img src="assets/medicines.jpg" alt="Medicines">
+      <h2>Medicines</h2>
+      <p>₹250 / pack</p>
+      <input type="number" id="qty-6" value="1" min="1">
+      <button onclick="addToCart(6)">Add to Cart</button>
+    </div>
+
+    <!-- Product 7 -->
+    <div class="product-card">
+      <img src="assets/cold_drink.jpg" alt="Cold Drink">
+      <h2>Cold Drink</h2>
+      <p>₹35 / bottle</p>
+      <input type="number" id="qty-7" value="1" min="1">
+      <button onclick="addToCart(7)">Add to Cart</button>
+    </div>
+
+  </main>
 
   <!-- Checkout -->
   <div class="checkout">
-    <button onclick="checkout()">Checkout with WhatsApp</button>
+    <a href="checkout.html"><button>Checkout with WhatsApp</button></a>
   </div>
 
+  <!-- Script -->
   <script src="shop.js"></script>
 </body>
 </html>
