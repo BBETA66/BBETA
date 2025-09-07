@@ -1,34 +1,46 @@
-let cart = [];
-let cartCount = 0;
+// shop.js
 
-function addToCart(name, price, unit, qtyId) {
-  let qty = parseInt(document.getElementById(qtyId).value);
-  if (qty > 0) {
-    cart.push({ name, price, unit, qty });
-    cartCount += qty;
-    document.getElementById("cart-count").innerText = cartCount;
-    alert(`${qty} ${unit} ${name} added to cart!`);
-  }
-}
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+updateCartCount();
 
-function checkout() {
-  if (cart.length === 0) {
-    alert("Cart is empty!");
+// Products list
+const products = [
+  { id: 1, name: "Fresh Apples", price: 50, unit: "kg" },
+  { id: 2, name: "Tomatoes", price: 30, unit: "kg" },
+  { id: 3, name: "Rice", price: 60, unit: "kg" },
+  { id: 4, name: "Sugar", price: 40, unit: "kg" },
+  { id: 5, name: "Cooking Oil", price: 120, unit: "litre" },
+  { id: 6, name: "Medicines", price: 250, unit: "pack" },
+  { id: 7, name: "Cold Drink", price: 35, unit: "bottle" }
+];
+
+// Add to Cart function
+function addToCart(id) {
+  const qtyInput = document.getElementById(`qty-${id}`);
+  const quantity = parseInt(qtyInput.value);
+
+  if (quantity < 1) {
+    alert("Quantity must be at least 1");
     return;
   }
 
-  let message = "🛒 *New Order from BBETA*%0A%0A";
-  let total = 0;
+  const product = products.find(p => p.id === id);
 
-  cart.forEach(item => {
-    message += `• ${item.name} - ${item.qty} ${item.unit} x ₹${item.price} = ₹${item.qty * item.price}%0A`;
-    total += item.qty * item.price;
-  });
+  const existing = cart.find(item => item.id === id);
+  if (existing) {
+    existing.quantity += quantity;
+  } else {
+    cart.push({ ...product, quantity });
+  }
 
-  message += `%0A*Total: ₹${total}*`;
+  localStorage.setItem("cart", JSON.stringify(cart));
+  updateCartCount();
+  alert(`${product.name} added to cart!`);
+}
 
-  let phoneNumber = "917093242271"; // apna WhatsApp number
-  let url = `https://wa.me/${phoneNumber}?text=${message}`;
-
-  window.open(url, "_blank");
+// Update cart count
+function updateCartCount() {
+  const count = cart.reduce((acc, item) => acc + item.quantity, 0);
+  const el = document.getElementById("cart-count");
+  if (el) el.innerText = count;
 }
