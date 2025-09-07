@@ -3,22 +3,74 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Checkout - BBETA</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="checkout.js" defer></script>
+  <title>BBETA - Checkout</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background: #f8f9fa; }
+    .container { margin-top: 50px; }
+    .btn-whatsapp {
+      background-color: #25D366;
+      color: white;
+      font-weight: bold;
+    }
+    .btn-whatsapp:hover {
+      background-color: #1ebe57;
+      color: white;
+    }
+  </style>
 </head>
 <body>
+  <div class="container">
+    <h2 class="mb-4 text-center">Checkout</h2>
+    <form onsubmit="placeOrder(event)">
+      <div class="mb-3">
+        <label class="form-label">Full Name</label>
+        <input type="text" id="name" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Address</label>
+        <textarea id="address" class="form-control" required></textarea>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Phone Number</label>
+        <input type="tel" id="phone" class="form-control" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Place Order</button>
+      <button type="button" class="btn btn-whatsapp" onclick="sendToWhatsApp()">📩 Order via WhatsApp</button>
+    </form>
+  </div>
 
-  <header>
-    <h1>✅ Checkout with WhatsApp</h1>
-    <p><a href="cart.html">⬅ Back to Cart</a></p>
-  </header>
+  <script>
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-  <main>
-    <h3>Your Order</h3>
-    <div id="order-summary"></div>
-    <button onclick="sendWhatsApp()">Send Order on WhatsApp</button>
-  </main>
+    function placeOrder(event) {
+      event.preventDefault();
+      alert("Order placed successfully! ✅");
+      localStorage.removeItem("cart");
+      window.location.href = "thankyou.html";
+    }
 
+    function sendToWhatsApp() {
+      if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+      }
+      let name = document.getElementById("name").value || "Customer";
+      let address = document.getElementById("address").value || "No address";
+      let phoneInput = document.getElementById("phone").value || "Not provided";
+
+      let message = `🛒 BBETA Order:%0A👤 Name: ${name}%0A🏠 Address: ${address}%0A📞 Phone: ${phoneInput}%0A%0AItems:%0A`;
+      let total = 0;
+      cart.forEach(item => {
+        message += `${item.name} - ₹${item.price} x ${item.quantity} = ₹${item.price * item.quantity}%0A`;
+        total += item.price * item.quantity;
+      });
+      message += `%0ATotal: ₹${total}`;
+
+      let phone = "917093242271"; // Tumhara WhatsApp number
+      let url = `https://wa.me/${phone}?text=${message}`;
+      window.open(url, "_blank");
+    }
+  </script>
 </body>
 </html>
