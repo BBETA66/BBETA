@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BBETA Store</title>
   <link rel="stylesheet" href="style.css">
+  <script src="shop.js" defer></script>
 </head>
 <body>
 
   <!-- Header -->
   <header>
-    <img src="assets/logo.png" alt="BBETA Logo" style="height:50px;">
+    <img src="assets/logo.png" alt="BBETA Logo" style="height:60px;">
     <h1>BBETA</h1>
     <p>Apka Apna Bada Beta 🛒</p>
     <p>📞 WhatsApp: <a href="https://wa.me/917093242271" target="_blank">+91 7093242271</a></p>
@@ -18,79 +19,117 @@
     <p><a href="cart.html">🛒 Cart (<span id="cart-count">0</span>)</a></p>
   </header>
 
-  <!-- Products Section -->
-  <main id="products" class="products">
-    <!-- Product 1 -->
+  <!-- Google Map -->
+  <div style="text-align:center; margin:20px;">
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3801.527574841496!2d79.2672!3d17.0575!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a34a1c0f5e7b6ff%3A0xabcdef123456789!2sNalgonda%2C%20Telangana!5e0!3m2!1sen!2sin!4v1693987200000"
+      width="100%" height="250" style="border:0; border-radius:12px;" allowfullscreen="" loading="lazy">
+    </iframe>
+  </div>
+
+  <!-- Product Grid -->
+  <div class="product-grid">
     <div class="product-card">
-      <img src="assets/fruits.jpg" alt="Fresh Apples">
-      <h2>Fresh Apples</h2>
+      <img src="assets/fruits.jpg" alt="Fruits">
+      <h2>Fresh Fruits</h2>
       <p>₹50 / kg</p>
-      <input type="number" id="qty-1" value="1" min="1">
-      <button onclick="addToCart(1)">Add to Cart</button>
+      <input type="number" value="1" min="1">
+      <button onclick="addToCart('Fresh Fruits', 50, this)">Add to Cart</button>
     </div>
 
-    <!-- Product 2 -->
     <div class="product-card">
-      <img src="assets/vegetables.jpg" alt="Tomatoes">
-      <h2>Tomatoes</h2>
+      <img src="assets/vegetables.jpg" alt="Vegetables">
+      <h2>Fresh Vegetables</h2>
       <p>₹30 / kg</p>
-      <input type="number" id="qty-2" value="1" min="1">
-      <button onclick="addToCart(2)">Add to Cart</button>
+      <input type="number" value="1" min="1">
+      <button onclick="addToCart('Fresh Vegetables', 30, this)">Add to Cart</button>
     </div>
 
-    <!-- Product 3 -->
     <div class="product-card">
       <img src="assets/rice.jpg" alt="Rice">
       <h2>Rice</h2>
       <p>₹60 / kg</p>
-      <input type="number" id="qty-3" value="1" min="1">
-      <button onclick="addToCart(3)">Add to Cart</button>
+      <input type="number" value="1" min="1">
+      <button onclick="addToCart('Rice', 60, this)">Add to Cart</button>
     </div>
 
-    <!-- Product 4 -->
     <div class="product-card">
       <img src="assets/sugar.jpg" alt="Sugar">
       <h2>Sugar</h2>
       <p>₹40 / kg</p>
-      <input type="number" id="qty-4" value="1" min="1">
-      <button onclick="addToCart(4)">Add to Cart</button>
+      <input type="number" value="1" min="1">
+      <button onclick="addToCart('Sugar', 40, this)">Add to Cart</button>
     </div>
 
-    <!-- Product 5 -->
     <div class="product-card">
       <img src="assets/oil.jpg" alt="Cooking Oil">
       <h2>Cooking Oil</h2>
       <p>₹120 / litre</p>
-      <input type="number" id="qty-5" value="1" min="1">
-      <button onclick="addToCart(5)">Add to Cart</button>
+      <input type="number" value="1" min="1">
+      <button onclick="addToCart('Cooking Oil', 120, this)">Add to Cart</button>
     </div>
 
-    <!-- Product 6 -->
+    <div class="product-card">
+      <img src="assets/dairy.jpg" alt="Dairy">
+      <h2>Dairy</h2>
+      <p>₹40 / packet</p>
+      <input type="number" value="1" min="1">
+      <button onclick="addToCart('Dairy', 40, this)">Add to Cart</button>
+    </div>
+
     <div class="product-card">
       <img src="assets/medicines.jpg" alt="Medicines">
       <h2>Medicines</h2>
-      <p>₹250 / pack</p>
-      <input type="number" id="qty-6" value="1" min="1">
-      <button onclick="addToCart(6)">Add to Cart</button>
+      <p>₹100 / pack</p>
+      <input type="number" value="1" min="1">
+      <button onclick="addToCart('Medicines', 100, this)">Add to Cart</button>
     </div>
 
-    <!-- Product 7 -->
+    <div class="product-card">
+      <img src="assets/snacks.jpg" alt="Snacks">
+      <h2>Snacks</h2>
+      <p>₹20 / pack</p>
+      <input type="number" value="1" min="1">
+      <button onclick="addToCart('Snacks', 20, this)">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="assets/tea.jpg" alt="Tea">
+      <h2>Tea</h2>
+      <p>₹80 / pack</p>
+      <input type="number" value="1" min="1">
+      <button onclick="addToCart('Tea', 80, this)">Add to Cart</button>
+    </div>
+
     <div class="product-card">
       <img src="assets/cold_drink.jpg" alt="Cold Drink">
       <h2>Cold Drink</h2>
       <p>₹35 / bottle</p>
-      <input type="number" id="qty-7" value="1" min="1">
-      <button onclick="addToCart(7)">Add to Cart</button>
+      <input type="number" value="1" min="1">
+      <button onclick="addToCart('Cold Drink', 35, this)">Add to Cart</button>
     </div>
 
-  </main>
+    <div class="product-card">
+      <img src="assets/bakery.jpg" alt="Bakery">
+      <h2>Bakery Items</h2>
+      <p>₹60 / pack</p>
+      <input type="number" value="1" min="1">
+      <button onclick="addToCart('Bakery Items', 60, this)">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="assets/bread.jpg" alt="Bread">
+      <h2>Bread</h2>
+      <p>₹25 / packet</p>
+      <input type="number" value="1" min="1">
+      <button onclick="addToCart('Bread', 25, this)">Add to Cart</button>
+    </div>
+  </div>
 
   <!-- Checkout -->
   <div class="checkout">
-    <a href="checkout.html"><button>Checkout with WhatsApp</button></a>
+    <button onclick="checkout()">Checkout with WhatsApp</button>
   </div>
 
-  <!-- Script -->
-  <script src="shop.js"></script>
 </body>
 </html>
