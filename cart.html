@@ -1,63 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Your Cart - BBETA</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
+  <script src="cart.js" defer></script>
 </head>
 <body>
-  <!-- Floating WhatsApp (merchant) -->
-  <a href="https://wa.me/917093242271" class="floating-whatsapp" target="_blank" aria-label="Chat on WhatsApp">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-  </a>
 
-  <header class="site-header">
-    <div class="brand">
-      <h1 class="logo">BBETA</h1>
-      <p class="tagline">Apka Apna Bada Beta 🛒</p>
-    </div>
-    <a href="index.html" class="cart-link">⬅ Back to Shop</a>
+  <header>
+    <h1>🛒 BBETA - Your Cart</h1>
+    <p><a href="index.html">⬅ Back to Shop</a></p>
   </header>
 
   <main>
-    <div class="container">
-      <h2>Your Cart</h2>
-      <div id="cart-items"></div>
-
-      <div class="cart-summary">
-        <p><strong>Total Items:</strong> <span id="total-qty">0</span></p>
-        <p><strong>Total Amount:</strong> ₹<span id="total-price">0</span></p>
-      </div>
-
-      <section class="customer-details">
-        <h3>Customer Details</h3>
-        <label for="custName">Name</label>
-        <input type="text" id="custName" placeholder="Enter your full name" />
-
-        <label for="custPhone">Contact Number</label>
-        <input type="tel" id="custPhone" placeholder="Enter your phone number" />
-
-        <label for="custAddress">Address</label>
-        <input type="text" id="custAddress" placeholder="House No, Area, City, PIN" />
-
-        <button class="gps-btn" onclick="getLocation()">📍 Add GPS Location</button>
-        <input type="hidden" id="gpsLink" />
-        <div id="gpsStatus" class="gps-status"></div>
-      </section>
-
-      <button class="confirm-btn" onclick="sendOrder()">✅ Send Order on WhatsApp</button>
-    </div>
+    <div id="cart-items"></div>
+    <h3 id="total"></h3>
+    <button onclick="checkout()">Proceed to Checkout</button>
   </main>
 
-  <footer class="site-footer">
-    <p>&copy; 2025 BBETA — Apka Apna Bada Beta</p>
-    <h3>📍 Our Location</h3>
-    <iframe
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3805.8491127896724!2d79.26356427485021!3d17.057541983847895!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a34a31b79e0533f%3A0xe7af77e6c2f3dd6c!2sNalgonda%2C%20Telangana%20508001!5e0!3m2!1sen!2sin!4v1693924505178!5m2!1sen!2sin"
-      width="100%" height="280" style="border:0" allowfullscreen="" loading="lazy"></iframe>
-  </footer>
-
-  <script src="shop.js"></script>
 </body>
 </html>
