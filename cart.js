@@ -1,33 +1,25 @@
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
-const cartContainer = document.getElementById("cart-items");
-const totalEl = document.getElementById("total");
+const cartItemsDiv = document.getElementById("cart-items");
+const totalDiv = document.getElementById("total");
 
 function renderCart() {
-  cartContainer.innerHTML = "";
+  cartItemsDiv.innerHTML = "";
   let total = 0;
 
-  if (cart.length === 0) {
-    cartContainer.innerHTML = "<p>Your cart is empty!</p>";
-    totalEl.innerText = "";
-    return;
-  }
-
   cart.forEach((item, index) => {
+    let itemTotal = item.price * item.qty;
+    total += itemTotal;
+
     const div = document.createElement("div");
     div.classList.add("cart-item");
-
     div.innerHTML = `
-      <p><strong>${item.name}</strong> - ₹${item.price} / ${item.unit}</p>
-      <p>Qty: ${item.quantity}</p>
-      <p>Subtotal: ₹${item.price * item.quantity}</p>
-      <button onclick="removeItem(${index})">Remove</button>
+      ${item.name} - ₹${item.price} × ${item.qty} = ₹${itemTotal}
+      <button onclick="removeItem(${index})">❌ Remove</button>
     `;
-
-    cartContainer.appendChild(div);
-    total += item.price * item.quantity;
+    cartItemsDiv.appendChild(div);
   });
 
-  totalEl.innerText = `Total: ₹${total}`;
+  totalDiv.innerText = "Total: ₹" + total;
 }
 
 function removeItem(index) {
@@ -36,8 +28,25 @@ function removeItem(index) {
   renderCart();
 }
 
-function checkout() {
-  window.location.href = "checkout.html";
-}
+document.getElementById("orderForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const name = document.getElementById("customerName").value;
+  const phone = document.getElementById("customerPhone").value;
+  const address = document.getElementById("customerAddress").value;
+  const map = document.getElementById("customerMap").value;
+
+  let orderDetails = "🛍️ *New Order Received* 🛍️\n\n";
+  cart.forEach(item => {
+    orderDetails += `${item.name} × ${item.qty} = ₹${item.price * item.qty}\n`;
+  });
+
+  orderDetails += `\n💰 Total: ₹${cart.reduce((t, i) => t + i.price * i.qty, 0)}`;
+  orderDetails += `\n\n👤 Name: ${name}\n📞 Phone: ${phone}\n📍 Address: ${address}`;
+  if (map) orderDetails += `\n🌐 Map: ${map}`;
+
+  const whatsappURL = `https://wa.me/917093242271?text=${encodeURIComponent(orderDetails)}`;
+  window.open(whatsappURL, "_blank");
+});
 
 renderCart();
